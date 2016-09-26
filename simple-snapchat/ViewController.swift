@@ -1,9 +1,9 @@
 //
 //  ViewController.swift
-//  simple-snapchat
+//  snapchat
 //
-//  Created by Jeffrey on 26/9/16.
-//  Copyright © 2016 University of Melbourne. All rights reserved.
+//  Created by Boqin Hu on 27/07/2016.
+//  Copyright © 2016 Boqin Hu. All rights reserved.
 //
 
 import UIKit
