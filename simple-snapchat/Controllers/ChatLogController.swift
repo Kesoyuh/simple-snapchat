@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ChatLogController: UICollectionViewController {
 
@@ -17,6 +18,15 @@ class ChatLogController: UICollectionViewController {
         return textField
     }()
     
+    let sendButton:UIButton = {
+        let sendButton = UIButton(type: .system)
+        sendButton.setTitle("Send", for: .normal)
+        sendButton.setTitleColor(UIColor(red: 102, green: 178, blue: 255), for: .normal)
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        return sendButton
+    }()
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,10 +51,6 @@ class ChatLogController: UICollectionViewController {
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         //-----------------------------------Add send button-----------------------------------
-        let sendButton = UIButton(type: .system)
-        sendButton.setTitle("Send", for: .normal)
-        sendButton.setTitleColor(UIColor(red: 102, green: 178, blue: 255), for: .normal)
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         containerView.addSubview(sendButton)
         //x,y,w,h constraint anchors for send button
@@ -73,9 +79,46 @@ class ChatLogController: UICollectionViewController {
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
 }
-    
+    // Send button tapped function
     func handleSend(){
-       print(inputTextField.text)
+        // Call the end editing method and disable the send button & input field
+        self.inputTextField.endEditing(true)
+        self.inputTextField.isEnabled = false
+        self.sendButton.isEnabled = false
+        
+        // Create a PFObject
+        // Create a PFObject
+        var newMessageObject: PFObject = PFObject(className: "Message")
+        
+        //Set the Text key to the text of the messageTextField
+        newMessageObject["Text"] = self.inputTextField.text
+        
+        //Save the PFObject
+        newMessageObject.saveInBackground {  (success: Bool, error: Error?) -> Void in
+            if (success) {
+                // The object has been saved.
+                print("Message saved sucessfully")
+                
+                // Retrieve the latest messages and reload the table
+                //self.retrieveMessages()
+                
+            } else {
+                // There was a problem, check error.description
+                NSLog(error as! String)
+            }
+            DispatchQueue.global().async {
+                
+                DispatchQueue.main.async {
+                    self.inputTextField.isEnabled = true
+                    self.sendButton.isEnabled = true
+                    self.inputTextField.text = ""
+                }
+            }
+
+            
+        }
+        //TODO: Load IMG....
+        
     }
 
 }

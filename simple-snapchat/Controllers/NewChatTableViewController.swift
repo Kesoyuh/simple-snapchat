@@ -58,7 +58,7 @@ class NewChatTableViewController: UITableViewController {
                         self.users.append(user)
                         
                         
-                        //***********************Swift 3 dispatch*******************//
+                        //---------------------Swift 3 dispatch---------------//
                         DispatchQueue.global().async {
                             
                             DispatchQueue.main.async {
