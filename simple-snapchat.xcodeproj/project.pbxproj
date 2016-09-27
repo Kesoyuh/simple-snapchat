@@ -33,6 +33,7 @@
 		798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136311D9928670074ED25 /* ChatListTableViewController.swift */; };
 		798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136331D992DA10074ED25 /* NewChatTableViewController.swift */; };
 		798136361D9977010074ED25 /* NewMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136351D9977000074ED25 /* NewMessageTableViewController.swift */; };
+		798136381D99ED370074ED25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136371D99ED370074ED25 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		798136311D9928670074ED25 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListTableViewController.swift; path = Controllers/ChatListTableViewController.swift; sourceTree = "<group>"; };
 		798136331D992DA10074ED25 /* NewChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewChatTableViewController.swift; path = Controllers/NewChatTableViewController.swift; sourceTree = "<group>"; };
 		798136351D9977000074ED25 /* NewMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMessageTableViewController.swift; path = Controllers/NewMessageTableViewController.swift; sourceTree = "<group>"; };
+		798136371D99ED370074ED25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = User/User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			children = (
 				798136311D9928670074ED25 /* ChatListTableViewController.swift */,
 				798136331D992DA10074ED25 /* NewChatTableViewController.swift */,
+				798136371D99ED370074ED25 /* User.swift */,
 				798136351D9977000074ED25 /* NewMessageTableViewController.swift */,
 			);
 			name = Chat;
@@ -283,6 +286,7 @@
 				004349051D99030100D3DE54 /* CameraViewController.swift in Sources */,
 				798136361D9977010074ED25 /* NewMessageTableViewController.swift in Sources */,
 				004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */,
+				798136381D99ED370074ED25 /* User.swift in Sources */,
 				004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */,
 				798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */,
 				0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */,

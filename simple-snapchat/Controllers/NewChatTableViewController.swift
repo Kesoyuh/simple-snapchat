@@ -14,6 +14,9 @@ import Parse
 class NewChatTableViewController: UITableViewController {
     
     let cellID = "newChatCellId"
+    
+    //Currently show all users
+    let chatList = [PFUser]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +63,8 @@ class NewChatTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 8
     }
+    
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
