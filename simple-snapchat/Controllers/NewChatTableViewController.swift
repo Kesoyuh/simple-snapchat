@@ -15,8 +15,8 @@ class NewChatTableViewController: UITableViewController {
     
     let cellID = "newChatCellId"
     
-    //Currently show all users
-    let chatList = [PFUser]
+     //************************************************************************TODO:Currently show all users, latter show firnds
+    var users = [User]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +28,53 @@ class NewChatTableViewController: UITableViewController {
         navigationController?.navigationBar.isHidden = false
         
         checkIfUserIsLoggedIn()
+        fetchUser()
 
   }
     
-    
+    //************************************************************************TODO: Change to fetch friend latter
+    func fetchUser(){
+        var query:PFQuery = PFUser.query()!
+        // Create a new PFQuery
+                // Call findObjectInBackground
+        query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) -> Void in
+            
+            if error == nil {
+                // The find succeeded.
+                print("Successfully retrieved \(objects!.count) users.")
+                
+                /*** Do something with the found objects ***/
+                
+                // 1. Clear the users so that there is no duplications
+                self.users = [User]()
+                
+                // 2. Loop through the objects array
+                if let objects = objects {
+                    for userObject in objects {
+                        let user = User()
+                        user.username = userObject["username"] as! String?
+                        user.email = userObject["email"] as! String?
+                        print(user.username, user.email)
+                        self.users.append(user)
+                        
+                        
+                        //***********************Swift 3 dispatch*******************//
+                        DispatchQueue.global().async {
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+               
+                
+            } else {
+                
+            }
+        }
+        
+    }
     
     //TEST: for get user info 以后可以借鉴获取friend信息
     func checkIfUserIsLoggedIn() {
@@ -51,8 +94,8 @@ class NewChatTableViewController: UITableViewController {
 
     
     func handleCancel(){
-       /* let chatListController = ChatListTableViewController()
-        let navController = UINavigationController(rootViewController: chatListController)
+       /* let usersController = usersTableViewController()
+        let navController = UINavigationController(rootViewController: usersController)
         present(navController, animated:true, completion:nil)*/
         
         dismiss(animated: true, completion: nil)
@@ -61,14 +104,17 @@ class NewChatTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return users.count
     }
     
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
-        cell.textLabel?.text = "hisahdaiosdhaiosd"
+        
+        let user = users[indexPath.row]
+        
+        cell.textLabel?.text = user.username
         return cell
     }
 }
