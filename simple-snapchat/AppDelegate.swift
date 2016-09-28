@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import Bolts
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,7 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = snapContainer
         self.window?.makeKeyAndVisible()
 
-        // Initialize Parse.
+        // Initialize Firebase
+        FIRApp.configure()
+        
+        // Initialize Parse. Waiting to be deleted
         let configuration = ParseClientConfiguration {
             $0.applicationId = "SnapchatFromTeamToBeContinued"
             $0.clientKey = "Jfed9kfKF902Bmmzw32SE"

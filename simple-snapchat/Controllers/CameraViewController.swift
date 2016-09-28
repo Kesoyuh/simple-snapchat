@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Parse
+import Firebase
 
 class CameraViewController : UIViewController {
     
@@ -45,9 +46,8 @@ class CameraViewController : UIViewController {
     }
     
     func checkIfUserIsLoggedIn() {
-        let currentUser = PFUser.current()
         
-        if currentUser != nil {
+        if FIRAuth.auth()?.currentUser?.uid != nil {
             // User is logged in
             // Do nothing currently
         } else {

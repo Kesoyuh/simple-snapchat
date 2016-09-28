@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Firebase
 
 class TopViewController: UIViewController {
 
@@ -23,7 +24,11 @@ class TopViewController: UIViewController {
     }
     
     @IBAction func logout(_ sender: UIButton) {
-        PFUser.logOut()
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch let error{
+            print(error)
+        }
         let loginRegisterController = LoginRegisterController()
         let scrollView = self.view.superview as? UIScrollView
         scrollView!.contentOffset.y = view.bounds.height

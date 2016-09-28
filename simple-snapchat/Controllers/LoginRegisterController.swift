@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Firebase
 
 @IBDesignable
 class LoginRegisterController: UIViewController {
@@ -91,19 +92,28 @@ class LoginRegisterController: UIViewController {
     }
     
     func handleLogin() {
-        guard let username = nameTextField.text, let password = passwordTextField.text else {
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
             print("Form is not valid!")
             return
         }
- 
-        PFUser.logInWithUsername(inBackground: username, password: password) { (user, error) in
-            if let error = error{
-                let errorString = error as? NSString
-                print(errorString)
+        
+        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+            if error != nil {
+                print(error)
+                return
             } else {
                 self.dismiss(animated: true, completion: nil)
             }
-        }
+        })
+        
+//        PFUser.logInWithUsername(inBackground: username, password: password) { (user, error) in
+//            if let error = error{
+//                let errorString = error as? NSString
+//                print(errorString)
+//            } else {
+//                self.dismiss(animated: true, completion: nil)
+//            }
+//        }
         
     }
     
@@ -112,19 +122,43 @@ class LoginRegisterController: UIViewController {
             print("Form is not valid!")
             return
         }
-        let user = PFUser()
-        user.email = email
-        user.username = username
-        user.password = password
-
-        user.signUpInBackground { (succeeded, error) in
-            if let error = error{
-                let errorString = error as? NSString
-                print(errorString)
+        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
+            if error != nil {
+                print(error)
+                return
             } else {
-                self.dismiss(animated: true, completion: nil)
+                
+                guard let uid = user?.uid else {
+                    return
+                }
+                
+                let ref = FIRDatabase.database().reference(fromURL: "https://simple-snapchat.firebaseio.com/")
+                let userRef = ref.child("users").child(uid)
+                let values = ["name": username, "email": email]
+ 
+                userRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                    if error != nil {
+                        print(error)
+                        return
+                    } else {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                })
             }
-        }
+        })
+//        let user = PFUser()
+//        user.email = email
+//        user.username = username
+//        user.password = password
+//
+//        user.signUpInBackground { (succeeded, error) in
+//            if let error = error{
+//                let errorString = error as? NSString
+//                print(errorString)
+//            } else {
+//                self.dismiss(animated: true, completion: nil)
+//            }
+//        }
 
     
     }
@@ -139,16 +173,22 @@ class LoginRegisterController: UIViewController {
         
         // nameTextField height
         nameTextFieldHeightConstraint?.isActive = false
-        nameTextFieldHeightConstraint = nameTextField.heightAnchor.constraint(equalTo: inputContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        nameTextFieldHeightConstraint = nameTextField.heightAnchor.constraint(equalTo: inputContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
         nameTextFieldHeightConstraint?.isActive = true
+        
+        // nameTextField placeholder
+        nameTextField.placeholder = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? "" : "Name"
+        
+        // nameSeparator Height
+        nameSeparatorHeightConstraint?.isActive = false
+        nameSeparatorHeightConstraint = nameSeparatorView.heightAnchor.constraint(equalToConstant: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1)
+        nameSeparatorHeightConstraint?.isActive = true
         
         // emailTextField height
         emailTextFieldHeightConstraint?.isActive = false
-        emailTextFieldHeightConstraint = emailTextField.heightAnchor.constraint(equalTo: inputContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
+        emailTextFieldHeightConstraint = emailTextField.heightAnchor.constraint(equalTo: inputContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
         emailTextFieldHeightConstraint?.isActive = true
         
-        // emailTextField placeholder
-        emailTextField.placeholder = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? "" : "Email address"
         
         // passwordTextField height
         passwordTextFieldHeightConstraint?.isActive = false
@@ -186,6 +226,7 @@ class LoginRegisterController: UIViewController {
     var nameTextFieldHeightConstraint: NSLayoutConstraint?
     var emailTextFieldHeightConstraint: NSLayoutConstraint?
     var passwordTextFieldHeightConstraint: NSLayoutConstraint?
+    var nameSeparatorHeightConstraint: NSLayoutConstraint?
     fileprivate func setupInputContainerView() {
         //setup constraints, x, y, width, height
         inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -212,7 +253,8 @@ class LoginRegisterController: UIViewController {
         nameSeparatorView.leftAnchor.constraint(equalTo: inputContainerView.leftAnchor).isActive = true
         nameSeparatorView.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
         nameSeparatorView.widthAnchor.constraint(equalTo: inputContainerView.widthAnchor).isActive = true
-        nameSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        nameSeparatorHeightConstraint = nameSeparatorView.heightAnchor.constraint(equalToConstant: 1)
+        nameSeparatorHeightConstraint?.isActive = true
         
         //setup constraints, x, y, width, height
         emailTextField.leftAnchor.constraint(equalTo: inputContainerView.leftAnchor, constant: 12).isActive = true
