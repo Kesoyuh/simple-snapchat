@@ -40,24 +40,21 @@ class NewChatTableViewController: UITableViewController {
         query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) -> Void in
             
             if error == nil {
-                // The find succeeded.
+                
                 print("Successfully retrieved \(objects!.count) users.")
-                
-                /*** Do something with the found objects ***/
-                
-                // 1. Clear the users so that there is no duplications
+
                 self.users = [User]()
-                
-                // 2. Loop through the objects array
+
                 if let objects = objects {
+                    
                     for userObject in objects {
+                        
                         let user = User()
                         user.username = userObject["username"] as! String?
                         user.email = userObject["email"] as! String?
-                        print(user.username, user.email)
+                        user.id = userObject.objectId
+                        print(user.username, user.email,user.id)
                         self.users.append(user)
-                        
-                        
                         //---------------------Swift 3 dispatch---------------//
                         DispatchQueue.global().async {
                             
@@ -67,8 +64,6 @@ class NewChatTableViewController: UITableViewController {
                         }
                     }
                 }
-               
-                
             } else {
                 
             }
@@ -116,5 +111,14 @@ class NewChatTableViewController: UITableViewController {
         
         cell.textLabel?.text = user.username
         return cell
+    }
+    
+    var chatListController: ChatListTableViewController?
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true) {
+            let user = self.users[indexPath.row]
+            self.chatListController?.showChatLogControllerForUser(user: user)
+        }
     }
 }

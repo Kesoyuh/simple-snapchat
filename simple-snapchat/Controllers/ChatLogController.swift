@@ -9,12 +9,19 @@
 import UIKit
 import Parse
 
-class ChatLogController: UICollectionViewController {
+class ChatLogController: UICollectionViewController, UITextFieldDelegate {
 
-    let inputTextField: UITextField = {
+    var user: User?{
+        didSet{
+            navigationItem.title = user?.username
+        }
+    }
+    
+    lazy var inputTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter message..."
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
         return textField
     }()
     
@@ -29,8 +36,6 @@ class ChatLogController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = "Chat Log Controller"
         collectionView?.backgroundColor = UIColor.white
         setUpInputComponents()
     }
@@ -88,10 +93,12 @@ class ChatLogController: UICollectionViewController {
         
         // Create a PFObject
         // Create a PFObject
-        var newMessageObject: PFObject = PFObject(className: "Message")
+        let newMessageObject: PFObject = PFObject(className: "Messages")
         
         //Set the Text key to the text of the messageTextField
-        newMessageObject["Text"] = self.inputTextField.text
+        newMessageObject["Type"] = "Text"
+        newMessageObject["Content"] = self.inputTextField.text
+        newMessageObject["Users"] = chatWithPFUser()
         
         //Save the PFObject
         newMessageObject.saveInBackground {  (success: Bool, error: Error?) -> Void in
@@ -120,5 +127,51 @@ class ChatLogController: UICollectionViewController {
         //TODO: Load IMG....
         
     }
+    
+    
+    
+    func chatWithPFUser() -> [PFUser]{
+        var users:[PFUser] = []
+        users.append(PFUser.current()!)
+        
+        var query = PFUser.query()!
+        if user?.id != nil {
+            do {
+                let pfUser = try query.getObjectWithId((user?.id)!) as! PFUser
+                 users.append(pfUser)
+            }
+            catch{
+                print("Query with user id failed.")
+            }
+        }
+         return users
+    }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        handleSend()
+        return true
+    }
+
+
+}
+
+
+
+
+
+
+
+class Messages:NSObject{
+    var type: String!
+    var content: AnyObject!
+    var date: Date!
+    var users: [User] = []
+    
+    func addNewMessage(newType: String, newContent: AnyObject, newDate: Date, newUsers: [User]){
+        type = newType
+        content = newContent
+        date = newDate
+        users = newUsers
+    
+    }
 }

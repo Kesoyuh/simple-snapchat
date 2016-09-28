@@ -37,11 +37,6 @@ class ChatListTableViewController: UITableViewController {
         
     }
         
-
-    func showChatController(){
-    print("dsadasdasdasdas")
-    }
-    
     
     //************************************************************************TODO: Change to fetch friend latter
     func fetchUser(){
@@ -65,6 +60,7 @@ class ChatListTableViewController: UITableViewController {
                         let user = User()
                         user.username = userObject["username"] as! String?
                         user.email = userObject["email"] as! String?
+                        user.id = userObject.objectId
                         print(user.username, user.email)
                         self.chatHistory.append(user)
                         
@@ -80,7 +76,7 @@ class ChatListTableViewController: UITableViewController {
                 
                 
             } else {
-                
+                print("fetch error!")
             }
         }
         
@@ -106,13 +102,21 @@ class ChatListTableViewController: UITableViewController {
 
     //Start a chat --> ChatLogController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = chatHistory[indexPath.row]
+        showChatLogControllerForUser(user: user)
+    }
+    
+    func showChatLogControllerForUser(user: User){
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         navigationController?.pushViewController(chatLogController, animated: true)
+        chatLogController.user = user
+        print(user)
     }
     
     //TODO: When click the top left button, choosing a friend to chat with
         func addNewChat(){
             let newChatController = NewChatTableViewController()
+            newChatController.chatListController = self
             let navController = UINavigationController(rootViewController: newChatController)
             present(navController, animated:true, completion:nil)
         }
