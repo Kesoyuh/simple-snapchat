@@ -31,10 +31,14 @@ class ChatListTableViewController: UITableViewController {
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellId)
         
         
-        fetchUser()
-     
+        //fetchUser()
+        observeMessage()
         
         
+    }
+    
+    func observeMessage(){
+    
     }
         
     

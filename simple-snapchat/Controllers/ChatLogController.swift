@@ -96,9 +96,10 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         let newMessageObject: PFObject = PFObject(className: "Messages")
         
         //Set the Text key to the text of the messageTextField
-        newMessageObject["Type"] = "Text"
-        newMessageObject["Content"] = self.inputTextField.text
-        newMessageObject["Users"] = chatWithPFUser()
+        newMessageObject["type"] = "Text"
+        newMessageObject["content"] = self.inputTextField.text
+        newMessageObject["users"] = chatWithPFUser()
+        newMessageObject["timestamp"] = NSDate().timeIntervalSince1970 as NSNumber
         
         //Save the PFObject
         newMessageObject.saveInBackground {  (success: Bool, error: Error?) -> Void in
@@ -158,20 +159,3 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
 
 
 
-
-
-
-class Messages:NSObject{
-    var type: String!
-    var content: AnyObject!
-    var date: Date!
-    var users: [User] = []
-    
-    func addNewMessage(newType: String, newContent: AnyObject, newDate: Date, newUsers: [User]){
-        type = newType
-        content = newContent
-        date = newDate
-        users = newUsers
-    
-    }
-}

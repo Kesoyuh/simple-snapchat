@@ -33,7 +33,8 @@
 		798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136311D9928670074ED25 /* ChatListTableViewController.swift */; };
 		798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136331D992DA10074ED25 /* NewChatTableViewController.swift */; };
 		798136361D9977010074ED25 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136351D9977000074ED25 /* ChatLogController.swift */; };
-		798136381D99ED370074ED25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136371D99ED370074ED25 /* User.swift */; };
+		798136471D9BCFD50074ED25 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136451D9BCFD50074ED25 /* Message.swift */; };
+		798136481D9BCFD50074ED25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136461D9BCFD50074ED25 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +67,8 @@
 		798136311D9928670074ED25 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListTableViewController.swift; path = Controllers/ChatListTableViewController.swift; sourceTree = "<group>"; };
 		798136331D992DA10074ED25 /* NewChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewChatTableViewController.swift; path = Controllers/NewChatTableViewController.swift; sourceTree = "<group>"; };
 		798136351D9977000074ED25 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLogController.swift; path = Controllers/ChatLogController.swift; sourceTree = "<group>"; };
-		798136371D99ED370074ED25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = User/User.swift; sourceTree = "<group>"; };
+		798136451D9BCFD50074ED25 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
+		798136461D9BCFD50074ED25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 		00DD9D161D98F5D3006489BE /* simple-snapchat */ = {
 			isa = PBXGroup;
 			children = (
+				798136421D9BCF9D0074ED25 /* Model */,
 				798136301D9928560074ED25 /* Chat */,
 				00198B171D99102A003AD328 /* simple-snapchat.entitlements */,
 				0043490B1D99031000D3DE54 /* Carema */,
@@ -194,10 +197,18 @@
 			children = (
 				798136311D9928670074ED25 /* ChatListTableViewController.swift */,
 				798136331D992DA10074ED25 /* NewChatTableViewController.swift */,
-				798136371D99ED370074ED25 /* User.swift */,
 				798136351D9977000074ED25 /* ChatLogController.swift */,
 			);
 			name = Chat;
+			sourceTree = "<group>";
+		};
+		798136421D9BCF9D0074ED25 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				798136451D9BCFD50074ED25 /* Message.swift */,
+				798136461D9BCFD50074ED25 /* User.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,10 +297,11 @@
 				004349051D99030100D3DE54 /* CameraViewController.swift in Sources */,
 				798136361D9977010074ED25 /* ChatLogController.swift in Sources */,
 				004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */,
-				798136381D99ED370074ED25 /* User.swift in Sources */,
+				798136481D9BCFD50074ED25 /* User.swift in Sources */,
 				004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */,
 				798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */,
 				0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */,
+				798136471D9BCFD50074ED25 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
