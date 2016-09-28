@@ -13,7 +13,6 @@
 		004348F11D98FCD100D3DE54 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348F01D98FCD100D3DE54 /* CoreLocation.framework */; };
 		004348F31D98FCD900D3DE54 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348F21D98FCD900D3DE54 /* QuartzCore.framework */; };
 		004348F51D98FCE300D3DE54 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348F41D98FCE300D3DE54 /* Security.framework */; };
-		004348F71D98FCEB00D3DE54 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348F61D98FCEB00D3DE54 /* StoreKit.framework */; };
 		004348F91D98FCF600D3DE54 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348F81D98FCF600D3DE54 /* SystemConfiguration.framework */; };
 		004348FB1D98FD0200D3DE54 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348FA1D98FD0200D3DE54 /* libz.tbd */; };
 		004348FD1D98FD0B00D3DE54 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348FC1D98FD0B00D3DE54 /* libsqlite3.tbd */; };
@@ -40,7 +39,6 @@
 		004348F01D98FCD100D3DE54 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		004348F21D98FCD900D3DE54 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		004348F41D98FCE300D3DE54 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		004348F61D98FCEB00D3DE54 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		004348F81D98FCF600D3DE54 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		004348FA1D98FD0200D3DE54 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		004348FC1D98FD0B00D3DE54 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -69,7 +67,6 @@
 				004348FD1D98FD0B00D3DE54 /* libsqlite3.tbd in Frameworks */,
 				004348FB1D98FD0200D3DE54 /* libz.tbd in Frameworks */,
 				004348F91D98FCF600D3DE54 /* SystemConfiguration.framework in Frameworks */,
-				004348F71D98FCEB00D3DE54 /* StoreKit.framework in Frameworks */,
 				004348F51D98FCE300D3DE54 /* Security.framework in Frameworks */,
 				004348F31D98FCD900D3DE54 /* QuartzCore.framework in Frameworks */,
 				004348F11D98FCD100D3DE54 /* CoreLocation.framework in Frameworks */,
@@ -92,7 +89,6 @@
 				004348FC1D98FD0B00D3DE54 /* libsqlite3.tbd */,
 				004348FA1D98FD0200D3DE54 /* libz.tbd */,
 				004348F81D98FCF600D3DE54 /* SystemConfiguration.framework */,
-				004348F61D98FCEB00D3DE54 /* StoreKit.framework */,
 				004348F41D98FCE300D3DE54 /* Security.framework */,
 				004348F21D98FCD900D3DE54 /* QuartzCore.framework */,
 				004348F01D98FCD100D3DE54 /* CoreLocation.framework */,
@@ -215,8 +211,11 @@
 						DevelopmentTeam = 7STNWYS4YZ;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
 							com.apple.Keychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -387,7 +386,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "simple-snapchat/simple-snapchat.entitlements";
 				DEVELOPMENT_TEAM = 7STNWYS4YZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -407,7 +405,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "simple-snapchat/simple-snapchat.entitlements";
 				DEVELOPMENT_TEAM = 7STNWYS4YZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
