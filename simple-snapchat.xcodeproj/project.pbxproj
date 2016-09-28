@@ -16,7 +16,6 @@
 		004348F91D98FCF600D3DE54 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348F81D98FCF600D3DE54 /* SystemConfiguration.framework */; };
 		004348FB1D98FD0200D3DE54 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348FA1D98FD0200D3DE54 /* libz.tbd */; };
 		004348FD1D98FD0B00D3DE54 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348FC1D98FD0B00D3DE54 /* libsqlite3.tbd */; };
-		004349051D99030100D3DE54 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004348FF1D99030100D3DE54 /* CameraViewController.swift */; };
 		004349061D99030100D3DE54 /* LoginRegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349001D99030100D3DE54 /* LoginRegisterController.swift */; };
 		004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349011D99030100D3DE54 /* PublicAgencyCell.swift */; };
 		004349081D99030100D3DE54 /* SnapContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349021D99030100D3DE54 /* SnapContainerViewController.swift */; };
@@ -35,6 +34,7 @@
 		798136471D9BCFD50074ED25 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136451D9BCFD50074ED25 /* Message.swift */; };
 		798136481D9BCFD50074ED25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136461D9BCFD50074ED25 /* User.swift */; };
 		79E7CFF31D9BFA3100F081E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79E7CFF21D9BFA3100F081E2 /* GoogleService-Info.plist */; };
+		79E7CFF51D9C259F00F081E2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */; };
 		F595B0AB8367814EF8C25504 /* Pods_simple_snapchat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +49,6 @@
 		004348F81D98FCF600D3DE54 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		004348FA1D98FD0200D3DE54 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		004348FC1D98FD0B00D3DE54 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		004348FF1D99030100D3DE54 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Controllers/CameraViewController.swift; sourceTree = "<group>"; };
 		004349001D99030100D3DE54 /* LoginRegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginRegisterController.swift; path = Controllers/LoginRegisterController.swift; sourceTree = "<group>"; };
 		004349011D99030100D3DE54 /* PublicAgencyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PublicAgencyCell.swift; path = Controllers/PublicAgencyCell.swift; sourceTree = "<group>"; };
 		004349021D99030100D3DE54 /* SnapContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapContainerViewController.swift; path = Controllers/SnapContainerViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +69,7 @@
 		798136451D9BCFD50074ED25 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
 		798136461D9BCFD50074ED25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
 		79E7CFF21D9BFA3100F081E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Controllers/CameraViewController.swift; sourceTree = "<group>"; };
 		AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_simple_snapchat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEFFBC8570546B75E246890B /* Pods-simple-snapchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.debug.xcconfig"; sourceTree = "<group>"; };
 		FF70871258D3258057C9ED4E /* Pods-simple-snapchat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.release.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 		0043490B1D99031000D3DE54 /* Carema */ = {
 			isa = PBXGroup;
 			children = (
-				004348FF1D99030100D3DE54 /* CameraViewController.swift */,
+				79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */,
 			);
 			name = Carema;
 			sourceTree = "<group>";
@@ -363,8 +363,8 @@
 				798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */,
 				004349061D99030100D3DE54 /* LoginRegisterController.swift in Sources */,
 				00DD9D181D98F5D3006489BE /* AppDelegate.swift in Sources */,
+				79E7CFF51D9C259F00F081E2 /* CameraViewController.swift in Sources */,
 				004349081D99030100D3DE54 /* SnapContainerViewController.swift in Sources */,
-				004349051D99030100D3DE54 /* CameraViewController.swift in Sources */,
 				798136361D9977010074ED25 /* ChatLogController.swift in Sources */,
 				004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */,
 				798136481D9BCFD50074ED25 /* User.swift in Sources */,
