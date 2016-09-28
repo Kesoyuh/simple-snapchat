@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		003CED081D9BE86700C36A9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 003CED071D9BE86700C36A9F /* GoogleService-Info.plist */; };
 		004348EB1D98FCB600D3DE54 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348EA1D98FCB600D3DE54 /* AudioToolbox.framework */; };
 		004348ED1D98FCC200D3DE54 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348EC1D98FCC200D3DE54 /* CFNetwork.framework */; };
 		004348EF1D98FCCA00D3DE54 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348EE1D98FCCA00D3DE54 /* CoreGraphics.framework */; };
@@ -35,12 +34,12 @@
 		798136361D9977010074ED25 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136351D9977000074ED25 /* ChatLogController.swift */; };
 		798136471D9BCFD50074ED25 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136451D9BCFD50074ED25 /* Message.swift */; };
 		798136481D9BCFD50074ED25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136461D9BCFD50074ED25 /* User.swift */; };
+		79E7CFF31D9BFA3100F081E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79E7CFF21D9BFA3100F081E2 /* GoogleService-Info.plist */; };
 		F595B0AB8367814EF8C25504 /* Pods_simple_snapchat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		00198B171D99102A003AD328 /* simple-snapchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "simple-snapchat.entitlements"; sourceTree = "<group>"; };
-		003CED071D9BE86700C36A9F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		004348EA1D98FCB600D3DE54 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		004348EC1D98FCC200D3DE54 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		004348EE1D98FCCA00D3DE54 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -70,6 +69,7 @@
 		798136351D9977000074ED25 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLogController.swift; path = Controllers/ChatLogController.swift; sourceTree = "<group>"; };
 		798136451D9BCFD50074ED25 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
 		798136461D9BCFD50074ED25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
+		79E7CFF21D9BFA3100F081E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_simple_snapchat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEFFBC8570546B75E246890B /* Pods-simple-snapchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.debug.xcconfig"; sourceTree = "<group>"; };
 		FF70871258D3258057C9ED4E /* Pods-simple-snapchat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.release.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.release.xcconfig"; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 				00DD9D1E1D98F5D3006489BE /* Assets.xcassets */,
 				00DD9D201D98F5D3006489BE /* LaunchScreen.storyboard */,
 				00DD9D231D98F5D3006489BE /* Info.plist */,
-				003CED071D9BE86700C36A9F /* GoogleService-Info.plist */,
+				79E7CFF21D9BFA3100F081E2 /* GoogleService-Info.plist */,
 			);
 			path = "simple-snapchat";
 			sourceTree = "<group>";
@@ -261,7 +261,7 @@
 				TargetAttributes = {
 					00DD9D131D98F5D3006489BE = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 7STNWYS4YZ;
+						DevelopmentTeam = 87226X2B9L;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -298,7 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00DD9D221D98F5D3006489BE /* LaunchScreen.storyboard in Resources */,
-				003CED081D9BE86700C36A9F /* GoogleService-Info.plist in Resources */,
+				79E7CFF31D9BFA3100F081E2 /* GoogleService-Info.plist in Resources */,
 				00DD9D1F1D98F5D3006489BE /* Assets.xcassets in Resources */,
 				00DD9D1D1D98F5D3006489BE /* Main.storyboard in Resources */,
 			);
@@ -495,7 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "simple-snapchat/simple-snapchat.entitlements";
-				DEVELOPMENT_TEAM = 7STNWYS4YZ;
+				DEVELOPMENT_TEAM = 87226X2B9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -504,7 +504,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat-helen";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -516,7 +516,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "simple-snapchat/simple-snapchat.entitlements";
-				DEVELOPMENT_TEAM = 7STNWYS4YZ;
+				DEVELOPMENT_TEAM = 87226X2B9L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -525,7 +525,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat-helen";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

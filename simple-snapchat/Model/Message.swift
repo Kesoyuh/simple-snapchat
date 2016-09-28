@@ -8,20 +8,11 @@
 
 import UIKit
 
-
-
-
-class Messages:NSObject{
-    var type: String!
-    var content: AnyObject!
+class Message:NSObject{
+    //var type: String!
+    var text: String!
     var timestamp: NSNumber!
-    var users: [User] = []
+    var fromID: String!
+    var toID: String!
     
-    func addNewMessage(newType: String, newContent: AnyObject, newDate: NSNumber, newUsers: [User]){
-        type = newType
-        content = newContent
-        timestamp = newDate
-        users = newUsers
-        
-    }
 }

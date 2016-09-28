@@ -7,13 +7,14 @@
 //
 
 import UIKit
-import Parse
+import Firebase
 
 class ChatListTableViewController: UITableViewController {
 
     let cellId = "ChatCellId"
     
     var chatHistory = [User]()
+    var messages = [Message]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,84 +31,80 @@ class ChatListTableViewController: UITableViewController {
         
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellId)
         
-        
-        //fetchUser()
+       //fetchUser()
         observeMessage()
         
         
     }
     
     func observeMessage(){
-    
+        let ref = FIRDatabase.database().reference().child("messages")
+        ref.observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let message = Message()
+                message.setValuesForKeys(dictionary)
+                self.messages.append(message)
+                DispatchQueue.global().async {
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+
+            }
+           print("Observe messages:")
+           print(self.messages)
+            
+            }, withCancel: nil)
     }
         
     
-    //************************************************************************TODO: Change to fetch friend latter
+    //************************************************************************TODO: Change to fetch chat list latter
     func fetchUser(){
-        var query:PFQuery = PFUser.query()!
-        // Create a new PFQuery
-        // Call findObjectInBackground
-        query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) -> Void in
-            
-            if error == nil {
-                // The find succeeded.
-                print("Successfully retrieved \(objects!.count) users.")
-                
-                /*** Do something with the found objects ***/
-                
-                // 1. Clear the users so that there is no duplications
-                self.chatHistory = [User]()
-                
-                // 2. Loop through the objects array
-                if let objects = objects {
-                    for userObject in objects {
-                        let user = User()
-                        user.username = userObject["username"] as! String?
-                        user.email = userObject["email"] as! String?
-                        user.id = userObject.objectId
-                        print(user.username, user.email)
-                        self.chatHistory.append(user)
-                        
-                        //***********************Swift 3 dispatch*******************//
-                        DispatchQueue.global().async {
-                            
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        }
-                    }
-                }
-                
-                
-            } else {
-                print("fetch error!")
-            }
-        }
         
+        self.chatHistory = [User]()
+        FIRDatabase.database().reference().child("users").observe(.childAdded, with: {(snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let user = User()
+                user.setValuesForKeys(dictionary)
+                user.id = snapshot.key
+                self.chatHistory.append(user)
+            }
+            
+            DispatchQueue.global().async {
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+
+            }, withCancel: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chatHistory.count
+        return messages.count
     }
     
     
-    
+    // Display value for cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let message = messages[indexPath.row]
+
+        //TODO: check message type, show message if the type is text, others show "New message"
+        cell.textLabel?.text = message.text 
         
-        let user = chatHistory[indexPath.row]
-        
-        cell.textLabel?.text = user.username
-        
-        //*********************************************************************************TODO: Chage this to last chat time***********************
-        cell.detailTextLabel?.text = user.email
+        //*****************************TODO: Chage this to last chat time***********************
+        cell.detailTextLabel?.text = "time"
         return cell
+
     }
+    
 
     //Start a chat --> ChatLogController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let user = chatHistory[indexPath.row]
-        showChatLogControllerForUser(user: user)
+       // let user = chatHistory[indexPath.row]
+        //showChatLogControllerForUser(user: user)
     }
     
     func showChatLogControllerForUser(user: User){

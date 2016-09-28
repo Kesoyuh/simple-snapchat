@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import Parse
-
+import Firebase
 class ChatLogController: UICollectionViewController, UITextFieldDelegate {
 
     var user: User?{
         didSet{
-            navigationItem.title = user?.username
+            navigationItem.title = user?.name
         }
     }
     
@@ -91,62 +90,26 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         self.inputTextField.isEnabled = false
         self.sendButton.isEnabled = false
         
-        // Create a PFObject
-        // Create a PFObject
-        let newMessageObject: PFObject = PFObject(className: "Messages")
-        
+        let ref = FIRDatabase.database().reference().child("messages")
+        let childRef = ref.childByAutoId()
+        let fromID = FIRAuth.auth()!.currentUser!.uid
+        let toID = user!.id!
+        let timestamp = Int(NSDate().timeIntervalSince1970)
         //Set the Text key to the text of the messageTextField
+        /*var newMessageObject = Message()
         newMessageObject["type"] = "Text"
         newMessageObject["content"] = self.inputTextField.text
-        newMessageObject["users"] = chatWithPFUser()
+        newMessageObject["fromID"] = fromID
+        newMessageObject["toID"] = toID
         newMessageObject["timestamp"] = NSDate().timeIntervalSince1970 as NSNumber
+*/
+        let values = ["text": inputTextField.text!, "toID": toID, "fromID": fromID, "timestamp": timestamp] as [String : Any]
         
-        //Save the PFObject
-        newMessageObject.saveInBackground {  (success: Bool, error: Error?) -> Void in
-            if (success) {
-                // The object has been saved.
-                print("Message saved sucessfully")
-                
-                // Retrieve the latest messages and reload the table
-                //self.retrieveMessages()
-                
-            } else {
-                // There was a problem, check error.description
-                NSLog(error as! String)
-            }
-            DispatchQueue.global().async {
-                
-                DispatchQueue.main.async {
-                    self.inputTextField.isEnabled = true
-                    self.sendButton.isEnabled = true
-                    self.inputTextField.text = ""
-                }
-            }
-
-            
-        }
+        childRef.updateChildValues(values)
         //TODO: Load IMG....
         
     }
     
-    
-    
-    func chatWithPFUser() -> [PFUser]{
-        var users:[PFUser] = []
-        users.append(PFUser.current()!)
-        
-        var query = PFUser.query()!
-        if user?.id != nil {
-            do {
-                let pfUser = try query.getObjectWithId((user?.id)!) as! PFUser
-                 users.append(pfUser)
-            }
-            catch{
-                print("Query with user id failed.")
-            }
-        }
-         return users
-    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         handleSend()

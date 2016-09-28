@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Parse
+import Firebase
 
 // Add a new chat by choosing a friend
 
@@ -16,7 +16,7 @@ class NewChatTableViewController: UITableViewController {
     let cellID = "newChatCellId"
     
      //************************************************************************TODO:Currently show all users, latter show firnds
-    var users = [User]()
+    var firends = [User]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,65 +27,50 @@ class NewChatTableViewController: UITableViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red: 102, green: 178, blue: 255)]
         navigationController?.navigationBar.isHidden = false
         
-        checkIfUserIsLoggedIn()
-        fetchUser()
+        fetchFriends()
 
   }
     
     //************************************************************************TODO: Change to fetch friend latter
-    func fetchUser(){
-        var query:PFQuery = PFUser.query()!
-        // Create a new PFQuery
-                // Call findObjectInBackground
-        query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) -> Void in
-            
-            if error == nil {
-                
-                print("Successfully retrieved \(objects!.count) users.")
-
-                self.users = [User]()
-
-                if let objects = objects {
+    func fetchFriends(){
+        
+        self.firends = [User]()
+        FIRDatabase.database().reference().child("users").observe(.childAdded, with: {(snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let user = User()
+                user.setValuesForKeys(dictionary)
+                user.id = snapshot.key
+                self.firends.append(user)
+                DispatchQueue.global().async {
                     
-                    for userObject in objects {
-                        
-                        let user = User()
-                        user.username = userObject["username"] as! String?
-                        user.email = userObject["email"] as! String?
-                        user.id = userObject.objectId
-                        print(user.username, user.email,user.id)
-                        self.users.append(user)
-                        //---------------------Swift 3 dispatch---------------//
-                        DispatchQueue.global().async {
-                            
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        }
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                     }
                 }
-            } else {
-                
+
             }
-        }
-        
+            
+            
+            }, withCancel: nil)
     }
+
     
+    /*
     //TEST: for get user info 以后可以借鉴获取friend信息
     func checkIfUserIsLoggedIn() {
-        let currentUser = PFUser.current()
-        
+       
+        let currentUser = FIRAuth.auth()?.currentUser?.displayName
         if currentUser != nil {
+             print(currentUser)
             // User is logged in, change the title with username
-            let title = currentUser?.username?.appending(" Friend List")
-
+            let title = currentUser?.appending(" Friend List")
             self.navigationItem.title = title
         } else {
             // User is not logged in
             let loginRegisterController = LoginRegisterController()
             present(loginRegisterController, animated: true, completion: nil)
         }
-    }
+    }*/
 
     
     func handleCancel(){
@@ -99,7 +84,7 @@ class NewChatTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return firends.count
     }
     
     
@@ -107,9 +92,9 @@ class NewChatTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
         
-        let user = users[indexPath.row]
+        let user = firends[indexPath.row]
         
-        cell.textLabel?.text = user.username
+        cell.textLabel?.text = user.name
         return cell
     }
     
@@ -117,7 +102,7 @@ class NewChatTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true) {
-            let user = self.users[indexPath.row]
+            let user = self.firends[indexPath.row]
             self.chatListController?.showChatLogControllerForUser(user: user)
         }
     }
