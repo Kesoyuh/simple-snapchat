@@ -131,7 +131,7 @@ class LoginRegisterController: UIViewController {
                     return
                 }
                 
-                let ref = FIRDatabase.database().reference(fromURL: "https://simple-snapchat.firebaseio.com/")
+                let ref = FIRDatabase.database().reference()
                 let userRef = ref.child("users").child(uid)
                 let values = ["name": username, "email": email]
  

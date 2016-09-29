@@ -92,10 +92,9 @@ class ChatListTableViewController: UITableViewController {
         let message = messages[indexPath.row]
 
         //TODO: check message type, show message if the type is text, others show "New message"
-        cell.textLabel?.text = message.text 
+        cell.textLabel?.text = message.toID
         
-        //*****************************TODO: Chage this to last chat time***********************
-        cell.detailTextLabel?.text = "time"
+        cell.detailTextLabel?.text = message.text
         return cell
 
     }

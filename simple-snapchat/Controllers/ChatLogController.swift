@@ -95,14 +95,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         let fromID = FIRAuth.auth()!.currentUser!.uid
         let toID = user!.id!
         let timestamp = Int(NSDate().timeIntervalSince1970)
-        //Set the Text key to the text of the messageTextField
-        /*var newMessageObject = Message()
-        newMessageObject["type"] = "Text"
-        newMessageObject["content"] = self.inputTextField.text
-        newMessageObject["fromID"] = fromID
-        newMessageObject["toID"] = toID
-        newMessageObject["timestamp"] = NSDate().timeIntervalSince1970 as NSNumber
-*/
         let values = ["text": inputTextField.text!, "toID": toID, "fromID": fromID, "timestamp": timestamp] as [String : Any]
         
         childRef.updateChildValues(values)
