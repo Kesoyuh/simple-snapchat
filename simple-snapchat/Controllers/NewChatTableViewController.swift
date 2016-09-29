@@ -14,6 +14,7 @@ import Firebase
 class NewChatTableViewController: UITableViewController {
     
     let cellID = "newChatCellId"
+    var chatListController: ChatListTableViewController?
     
      //************************************************************************TODO:Currently show all users, latter show firnds
     var firends = [User]()
@@ -98,12 +99,11 @@ class NewChatTableViewController: UITableViewController {
         return cell
     }
     
-    var chatListController: ChatListTableViewController?
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true) {
             let user = self.firends[indexPath.row]
-            self.chatListController?.showChatLogControllerForUser(user: user)
+            self.chatListController?.showChatLogControllerForUser(uid: user.id!)
         }
     }
 }

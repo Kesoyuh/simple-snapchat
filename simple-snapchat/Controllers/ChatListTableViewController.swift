@@ -12,10 +12,9 @@ import Firebase
 class ChatListTableViewController: UITableViewController {
 
     let cellId = "ChatCellId"
-    
-    var chatHistory = [User]()
+   
     var messages = [Message]()
-    
+    var messagesDictionary = [String: Message]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,22 +27,78 @@ class ChatListTableViewController: UITableViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         navigationController?.navigationBar.isHidden = false
-        
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellId)
-        
-       //fetchUser()
-        observeMessage()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+       // observeMessage()
+        observeUserMessages()
         
         
     }
     
+    func observeUserMessages(){
+        if let uid = FIRAuth.auth()?.currentUser?.uid {
+            print("fetch messages start")
+            print(uid)
+            let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
+            ref.observe(.childAdded, with: { (snapshot) in
+                if let messageID = snapshot.key as? String {
+                    let msgRef = FIRDatabase.database().reference().child("messages").child(messageID)
+                    msgRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                        print(snapshot)
+                        if let dictionary = snapshot.value as? [String: AnyObject]{
+                            let message = Message()
+                            message.setValuesForKeys(dictionary)
+                            
+                            // Group messages by id
+                            if let toID = message.toID {
+                                self.messagesDictionary[toID] = message
+                                self.messages = Array(self.messagesDictionary.values)
+                            
+                            }
+                                DispatchQueue.global().async {
+                                DispatchQueue.main.async {
+                                    //Sort the messages by timestamp
+                                    self.messages.sort(by: {
+                                        (m1,m2) ->Bool in
+                                        return (m1.timestamp?.intValue)! > (m2.timestamp?.intValue)!
+                                    })
+                                    print(self.messages)
+                                    print("-------------------RELOAD------------------------------")
+                                    self.tableView.reloadData()
+                                    print("-------------------RELOAD------------------------------")
+                                }
+                            }
+                        }
+                        }, withCancel: nil)
+                }
+            })
+        }
+    }
+    //Fetch message from database
     func observeMessage(){
         let ref = FIRDatabase.database().reference().child("messages")
         ref.observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let message = Message()
                 message.setValuesForKeys(dictionary)
-                self.messages.append(message)
+                
+                //self.messages.append(message)
+                
+                // Group messages by id
+                if let toID = message.toID {
+                    self.messagesDictionary[toID] = message
+                    self.messages = Array(self.messagesDictionary.values)
+                    
+                    //Sort the messages by timestamp
+                    self.messages.sort(by: {
+                    (m1,m2) ->Bool in
+                        return (m1.timestamp?.intValue)! > (m2.timestamp?.intValue)!
+                    })
+                    
+                }
+    
+                
                 DispatchQueue.global().async {
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -51,34 +106,9 @@ class ChatListTableViewController: UITableViewController {
                 }
 
             }
-           print("Observe messages:")
-           print(self.messages)
-            
             }, withCancel: nil)
     }
         
-    
-    //************************************************************************TODO: Change to fetch chat list latter
-    func fetchUser(){
-        
-        self.chatHistory = [User]()
-        FIRDatabase.database().reference().child("users").observe(.childAdded, with: {(snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let user = User()
-                user.setValuesForKeys(dictionary)
-                user.id = snapshot.key
-                self.chatHistory.append(user)
-            }
-            
-            DispatchQueue.global().async {
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-
-            }, withCancel: nil)
-    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
@@ -88,29 +118,28 @@ class ChatListTableViewController: UITableViewController {
     // Display value for cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatCell
         let message = messages[indexPath.row]
-
-        //TODO: check message type, show message if the type is text, others show "New message"
-        cell.textLabel?.text = message.toID
-        
-        cell.detailTextLabel?.text = message.text
+        cell.messgae = message
         return cell
 
     }
     
-
-    //Start a chat --> ChatLogController
+        //Start a chat --> ChatLogController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // let user = chatHistory[indexPath.row]
-        //showChatLogControllerForUser(user: user)
+        if let id = messages[indexPath.row].toID {
+               showChatLogControllerForUser(uid: id)
+        }
+        
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72
     }
     
-    func showChatLogControllerForUser(user: User){
+    func showChatLogControllerForUser(uid: String){
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         navigationController?.pushViewController(chatLogController, animated: true)
-        chatLogController.user = user
-        print(user)
+        chatLogController.uid = uid
     }
     
     //TODO: When click the top left button, choosing a friend to chat with
@@ -146,17 +175,3 @@ extension UIColor {
  override var preferredStatusBarStyle: UIStatusBarStyle {
  return .lightContent
  }**/
-
-
-class ChatCell: UITableViewCell{
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?){
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-}
-
-
-}

@@ -1,0 +1,129 @@
+//
+//  ChatCell.swift
+//  simple-snapchat
+//
+//  Created by Helen on 29/09/2016.
+//  Copyright © 2016 University of Melbourne. All rights reserved.
+//
+import Foundation
+import UIKit
+import Firebase
+
+class ChatCell: UITableViewCell{
+    var messgae: Message?{
+        didSet{
+            
+            if let toID = messgae?.toID{
+                let ref = FIRDatabase.database().reference().child("users").child(toID)
+                ref.observeSingleEvent(of: .value, with: {(snapshot) in
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        self.textLabel?.text =  dictionary["name"] as? String
+                        
+                        //Load imgae
+                        //TODO: Add profile image OR status image?
+                        if let imageURL = dictionary["imageURL"] as? URL
+                        {
+                            self.downloadImage(imageView: self.leftImageView, url: imageURL)
+                        }else{
+                            //print("NO Image found for this cell.")
+                        }
+                        
+                    }
+                    
+                    }, withCancel: nil)
+            }
+            //TODO: check message type, show message if the type is text, others show "New message"
+            
+            
+            if let seconds = messgae?.timestamp?.doubleValue {
+                let timestampDate = NSDate(timeIntervalSince1970: seconds )
+                
+                //TODO: Change the info of date displayed latter( ** ago, or dd/mm)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "h:mm:ss a"
+                timeLabel.text = dateFormatter.string(from: timestampDate as Date)
+
+            }
+            
+            self.detailTextLabel?.text = messgae?.text
+
+            
+        }
+    }
+    let leftImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 24
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+        }()
+    
+    let timeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "HH:MM:SS"
+        label.font  = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor.lightGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        textLabel?.frame = CGRect( x: 64, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
+        
+        detailTextLabel?.frame = CGRect(x: 64, y: detailTextLabel!.frame.origin.y + 2, width: (detailTextLabel?.frame.width)!, height: detailTextLabel!.frame.height)
+        
+        
+    }
+    
+    
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?){
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        addSubview(leftImageView)
+        addSubview(timeLabel)
+        leftImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        leftImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        leftImageView.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        leftImageView.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        
+        timeLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        timeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant:18).isActive = true
+        timeLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        timeLabel.heightAnchor.constraint(equalTo: (textLabel?.heightAnchor)!).isActive = true
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    //---------------------Downloading Imgae from URL------------------------------------------
+    //a method with a completion handler to get the image data from your url
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
+    }
+    //Create a method to download the image (start the task)
+    func downloadImage(imageView: UIImageView, url: URL) {
+        print("Download Started")
+        getDataFromUrl(url: url) { (data, response, error)  in
+            DispatchQueue.main.sync() { () -> Void in
+                guard let data = data, error == nil else { return }
+                print(response?.suggestedFilename ?? url.lastPathComponent)
+                print("Download Finished")
+                imageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    //--------------------------------------------------------------------------------------------
+    
+
+    
+}

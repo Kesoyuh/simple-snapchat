@@ -10,9 +10,17 @@ import UIKit
 import Firebase
 class ChatLogController: UICollectionViewController, UITextFieldDelegate {
 
-    var user: User?{
+    var uid: String?{
         didSet{
-            navigationItem.title = user?.name
+            
+            let ref = FIRDatabase.database().reference().child("users").child(uid!)
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                  self.navigationItem.title = dictionary["name"] as! String?
+                }
+                }, withCancel: nil)
+            
+           
         }
     }
     
@@ -93,15 +101,22 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         let ref = FIRDatabase.database().reference().child("messages")
         let childRef = ref.childByAutoId()
         let fromID = FIRAuth.auth()!.currentUser!.uid
-        let toID = user!.id!
+        let toID = uid!
         let timestamp = Int(NSDate().timeIntervalSince1970)
         let values = ["text": inputTextField.text!, "toID": toID, "fromID": fromID, "timestamp": timestamp] as [String : Any]
         
-        childRef.updateChildValues(values)
-        //TODO: Load IMG....
-        
+        childRef.updateChildValues(values) { (error, ref) in
+            if error != nil{
+                print(error)
+                return
+            }
+            //Update user-messages for both sender and receiver
+            let senderMsgRef = FIRDatabase.database().reference().child("user-messages").child(fromID)
+            senderMsgRef.updateChildValues([childRef.key : 1])
+            let receiverMsgRef = FIRDatabase.database().reference().child("user-messages").child(toID)
+            receiverMsgRef.updateChildValues([childRef.key : 1])
     }
-    
+    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         handleSend()

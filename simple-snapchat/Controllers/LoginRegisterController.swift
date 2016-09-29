@@ -11,6 +11,7 @@ import Firebase
 
 @IBDesignable
 class LoginRegisterController: UIViewController {
+    let chatListController = ChatListTableViewController()
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -101,18 +102,14 @@ class LoginRegisterController: UIViewController {
                 print(error)
                 return
             } else {
+                self.chatListController.messages.removeAll()
+                self.chatListController.messagesDictionary.removeAll()
+                self.chatListController.viewDidLoad()
                 self.dismiss(animated: true, completion: nil)
+                
             }
         })
-        
-//        PFUser.logInWithUsername(inBackground: username, password: password) { (user, error) in
-//            if let error = error{
-//                let errorString = error as? NSString
-//                print(errorString)
-//            } else {
-//                self.dismiss(animated: true, completion: nil)
-//            }
-//        }
+    
         
     }
     
@@ -145,19 +142,6 @@ class LoginRegisterController: UIViewController {
                 })
             }
         })
-//        let user = PFUser()
-//        user.email = email
-//        user.username = username
-//        user.password = password
-//
-//        user.signUpInBackground { (succeeded, error) in
-//            if let error = error{
-//                let errorString = error as? NSString
-//                print(errorString)
-//            } else {
-//                self.dismiss(animated: true, completion: nil)
-//            }
-//        }
 
     
     }
