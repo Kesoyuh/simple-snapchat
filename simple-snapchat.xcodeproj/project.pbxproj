@@ -22,6 +22,9 @@
 		004349091D99030100D3DE54 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349031D99030100D3DE54 /* TopViewController.swift */; };
 		0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349041D99030100D3DE54 /* VerticalScrollViewController.swift */; };
 		004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349101D9903CA00D3DE54 /* StoriesViewController.swift */; };
+		004B00C71D9D212000C1C6E5 /* MemoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B00C61D9D212000C1C6E5 /* MemoriesController.swift */; };
+		004B00C91D9D231A00C1C6E5 /* CameraRollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B00C81D9D231A00C1C6E5 /* CameraRollController.swift */; };
+		004B00CB1D9D23B500C1C6E5 /* SnapsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */; };
 		00DD9D181D98F5D3006489BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DD9D171D98F5D3006489BE /* AppDelegate.swift */; };
 		00DD9D1D1D98F5D3006489BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DD9D1B1D98F5D3006489BE /* Main.storyboard */; };
 		00DD9D1F1D98F5D3006489BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00DD9D1E1D98F5D3006489BE /* Assets.xcassets */; };
@@ -55,6 +58,9 @@
 		004349031D99030100D3DE54 /* TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopViewController.swift; path = Controllers/TopViewController.swift; sourceTree = "<group>"; };
 		004349041D99030100D3DE54 /* VerticalScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalScrollViewController.swift; path = Controllers/VerticalScrollViewController.swift; sourceTree = "<group>"; };
 		004349101D9903CA00D3DE54 /* StoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoriesViewController.swift; path = Controllers/StoriesViewController.swift; sourceTree = "<group>"; };
+		004B00C61D9D212000C1C6E5 /* MemoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoriesController.swift; path = Controllers/MemoriesController.swift; sourceTree = "<group>"; };
+		004B00C81D9D231A00C1C6E5 /* CameraRollController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraRollController.swift; path = Controllers/CameraRollController.swift; sourceTree = "<group>"; };
+		004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapsController.swift; path = Controllers/SnapsController.swift; sourceTree = "<group>"; };
 		00DD9D141D98F5D3006489BE /* simple-snapchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "simple-snapchat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DD9D171D98F5D3006489BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00DD9D1C1D98F5D3006489BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -159,6 +165,16 @@
 			name = Discover;
 			sourceTree = "<group>";
 		};
+		004B00C51D9D0DF100C1C6E5 /* BottomView */ = {
+			isa = PBXGroup;
+			children = (
+				004B00C61D9D212000C1C6E5 /* MemoriesController.swift */,
+				004B00C81D9D231A00C1C6E5 /* CameraRollController.swift */,
+				004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */,
+			);
+			name = BottomView;
+			sourceTree = "<group>";
+		};
 		00DD9D0B1D98F5D3006489BE = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +196,7 @@
 		00DD9D161D98F5D3006489BE /* simple-snapchat */ = {
 			isa = PBXGroup;
 			children = (
+				004B00C51D9D0DF100C1C6E5 /* BottomView */,
 				798136421D9BCF9D0074ED25 /* Model */,
 				798136301D9928560074ED25 /* Chat */,
 				00198B171D99102A003AD328 /* simple-snapchat.entitlements */,
@@ -261,7 +278,7 @@
 				TargetAttributes = {
 					00DD9D131D98F5D3006489BE = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 87226X2B9L;
+						DevelopmentTeam = 7STNWYS4YZ;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -359,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004B00C71D9D212000C1C6E5 /* MemoriesController.swift in Sources */,
 				004349091D99030100D3DE54 /* TopViewController.swift in Sources */,
 				798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */,
 				004349061D99030100D3DE54 /* LoginRegisterController.swift in Sources */,
@@ -367,6 +385,8 @@
 				004349081D99030100D3DE54 /* SnapContainerViewController.swift in Sources */,
 				798136361D9977010074ED25 /* ChatLogController.swift in Sources */,
 				004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */,
+				004B00CB1D9D23B500C1C6E5 /* SnapsController.swift in Sources */,
+				004B00C91D9D231A00C1C6E5 /* CameraRollController.swift in Sources */,
 				798136481D9BCFD50074ED25 /* User.swift in Sources */,
 				004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */,
 				798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */,
@@ -495,7 +515,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "simple-snapchat/simple-snapchat.entitlements";
-				DEVELOPMENT_TEAM = 87226X2B9L;
+				DEVELOPMENT_TEAM = 7STNWYS4YZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -504,7 +524,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat-helen";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -516,7 +536,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "simple-snapchat/simple-snapchat.entitlements";
-				DEVELOPMENT_TEAM = 87226X2B9L;
+				DEVELOPMENT_TEAM = 7STNWYS4YZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -525,7 +545,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat-helen";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
