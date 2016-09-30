@@ -104,10 +104,32 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         let message = messages[indexPath.item]
         cell.textView.text = message.text
         
+        setupCell(cell: cell, message: message)
+        
         // Modify the bubbleView's width
         cell.bubbleWidthAnchor?.constant = estimateFrameForText(text: message.text!).width + 32
         
         return cell
+    }
+    
+    private func setupCell(cell: MessageCell, message: Message){
+        
+        // Incoming and outgoing messages
+        if message.fromID == FIRAuth.auth()?.currentUser?.uid {
+            // outgoing blue bubble
+            cell.bubbleView.backgroundColor = MessageCell.blueColor
+            cell.textView.textColor = UIColor.white
+            cell.bubbleViewRightAnchor?.isActive = true
+            cell.bubbleViewLeftAnchor?.isActive = false
+        }else{
+            // incoming gray bubble
+            cell.bubbleView.backgroundColor = MessageCell.grayColor
+            cell.textView.textColor = UIColor.black
+            cell.bubbleViewRightAnchor?.isActive = false
+            cell.bubbleViewLeftAnchor?.isActive = true
+        }
+        
+
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

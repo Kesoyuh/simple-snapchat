@@ -21,24 +21,33 @@ class MessageCell: UICollectionViewCell {
 
         return tv
     }()
+    static let blueColor = UIColor(red: 0, green: 137, blue: 249)
+    static let grayColor = UIColor(red: 240, green: 240, blue: 240)
     
     let bubbleView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0, green: 137, blue: 249)
+        //view.backgroundColor = blueColor
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
         return view
     }()
     var bubbleWidthAnchor: NSLayoutConstraint?
-    
+    var bubbleViewRightAnchor: NSLayoutConstraint?
+    var bubbleViewLeftAnchor: NSLayoutConstraint?
     override init(frame: CGRect){
         super.init(frame: frame)
         addSubview(bubbleView)
         addSubview(textView)
         
+        
         // Contraints for bubble view
-        bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8).isActive = true
+        bubbleViewRightAnchor = bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
+        //bubbleViewRightAnchor?.isActive = true
+        
+        bubbleViewLeftAnchor = bubbleView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8)
+        //bubbleViewLeftAnchor?.isActive = true
+        
         bubbleView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         bubbleWidthAnchor = bubbleView.widthAnchor.constraint(equalToConstant: 200)
         bubbleWidthAnchor?.isActive = true
