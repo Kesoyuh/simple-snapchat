@@ -21,12 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let left = storyboard.instantiateViewController(withIdentifier: "left")
-        let middle = storyboard.instantiateViewController(withIdentifier: "middle")
+        let middle = storyboard.instantiateViewController(withIdentifier: "camera")
         let right = storyboard.instantiateViewController(withIdentifier: "right")
         let top = storyboard.instantiateViewController(withIdentifier: "top")
         let bottom = storyboard.instantiateViewController(withIdentifier: "bottom")
         
-        let snapContainer = SnapContainerViewController.containerViewWith(left, middleVC: middle as! UINavigationController, rightVC: right as! UINavigationController, topVC: top, bottomVC: bottom)
+        let snapContainer = SnapContainerViewController.containerViewWith(left, middleVC: middle as! CameraViewController, rightVC: right as! UINavigationController, topVC: top, bottomVC: bottom)
         
         self.window?.rootViewController = snapContainer
         self.window?.makeKeyAndVisible()

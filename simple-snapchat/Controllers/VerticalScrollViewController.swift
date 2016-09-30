@@ -10,11 +10,11 @@ import UIKit
 
 class VerticalScrollViewController: UIViewController, SnapContainerViewControllerDelegate {
     var topVc: UIViewController!
-    var middleVc: UINavigationController!
+    var middleVc: CameraViewController!
     var bottomVc: UIViewController!
     var scrollView: UIScrollView!
     
-    class func verticalScrollVcWith(_ middleVc: UINavigationController,
+    class func verticalScrollVcWith(_ middleVc: CameraViewController,
                                     topVc: UIViewController?=nil,
                                     bottomVc: UIViewController?=nil) -> VerticalScrollViewController {
         let middleScrollVc = VerticalScrollViewController()

@@ -16,8 +16,8 @@ class SnapContainerViewController: UIViewController, UIScrollViewDelegate {
     
     var topVc: UIViewController?
     var leftVc: UIViewController!
-//    var middleVc: CameraViewController!
-    var middleVc: UINavigationController!
+    var middleVc: CameraViewController!
+    //var middleVc: UINavigationController!
     var rightVc: UINavigationController!
     var bottomVc: UIViewController?
     var directionLockDisabled: Bool!
@@ -30,7 +30,7 @@ class SnapContainerViewController: UIViewController, UIScrollViewDelegate {
     var delegate: SnapContainerViewControllerDelegate?
     
     class func containerViewWith(_ leftVC: UIViewController,
-                                 middleVC: UINavigationController,
+                                 middleVC: CameraViewController,
                                  rightVC: UINavigationController,
                                  topVC: UIViewController?=nil,
                                  bottomVC: UIViewController?=nil,

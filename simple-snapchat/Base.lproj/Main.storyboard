@@ -175,11 +175,12 @@
                         <outlet property="FlipCamera" destination="Qkb-8s-mvH" id="GAs-fo-3Bg"/>
                         <outlet property="TakePicButton" destination="VUc-xl-edW" id="XLI-X9-0g7"/>
                         <outlet property="previewView" destination="EGf-Wj-b1O" id="EVq-DX-kjg"/>
+                        <segue destination="SmH-En-Bre" kind="show" identifier="captured" id="WUB-ab-8vk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="319" y="399"/>
+            <point key="canvasLocation" x="471" y="383"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ubO-V9-Lhs">
@@ -222,24 +223,23 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6AI-U0-yjB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2508" y="-168"/>
+            <point key="canvasLocation" x="2510" y="-447"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5KE-EL-e8W">
             <objects>
-                <navigationController storyboardIdentifier="middle" id="SmH-En-Bre" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="captured" id="SmH-En-Bre" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1wa-iE-KfW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Jht-Ta-qdw"/>
-                        <segue destination="Tb7-Al-dck" kind="show" id="f1D-Od-E3L"/>
+                        <segue destination="Tb7-Al-dck" kind="relationship" relationship="rootViewController" id="dQT-Fh-OU5"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdx-cY-GLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1522" y="496"/>
+            <point key="canvasLocation" x="2041" y="348"/>
         </scene>
         <!--Preview-->
         <scene sceneID="SOP-Sx-9Wz">
@@ -310,7 +310,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Krc-GM-ofv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1686" y="-167"/>
+            <point key="canvasLocation" x="1686" y="-446"/>
         </scene>
     </scenes>
     <resources>

@@ -142,6 +142,8 @@ class CameraViewController : UIViewController {
                 let cgImageRef = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
                 self.ImageCaptured = UIImage(cgImage:cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
                 self.captureSession.stopRunning()
+                self.performSegue(withIdentifier: "captured", sender: self)
+
                 }
 //                let previewController = PreviewViewController()
 //                previewController.capturedPhoto = self.ImageCaptured
@@ -191,7 +193,7 @@ class CameraViewController : UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Captured"{
+        if segue.identifier == "captured"{
             if let navigationController = segue.destination as? UINavigationController{
                 if let PreviewController = navigationController.topViewController as? PreviewViewController {
                     PreviewController.capturedPhoto = ImageCaptured
