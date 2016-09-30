@@ -48,7 +48,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e5X-Cb-eJL" id="4ZZ-Sy-twB">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -93,7 +93,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oA4-gm-OFh" id="16q-oC-Cnh">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -180,56 +180,31 @@
             </objects>
             <point key="canvasLocation" x="319" y="399"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="MH1-KT-bdX">
-            <objects>
-                <navigationController storyboardIdentifier="bottom" id="SOl-OT-MAN" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cWm-ri-eVD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="TT3-4S-vpL" kind="relationship" relationship="rootViewController" id="DHo-S9-VfK"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ORg-T1-CDH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="361" y="1142"/>
-        </scene>
         <!--Camera Roll Controller-->
-        <scene sceneID="3Pd-DE-50Z">
+        <scene sceneID="QkP-Zm-Kbb">
             <objects>
-                <collectionViewController id="TT3-4S-vpL" customClass="CameraRollController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="xYx-rj-DLO">
+                <collectionViewController id="nGU-g3-k6c" customClass="CameraRollController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="GUt-C9-PId">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ts0-rR-fpG">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GQJ-SX-QJY">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9zg-oE-LHb">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
-                            <outlet property="dataSource" destination="TT3-4S-vpL" id="frH-iD-1JX"/>
-                            <outlet property="delegate" destination="TT3-4S-vpL" id="MiM-Ci-g6j"/>
+                            <outlet property="dataSource" destination="nGU-g3-k6c" id="yCv-Ks-1sD"/>
+                            <outlet property="delegate" destination="nGU-g3-k6c" id="N0f-Mj-qU8"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="aZi-Pc-zks"/>
+                    <navigationItem key="navigationItem" id="G0x-ta-tBM"/>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="heM-a9-4xU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oBm-IE-E5J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1115" y="1146"/>
+            <point key="canvasLocation" x="1345" y="1153"/>
         </scene>
         <!--Stories-->
         <scene sceneID="ony-Ao-7xw">
@@ -273,6 +248,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Krc-GM-ofv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1483" y="415"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZCg-Ew-mXI">
+            <objects>
+                <navigationController storyboardIdentifier="bottom" automaticallyAdjustsScrollViewInsets="NO" id="6kf-dW-m3H" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hnx-Q9-3z1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nGU-g3-k6c" kind="relationship" relationship="rootViewController" id="vfQ-Mc-FVw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dIj-gO-kPV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="431" y="1153"/>
         </scene>
     </scenes>
     <resources>
