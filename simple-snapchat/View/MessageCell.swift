@@ -21,6 +21,16 @@ class MessageCell: UICollectionViewCell {
 
         return tv
     }()
+    
+    let messageImageView: UIImageView =  {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    
     static let blueColor = UIColor(red: 0, green: 137, blue: 249)
     static let grayColor = UIColor(red: 240, green: 240, blue: 240)
     
@@ -39,7 +49,7 @@ class MessageCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubview(bubbleView)
         addSubview(textView)
-        
+        bubbleView.addSubview(messageImageView)
         
         // Contraints for bubble view
         bubbleViewRightAnchor = bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
@@ -61,8 +71,17 @@ class MessageCell: UICollectionViewCell {
         //textView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         textView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
         
-        
+        // Constraints for message image view
+        messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor).isActive = true
+        messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
+        messageImageView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor).isActive = true
+        messageImageView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor).isActive = true
+
         self.backgroundColor = UIColor.white
+        
+        self.bubbleView.isUserInteractionEnabled = false
+        self.textView.isUserInteractionEnabled = false
+        self.textView.isUserInteractionEnabled = false
         
     }
 
