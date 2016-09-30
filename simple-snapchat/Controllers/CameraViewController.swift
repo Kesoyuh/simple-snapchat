@@ -23,6 +23,9 @@ class CameraViewController : UIViewController {
     var stillImageOutput:AVCaptureStillImageOutput!
     
     var cameraFacingback: Bool = true
+    var ImageCaptured: UIImage!
+    var cameraState:Bool = true
+
     
     @IBOutlet var previewView: UIView!
     
@@ -35,13 +38,14 @@ class CameraViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print(prefersStatusBarHidden())
-        //loadCamera()
+        self.navigationController?.isNavigationBarHidden = true
+        loadCamera()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         checkIfUserIsLoggedIn()
     }
     
@@ -59,10 +63,6 @@ class CameraViewController : UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    override var prefersStatusBarHidden : Bool {
-        return !(self.parent!.prefersStatusBarHidden)
     }
     
     
@@ -130,6 +130,25 @@ class CameraViewController : UIViewController {
     
     @IBAction func Takepicture(_ sender: UIButton) {
         TakePicButton.isEnabled = true;
+        cameraState = false
+        if !captureSession.isRunning {
+            return
+        }
+        if let videoConnection = stillImageOutput!.connection(withMediaType: AVMediaTypeVideo){
+            stillImageOutput?.captureStillImageAsynchronously(from: videoConnection, completionHandler: {(sampleBuffer,error) -> Void in
+                if sampleBuffer != nil {
+                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
+                let dataProvider = CGDataProvider(data: imageData as! CFData)
+                let cgImageRef = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
+                self.ImageCaptured = UIImage(cgImage:cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
+                self.captureSession.stopRunning()
+                }
+//                let previewController = PreviewViewController()
+//                previewController.capturedPhoto = self.ImageCaptured
+//                self.present(previewController, animated: true, completion: nil)
+            })
+        }
+        
     }
     
     @IBAction func ChangeFlash(_ sender: UIButton){
@@ -146,9 +165,6 @@ class CameraViewController : UIViewController {
         } else {
             displayFrontCamera()
         }
-        
-        
-        
     }
     
     func displayBackCamera(){
@@ -174,5 +190,14 @@ class CameraViewController : UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Captured"{
+            if let navigationController = segue.destination as? UINavigationController{
+                if let PreviewController = navigationController.topViewController as? PreviewViewController {
+                    PreviewController.capturedPhoto = ImageCaptured
+            }
+        }
+    }
 }
-
+}
+    

@@ -26,11 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let top = storyboard.instantiateViewController(withIdentifier: "top")
         let bottom = storyboard.instantiateViewController(withIdentifier: "bottom")
         
-        let snapContainer = SnapContainerViewController.containerViewWith(left, middleVC: middle, rightVC: right as! UINavigationController, topVC: top, bottomVC: bottom)
+        let snapContainer = SnapContainerViewController.containerViewWith(left, middleVC: middle as! UINavigationController, rightVC: right as! UINavigationController, topVC: top, bottomVC: bottom)
         
         self.window?.rootViewController = snapContainer
         self.window?.makeKeyAndVisible()
-
+    
         // Initialize Firebase
         FIRApp.configure()
         
@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
 
 
 }

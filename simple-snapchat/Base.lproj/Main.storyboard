@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -67,7 +67,6 @@
         <!--Navigation Controller-->
         <scene sceneID="lPw-p9-MGm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xcM-Oh-MBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="left" id="7ho-jP-Cad" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qg0-jf-l7C">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -77,6 +76,7 @@
                         <segue destination="hFU-6v-FWk" kind="relationship" relationship="rootViewController" id="ob5-Uj-a1t"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xcM-Oh-MBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2752" y="230"/>
         </scene>
@@ -112,7 +112,7 @@
         <!--Camera View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="middle" id="BYZ-38-t0r" customClass="CameraViewController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="camera" id="BYZ-38-t0r" customClass="CameraViewController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -169,6 +169,7 @@
                             <constraint firstItem="EGf-Wj-b1O" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="m4k-TI-29x"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="TRO-BS-djY"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="FlipCamera" destination="Qkb-8s-mvH" id="GAs-fo-3Bg"/>
@@ -196,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jde-Vi-wJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="325" y="1119"/>
+            <point key="canvasLocation" x="377" y="1701"/>
         </scene>
         <!--Stories-->
         <scene sceneID="ony-Ao-7xw">
@@ -221,7 +222,77 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6AI-U0-yjB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2301" y="415"/>
+            <point key="canvasLocation" x="2508" y="-168"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5KE-EL-e8W">
+            <objects>
+                <navigationController storyboardIdentifier="middle" id="SmH-En-Bre" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1wa-iE-KfW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Jht-Ta-qdw"/>
+                        <segue destination="Tb7-Al-dck" kind="show" id="f1D-Od-E3L"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jdx-cY-GLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1522" y="496"/>
+        </scene>
+        <!--Preview-->
+        <scene sceneID="SOP-Sx-9Wz">
+            <objects>
+                <viewController id="Tb7-Al-dck" userLabel="Preview" customClass="PreviewViewController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fki-0f-KgM"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xje-SK-CMo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="85R-JD-SwN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EoO-n8-d3I" userLabel="CapturedPhoto">
+                                <frame key="frameInset" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqt-Vv-gqh">
+                                <frame key="frameInset" minX="16" minY="617" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Timer"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYd-U2-5GK">
+                                <frame key="frameInset" minX="70" minY="617" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBk-ke-De3">
+                                <frame key="frameInset" minX="124" minY="617" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Memories"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QsS-1N-6Yp">
+                                <frame key="frameInset" minX="313" minY="617" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="send"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cZ-5Q-Azc">
+                                <frame key="frameInset" minX="16" minY="96" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancle"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Preview" id="zPM-cb-98L"/>
+                    <connections>
+                        <outlet property="CapturedPhotoView" destination="EoO-n8-d3I" id="n5G-DI-Qmm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eId-am-sdt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2372" y="1378"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kxB-C8-7gA">
@@ -239,7 +310,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Krc-GM-ofv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1483" y="415"/>
+            <point key="canvasLocation" x="1686" y="-167"/>
         </scene>
     </scenes>
     <resources>

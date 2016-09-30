@@ -10,11 +10,11 @@ import UIKit
 
 class VerticalScrollViewController: UIViewController, SnapContainerViewControllerDelegate {
     var topVc: UIViewController!
-    var middleVc: UIViewController!
+    var middleVc: UINavigationController!
     var bottomVc: UIViewController!
     var scrollView: UIScrollView!
     
-    class func verticalScrollVcWith(_ middleVc: UIViewController,
+    class func verticalScrollVcWith(_ middleVc: UINavigationController,
                                     topVc: UIViewController?=nil,
                                     bottomVc: UIViewController?=nil) -> VerticalScrollViewController {
         let middleScrollVc = VerticalScrollViewController()
@@ -34,7 +34,6 @@ class VerticalScrollViewController: UIViewController, SnapContainerViewControlle
     
     func setupScrollView() {
         scrollView = UIScrollView()
-        //scrollView.PagingEnabled = true
         scrollView.isPagingEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.bounces = false

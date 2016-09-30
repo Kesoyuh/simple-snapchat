@@ -16,7 +16,8 @@ class SnapContainerViewController: UIViewController, UIScrollViewDelegate {
     
     var topVc: UIViewController?
     var leftVc: UIViewController!
-    var middleVc: UIViewController!
+//    var middleVc: CameraViewController!
+    var middleVc: UINavigationController!
     var rightVc: UINavigationController!
     var bottomVc: UIViewController?
     var directionLockDisabled: Bool!
@@ -29,7 +30,7 @@ class SnapContainerViewController: UIViewController, UIScrollViewDelegate {
     var delegate: SnapContainerViewControllerDelegate?
     
     class func containerViewWith(_ leftVC: UIViewController,
-                                 middleVC: UIViewController,
+                                 middleVC: UINavigationController,
                                  rightVC: UINavigationController,
                                  topVC: UIViewController?=nil,
                                  bottomVC: UIViewController?=nil,
@@ -137,7 +138,4 @@ class SnapContainerViewController: UIViewController, UIScrollViewDelegate {
             self.scrollView!.setContentOffset(newOffset, animated:  false)
         }
     }
-//    override func prefersStatusBarHidden() -> Bool {
-//        return true
-//    }
 }
