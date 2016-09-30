@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class ChatListTableViewController: UITableViewController {
-
+    
     let cellId = "ChatCellId"
     var uid : String?
     var messages = [Message]()
@@ -21,7 +21,7 @@ class ChatListTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "NewChat", style: .plain, target: self, action: #selector(addNewChat))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Camera", style: .plain, target: self, action: #selector(cameraView))
-    
+        
         navigationItem.title = "Chat"
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 102, green: 178, blue: 255)
         self.navigationController?.navigationBar.tintColor = UIColor.white
@@ -46,39 +46,49 @@ class ChatListTableViewController: UITableViewController {
     }
     
     func observeUserMessages(){
-        if let uid = FIRAuth.auth()?.currentUser?.uid {
-            let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
-            ref.observe(.childAdded, with: { (snapshot) in
-                if let messageID = snapshot.key as? String {
-                    let msgRef = FIRDatabase.database().reference().child("messages").child(messageID)
-                    msgRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                        if let dictionary = snapshot.value as? [String: AnyObject]{
-                            let message = Message()
-                            message.setValuesForKeys(dictionary)
-                            
-                            // Group messages by id
-                            if let chatPartnerId = message.chatPartnerId() {
-                                self.messagesDictionary[chatPartnerId] = message
-                                self.messages = Array(self.messagesDictionary.values)
-                            
-                            }
-                            //Sort the messages by timestamp
-                            self.messages.sort(by: {
-                                (m1,m2) ->Bool in
-                                return (m1.timestamp?.intValue)! > (m2.timestamp?.intValue)!
-                            })
-                            self.timer?.invalidate()
-                            self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
-                            
-                        }
-                        }, withCancel: nil)
-                }
-            })
+        guard  let uid = FIRAuth.auth()?.currentUser?.uid else {
+            return
         }
+        
+        let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let userID = snapshot.key
+            FIRDatabase.database().reference().child("user-messages").child(uid).child(userID).observe(.childAdded, with: { (snapshot) in
+                let messageID = snapshot.key
+                self.fetchMessageWithID(messageID: messageID)
+                }, withCancel: nil)
+        })
+    }
+    
+    private func fetchMessageWithID(messageID: String){
+        let msgRef = FIRDatabase.database().reference().child("messages").child(messageID)
+        msgRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let message = Message()
+                message.setValuesForKeys(dictionary)
+                // Group messages by id
+                if let chatPartnerId = message.chatPartnerId() {
+                    self.messagesDictionary[chatPartnerId] = message
+                }
+                self.attemptReloadOfTable()
+            }
+            }, withCancel: nil)
+    }
+    private func attemptReloadOfTable(){
+        
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
     }
     
     var timer: Timer?
     func handleReloadTable(){
+        self.messages = Array(self.messagesDictionary.values)
+        //Sort the messages by timestamp
+        self.messages.sort(by: {
+            (m1,m2) ->Bool in
+            return (m1.timestamp?.intValue)! > (m2.timestamp?.intValue)!
+        })
+        
         DispatchQueue.global().async {
             DispatchQueue.main.async {
                 print("We reloaded the table")
@@ -95,15 +105,15 @@ class ChatListTableViewController: UITableViewController {
     
     // Display value for cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatCell
         let message = messages[indexPath.row]
         cell.message = message
         return cell
-
+        
     }
     
-        //Start a chat --> ChatLogController
+    //Start a chat --> ChatLogController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let message = messages[indexPath.row]
         guard let chatPartnerId = message.chatPartnerId() else {
@@ -112,11 +122,11 @@ class ChatListTableViewController: UITableViewController {
         showChatLogControllerForUser(uid: chatPartnerId)
     }
     
-        override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
     }
     
-
+    
     func showChatLogControllerForUser(uid: String){
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         navigationController?.pushViewController(chatLogController, animated: true)
@@ -124,20 +134,20 @@ class ChatListTableViewController: UITableViewController {
     }
     
     //TODO: When click the top left button, choosing a friend to chat with
-        func addNewChat(){
-            let newChatController = NewChatTableViewController()
-            newChatController.chatListController = self
-            let navController = UINavigationController(rootViewController: newChatController)
-            present(navController, animated:true, completion:nil)
-        }
-    
-    
-        func cameraView(){
-            let cameraViewController = CameraViewController()
-            present(cameraViewController, animated:true, completion:nil)
-        
-        }
+    func addNewChat(){
+        let newChatController = NewChatTableViewController()
+        newChatController.chatListController = self
+        let navController = UINavigationController(rootViewController: newChatController)
+        present(navController, animated:true, completion:nil)
     }
+    
+    
+    func cameraView(){
+        let cameraViewController = CameraViewController()
+        present(cameraViewController, animated:true, completion:nil)
+        
+    }
+}
 
 
 
