@@ -36,6 +36,7 @@
 		798136471D9BCFD50074ED25 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136451D9BCFD50074ED25 /* Message.swift */; };
 		798136481D9BCFD50074ED25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136461D9BCFD50074ED25 /* User.swift */; };
 		D4F528341D9D64F200781F78 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F528331D9D64F200781F78 /* PreviewController.swift */; };
+		D4F528361D9EA74200781F78 /* NoAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F528351D9EA74200781F78 /* NoAnimation.swift */; };
 		F595B0AB8367814EF8C25504 /* Pods_simple_snapchat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		798136461D9BCFD50074ED25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
 		AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_simple_snapchat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F528331D9D64F200781F78 /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		D4F528351D9EA74200781F78 /* NoAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAnimation.swift; sourceTree = "<group>"; };
 		FEFFBC8570546B75E246890B /* Pods-simple-snapchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.debug.xcconfig"; sourceTree = "<group>"; };
 		FF70871258D3258057C9ED4E /* Pods-simple-snapchat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.release.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +126,7 @@
 			children = (
 				004348FF1D99030100D3DE54 /* CameraViewController.swift */,
 				D4F528331D9D64F200781F78 /* PreviewController.swift */,
+				D4F528351D9EA74200781F78 /* NoAnimation.swift */,
 			);
 			name = Carema;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */,
 				798136481D9BCFD50074ED25 /* User.swift in Sources */,
 				004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */,
+				D4F528361D9EA74200781F78 /* NoAnimation.swift in Sources */,
 				798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */,
 				0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */,
 				798136471D9BCFD50074ED25 /* Message.swift in Sources */,

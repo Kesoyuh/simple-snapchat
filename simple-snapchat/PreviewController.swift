@@ -11,6 +11,8 @@ class PreviewViewController: UIViewController {
     
     @IBOutlet weak var CapturedPhotoView : UIImageView!
     
+    @IBOutlet weak var CancleButton: UIButton!
+    
     var capturedPhoto :UIImage!
     
     

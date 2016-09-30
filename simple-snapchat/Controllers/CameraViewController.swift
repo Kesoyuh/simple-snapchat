@@ -143,11 +143,7 @@ class CameraViewController : UIViewController {
                 self.ImageCaptured = UIImage(cgImage:cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
                 self.captureSession.stopRunning()
                 self.performSegue(withIdentifier: "captured", sender: self)
-
                 }
-//                let previewController = PreviewViewController()
-//                previewController.capturedPhoto = self.ImageCaptured
-//                self.present(previewController, animated: true, completion: nil)
             })
         }
         

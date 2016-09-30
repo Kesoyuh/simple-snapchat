@@ -175,7 +175,7 @@
                         <outlet property="FlipCamera" destination="Qkb-8s-mvH" id="GAs-fo-3Bg"/>
                         <outlet property="TakePicButton" destination="VUc-xl-edW" id="XLI-X9-0g7"/>
                         <outlet property="previewView" destination="EGf-Wj-b1O" id="EVq-DX-kjg"/>
-                        <segue destination="SmH-En-Bre" kind="show" identifier="captured" id="WUB-ab-8vk"/>
+                        <segue destination="SmH-En-Bre" kind="showDetail" identifier="captured" animates="NO" id="WUB-ab-8vk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -281,12 +281,16 @@
                                 <frame key="frameInset" minX="16" minY="96" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancle"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="custom" identifier="backtoCamera" customClass="NoAnimation" customModule="simple_snapchat" customModuleProvider="target" id="1oN-ha-6Rw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Preview" id="zPM-cb-98L"/>
                     <connections>
+                        <outlet property="CancleButton" destination="6cZ-5Q-Azc" id="ehT-KH-dGX"/>
                         <outlet property="CapturedPhotoView" destination="EoO-n8-d3I" id="n5G-DI-Qmm"/>
                     </connections>
                 </viewController>
