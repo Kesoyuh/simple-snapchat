@@ -10,32 +10,18 @@ import UIKit
 import Firebase
 
 class ChatCell: UITableViewCell{
-    var messgae: Message?{
+    var message: Message?{
         didSet{
             
-            if let toID = messgae?.toID{
-                let ref = FIRDatabase.database().reference().child("users").child(toID)
-                ref.observeSingleEvent(of: .value, with: {(snapshot) in
-                    if let dictionary = snapshot.value as? [String: AnyObject] {
-                        self.textLabel?.text =  dictionary["name"] as? String
-                        
-                        //Load imgae
-                        //TODO: Add profile image OR status image?
-                        if let imageURL = dictionary["imageURL"] as? URL
-                        {
-                            self.downloadImage(imageView: self.leftImageView, url: imageURL)
-                        }else{
-                            //print("NO Image found for this cell.")
-                        }
-                        
-                    }
-                    
-                    }, withCancel: nil)
-            }
+            // set name and image
+            setupNameAndImgae()
+            
             //TODO: check message type, show message if the type is text, others show "New message"
+            // set message label
+            self.detailTextLabel?.text = message?.text
             
-            
-            if let seconds = messgae?.timestamp?.doubleValue {
+            // set time label
+            if let seconds = message?.timestamp?.doubleValue {
                 let timestampDate = NSDate(timeIntervalSince1970: seconds )
                 
                 //TODO: Change the info of date displayed latter( ** ago, or dd/mm)
@@ -45,11 +31,37 @@ class ChatCell: UITableViewCell{
 
             }
             
-            self.detailTextLabel?.text = messgae?.text
+
 
             
         }
     }
+    
+    private func setupNameAndImgae(){
+        let chatParrtnerID = message?.chatPartnerId()
+
+        if let id = chatParrtnerID{
+            let ref = FIRDatabase.database().reference().child("users").child(id)
+            ref.observeSingleEvent(of: .value, with: {(snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    self.textLabel?.text =  dictionary["name"] as? String
+                    
+                    //Load imgae
+                    //TODO: Add profile image OR status image?
+                    if let imageURL = dictionary["imageURL"] as? URL
+                    {
+                        self.downloadImage(imageView: self.leftImageView, url: imageURL)
+                    }else{
+                        //print("NO Image found for this cell.")
+                    }
+                    
+                }
+                
+                }, withCancel: nil)
+        }
+    }
+    
+    
     let leftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false

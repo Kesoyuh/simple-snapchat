@@ -11,7 +11,6 @@ import Firebase
 
 @IBDesignable
 class LoginRegisterController: UIViewController {
-    let chatListController = ChatListTableViewController()
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -102,9 +101,7 @@ class LoginRegisterController: UIViewController {
                 print(error)
                 return
             } else {
-                self.chatListController.messages.removeAll()
-                self.chatListController.messagesDictionary.removeAll()
-                self.chatListController.viewDidLoad()
+
                 self.dismiss(animated: true, completion: nil)
                 
             }
