@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import Firebase
 
 private let reuseIdentifier = "Cell"
 
@@ -43,13 +44,58 @@ class CameraRollController: UICollectionViewController, UICollectionViewDelegate
         return bs
     }()
     
-    let sendButtonView: UIImageView = {
+    lazy var sendButtonView: UIImageView = {
         let sb = UIImageView()
         sb.image = UIImage(named: "send-button")?.withRenderingMode(.alwaysTemplate)
         sb.tintColor = UIColor.white
+        sb.isUserInteractionEnabled = true
+        sb.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSend)))
         return sb
     }()
     
+    func handleSend() {
+        if let selectedPhotos = collectionView?.indexPathsForSelectedItems, let uid = FIRAuth.auth()?.currentUser?.uid {
+            
+            // Create new story ref
+            let storiesRef = FIRDatabase.database().reference().child("users").child(uid).child("stories")
+            let storyRef = storiesRef.childByAutoId()
+            
+            for i in 0..<selectedPhotos.count {
+                let imageName = NSUUID().uuidString
+                let storageRef = FIRStorage.storage().reference().child("stories").child(imageName)
+                let cell = collectionView?.cellForItem(at: selectedPhotos[i]) as! PhotoCell
+                let image = cell.imageView.image
+                let uploadData = UIImagePNGRepresentation(image!)
+                
+                storageRef.put(uploadData!, metadata: nil, completion: { (metaData, error) in
+                    
+                    if error != nil {
+                        print(error)
+                        return
+                    } else {
+                        
+                        // update database after successfully uploaded
+                        let imageRef = storyRef.childByAutoId()
+                        if let imageURL = metaData?.downloadURL()?.absoluteString {
+                            let values = ["imageURL": imageURL]
+                            imageRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                                if error != nil {
+                                    print(error)
+                                    return
+                                } else {
+                                    self.handleSelectImage()
+                                    self.didClickSelectButton = true
+                                }
+                            })
+                        }
+                        
+                    }
+                    
+                })
+            }
+        }
+
+    }
     
     func handleSelectImage() {
         if didClickSelectButton == false {
@@ -86,15 +132,17 @@ class CameraRollController: UICollectionViewController, UICollectionViewDelegate
             didClickSelectButton = false
             
             navigationItem.rightBarButtonItem?.tintColor = UIColor(colorLiteralRed: 255/255, green: 20/255, blue: 147/255, alpha: 1)
-            
-            collectionView?.allowsSelection = false
-            collectionView?.allowsMultipleSelection = false
+        
             if let cells = collectionView?.visibleCells {
                 for i in 0..<cells.count {
                     let photoCell = cells[i] as? PhotoCell
+                    collectionView?.deselectItem(at: IndexPath(row: i, section: 0), animated: true)
                     photoCell?.imageView.isUserInteractionEnabled = true
+                    photoCell?.imageView.alpha = 1
                 }
             }
+            collectionView?.allowsSelection = false
+            collectionView?.allowsMultipleSelection = false
             sendButtonView.removeFromSuperview()
             bottomSelectView.removeFromSuperview()
         }

@@ -131,7 +131,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
         //-----------------------------------Add upload image icon--------------------------------
-        l
+
         return containerView
     }()
     
