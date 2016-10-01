@@ -36,7 +36,7 @@ class LoginRegisterController: UIViewController {
         view.layer.masksToBounds = true
         return view
     }()
-    
+
     lazy var loginRegisterButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor(r: 255, g: 96, b: 136)
