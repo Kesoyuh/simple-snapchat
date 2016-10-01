@@ -10,74 +10,92 @@ import UIKit
 import Firebase
 
 class ChatListTableViewController: UITableViewController {
-
+    
     let cellId = "ChatCellId"
-    
-    var chatHistory = [User]()
+    var uid : String?
     var messages = [Message]()
-    
+    var messagesDictionary = [String: Message]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "NewChat", style: .plain, target: self, action: #selector(addNewChat))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Camera", style: .plain, target: self, action: #selector(cameraView))
-    
+        
         navigationItem.title = "Chat"
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 102, green: 178, blue: 255)
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         navigationController?.navigationBar.isHidden = false
-        
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellId)
-        
-       //fetchUser()
-        observeMessage()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
         
     }
     
-    func observeMessage(){
-        let ref = FIRDatabase.database().reference().child("messages")
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if uid != FIRAuth.auth()?.currentUser?.uid{
+            messages.removeAll()
+            messagesDictionary.removeAll()
+            uid = FIRAuth.auth()?.currentUser?.uid
+            observeUserMessages()
+        }
+        
+    }
+    
+    func observeUserMessages(){
+        guard  let uid = FIRAuth.auth()?.currentUser?.uid else {
+            return
+        }
+        
+        let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
+            let userID = snapshot.key
+            FIRDatabase.database().reference().child("user-messages").child(uid).child(userID).observe(.childAdded, with: { (snapshot) in
+                let messageID = snapshot.key
+                self.fetchMessageWithID(messageID: messageID)
+                }, withCancel: nil)
+        })
+    }
+    
+    private func fetchMessageWithID(messageID: String){
+        let msgRef = FIRDatabase.database().reference().child("messages").child(messageID)
+        msgRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let message = Message()
                 message.setValuesForKeys(dictionary)
-                self.messages.append(message)
-                DispatchQueue.global().async {
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+                // Group messages by id
+                if let chatPartnerId = message.chatPartnerId() {
+                    self.messagesDictionary[chatPartnerId] = message
                 }
-
+                self.attemptReloadOfTable()
             }
-           print("Observe messages:")
-           print(self.messages)
-            
             }, withCancel: nil)
     }
+    private func attemptReloadOfTable(){
         
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+    }
     
-    //************************************************************************TODO: Change to fetch chat list latter
-    func fetchUser(){
+    var timer: Timer?
+    func handleReloadTable(){
+        self.messages = Array(self.messagesDictionary.values)
+        //Sort the messages by timestamp
+        self.messages.sort(by: {
+            (m1,m2) ->Bool in
+            return (m1.timestamp?.intValue)! > (m2.timestamp?.intValue)!
+        })
         
-        self.chatHistory = [User]()
-        FIRDatabase.database().reference().child("users").observe(.childAdded, with: {(snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let user = User()
-                user.setValuesForKeys(dictionary)
-                user.id = snapshot.key
-                self.chatHistory.append(user)
-            }
-            
-            DispatchQueue.global().async {
+        DispatchQueue.global().async {
+            DispatchQueue.main.async {
+                print("We reloaded the table")
+                self.tableView.reloadData()
                 
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
             }
-
-            }, withCancel: nil)
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,47 +105,49 @@ class ChatListTableViewController: UITableViewController {
     
     // Display value for cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        let message = messages[indexPath.row]
-
-        //TODO: check message type, show message if the type is text, others show "New message"
-        cell.textLabel?.text = message.toID
         
-        cell.detailTextLabel?.text = message.text
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatCell
+        let message = messages[indexPath.row]
+        cell.message = message
         return cell
-
+        
     }
     
-
     //Start a chat --> ChatLogController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // let user = chatHistory[indexPath.row]
-        //showChatLogControllerForUser(user: user)
+        let message = messages[indexPath.row]
+        guard let chatPartnerId = message.chatPartnerId() else {
+            return
+        }
+        showChatLogControllerForUser(uid: chatPartnerId)
     }
     
-    func showChatLogControllerForUser(user: User){
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72
+    }
+    
+    
+    func showChatLogControllerForUser(uid: String){
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         navigationController?.pushViewController(chatLogController, animated: true)
-        chatLogController.user = user
-        print(user)
+        chatLogController.partnerId = uid
     }
     
     //TODO: When click the top left button, choosing a friend to chat with
-        func addNewChat(){
-            let newChatController = NewChatTableViewController()
-            newChatController.chatListController = self
-            let navController = UINavigationController(rootViewController: newChatController)
-            present(navController, animated:true, completion:nil)
-        }
-    
-    
-        func cameraView(){
-            let cameraViewController = CameraViewController()
-            present(cameraViewController, animated:true, completion:nil)
-        
-        }
+    func addNewChat(){
+        let newChatController = NewChatTableViewController()
+        newChatController.chatListController = self
+        let navController = UINavigationController(rootViewController: newChatController)
+        present(navController, animated:true, completion:nil)
     }
+    
+    
+    func cameraView(){
+        let cameraViewController = CameraViewController()
+        present(cameraViewController, animated:true, completion:nil)
+        
+    }
+}
 
 
 
@@ -146,17 +166,3 @@ extension UIColor {
  override var preferredStatusBarStyle: UIStatusBarStyle {
  return .lightContent
  }**/
-
-
-class ChatCell: UITableViewCell{
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?){
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-}
-
-
-}

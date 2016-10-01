@@ -14,6 +14,7 @@ import Firebase
 class NewChatTableViewController: UITableViewController {
     
     let cellID = "newChatCellId"
+    var chatListController: ChatListTableViewController?
     
      //************************************************************************TODO:Currently show all users, latter show firnds
     var firends = [User]()
@@ -54,25 +55,6 @@ class NewChatTableViewController: UITableViewController {
             }, withCancel: nil)
     }
 
-    
-    /*
-    //TEST: for get user info 以后可以借鉴获取friend信息
-    func checkIfUserIsLoggedIn() {
-       
-        let currentUser = FIRAuth.auth()?.currentUser?.displayName
-        if currentUser != nil {
-             print(currentUser)
-            // User is logged in, change the title with username
-            let title = currentUser?.appending(" Friend List")
-            self.navigationItem.title = title
-        } else {
-            // User is not logged in
-            let loginRegisterController = LoginRegisterController()
-            present(loginRegisterController, animated: true, completion: nil)
-        }
-    }*/
-
-    
     func handleCancel(){
        /* let usersController = usersTableViewController()
         let navController = UINavigationController(rootViewController: usersController)
@@ -98,12 +80,11 @@ class NewChatTableViewController: UITableViewController {
         return cell
     }
     
-    var chatListController: ChatListTableViewController?
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true) {
             let user = self.firends[indexPath.row]
-            self.chatListController?.showChatLogControllerForUser(user: user)
+            self.chatListController?.showChatLogControllerForUser(uid: user.id!)
         }
     }
 }
