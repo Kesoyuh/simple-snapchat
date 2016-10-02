@@ -64,8 +64,7 @@ class ChatListTableViewController: UITableViewController {
         let msgRef = FIRDatabase.database().reference().child("messages").child(messageID)
         msgRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
-                let message = Message()
-                message.setValuesForKeys(dictionary)
+                let message = Message(dictionary: dictionary)
                 // Group messages by id
                 if let chatPartnerId = message.chatPartnerId() {
                     self.messagesDictionary[chatPartnerId] = message
