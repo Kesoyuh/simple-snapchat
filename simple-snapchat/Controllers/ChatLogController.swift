@@ -476,7 +476,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         
         if let zoomOutImageView = tapGesture.view{
             //Ned to animate back out to controller
-            
+            zoomOutImageView.layer.cornerRadius = 16
+            zoomOutImageView.clipsToBounds = true
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity:1, options: .curveEaseOut, animations: {
 
                 zoomOutImageView.frame = self.startingFrame!
