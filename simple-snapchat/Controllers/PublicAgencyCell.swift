@@ -26,14 +26,24 @@ class PublicAgencyCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
         layout.minimumLineSpacing = 4
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.clear
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
+    }()
+    
+    let separatorView: UIView = {
+        let sv = UIView()
+        sv.backgroundColor = UIColor.black
+        sv.alpha = 0.4
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
     }()
     
     func setupViews() {
         backgroundColor = UIColor.clear
         
         addSubview(agenciesCollectionView)
+//        addSubview(separatorView)
         
         agenciesCollectionView.delegate = self
         agenciesCollectionView.dataSource = self
@@ -41,7 +51,12 @@ class PublicAgencyCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
         agenciesCollectionView.register(AgencyCell.self, forCellWithReuseIdentifier: cellId)
         
         agenciesCollectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        agenciesCollectionView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        agenciesCollectionView.heightAnchor.constraint(equalTo: heightAnchor, constant: 0).isActive = true
+        
+//        separatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//        separatorView.topAnchor.constraint(equalTo: agenciesCollectionView.bottomAnchor).isActive = true
+//        separatorView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+//        separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
     }
     
@@ -54,7 +69,7 @@ class PublicAgencyCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: frame.height)
+        return CGSize(width: 100, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

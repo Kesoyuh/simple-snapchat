@@ -12,5 +12,15 @@ class User: NSObject {
     var id: String?
     var name : String?
     var email : String?
+    var stories = [Story]()
     
+    func printDetail() {
+        print(id)
+        print(name)
+        for i in 0..<stories.count {
+            let story = stories[i]
+            print(story.imageURL)
+            print(story.timer)
+        }
+    }
 }

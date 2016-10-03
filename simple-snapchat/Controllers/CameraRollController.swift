@@ -57,8 +57,16 @@ class CameraRollController: UICollectionViewController, UICollectionViewDelegate
         if let selectedPhotos = collectionView?.indexPathsForSelectedItems, let uid = FIRAuth.auth()?.currentUser?.uid {
             
             // Create new story ref
-            let storiesRef = FIRDatabase.database().reference().child("users").child(uid).child("stories")
-            let storyRef = storiesRef.childByAutoId()
+            let storiesRef = FIRDatabase.database().reference().child("stories").child(uid)
+            FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    
+                    storiesRef.updateChildValues(["userID": uid, "username": dictionary["name"] as! String])
+                }
+                
+            })
+            
+            
             
             for i in 0..<selectedPhotos.count {
                 let imageName = NSUUID().uuidString
@@ -75,17 +83,16 @@ class CameraRollController: UICollectionViewController, UICollectionViewDelegate
                     } else {
                         
                         // update database after successfully uploaded
-                        let imageRef = storyRef.childByAutoId()
+                        let imageRef = storiesRef.child("contents").childByAutoId()
                         if let imageURL = metaData?.downloadURL()?.absoluteString {
-                            let values = ["imageURL": imageURL]
-                            imageRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                            imageRef.updateChildValues(["imageURL": imageURL, "timer": 3], withCompletionBlock: { (error, ref) in
                                 if error != nil {
                                     print(error)
                                     return
-                                } else {
-                                    self.handleSelectImage()
-                                    self.didClickSelectButton = true
                                 }
+                                
+                                self.handleSelectImage()
+                                self.didClickSelectButton = true
                             })
                         }
                         

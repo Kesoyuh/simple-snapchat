@@ -26,6 +26,8 @@
 		004B00CB1D9D23B500C1C6E5 /* SnapsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */; };
 		0061700B1D9E3192002354B3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0061700A1D9E3192002354B3 /* Photos.framework */; };
 		0061700D1D9EA9AA002354B3 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061700C1D9EA9AA002354B3 /* PhotoCell.swift */; };
+		0061700F1D9FCEC2002354B3 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061700E1D9FCEC2002354B3 /* Story.swift */; };
+		006170131DA22118002354B3 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006170121DA22118002354B3 /* StoryCell.swift */; };
 		00DD9D181D98F5D3006489BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DD9D171D98F5D3006489BE /* AppDelegate.swift */; };
 		00DD9D1D1D98F5D3006489BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DD9D1B1D98F5D3006489BE /* Main.storyboard */; };
 		00DD9D1F1D98F5D3006489BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00DD9D1E1D98F5D3006489BE /* Assets.xcassets */; };
@@ -65,6 +67,8 @@
 		004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapsController.swift; path = Controllers/SnapsController.swift; sourceTree = "<group>"; };
 		0061700A1D9E3192002354B3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		0061700C1D9EA9AA002354B3 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCell.swift; path = Controllers/PhotoCell.swift; sourceTree = "<group>"; };
+		0061700E1D9FCEC2002354B3 /* Story.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Story.swift; path = Model/Story.swift; sourceTree = "<group>"; };
+		006170121DA22118002354B3 /* StoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryCell.swift; path = Controllers/StoryCell.swift; sourceTree = "<group>"; };
 		00DD9D141D98F5D3006489BE /* simple-snapchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "simple-snapchat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DD9D171D98F5D3006489BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00DD9D1C1D98F5D3006489BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -167,8 +171,9 @@
 		004349121D9903CF00D3DE54 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
-				004349011D99030100D3DE54 /* PublicAgencyCell.swift */,
 				004349101D9903CA00D3DE54 /* StoriesViewController.swift */,
+				004349011D99030100D3DE54 /* PublicAgencyCell.swift */,
+				006170121DA22118002354B3 /* StoryCell.swift */,
 			);
 			name = Discover;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 			children = (
 				798136451D9BCFD50074ED25 /* Message.swift */,
 				798136461D9BCFD50074ED25 /* User.swift */,
+				0061700E1D9FCEC2002354B3 /* Story.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -396,6 +402,7 @@
 			files = (
 				004349091D99030100D3DE54 /* TopViewController.swift in Sources */,
 				798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */,
+				0061700F1D9FCEC2002354B3 /* Story.swift in Sources */,
 				004349061D99030100D3DE54 /* LoginRegisterController.swift in Sources */,
 				00DD9D181D98F5D3006489BE /* AppDelegate.swift in Sources */,
 				0061700D1D9EA9AA002354B3 /* PhotoCell.swift in Sources */,
@@ -412,6 +419,7 @@
 				79E7CFF81D9CE95A00F081E2 /* ChatCell.swift in Sources */,
 				0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */,
 				798136471D9BCFD50074ED25 /* Message.swift in Sources */,
+				006170131DA22118002354B3 /* StoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
