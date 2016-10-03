@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class Message:NSObject{
-    //var type: String!
+    
     var text: String!
     var timestamp: NSNumber!
     var fromID: String!
@@ -19,10 +19,28 @@ class Message:NSObject{
     var imageHeight: NSNumber?
     var imageWidth: NSNumber?
     
+    var partnerName: String!
+    
     func chatPartnerId() ->String?{
         return fromID == FIRAuth.auth()?.currentUser?.uid ? toID: fromID
     }
     
+    
+//    func chatPartnerName() -> String?{
+//        var name: String?
+//        
+//        var partnerID = chatPartnerId()
+//        let partNameRef = FIRDatabase.database().reference().child("user").child(partnerID!).child("name")
+//        partNameRef.observeSingleEvent(of: .value, with: { (snapshot) in
+//            name = snapshot as! String
+//            print("Chat partner's name is :", name)
+//            }, withCancel: nil)
+//        while name == nil {
+//            print("Wait for name...")
+//        }
+//        return name!
+//    }
+//    
     init(dictionary : [String: AnyObject]){
         super.init()
         

@@ -17,7 +17,9 @@ class NewChatTableViewController: UITableViewController {
     var chatListController: ChatListTableViewController?
     
      //************************************************************************TODO:Currently show all users, latter show firnds
-    var firends = [User]()
+    var friends = [User]()
+    var filterFriends = [User]()
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,19 +31,31 @@ class NewChatTableViewController: UITableViewController {
         navigationController?.navigationBar.isHidden = false
         
         fetchFriends()
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
 
   }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All"){
+        filterFriends = friends.filter({ (friend) -> Bool in
+            return (friend.name?.localizedLowercase.contains(searchText.localizedLowercase))!
+        })
+        tableView.reloadData()
+    }
     
     //************************************************************************TODO: Change to fetch friend latter
     func fetchFriends(){
         
-        self.firends = [User]()
+        self.friends = [User]()
         FIRDatabase.database().reference().child("users").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let user = User()
                 user.setValuesForKeys(dictionary)
                 user.id = snapshot.key
-                self.firends.append(user)
+                self.friends.append(user)
                 DispatchQueue.global().async {
                     
                     DispatchQueue.main.async {
@@ -66,15 +80,25 @@ class NewChatTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return firends.count
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filterFriends.count
+        }else{
+            return friends.count
+        }
+        
     }
     
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
-        
-        let user = firends[indexPath.row]
+        let user : User
+        if searchController.isActive && searchController.searchBar.text != "" {
+            user = filterFriends[indexPath.row]
+        }else {
+            user = friends[indexPath.row]
+        }
         
         cell.textLabel?.text = user.name
         return cell
@@ -83,8 +107,26 @@ class NewChatTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true) {
-            let user = self.firends[indexPath.row]
-            self.chatListController?.showChatLogControllerForUser(uid: user.id!)
+            let user: User?
+                
+           if self.searchController.searchBar.text != ""{
+            
+                    user = self.filterFriends[indexPath.row]
+
+                    self.handleCancel()
+                }else{
+                user = self.friends[indexPath.row]
+            }
+            
+            self.chatListController?.showChatLogControllerForUser(uid: (user?.id!)!)
+            print("Show chat log controller with uid", user?.name)
         }
+    }
+}
+
+extension NewChatTableViewController : UISearchResultsUpdating{
+    @available(iOS 8.0, *)
+    public func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
 }

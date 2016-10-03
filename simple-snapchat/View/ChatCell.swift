@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class ChatCell: UITableViewCell{
+    
     var message: Message?{
         didSet{
             
@@ -45,7 +46,6 @@ class ChatCell: UITableViewCell{
             ref.observeSingleEvent(of: .value, with: {(snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     self.textLabel?.text =  dictionary["name"] as? String
-                    
                     //Load imgae
                     //TODO: Add profile image OR status image?
                     if let imageURL = dictionary["imageURL"] as? URL

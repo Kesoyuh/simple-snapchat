@@ -87,7 +87,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         collectionView?.backgroundColor = UIColor.white
         collectionView?.keyboardDismissMode = .interactive
         observeMessages()
-
+        
         setupKeyboardObservers()
         
     }

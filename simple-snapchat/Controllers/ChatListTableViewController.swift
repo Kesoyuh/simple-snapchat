@@ -15,6 +15,11 @@ class ChatListTableViewController: UITableViewController {
     var uid : String?
     var messages = [Message]()
     var messagesDictionary = [String: Message]()
+    
+    var searchController = UISearchController(searchResultsController: nil)
+    var filterMessages = [Message]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +36,10 @@ class ChatListTableViewController: UITableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
         
     }
     
@@ -42,8 +51,27 @@ class ChatListTableViewController: UITableViewController {
             uid = FIRAuth.auth()?.currentUser?.uid
             observeUserMessages()
         }
-        
+
     }
+    
+    func filterContentForSearch(searchText: String, scope: String = "All"){
+        
+        filterMessages = messages.filter({ (message) -> Bool in
+            let index = messages.index(of: message)! as Int
+            let indexPath = IndexPath(row: index, section: 0)
+            if let cell = tableView.cellForRow(at: indexPath) as? ChatCell {
+                  return (cell.textLabel?.text!.localizedLowercase.contains(searchText.localizedLowercase))!
+            }else {
+                return false
+            }
+//            return (cell.textLabel?.text!.localizedLowercase.contains(searchText.localizedLowercase))!
+     })
+        print("----FILTER MESSAGES-------",filterMessages)
+        tableView.reloadData()
+    }
+    
+
+    
     
     func observeUserMessages(){
         guard  let uid = FIRAuth.auth()?.currentUser?.uid else {
@@ -73,6 +101,9 @@ class ChatListTableViewController: UITableViewController {
             }
             }, withCancel: nil)
     }
+    
+ 
+    
     private func attemptReloadOfTable(){
         
         self.timer?.invalidate()
@@ -98,6 +129,11 @@ class ChatListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            print("Update filter messages number!!!!")
+            return filterMessages.count
+        }
+        
         return messages.count
     }
     
@@ -106,7 +142,15 @@ class ChatListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatCell
-        let message = messages[indexPath.row]
+        let message: Message
+        
+        if searchController.isActive && searchController.searchBar.text != ""{
+            message = filterMessages[indexPath.row]
+            print("Update filter messages cell!!!")
+        }else{
+            message = messages[indexPath.row]
+        }
+        
         cell.message = message
         return cell
         
@@ -114,7 +158,13 @@ class ChatListTableViewController: UITableViewController {
     
     //Start a chat --> ChatLogController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let message = messages[indexPath.row]
+        let message: Message
+        print("When I want to start a chat, the index is :", indexPath)
+        if searchController.isActive {
+         message = filterMessages[indexPath.row]
+        }else{
+            message = messages[indexPath.row]
+        }
         guard let chatPartnerId = message.chatPartnerId() else {
             return
         }
@@ -160,6 +210,14 @@ extension UIColor {
     }
 }
 
+extension ChatListTableViewController : UISearchResultsUpdating{
+    @available(iOS 8.0, *)
+    public func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearch(searchText: searchController.searchBar.text!)
+    }
+
+    
+}
 
 /**TODO: Change status bar color Doesn't work!!!!!!
  override var preferredStatusBarStyle: UIStatusBarStyle {
