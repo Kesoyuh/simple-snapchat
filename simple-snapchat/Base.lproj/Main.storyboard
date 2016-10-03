@@ -48,11 +48,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e5X-Cb-eJL" id="4ZZ-Sy-twB">
-<<<<<<< HEAD
-                                    <frame key="frameInset" width="375" height="43.5"/>
-=======
                                     <frame key="frameInset" width="375" height="44"/>
->>>>>>> 7be911545e4b27fb245848804d1083f7e3df5f17
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
