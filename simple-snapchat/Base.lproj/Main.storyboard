@@ -48,7 +48,11 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e5X-Cb-eJL" id="4ZZ-Sy-twB">
+<<<<<<< HEAD
                                     <frame key="frameInset" width="375" height="43.5"/>
+=======
+                                    <frame key="frameInset" width="375" height="44"/>
+>>>>>>> 7be911545e4b27fb245848804d1083f7e3df5f17
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -93,7 +97,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oA4-gm-OFh" id="16q-oC-Cnh">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -210,7 +214,7 @@
         <scene sceneID="ony-Ao-7xw">
             <objects>
                 <collectionViewController id="QwQ-Ne-Fd4" customClass="StoriesViewController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EC4-tP-N49">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="EC4-tP-N49">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JAu-Uv-lxU">
@@ -236,7 +240,7 @@
             <objects>
                 <navigationController storyboardIdentifier="right" automaticallyAdjustsScrollViewInsets="NO" id="pel-dI-FCt" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mWd-hY-MU6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="mWd-hY-MU6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

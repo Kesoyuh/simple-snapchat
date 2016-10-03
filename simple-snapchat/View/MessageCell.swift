@@ -9,6 +9,8 @@
 import UIKit
 
 class MessageCell: UICollectionViewCell {
+    var chatLogController : ChatLogController?
+    
     let textView: UITextView = {
         let tv = UITextView()
         tv.text = "lalalal"
@@ -18,9 +20,31 @@ class MessageCell: UICollectionViewCell {
         // The default background color is white, need to be clear or the bubble view won't be seen.
         tv.backgroundColor = UIColor.clear
         tv.textColor = UIColor.white
-
+        tv.isEditable = false
         return tv
     }()
+    
+    lazy var messageImageView: UIImageView =  {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
+        return imageView
+    }()
+    
+    
+    func handleZoomTap(tapGesture: UITapGestureRecognizer){
+        // *Do not put lots of custom logic in View
+        // *Delegate this function to ChatLogContoller
+        if let imageView = tapGesture.view as? UIImageView {
+            self.chatLogController?.performZoomInForStartingImageView(startingImageView: imageView)
+        }
+       
+        
+    }
+    
     static let blueColor = UIColor(red: 0, green: 137, blue: 249)
     static let grayColor = UIColor(red: 240, green: 240, blue: 240)
     
@@ -39,7 +63,7 @@ class MessageCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubview(bubbleView)
         addSubview(textView)
-        
+        bubbleView.addSubview(messageImageView)
         
         // Contraints for bubble view
         bubbleViewRightAnchor = bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
@@ -61,8 +85,16 @@ class MessageCell: UICollectionViewCell {
         //textView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         textView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
         
-        
+        // Constraints for message image view
+        messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor).isActive = true
+        messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
+        messageImageView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor).isActive = true
+        messageImageView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor).isActive = true
+
         self.backgroundColor = UIColor.white
+        
+        self.bubbleView.isUserInteractionEnabled = true
+
         
     }
 
