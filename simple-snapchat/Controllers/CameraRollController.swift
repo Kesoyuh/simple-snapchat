@@ -16,9 +16,17 @@ class CameraRollController: UICollectionViewController, UICollectionViewDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Memories"
+        let titleLable = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 40, height: view.frame.height))
+        titleLable.text = "Memories"
+        titleLable.font = UIFont.systemFont(ofSize: 20)
+        titleLable.textColor = UIColor(r: 255, g: 20, b: 147)
+        navigationItem.titleView = titleLable
         navigationController?.navigationBar.barTintColor = UIColor.white
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(colorLiteralRed: 255/255, green: 20/255, blue: 147/255, alpha: 1)]
+        navigationController?.navigationBar.isTranslucent = false
+        
+        // get rid of the black bar underneath the navbar
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         
         let checkIcon = UIImage(named: "check-icon")
         // set icon size
@@ -29,11 +37,31 @@ class CameraRollController: UICollectionViewController, UICollectionViewDelegate
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: newCheckIcon, style: .plain, target: self, action: #selector(handleSelectImage))
         navigationItem.rightBarButtonItem?.tintColor = UIColor(colorLiteralRed: 255/255, green: 20/255, blue: 147/255, alpha: 1)
+        
+        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
     
         grabPhotos()
         collectionView?.register(PhotoCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.allowsSelection = false
         
+        
+        setupMenuBar()
+        
+    }
+    
+    let menuBar: MenuBar = {
+        let mb = MenuBar()
+        mb.translatesAutoresizingMaskIntoConstraints = false
+        return mb
+    }()
+    
+    fileprivate func setupMenuBar() {
+        view.addSubview(menuBar)
+        menuBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        menuBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        menuBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     var didClickSelectButton: Bool = false
@@ -56,17 +84,16 @@ class CameraRollController: UICollectionViewController, UICollectionViewDelegate
     func handleSend() {
         if let selectedPhotos = collectionView?.indexPathsForSelectedItems, let uid = FIRAuth.auth()?.currentUser?.uid {
             
-            // Create new story ref
-            let storiesRef = FIRDatabase.database().reference().child("stories").child(uid)
+            var username = String()
+            
+            // Create story reference
+            let storiesRef = FIRDatabase.database().reference().child("stories")
             FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     
-                    storiesRef.updateChildValues(["userID": uid, "username": dictionary["name"] as! String])
+                    username = dictionary["name"] as! String
                 }
-                
             })
-            
-            
             
             for i in 0..<selectedPhotos.count {
                 let imageName = NSUUID().uuidString
@@ -83,9 +110,9 @@ class CameraRollController: UICollectionViewController, UICollectionViewDelegate
                     } else {
                         
                         // update database after successfully uploaded
-                        let imageRef = storiesRef.child("contents").childByAutoId()
+                        let storyRef = storiesRef.childByAutoId()
                         if let imageURL = metaData?.downloadURL()?.absoluteString {
-                            imageRef.updateChildValues(["imageURL": imageURL, "timer": 3], withCompletionBlock: { (error, ref) in
+                            storyRef.updateChildValues(["userID": uid, "username": username, "imageURL": imageURL, "timer": 3], withCompletionBlock: { (error, ref) in
                                 if error != nil {
                                     print(error)
                                     return

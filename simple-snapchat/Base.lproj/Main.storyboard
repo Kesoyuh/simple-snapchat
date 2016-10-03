@@ -48,7 +48,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e5X-Cb-eJL" id="4ZZ-Sy-twB">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -93,7 +93,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oA4-gm-OFh" id="16q-oC-Cnh">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -206,11 +206,11 @@
             </objects>
             <point key="canvasLocation" x="1345" y="1153"/>
         </scene>
-        <!--Stories-->
+        <!--Stories View Controller-->
         <scene sceneID="ony-Ao-7xw">
             <objects>
                 <collectionViewController id="QwQ-Ne-Fd4" customClass="StoriesViewController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="EC4-tP-N49">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EC4-tP-N49">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JAu-Uv-lxU">
@@ -225,7 +225,7 @@
                             <outlet property="delegate" destination="QwQ-Ne-Fd4" id="G9N-W9-2Aj"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Stories" id="DhP-3S-1BE"/>
+                    <navigationItem key="navigationItem" id="DhP-3S-1BE"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6AI-U0-yjB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -236,7 +236,7 @@
             <objects>
                 <navigationController storyboardIdentifier="right" automaticallyAdjustsScrollViewInsets="NO" id="pel-dI-FCt" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="mWd-hY-MU6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mWd-hY-MU6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

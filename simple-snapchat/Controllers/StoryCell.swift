@@ -17,6 +17,8 @@ class StoryCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var userID: String?
+    
     let nameLable: UILabel = {
         let nl = UILabel()
         nl.text = "Changchang Wang"
@@ -27,7 +29,7 @@ class StoryCell: UICollectionViewCell {
     var imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.image = UIImage(named: "buzzfeed")
+        iv.image = nil
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 30
         iv.layer.masksToBounds = true
