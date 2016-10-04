@@ -25,6 +25,7 @@ class CameraViewController : UIViewController {
     var cameraFacingback: Bool = true
     var ImageCaptured: UIImage!
     var cameraState:Bool = true
+    
 
     
     @IBOutlet var previewView: UIView!
@@ -141,12 +142,12 @@ class CameraViewController : UIViewController {
                 let dataProvider = CGDataProvider(data: imageData as! CFData)
                 let cgImageRef = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
                 self.ImageCaptured = UIImage(cgImage:cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
-                self.captureSession.stopRunning()
-                self.performSegue(withIdentifier: "captured", sender: self)
-                }
+                    //self.captureSession.stopRunning()
+//                    let previewController = PreviewController()
+//                    previewController.capturedPhoto = self.ImageCaptured
+                self.performSegue(withIdentifier: "test", sender: self)}
             })
         }
-        
     }
     
     @IBAction func ChangeFlash(_ sender: UIButton){
@@ -189,13 +190,15 @@ class CameraViewController : UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "captured"{
-            if let navigationController = segue.destination as? UINavigationController{
-                if let PreviewController = navigationController.topViewController as? PreviewViewController {
-                    PreviewController.capturedPhoto = ImageCaptured
-            }
+        if segue.identifier == "test"{
+//            if let navigationController = segue.destination as? UINavigationController{
+//                if let previewController = navigationController.topViewController as? PreviewController {
+//                    previewController.capturedPhoto = ImageCaptured
+//            }
+//        }
+            let previewController = segue.destination as! PreviewController
+            previewController.capturedPhoto = self.ImageCaptured            
         }
-    }
 }
 }
     

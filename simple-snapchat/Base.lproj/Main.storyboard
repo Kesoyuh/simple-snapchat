@@ -48,7 +48,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e5X-Cb-eJL" id="4ZZ-Sy-twB">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -93,7 +93,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oA4-gm-OFh" id="16q-oC-Cnh">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -175,7 +175,7 @@
                         <outlet property="FlipCamera" destination="Qkb-8s-mvH" id="GAs-fo-3Bg"/>
                         <outlet property="TakePicButton" destination="VUc-xl-edW" id="XLI-X9-0g7"/>
                         <outlet property="previewView" destination="EGf-Wj-b1O" id="EVq-DX-kjg"/>
-                        <segue destination="SmH-En-Bre" kind="showDetail" identifier="captured" animates="NO" id="WUB-ab-8vk"/>
+                        <segue destination="Tb7-Al-dck" kind="presentation" identifier="test" id="YUd-FN-j5n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -225,26 +225,10 @@
             </objects>
             <point key="canvasLocation" x="2510" y="-447"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="5KE-EL-e8W">
-            <objects>
-                <navigationController storyboardIdentifier="captured" id="SmH-En-Bre" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1wa-iE-KfW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Tb7-Al-dck" kind="relationship" relationship="rootViewController" id="dQT-Fh-OU5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jdx-cY-GLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2041" y="348"/>
-        </scene>
         <!--Preview-->
         <scene sceneID="SOP-Sx-9Wz">
             <objects>
-                <viewController id="Tb7-Al-dck" userLabel="Preview" customClass="PreviewViewController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Tb7-Al-dck" userLabel="Preview" customClass="PreviewController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fki-0f-KgM"/>
                         <viewControllerLayoutGuide type="bottom" id="Xje-SK-CMo"/>
@@ -253,7 +237,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EoO-n8-d3I" userLabel="CapturedPhoto">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EoO-n8-d3I" userLabel="CapturedPhoto">
                                 <frame key="frameInset" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -282,7 +266,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancle"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="custom" identifier="backtoCamera" customClass="NoAnimation" customModule="simple_snapchat" customModuleProvider="target" id="1oN-ha-6Rw"/>
+                                    <action selector="quit:" destination="Tb7-Al-dck" eventType="touchUpInside" id="hTg-Cp-6pN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -291,7 +275,7 @@
                     <navigationItem key="navigationItem" title="Preview" id="zPM-cb-98L"/>
                     <connections>
                         <outlet property="CancleButton" destination="6cZ-5Q-Azc" id="ehT-KH-dGX"/>
-                        <outlet property="CapturedPhotoView" destination="EoO-n8-d3I" id="n5G-DI-Qmm"/>
+                        <outlet property="ImageEdit" destination="EoO-n8-d3I" id="pUp-vP-JzY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eId-am-sdt" userLabel="First Responder" sceneMemberID="firstResponder"/>

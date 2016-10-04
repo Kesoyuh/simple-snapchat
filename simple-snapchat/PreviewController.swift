@@ -7,22 +7,29 @@
 //
 
 import UIKit
-class PreviewViewController: UIViewController {
+class PreviewController: UIViewController {
     
-    @IBOutlet weak var CapturedPhotoView : UIImageView!
     
+    @IBOutlet weak var ImageEdit: UIImageView!
     @IBOutlet weak var CancleButton: UIButton!
     
+    @IBAction func quit(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     var capturedPhoto :UIImage!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ImageEdit.image = capturedPhoto
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)        
+        super.viewDidAppear(animated)
+        ImageEdit.image = capturedPhoto
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,7 +37,7 @@ class PreviewViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        CapturedPhotoView.image = capturedPhoto
+        ImageEdit.image = capturedPhoto
     }
 
 }
