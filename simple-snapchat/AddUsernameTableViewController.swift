@@ -11,7 +11,7 @@ import Firebase
 class AddUsernameTableViewController: UITableViewController {
 
     
-    let cellID = "findUsernameCellId"
+    let cellID = "AddUserNameCell"
     
     var allusers = [User]()
     var filterUsers = [User]()
@@ -19,6 +19,7 @@ class AddUsernameTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         fetchUser()
         
         searchController.searchResultsUpdater = self
@@ -34,6 +35,9 @@ class AddUsernameTableViewController: UITableViewController {
         filterUsers = allusers.filter({ (allusers) -> Bool in
             return (allusers.name?.localizedLowercase.contains(searchText.localizedLowercase))!
         })
+        filterUsers.forEach { (user) in
+            print(user.name)
+        }
         tableView.reloadData()
     }
 
@@ -46,9 +50,13 @@ class AddUsernameTableViewController: UITableViewController {
                 user.setValuesForKeys(dictionary)
                 user.id = snapshot.key
                 self.allusers.append(user)
+              
                 DispatchQueue.global().async {
                     
                     DispatchQueue.main.async {
+                        self.allusers.forEach { (user) in
+                            print(user.name)
+                        }
                         self.tableView.reloadData()
                     }
                 }
@@ -82,21 +90,23 @@ class AddUsernameTableViewController: UITableViewController {
         if searchController.isActive && searchController.searchBar.text != "" {
             return filterUsers.count
         }else{
-            return 0
+            return allusers.count
         }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
         let user : User
-        if searchController.isActive && searchController.searchBar.text != "" {
+        if searchController.searchBar.text != "" {
             user = filterUsers[indexPath.row]
-            cell.textLabel?.text = user.name
-            return cell
-            
+            print("search result, user is :", user.name)
         }else {
-            return cell
+            user = allusers[indexPath.row]
+            print("orginal user is :", user.name)
+
         }
+        cell.textLabel?.text = user.name
+        return cell
     }
     
     
