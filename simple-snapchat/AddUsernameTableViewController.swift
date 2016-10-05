@@ -19,6 +19,7 @@ class AddUsernameTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(ChatCell.self, forCellReuseIdentifier: cellID)
         
         fetchUser()
         
@@ -82,7 +83,7 @@ class AddUsernameTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -105,10 +106,13 @@ class AddUsernameTableViewController: UITableViewController {
             print("orginal user is :", user.name)
 
         }
-        cell.textLabel?.text = user.name
+        cell.textLabel!.text = user.name!
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
     
 
     /*
