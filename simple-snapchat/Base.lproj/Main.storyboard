@@ -35,7 +35,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="LqO-ok-kI5" kind="presentation" id="qC2-ZV-uRc"/>
+                                    <segue destination="LqO-ok-kI5" kind="presentation" modalTransitionStyle="coverVertical" id="qC2-ZV-uRc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9o-gH-DYt">
@@ -46,7 +46,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Fsw-D0-JIh" kind="presentation" id="Xb9-Ut-iA3"/>
+                                    <segue destination="Fsw-D0-JIh" kind="presentation" modalTransitionStyle="coverVertical" id="Xb9-Ut-iA3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEh-AU-8l9">
@@ -57,7 +57,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="qoO-25-1Da" kind="presentation" id="bYr-sU-Kek"/>
+                                    <segue destination="qoO-25-1Da" kind="presentation" modalTransitionStyle="coverVertical" id="bYr-sU-Kek"/>
                                 </connections>
                             </button>
                         </subviews>
