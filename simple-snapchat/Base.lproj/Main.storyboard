@@ -286,20 +286,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dqr-qc-HdJ" firstAttribute="bottom" secondItem="Xje-SK-CMo" secondAttribute="top" id="54S-5f-OVJ"/>
-                            <constraint firstItem="dqr-qc-HdJ" firstAttribute="trailing" secondItem="EoO-n8-d3I" secondAttribute="trailing" id="Szx-LQ-WPY"/>
-                            <constraint firstItem="dqr-qc-HdJ" firstAttribute="leading" secondItem="EoO-n8-d3I" secondAttribute="leading" id="Tzf-QR-UOM"/>
-                            <constraint firstAttribute="trailing" secondItem="EoO-n8-d3I" secondAttribute="trailing" id="YvM-OE-nXf"/>
-                            <constraint firstItem="EoO-n8-d3I" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leading" id="iBH-71-Lxh"/>
-                            <constraint firstItem="EoO-n8-d3I" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leading" id="jAI-dU-loK"/>
-                            <constraint firstItem="EoO-n8-d3I" firstAttribute="bottom" secondItem="Xje-SK-CMo" secondAttribute="top" id="mks-1N-nj3"/>
-                            <constraint firstItem="EoO-n8-d3I" firstAttribute="top" secondItem="fki-0f-KgM" secondAttribute="bottom" id="pfY-kl-47R"/>
+                            <constraint firstItem="dqr-qc-HdJ" firstAttribute="top" secondItem="fki-0f-KgM" secondAttribute="bottom" constant="431" id="LMb-4V-Dsd"/>
+                            <constraint firstItem="EoO-n8-d3I" firstAttribute="trailing" secondItem="dqr-qc-HdJ" secondAttribute="trailing" id="NDz-Vs-uFe"/>
+                            <constraint firstItem="EoO-n8-d3I" firstAttribute="bottom" secondItem="Xje-SK-CMo" secondAttribute="top" id="STZ-Yq-st4"/>
+                            <constraint firstItem="EoO-n8-d3I" firstAttribute="top" secondItem="fki-0f-KgM" secondAttribute="bottom" id="Uc1-5W-eIe"/>
+                            <constraint firstItem="EoO-n8-d3I" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leading" id="VB2-v6-1ra"/>
+                            <constraint firstItem="EoO-n8-d3I" firstAttribute="leading" secondItem="dqr-qc-HdJ" secondAttribute="leading" id="loW-Zy-8Ba"/>
+                            <constraint firstAttribute="trailing" secondItem="EoO-n8-d3I" secondAttribute="trailing" id="tgz-VA-EHT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Preview" id="zPM-cb-98L"/>
                     <connections>
                         <outlet property="CancleButton" destination="6cZ-5Q-Azc" id="ehT-KH-dGX"/>
-                        <outlet property="ContainerView" destination="85R-JD-SwN" id="3gZ-SY-LiX"/>
                         <outlet property="Draw" destination="Apf-3B-AfM" id="bhA-8Q-nOV"/>
                         <outlet property="DurationPick" destination="dqr-qc-HdJ" id="0RB-tZ-8Uw"/>
                         <outlet property="ImageEdit" destination="EoO-n8-d3I" id="pUp-vP-JzY"/>

@@ -143,8 +143,6 @@ class CameraViewController : UIViewController {
                 let cgImageRef = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
                 self.ImageCaptured = UIImage(cgImage:cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
                     //self.captureSession.stopRunning()
-//                    let previewController = PreviewController()
-//                    previewController.capturedPhoto = self.ImageCaptured
                 self.performSegue(withIdentifier: "test", sender: self)}
             })
         }

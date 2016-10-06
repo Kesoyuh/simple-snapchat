@@ -12,7 +12,6 @@ import CoreData
 class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewDelegate {
     
     
-    @IBOutlet var ContainerView: UIView!
     @IBOutlet weak var ImageEdit: UIImageView!
     @IBOutlet weak var CancleButton: UIButton!
     @IBOutlet weak var save: UIButton!
@@ -31,12 +30,13 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     }
     
     @IBAction func enable_draw(_ sender: UIButton) {
-        if self.enabledrawing == true {
+        
+        if enabledrawing == true {
             enabledrawing = false
             self.ImageEdit.isUserInteractionEnabled = true
-        }
-        else {
-            
+        }else {
+            enabledrawing = true
+            self.ImageEdit.isUserInteractionEnabled = false
         }
     }
     
@@ -61,7 +61,6 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         DurationPick.delegate = self
         ImageEdit.image = capturedPhoto
         self.DurationPick.isHidden = true
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,15 +82,19 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.isDrawing = false
         self.DurationPick.isHidden = true
-        if let touch = touches.first{
-            finalPoint = touch.preciseLocation(in: ImageEdit)
+        if let e = event?.touches(for: self.ImageEdit){
+        if let touch = e.first {
+            finalPoint = touch.preciseLocation(in: self.ImageEdit)
         }
+    }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.isDrawing = true
-        if let touch = touches.first{
-            if let d = ImageEdit {
+        if let e = event?.touches(for: self.ImageEdit){
+        if let touch = e.first{
+            print(touch.view)
+            if let d = self.ImageEdit {
                 let currentCoordinate = touch.preciseLocation(in: d)
                 UIGraphicsBeginImageContext(d.frame.size)
                 d.image?.draw(in: CGRect.init(x: 0, y: 0, width: d.frame.width, height: d.frame.height))
@@ -105,13 +108,30 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
                 UIGraphicsEndImageContext()
                 finalPoint = currentCoordinate
             }
-        
+            }
         }
         
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        if(!self.isDrawing){
+        if let touch = touches.first{
+            print(touch.view)
+            if let d = ImageEdit {
+                let currentCoordinate = touch.preciseLocation(in: d)
+                UIGraphicsBeginImageContext(d.frame.size)
+                d.image?.draw(in: CGRect.init(x: 0, y: 0, width: d.frame.width, height: d.frame.height))
+                UIGraphicsGetCurrentContext()?.move(to: finalPoint)
+                UIGraphicsGetCurrentContext()?.addLine(to: currentCoordinate)
+                UIGraphicsGetCurrentContext()?.setLineCap(CGLineCap.round)
+                UIGraphicsGetCurrentContext()?.setLineWidth(lineWidth)
+                UIGraphicsGetCurrentContext()?.setStrokeColor(red: red, green: green, blue: blue, alpha: 1.0)
+                UIGraphicsGetCurrentContext()?.strokePath()
+                d.image = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+            }
+        }
+        }
     }
     
     // Duration pick view
@@ -133,7 +153,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         self.pic_duaration = pickoption[row]
-        self.DurationPick.resignFirstResponder()
+        self.DurationPick.isHidden = true
     }
     
     func SaveImage(){
