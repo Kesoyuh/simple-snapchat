@@ -29,6 +29,8 @@
 		0061700F1D9FCEC2002354B3 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061700E1D9FCEC2002354B3 /* Story.swift */; };
 		006170131DA22118002354B3 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006170121DA22118002354B3 /* StoryCell.swift */; };
 		006170151DA28CB4002354B3 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006170141DA28CB4002354B3 /* MenuBar.swift */; };
+		00C4571D1DA5094E004075FD /* MemoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4571C1DA5094E004075FD /* MemoriesController.swift */; };
+		00C4571F1DA52381004075FD /* CamerollRollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4571E1DA52381004075FD /* CamerollRollCell.swift */; };
 		00DD9D181D98F5D3006489BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DD9D171D98F5D3006489BE /* AppDelegate.swift */; };
 		00DD9D1D1D98F5D3006489BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DD9D1B1D98F5D3006489BE /* Main.storyboard */; };
 		00DD9D1F1D98F5D3006489BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00DD9D1E1D98F5D3006489BE /* Assets.xcassets */; };
@@ -72,6 +74,8 @@
 		0061700E1D9FCEC2002354B3 /* Story.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Story.swift; path = Model/Story.swift; sourceTree = "<group>"; };
 		006170121DA22118002354B3 /* StoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryCell.swift; path = Controllers/StoryCell.swift; sourceTree = "<group>"; };
 		006170141DA28CB4002354B3 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuBar.swift; path = Controllers/MenuBar.swift; sourceTree = "<group>"; };
+		00C4571C1DA5094E004075FD /* MemoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoriesController.swift; path = Controllers/MemoriesController.swift; sourceTree = "<group>"; };
+		00C4571E1DA52381004075FD /* CamerollRollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CamerollRollCell.swift; path = Controllers/CamerollRollCell.swift; sourceTree = "<group>"; };
 		00DD9D141D98F5D3006489BE /* simple-snapchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "simple-snapchat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DD9D171D98F5D3006489BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00DD9D1C1D98F5D3006489BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 		004B00C51D9D0DF100C1C6E5 /* BottomView */ = {
 			isa = PBXGroup;
 			children = (
+				00C4571C1DA5094E004075FD /* MemoriesController.swift */,
+				00C4571E1DA52381004075FD /* CamerollRollCell.swift */,
 				004B00C81D9D231A00C1C6E5 /* CameraRollController.swift */,
 				004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */,
 				0061700C1D9EA9AA002354B3 /* PhotoCell.swift */,
@@ -415,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				004349091D99030100D3DE54 /* TopViewController.swift in Sources */,
+				00C4571F1DA52381004075FD /* CamerollRollCell.swift in Sources */,
 				798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */,
 				0061700F1D9FCEC2002354B3 /* Story.swift in Sources */,
 				004349061D99030100D3DE54 /* LoginRegisterController.swift in Sources */,
@@ -426,6 +433,7 @@
 				006170151DA28CB4002354B3 /* MenuBar.swift in Sources */,
 				004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */,
 				004B00CB1D9D23B500C1C6E5 /* SnapsController.swift in Sources */,
+				00C4571D1DA5094E004075FD /* MemoriesController.swift in Sources */,
 				004B00C91D9D231A00C1C6E5 /* CameraRollController.swift in Sources */,
 				798136481D9BCFD50074ED25 /* User.swift in Sources */,
 				004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */,

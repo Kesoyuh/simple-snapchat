@@ -180,11 +180,11 @@
             </objects>
             <point key="canvasLocation" x="319" y="399"/>
         </scene>
-        <!--Camera Roll Controller-->
+        <!--Memories Controller-->
         <scene sceneID="QkP-Zm-Kbb">
             <objects>
-                <collectionViewController id="nGU-g3-k6c" customClass="CameraRollController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="GUt-C9-PId">
+                <collectionViewController id="nGU-g3-k6c" customClass="MemoriesController" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="GUt-C9-PId">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
