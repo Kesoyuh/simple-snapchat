@@ -130,7 +130,6 @@ class ChatListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
-            print("Update filter messages number!!!!")
             return filterMessages.count
         }
         

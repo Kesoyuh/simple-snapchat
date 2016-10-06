@@ -40,6 +40,7 @@
 		798136361D9977010074ED25 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136351D9977000074ED25 /* ChatLogController.swift */; };
 		798136471D9BCFD50074ED25 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136451D9BCFD50074ED25 /* Message.swift */; };
 		798136481D9BCFD50074ED25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136461D9BCFD50074ED25 /* User.swift */; };
+		79DA44E91DA5DD4D00BBF518 /* AddedMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */; };
 		79E7CFF51D9C259F00F081E2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */; };
 		79E7CFF81D9CE95A00F081E2 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */; };
 		79E7CFFA1D9E04AA00F081E2 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */; };
@@ -89,6 +90,7 @@
 		798136351D9977000074ED25 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLogController.swift; path = Controllers/ChatLogController.swift; sourceTree = "<group>"; };
 		798136451D9BCFD50074ED25 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
 		798136461D9BCFD50074ED25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
+		79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddedMeCell.swift; path = View/AddedMeCell.swift; sourceTree = "<group>"; };
 		79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Controllers/CameraViewController.swift; sourceTree = "<group>"; };
 		79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCell.swift; path = View/ChatCell.swift; sourceTree = "<group>"; };
 		79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = View/MessageCell.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 			children = (
 				79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */,
 				79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */,
+				79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				798136481D9BCFD50074ED25 /* User.swift in Sources */,
 				004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */,
 				798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */,
+				79DA44E91DA5DD4D00BBF518 /* AddedMeCell.swift in Sources */,
 				E55B25401DA3DF20005E5626 /* AddFriendsTableViewController.swift in Sources */,
 				79E7CFFD1D9EC01600F081E2 /* Extensions.swift in Sources */,
 				79E7CFFA1D9E04AA00F081E2 /* MessageCell.swift in Sources */,

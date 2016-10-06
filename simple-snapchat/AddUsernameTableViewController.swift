@@ -50,8 +50,10 @@ class AddUsernameTableViewController: UITableViewController {
                 let user = User()
                 user.setValuesForKeys(dictionary)
                 user.id = snapshot.key
-                self.allusers.append(user)
-              
+                if user.id != FIRAuth.auth()?.currentUser?.uid{
+                    self.allusers.append(user)
+                }
+
                 DispatchQueue.global().async {
                     
                     DispatchQueue.main.async {
@@ -100,11 +102,8 @@ class AddUsernameTableViewController: UITableViewController {
         let user : User
         if searchController.searchBar.text != "" {
             user = filterUsers[indexPath.row]
-            print("search result, user is :", user.name)
         }else {
             user = allusers[indexPath.row]
-            print("orginal user is :", user.name)
-
         }
         cell.textLabel!.text = user.name!
         return cell
@@ -114,6 +113,38 @@ class AddUsernameTableViewController: UITableViewController {
         return 40
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true) {
+            let user: User
+    
+                if self.searchController.searchBar.text != "" {
+                    user = self.filterUsers[indexPath.row]
+                }else {
+                    user = self.allusers[indexPath.row]
+                }
+            
+            let fromID = (FIRAuth.auth()?.currentUser?.uid)!
+            let toID = user.id!
+            
+            // "0": wait for partner's acceptance
+            // "1": receive a new request, the user can choose to accept or reject
+            // "2": establish the friendship
+            
+            let senderFriendRef = FIRDatabase.database().reference().child("friendship").child(fromID)
+            senderFriendRef.updateChildValues([toID : 0])
+            let receiverFriendRef = FIRDatabase.database().reference().child("friendship").child(toID)
+            receiverFriendRef.updateChildValues([fromID: 1])
+            
+            var alertView = UIAlertView();
+            alertView.addButton(withTitle: "Done");
+            alertView.title = "Request is sent!";
+            var name = user.name!
+            alertView.message = "You sent a request to \(name)! Wait for the confirmation...";
+            alertView.show();
+            
+        }
+    }
+}
 
     /*
     // Override to support conditional editing of the table view.
@@ -161,7 +192,7 @@ class AddUsernameTableViewController: UITableViewController {
     */
    
 
-}
+
 extension AddUsernameTableViewController: UISearchResultsUpdating {
     @available(iOS 8.0, *)
     public func updateSearchResults(for searchController: UISearchController) {
