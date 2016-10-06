@@ -14,6 +14,8 @@ class TopViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -35,7 +37,10 @@ class TopViewController: UIViewController {
         
         present(loginRegisterController, animated: true, completion: nil)
     }
-
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 

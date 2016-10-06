@@ -46,27 +46,30 @@ class NewChatTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    //************************************************************************TODO: Change to fetch friend latter
+    
     func fetchFriends(){
-        
-        self.friends = [User]()
-        FIRDatabase.database().reference().child("users").observe(.childAdded, with: {(snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let user = User()
-                user.setValuesForKeys(dictionary)
-                user.id = snapshot.key
-                self.friends.append(user)
-                DispatchQueue.global().async {
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-
-            }
-            
-            
-            }, withCancel: nil)
+        if let myID = FIRAuth.auth()?.currentUser?.uid{
+            let friendRef = FIRDatabase.database().reference().child("friendship").child(myID)
+            friendRef.observe(.childAdded, with: { (snapshot) in
+                if snapshot.value as? Int == 2 {
+                    let key = snapshot.key
+                    let user = User()
+                    let userRef = FIRDatabase.database().reference().child("users").child(key)
+                    userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let dictionary = snapshot.value as? [String: AnyObject]{
+                            user.setValuesForKeys(dictionary)
+                            user.id = key
+                            self.friends.append(user)}
+                        
+                        DispatchQueue.global().async {
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                    })
+                }  }, withCancel: nil)
+        }
     }
 
     func handleCancel(){

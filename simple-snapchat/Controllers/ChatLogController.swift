@@ -398,7 +398,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         let imageName = NSUUID().uuidString
         let ref = FIRStorage.storage().reference().child("message_images").child(imageName)
         
-        if let uploadData = UIImageJPEGRepresentation(image, 0.2){
+        if let uploadData = UIImageJPEGRepresentation(image, 0.01){
             ref.put(uploadData, metadata: nil, completion: { (metadata, error) in
                 if error != nil {
                     print("Failed to upload image :", error)

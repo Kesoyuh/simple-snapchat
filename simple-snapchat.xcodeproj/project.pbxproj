@@ -42,11 +42,16 @@
 		798136361D9977010074ED25 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136351D9977000074ED25 /* ChatLogController.swift */; };
 		798136471D9BCFD50074ED25 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136451D9BCFD50074ED25 /* Message.swift */; };
 		798136481D9BCFD50074ED25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136461D9BCFD50074ED25 /* User.swift */; };
-		79E7CFF31D9BFA3100F081E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79E7CFF21D9BFA3100F081E2 /* GoogleService-Info.plist */; };
+		79DA44E91DA5DD4D00BBF518 /* AddedMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */; };
 		79E7CFF51D9C259F00F081E2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */; };
 		79E7CFF81D9CE95A00F081E2 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */; };
 		79E7CFFA1D9E04AA00F081E2 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */; };
 		79E7CFFD1D9EC01600F081E2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFFC1D9EC01600F081E2 /* Extensions.swift */; };
+		E50C4A071DA5247A009F4656 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E50C4A061DA5247A009F4656 /* GoogleService-Info.plist */; };
+		E55B253E1DA3D8C9005E5626 /* AddedMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55B253D1DA3D8C9005E5626 /* AddedMeTableViewController.swift */; };
+		E55B25401DA3DF20005E5626 /* AddFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55B253F1DA3DF20005E5626 /* AddFriendsTableViewController.swift */; };
+		E563EC231DA495EF00EA97F9 /* AddUsernameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E563EC221DA495EF00EA97F9 /* AddUsernameTableViewController.swift */; };
+		E57FF9DC1DA39E450038239B /* MyFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57FF9DB1DA39E450038239B /* MyFriendsTableViewController.swift */; };
 		F595B0AB8367814EF8C25504 /* Pods_simple_snapchat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,12 +94,17 @@
 		798136351D9977000074ED25 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLogController.swift; path = Controllers/ChatLogController.swift; sourceTree = "<group>"; };
 		798136451D9BCFD50074ED25 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
 		798136461D9BCFD50074ED25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
-		79E7CFF21D9BFA3100F081E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddedMeCell.swift; path = View/AddedMeCell.swift; sourceTree = "<group>"; };
 		79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Controllers/CameraViewController.swift; sourceTree = "<group>"; };
 		79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCell.swift; path = View/ChatCell.swift; sourceTree = "<group>"; };
 		79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = View/MessageCell.swift; sourceTree = "<group>"; };
 		79E7CFFC1D9EC01600F081E2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_simple_snapchat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E50C4A061DA5247A009F4656 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E55B253D1DA3D8C9005E5626 /* AddedMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddedMeTableViewController.swift; sourceTree = "<group>"; };
+		E55B253F1DA3DF20005E5626 /* AddFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewController.swift; sourceTree = "<group>"; };
+		E563EC221DA495EF00EA97F9 /* AddUsernameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsernameTableViewController.swift; sourceTree = "<group>"; };
+		E57FF9DB1DA39E450038239B /* MyFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFriendsTableViewController.swift; sourceTree = "<group>"; };
 		FEFFBC8570546B75E246890B /* Pods-simple-snapchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.debug.xcconfig"; sourceTree = "<group>"; };
 		FF70871258D3258057C9ED4E /* Pods-simple-snapchat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.release.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +173,10 @@
 			isa = PBXGroup;
 			children = (
 				004349031D99030100D3DE54 /* TopViewController.swift */,
+				E57FF9DB1DA39E450038239B /* MyFriendsTableViewController.swift */,
+				E55B253D1DA3D8C9005E5626 /* AddedMeTableViewController.swift */,
+				E55B253F1DA3DF20005E5626 /* AddFriendsTableViewController.swift */,
+				E563EC221DA495EF00EA97F9 /* AddUsernameTableViewController.swift */,
 			);
 			name = TopView;
 			sourceTree = "<group>";
@@ -236,7 +250,7 @@
 				00DD9D1E1D98F5D3006489BE /* Assets.xcassets */,
 				00DD9D201D98F5D3006489BE /* LaunchScreen.storyboard */,
 				00DD9D231D98F5D3006489BE /* Info.plist */,
-				79E7CFF21D9BFA3100F081E2 /* GoogleService-Info.plist */,
+				E50C4A061DA5247A009F4656 /* GoogleService-Info.plist */,
 			);
 			path = "simple-snapchat";
 			sourceTree = "<group>";
@@ -275,6 +289,7 @@
 			children = (
 				79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */,
 				79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */,
+				79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -359,7 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00DD9D221D98F5D3006489BE /* LaunchScreen.storyboard in Resources */,
-				79E7CFF31D9BFA3100F081E2 /* GoogleService-Info.plist in Resources */,
+				E50C4A071DA5247A009F4656 /* GoogleService-Info.plist in Resources */,
 				00DD9D1F1D98F5D3006489BE /* Assets.xcassets in Resources */,
 				00DD9D1D1D98F5D3006489BE /* Main.storyboard in Resources */,
 			);
@@ -430,6 +445,7 @@
 				79E7CFF51D9C259F00F081E2 /* CameraViewController.swift in Sources */,
 				004349081D99030100D3DE54 /* SnapContainerViewController.swift in Sources */,
 				798136361D9977010074ED25 /* ChatLogController.swift in Sources */,
+				E563EC231DA495EF00EA97F9 /* AddUsernameTableViewController.swift in Sources */,
 				006170151DA28CB4002354B3 /* MenuBar.swift in Sources */,
 				004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */,
 				004B00CB1D9D23B500C1C6E5 /* SnapsController.swift in Sources */,
@@ -438,9 +454,13 @@
 				798136481D9BCFD50074ED25 /* User.swift in Sources */,
 				004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */,
 				798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */,
+				79DA44E91DA5DD4D00BBF518 /* AddedMeCell.swift in Sources */,
+				E55B25401DA3DF20005E5626 /* AddFriendsTableViewController.swift in Sources */,
 				79E7CFFD1D9EC01600F081E2 /* Extensions.swift in Sources */,
 				79E7CFFA1D9E04AA00F081E2 /* MessageCell.swift in Sources */,
 				79E7CFF81D9CE95A00F081E2 /* ChatCell.swift in Sources */,
+				E57FF9DC1DA39E450038239B /* MyFriendsTableViewController.swift in Sources */,
+				E55B253E1DA3D8C9005E5626 /* AddedMeTableViewController.swift in Sources */,
 				0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */,
 				798136471D9BCFD50074ED25 /* Message.swift in Sources */,
 				006170131DA22118002354B3 /* StoryCell.swift in Sources */,
@@ -576,7 +596,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat-999";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -597,7 +617,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat-999";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
