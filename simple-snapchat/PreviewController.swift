@@ -7,28 +7,67 @@
 //
 
 import UIKit
-class PreviewController: UIViewController {
+import CoreData
+
+class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewDelegate {
     
     
+    @IBOutlet var ContainerView: UIView!
     @IBOutlet weak var ImageEdit: UIImageView!
     @IBOutlet weak var CancleButton: UIButton!
+    @IBOutlet weak var save: UIButton!
     
+    @IBOutlet weak var Draw: UIButton!
+    @IBAction func selectDuration(_ sender: AnyObject) {
+        self.DurationPick.isHidden = false
+    }
+    @IBOutlet weak var DurationPick: UIPickerView!
     @IBAction func quit(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func SaveButton(_ sender: UIButton) {
+        self.SaveImage()
+    }
+    
+    @IBAction func enable_draw(_ sender: UIButton) {
+        if self.enabledrawing == true {
+            enabledrawing = false
+            self.ImageEdit.isUserInteractionEnabled = true
+        }
+        else {
+            
+        }
+    }
+    
     var capturedPhoto :UIImage!
+    var pictureid : Int = 0
+    var pic_duaration = 3
+    var pickoption  = [1,2,3,4,5,6,7,8]
     
     
+    var isDrawing : Bool! = false
+    var enabledrawing : Bool! = true
+    var finalPoint: CGPoint!
+    var lineWidth: CGFloat = 4.0
     
+    let red: CGFloat = 255.0/255.0
+    let green: CGFloat = 0.0/255.0
+    let blue: CGFloat = 0.0/255.0
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        DurationPick.delegate = self
         ImageEdit.image = capturedPhoto
+        self.DurationPick.isHidden = true
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         ImageEdit.image = capturedPhoto
+        
 
     }
     
@@ -39,5 +78,113 @@ class PreviewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         ImageEdit.image = capturedPhoto
     }
+    
+    // Draw view
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.isDrawing = false
+        self.DurationPick.isHidden = true
+        if let touch = touches.first{
+            finalPoint = touch.preciseLocation(in: ImageEdit)
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.isDrawing = true
+        if let touch = touches.first{
+            if let d = ImageEdit {
+                let currentCoordinate = touch.preciseLocation(in: d)
+                UIGraphicsBeginImageContext(d.frame.size)
+                d.image?.draw(in: CGRect.init(x: 0, y: 0, width: d.frame.width, height: d.frame.height))
+                UIGraphicsGetCurrentContext()?.move(to: finalPoint)
+                UIGraphicsGetCurrentContext()?.addLine(to: currentCoordinate)
+                UIGraphicsGetCurrentContext()?.setLineCap(CGLineCap.round)
+                UIGraphicsGetCurrentContext()?.setLineWidth(lineWidth)
+                UIGraphicsGetCurrentContext()?.setStrokeColor(red: red, green: green, blue: blue, alpha: 1.0)
+                UIGraphicsGetCurrentContext()?.strokePath()
+                d.image = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                finalPoint = currentCoordinate
+            }
+        
+        }
+        
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
+    
+    // Duration pick view
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickoption.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if row == 0 {
+        return "\(pickoption[row])second"}
+        else {
+            return "\(pickoption[row])seconds"
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        self.pic_duaration = pickoption[row]
+        self.DurationPick.resignFirstResponder()
+    }
+    
+    func SaveImage(){
+        let saveQueue = DispatchQueue(label: "saveQueue",attributes: .concurrent)
+        
+        saveQueue.async {
+            let image : UIImage! = self.ImageEdit.image
+            let imageData = UIImageJPEGRepresentation(image, 1)
+            let contextManaged = self.getContext()
+            let a = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: contextManaged)
+            a.setPrimitiveValue(NSNumber(value:self.pictureid), forKey: "photo_id")
+            a.setValue(imageData, forKey: "photo_data")
+            do {
+                try contextManaged.save()
+            } catch{
+                
+            }
+            print(a.value(forKey: "photo_id"))
+        }
+        self.pictureid += 1
+        self.save.isHidden = true
+    }
+    
+    
+    func getContext() -> NSManagedObjectContext {
+        var context: NSManagedObjectContext?
+        
+        if #available(iOS 10.0, *) {
+            context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        } else {
+            // iOS 9.0 and below - however you were previously handling it
+            guard let modelURL = Bundle.main.url(forResource: "Model", withExtension:"momd") else {
+                fatalError("Error loading model from bundle")
+            }
+            guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+                fatalError("Error initializing mom from: \(modelURL)")
+            }
+            let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
+            context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docURL = urls[urls.endIndex-1]
+            let storeURL = docURL.appendingPathComponent("Model.sqlite")
+            do {
+                try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+            } catch {
+                fatalError("Error migrating store: \(error)")
+            }
+            
+        }
+        return context!
+    }
+    
 
 }

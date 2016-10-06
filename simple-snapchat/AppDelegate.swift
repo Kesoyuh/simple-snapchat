@@ -10,13 +10,25 @@ import UIKit
 import Parse
 import Bolts
 import Firebase
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    @available(iOS 10.0, *)
+    lazy var persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "photoModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error {
+                
+                fatalError("Unresolved error \(error), \(error)")
+            }
+        })
+        return container
+    }()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool{
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -30,7 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.rootViewController = snapContainer
         self.window?.makeKeyAndVisible()
-    
+        
+            
         // Initialize Firebase
         FIRApp.configure()
         

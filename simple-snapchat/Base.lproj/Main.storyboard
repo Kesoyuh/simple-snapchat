@@ -48,7 +48,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e5X-Cb-eJL" id="4ZZ-Sy-twB">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -93,7 +93,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oA4-gm-OFh" id="16q-oC-Cnh">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -237,19 +237,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EoO-n8-d3I" userLabel="CapturedPhoto">
-                                <frame key="frameInset" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EoO-n8-d3I" userLabel="CapturedPhoto"/>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqt-Vv-gqh">
                                 <frame key="frameInset" minX="16" minY="617" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Timer"/>
+                                <connections>
+                                    <action selector="selectDuration:" destination="Tb7-Al-dck" eventType="touchUpInside" id="Yta-B5-oDD"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYd-U2-5GK">
-                                <frame key="frameInset" minX="70" minY="617" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYd-U2-5GK">
+                                <frame key="frameInset" minX="62" minY="621" width="54" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save"/>
+                                <state key="normal" title="Save" image="buzzfeed"/>
+                                <connections>
+                                    <action selector="SaveButton:" destination="Tb7-Al-dck" eventType="touchUpInside" id="APk-U1-Na0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBk-ke-De3">
                                 <frame key="frameInset" minX="124" minY="617" width="46" height="30"/>
@@ -261,26 +264,51 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="send"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cZ-5Q-Azc">
-                                <frame key="frameInset" minX="16" minY="96" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cZ-5Q-Azc">
+                                <frame key="frameInset" minX="4" minY="32" width="70" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancle"/>
+                                <state key="normal" image="Delete"/>
                                 <connections>
                                     <action selector="quit:" destination="Tb7-Al-dck" eventType="touchUpInside" id="hTg-Cp-6pN"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="dqr-qc-HdJ">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apf-3B-AfM">
+                                <frame key="frameInset" minX="313" minY="32" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Draw"/>
+                                <connections>
+                                    <action selector="enable_draw:" destination="Tb7-Al-dck" eventType="touchUpInside" id="rMa-wW-9DK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dqr-qc-HdJ" firstAttribute="bottom" secondItem="Xje-SK-CMo" secondAttribute="top" id="54S-5f-OVJ"/>
+                            <constraint firstItem="dqr-qc-HdJ" firstAttribute="trailing" secondItem="EoO-n8-d3I" secondAttribute="trailing" id="Szx-LQ-WPY"/>
+                            <constraint firstItem="dqr-qc-HdJ" firstAttribute="leading" secondItem="EoO-n8-d3I" secondAttribute="leading" id="Tzf-QR-UOM"/>
+                            <constraint firstAttribute="trailing" secondItem="EoO-n8-d3I" secondAttribute="trailing" id="YvM-OE-nXf"/>
+                            <constraint firstItem="EoO-n8-d3I" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leading" id="iBH-71-Lxh"/>
+                            <constraint firstItem="EoO-n8-d3I" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leading" id="jAI-dU-loK"/>
+                            <constraint firstItem="EoO-n8-d3I" firstAttribute="bottom" secondItem="Xje-SK-CMo" secondAttribute="top" id="mks-1N-nj3"/>
+                            <constraint firstItem="EoO-n8-d3I" firstAttribute="top" secondItem="fki-0f-KgM" secondAttribute="bottom" id="pfY-kl-47R"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Preview" id="zPM-cb-98L"/>
                     <connections>
                         <outlet property="CancleButton" destination="6cZ-5Q-Azc" id="ehT-KH-dGX"/>
+                        <outlet property="ContainerView" destination="85R-JD-SwN" id="3gZ-SY-LiX"/>
+                        <outlet property="Draw" destination="Apf-3B-AfM" id="bhA-8Q-nOV"/>
+                        <outlet property="DurationPick" destination="dqr-qc-HdJ" id="0RB-tZ-8Uw"/>
                         <outlet property="ImageEdit" destination="EoO-n8-d3I" id="pUp-vP-JzY"/>
+                        <outlet property="save" destination="JYd-U2-5GK" id="v5c-uH-EDv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eId-am-sdt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2372" y="1378"/>
+            <point key="canvasLocation" x="2371.0144927536235" y="1376.9021739130435"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kxB-C8-7gA">
@@ -304,6 +332,8 @@
     <resources>
         <image name="Action button" width="82" height="82"/>
         <image name="Camera flip" width="33" height="27"/>
+        <image name="Delete" width="14" height="14"/>
         <image name="Flash" width="25" height="26"/>
+        <image name="buzzfeed" width="256" height="256"/>
     </resources>
 </document>

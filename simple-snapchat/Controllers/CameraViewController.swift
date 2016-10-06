@@ -191,11 +191,6 @@ class CameraViewController : UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "test"{
-//            if let navigationController = segue.destination as? UINavigationController{
-//                if let previewController = navigationController.topViewController as? PreviewController {
-//                    previewController.capturedPhoto = ImageCaptured
-//            }
-//        }
             let previewController = segue.destination as! PreviewController
             previewController.capturedPhoto = self.ImageCaptured            
         }
