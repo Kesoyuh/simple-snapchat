@@ -60,15 +60,15 @@ class AddedMeTableViewController: UITableViewController {
             
             let accRef = FIRDatabase.database().reference().child("friendship").child(accepterID!)
             accRef.updateChildValues([requesterID : 2])
-            var alertView = UIAlertView();
-            alertView.addButton(withTitle: "Done");
-            alertView.title = "New Friend Added";
-            var name = targetUser.name!
-            alertView.message = "You can chat with \(name) now!";
-            alertView.show();
+            let name = targetUser.name!
+            
+            let alert  = UIAlertController(title: "New Friend Added", message: "You can chat with \(name) now!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+            
             friendRequest = []
             fetchRequest()
-            self.tableView.reloadData()
+            
             
 
         }

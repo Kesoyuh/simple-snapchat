@@ -12,7 +12,6 @@ class AddUsernameTableViewController: UITableViewController {
 
     
     let cellID = "AddUserNameCell"
-    
     var allusers = [User]()
     var filterUsers = [User]()
     let searchController = UISearchController(searchResultsController: nil)
@@ -20,15 +19,13 @@ class AddUsernameTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellID)
-        
+
         fetchUser()
         
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-
-
        
     }
     
@@ -45,32 +42,48 @@ class AddUsernameTableViewController: UITableViewController {
     func fetchUser(){
         
         self.allusers = [User]()
-        FIRDatabase.database().reference().child("users").observe(.childAdded, with: {(snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let user = User()
-                user.setValuesForKeys(dictionary)
-                user.id = snapshot.key
-                if user.id != FIRAuth.auth()?.currentUser?.uid{
-                    self.allusers.append(user)
-                }
-
-                DispatchQueue.global().async {
+        if let myID = FIRAuth.auth()?.currentUser?.uid{
+            FIRDatabase.database().reference().child("users").observe(.childAdded, with: {(snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                    let user = User()
+                    user.setValuesForKeys(dictionary)
+                    user.id = snapshot.key
                     
-                    DispatchQueue.main.async {
-                        self.allusers.forEach { (user) in
-                            print(user.name)
+                    let myID = FIRAuth.auth()?.currentUser?.uid
+                    let friendRef = FIRDatabase.database().reference().child("friendship").child(myID!)
+                    friendRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                        //                    print(snapshot.value)
+                        if let dictionary = snapshot.value as? [String : AnyObject]{
+                            for(key,value) in dictionary {
+                                if value as? Int == 2 {
+                                    if user.id != myID! && user.id != key{
+                                        
+                                        self.allusers.append(user)}
+                                    print(user.name)
+                                    
+                                    
+                                    DispatchQueue.global().async {
+                                        
+                                        DispatchQueue.main.async {
+                                            self.tableView.reloadData()
+                                        }
+                                    }
+                                    
+                                }
+                            }
                         }
-                        self.tableView.reloadData()
-                    }
+                        
+                    })
+   
                 }
-                
-            }
-            
-            
-            }, withCancel: nil)
+                }, withCancel: nil)
+
+        }
+        
+        
     }
 
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -90,7 +103,7 @@ class AddUsernameTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if searchController.isActive && searchController.searchBar.text != "" {
+        if searchController.searchBar.text != "" {
             return filterUsers.count
         }else{
             return allusers.count
@@ -102,6 +115,7 @@ class AddUsernameTableViewController: UITableViewController {
         let user : User
         if searchController.searchBar.text != "" {
             user = filterUsers[indexPath.row]
+ 
         }else {
             user = allusers[indexPath.row]
         }
@@ -119,6 +133,7 @@ class AddUsernameTableViewController: UITableViewController {
     
                 if self.searchController.searchBar.text != "" {
                     user = self.filterUsers[indexPath.row]
+                    self.dismiss(animated: true, completion: nil)
                 }else {
                     user = self.allusers[indexPath.row]
                 }
@@ -135,12 +150,14 @@ class AddUsernameTableViewController: UITableViewController {
             let receiverFriendRef = FIRDatabase.database().reference().child("friendship").child(toID)
             receiverFriendRef.updateChildValues([fromID: 1])
             
-            var alertView = UIAlertView();
+            let alertView = UIAlertView();
             alertView.addButton(withTitle: "Done");
             alertView.title = "Request is sent!";
-            var name = user.name!
+            let name = user.name!
             alertView.message = "You sent a request to \(name)! Wait for the confirmation...";
             alertView.show();
+
+            
             
         }
     }
