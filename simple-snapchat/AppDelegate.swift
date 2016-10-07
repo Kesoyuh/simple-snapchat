@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Parse
+//import Parse
 import Bolts
 import Firebase
 import CoreData
@@ -46,17 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         // Initialize Firebase
         FIRApp.configure()
-        
-        // Initialize Parse. Waiting to be deleted
-        let configuration = ParseClientConfiguration {
-            $0.applicationId = "SnapchatFromTeamToBeContinued"
-            $0.clientKey = "Jfed9kfKF902Bmmzw32SE"
-            $0.server = "https://simple-snapchat.herokuapp.com/parse"
-        }
-        Parse.initialize(with: configuration)
+
         return true
     }
-
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

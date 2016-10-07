@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 import Firebase
 
 @IBDesignable
@@ -37,7 +36,7 @@ class LoginRegisterController: UIViewController {
         view.layer.masksToBounds = true
         return view
     }()
-    
+
     lazy var loginRegisterButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor(r: 255, g: 96, b: 136)
@@ -102,18 +101,12 @@ class LoginRegisterController: UIViewController {
                 print(error)
                 return
             } else {
+
                 self.dismiss(animated: true, completion: nil)
+                
             }
         })
-        
-//        PFUser.logInWithUsername(inBackground: username, password: password) { (user, error) in
-//            if let error = error{
-//                let errorString = error as? NSString
-//                print(errorString)
-//            } else {
-//                self.dismiss(animated: true, completion: nil)
-//            }
-//        }
+    
         
     }
     
@@ -132,7 +125,7 @@ class LoginRegisterController: UIViewController {
                     return
                 }
                 
-                let ref = FIRDatabase.database().reference(fromURL: "https://simple-snapchat.firebaseio.com/")
+                let ref = FIRDatabase.database().reference()
                 let userRef = ref.child("users").child(uid)
                 let values = ["name": username, "email": email]
  
@@ -146,19 +139,6 @@ class LoginRegisterController: UIViewController {
                 })
             }
         })
-//        let user = PFUser()
-//        user.email = email
-//        user.username = username
-//        user.password = password
-//
-//        user.signUpInBackground { (succeeded, error) in
-//            if let error = error{
-//                let errorString = error as? NSString
-//                print(errorString)
-//            } else {
-//                self.dismiss(animated: true, completion: nil)
-//            }
-//        }
 
     
     }

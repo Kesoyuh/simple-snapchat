@@ -14,6 +14,8 @@ class TopViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -32,9 +34,13 @@ class TopViewController: UIViewController {
         let loginRegisterController = LoginRegisterController()
         let scrollView = self.view.superview as? UIScrollView
         scrollView!.contentOffset.y = view.bounds.height
+        
         present(loginRegisterController, animated: true, completion: nil)
     }
-
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 

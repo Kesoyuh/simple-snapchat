@@ -7,16 +7,19 @@
 //
 
 import UIKit
-import Parse
+import Firebase
 
 // Add a new chat by choosing a friend
 
 class NewChatTableViewController: UITableViewController {
     
     let cellID = "newChatCellId"
+    var chatListController: ChatListTableViewController?
     
      //************************************************************************TODO:Currently show all users, latter show firnds
-    var users = [User]()
+    var friends = [User]()
+    var filterFriends = [User]()
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,67 +30,48 @@ class NewChatTableViewController: UITableViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red: 102, green: 178, blue: 255)]
         navigationController?.navigationBar.isHidden = false
         
-        checkIfUserIsLoggedIn()
-        fetchUser()
+        fetchFriends()
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
 
   }
     
-    //************************************************************************TODO: Change to fetch friend latter
-    func fetchUser(){
-        var query:PFQuery = PFUser.query()!
-        // Create a new PFQuery
-                // Call findObjectInBackground
-        query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) -> Void in
-            
-            if error == nil {
-                
-                print("Successfully retrieved \(objects!.count) users.")
-
-                self.users = [User]()
-
-                if let objects = objects {
-                    
-                    for userObject in objects {
+    func filterContentForSearchText(searchText: String, scope: String = "All"){
+        filterFriends = friends.filter({ (friend) -> Bool in
+            return (friend.name?.localizedLowercase.contains(searchText.localizedLowercase))!
+        })
+        tableView.reloadData()
+    }
+    
+    
+    func fetchFriends(){
+        if let myID = FIRAuth.auth()?.currentUser?.uid{
+            let friendRef = FIRDatabase.database().reference().child("friendship").child(myID)
+            friendRef.observe(.childAdded, with: { (snapshot) in
+                if snapshot.value as? Int == 2 {
+                    let key = snapshot.key
+                    let user = User()
+                    let userRef = FIRDatabase.database().reference().child("users").child(key)
+                    userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let dictionary = snapshot.value as? [String: AnyObject]{
+                            user.setValuesForKeys(dictionary)
+                            user.id = key
+                            self.friends.append(user)}
                         
-                        let user = User()
-                        user.username = userObject["username"] as! String?
-                        user.email = userObject["email"] as! String?
-                        user.id = userObject.objectId
-                        print(user.username, user.email,user.id)
-                        self.users.append(user)
-                        //---------------------Swift 3 dispatch---------------//
                         DispatchQueue.global().async {
                             
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
                             }
                         }
-                    }
-                }
-            } else {
-                
-            }
-        }
-        
-    }
-    
-    //TEST: for get user info 以后可以借鉴获取friend信息
-    func checkIfUserIsLoggedIn() {
-        let currentUser = PFUser.current()
-        
-        if currentUser != nil {
-            // User is logged in, change the title with username
-            let title = currentUser?.username?.appending(" Friend List")
-
-            self.navigationItem.title = title
-        } else {
-            // User is not logged in
-            let loginRegisterController = LoginRegisterController()
-            present(loginRegisterController, animated: true, completion: nil)
+                    })
+                }  }, withCancel: nil)
         }
     }
 
-    
     func handleCancel(){
        /* let usersController = usersTableViewController()
         let navController = UINavigationController(rootViewController: usersController)
@@ -99,26 +83,53 @@ class NewChatTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filterFriends.count
+        }else{
+            return friends.count
+        }
+        
     }
     
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
+        let user : User
+        if searchController.isActive && searchController.searchBar.text != "" {
+            user = filterFriends[indexPath.row]
+        }else {
+            user = friends[indexPath.row]
+        }
         
-        let user = users[indexPath.row]
-        
-        cell.textLabel?.text = user.username
+        cell.textLabel?.text = user.name
         return cell
     }
     
-    var chatListController: ChatListTableViewController?
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true) {
-            let user = self.users[indexPath.row]
-            self.chatListController?.showChatLogControllerForUser(user: user)
+            let user: User?
+                
+           if self.searchController.searchBar.text != ""{
+            
+                    user = self.filterFriends[indexPath.row]
+
+                    self.handleCancel()
+                }else{
+                user = self.friends[indexPath.row]
+            }
+            
+            self.chatListController?.showChatLogControllerForUser(uid: (user?.id!)!)
+            print("Show chat log controller with uid", user?.name)
         }
+    }
+}
+
+extension NewChatTableViewController : UISearchResultsUpdating{
+    @available(iOS 8.0, *)
+    public func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
 }
