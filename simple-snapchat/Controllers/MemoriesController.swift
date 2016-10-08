@@ -102,7 +102,7 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
     }()
     
     func handleSend() {
-        if let selectedPhotos = collectionView?.indexPathsForSelectedItems, let uid = FIRAuth.auth()?.currentUser?.uid {
+        if let selectedPhotos = cameraRollView?.indexPathsForSelectedItems, let uid = FIRAuth.auth()?.currentUser?.uid {
             
             var username = String()
             
@@ -118,7 +118,7 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
             for i in 0..<selectedPhotos.count {
                 let imageName = NSUUID().uuidString
                 let storageRef = FIRStorage.storage().reference().child("stories").child(imageName)
-                let cell = collectionView?.cellForItem(at: selectedPhotos[i]) as! PhotoCell
+                let cell = cameraRollView?.cellForItem(at: selectedPhotos[i]) as! PhotoCell
                 let image = cell.imageView.image
                 let uploadData = UIImagePNGRepresentation(image!)
                 
@@ -159,9 +159,9 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
             
             navigationItem.rightBarButtonItem?.tintColor = UIColor(colorLiteralRed: 174/255, green: 2/255, blue: 2/255, alpha: 1)
             
-            collectionView?.allowsSelection = true
-            collectionView?.allowsMultipleSelection = true
-            if let cells = collectionView?.visibleCells {
+            cameraRollView?.allowsSelection = true
+            cameraRollView?.allowsMultipleSelection = true
+            if let cells = cameraRollView?.visibleCells {
                 for i in 0..<cells.count {
                     let photoCell = cells[i] as? PhotoCell
                     photoCell?.imageView.isUserInteractionEnabled = false
@@ -188,16 +188,16 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
             
             navigationItem.rightBarButtonItem?.tintColor = UIColor(colorLiteralRed: 255/255, green: 20/255, blue: 147/255, alpha: 1)
             
-            if let cells = collectionView?.visibleCells {
+            if let cells = cameraRollView?.visibleCells {
                 for i in 0..<cells.count {
                     let photoCell = cells[i] as? PhotoCell
-                    collectionView?.deselectItem(at: IndexPath(row: i, section: 0), animated: true)
+                    cameraRollView?.deselectItem(at: IndexPath(row: i, section: 0), animated: true)
                     photoCell?.imageView.isUserInteractionEnabled = true
                     photoCell?.imageView.alpha = 1
                 }
             }
-            collectionView?.allowsSelection = false
-            collectionView?.allowsMultipleSelection = false
+            cameraRollView?.allowsSelection = false
+            cameraRollView?.allowsMultipleSelection = false
             sendButtonView.removeFromSuperview()
             bottomSelectView.removeFromSuperview()
         }
