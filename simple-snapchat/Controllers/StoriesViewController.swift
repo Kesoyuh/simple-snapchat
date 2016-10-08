@@ -258,6 +258,7 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
             zoomingImageView.clipsToBounds = true
             zoomingImageView.image = self.startingImageView?.image
             zoomingImageView.isUserInteractionEnabled = true
+            zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleStopStory)))
             
             if let keyWindow = UIApplication.shared.keyWindow {
                 
@@ -316,6 +317,21 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
       
             
         }
+    }
+    
+    func handleStopStory(tapGesture: UITapGestureRecognizer) {
+        if let zoomingImageView = tapGesture.view as? UIImageView{
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                zoomingImageView.frame = self.startingFrame!
+                self.blackBackgroundView?.alpha = 0
+                
+                }, completion: { (completed) in
+                    zoomingImageView.removeFromSuperview()
+                    self.startingImageView?.isHidden = false
+            })
+        }
+        
     }
     
     func delay(_ delay:Double, closure:@escaping ()->()) {

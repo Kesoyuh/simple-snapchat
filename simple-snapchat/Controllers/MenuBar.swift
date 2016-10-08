@@ -32,7 +32,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         
-        let selectedIndexPath = IndexPath(row: 1, section: 0)
+        let selectedIndexPath = IndexPath(row: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .bottom)
 
     }

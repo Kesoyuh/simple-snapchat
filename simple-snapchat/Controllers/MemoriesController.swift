@@ -62,12 +62,7 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
         }
         
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
-        
-    }
+    
     
     lazy var menuBar: MenuBar = {
         let mb = MenuBar()

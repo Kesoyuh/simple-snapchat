@@ -12,6 +12,14 @@ import Firebase
 @IBDesignable
 class LoginRegisterController: UIViewController {
     
+    let spinnerView: UIActivityIndicatorView = {
+        let sv = UIActivityIndicatorView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.stopAnimating()
+        sv.color = .black
+        return sv
+    }()
+    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Snapchat_Logo")
@@ -87,6 +95,8 @@ class LoginRegisterController: UIViewController {
     }()
     
     func handleLoginOrRegister() {
+        spinnerView.startAnimating()
+        loginRegisterButton.isUserInteractionEnabled = false
         loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? handleLogin() : handleRegister()
     }
     
@@ -97,7 +107,9 @@ class LoginRegisterController: UIViewController {
         }
         
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+            self.spinnerView.stopAnimating()
             if error != nil {
+                self.loginRegisterButton.isUserInteractionEnabled = true
                 print(error)
                 return
             } else {
@@ -115,9 +127,12 @@ class LoginRegisterController: UIViewController {
             print("Form is not valid!")
             return
         }
+        
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
+            self.spinnerView.stopAnimating()
             if error != nil {
                 print(error)
+                self.loginRegisterButton.isUserInteractionEnabled = true
                 return
             } else {
                 
@@ -156,8 +171,9 @@ class LoginRegisterController: UIViewController {
         nameTextFieldHeightConstraint = nameTextField.heightAnchor.constraint(equalTo: inputContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
         nameTextFieldHeightConstraint?.isActive = true
         
-        // nameTextField placeholder
+        // nameTextField placeholder and text
         nameTextField.placeholder = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? "" : "Name"
+        nameTextField.text = nil
         
         // nameSeparator Height
         nameSeparatorHeightConstraint?.isActive = false
@@ -186,11 +202,21 @@ class LoginRegisterController: UIViewController {
         view.addSubview(loginRegisterButton)
         view.addSubview(profileImageView)
         view.addSubview(loginRegisterSegmentedControl)
+        view.addSubview(spinnerView)
+        view.bringSubview(toFront: spinnerView)
         
+        setupSpinnerView()
         setupInputContainerView()
         setupLoginRegisterButton()
         setupProfileImageView()
         setupLoginRegisterSegmentedControl()
+    }
+    
+    func setupSpinnerView() {
+        spinnerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinnerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        spinnerView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        spinnerView.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     fileprivate func setupLoginRegisterSegmentedControl() {
