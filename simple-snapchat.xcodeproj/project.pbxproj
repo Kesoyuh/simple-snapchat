@@ -22,7 +22,6 @@
 		004349091D99030100D3DE54 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349031D99030100D3DE54 /* TopViewController.swift */; };
 		0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349041D99030100D3DE54 /* VerticalScrollViewController.swift */; };
 		004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349101D9903CA00D3DE54 /* StoriesViewController.swift */; };
-		004B00C91D9D231A00C1C6E5 /* CameraRollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B00C81D9D231A00C1C6E5 /* CameraRollController.swift */; };
 		004B00CB1D9D23B500C1C6E5 /* SnapsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */; };
 		0061700B1D9E3192002354B3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0061700A1D9E3192002354B3 /* Photos.framework */; };
 		0061700D1D9EA9AA002354B3 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061700C1D9EA9AA002354B3 /* PhotoCell.swift */; };
@@ -77,7 +76,6 @@
 		004349031D99030100D3DE54 /* TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopViewController.swift; path = Controllers/TopViewController.swift; sourceTree = "<group>"; };
 		004349041D99030100D3DE54 /* VerticalScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalScrollViewController.swift; path = Controllers/VerticalScrollViewController.swift; sourceTree = "<group>"; };
 		004349101D9903CA00D3DE54 /* StoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoriesViewController.swift; path = Controllers/StoriesViewController.swift; sourceTree = "<group>"; };
-		004B00C81D9D231A00C1C6E5 /* CameraRollController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraRollController.swift; path = Controllers/CameraRollController.swift; sourceTree = "<group>"; };
 		004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapsController.swift; path = Controllers/SnapsController.swift; sourceTree = "<group>"; };
 		0061700A1D9E3192002354B3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		0061700C1D9EA9AA002354B3 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCell.swift; path = Controllers/PhotoCell.swift; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 			children = (
 				00C4571C1DA5094E004075FD /* MemoriesController.swift */,
 				00C4571E1DA52381004075FD /* CamerollRollCell.swift */,
-				004B00C81D9D231A00C1C6E5 /* CameraRollController.swift */,
 				004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */,
 				0061700C1D9EA9AA002354B3 /* PhotoCell.swift */,
 				006170141DA28CB4002354B3 /* MenuBar.swift */,
@@ -469,7 +466,6 @@
 				004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */,
 				004B00CB1D9D23B500C1C6E5 /* SnapsController.swift in Sources */,
 				00C4571D1DA5094E004075FD /* MemoriesController.swift in Sources */,
-				004B00C91D9D231A00C1C6E5 /* CameraRollController.swift in Sources */,
 				798136481D9BCFD50074ED25 /* User.swift in Sources */,
 				004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */,
 				798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */,
