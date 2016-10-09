@@ -66,8 +66,8 @@ class AddedMeTableViewController: UITableViewController {
             alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             
-            friendRequest = []
-            fetchRequest()
+            friendRequest.remove(at: sender.tag)
+            self.tableView.reloadData()
             
             
 
