@@ -34,7 +34,7 @@ class AddUsernameTableViewController: UITableViewController {
             return (allusers.name?.localizedLowercase.contains(searchText.localizedLowercase))!
         })
         filterUsers.forEach { (user) in
-            print(user.name)
+            print(user.name!)
         }
         tableView.reloadData()
     }
@@ -45,7 +45,6 @@ class AddUsernameTableViewController: UITableViewController {
         if let myID = FIRAuth.auth()?.currentUser?.uid{
             FIRDatabase.database().reference().child("users").observe(.childAdded, with: {(snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject]{
-                   // print(dictionary)
                     let user = User()
                     user.setValuesForKeys(dictionary)
                     user.id = snapshot.key
@@ -61,17 +60,18 @@ class AddUsernameTableViewController: UITableViewController {
                                             self.allusers.append(user)
                                         }
                                         }
-                                   // print(user.name)
-                                    
-                                    
-                                    DispatchQueue.global().async {
-                                        
-                                        DispatchQueue.main.async {
-                                            self.tableView.reloadData()
-                                        }
-                                    }
-                                    
                                 }
+                            }
+                        }else{
+                            if user.id != myID {
+                                self.allusers.append(user)}
+                        
+                        }
+                        
+                        DispatchQueue.global().async {
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
                             }
                         }
                         
