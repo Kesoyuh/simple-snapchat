@@ -98,50 +98,54 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
     
     func handleSend() {
         if let selectedPhotos = cameraRollView?.indexPathsForSelectedItems, let uid = FIRAuth.auth()?.currentUser?.uid {
+            let sendToController = SendToController()
+            let navController = UINavigationController(rootViewController: sendToController)
+            present(navController, animated: true, completion: nil)
             
-            var username = String()
             
-            // Create story reference
-            let storiesRef = FIRDatabase.database().reference().child("stories")
-            FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let dictionary = snapshot.value as? [String: AnyObject] {
-                    
-                    username = dictionary["name"] as! String
-                }
-            })
-            
-            for i in 0..<selectedPhotos.count {
-                let imageName = NSUUID().uuidString
-                let storageRef = FIRStorage.storage().reference().child("stories").child(imageName)
-                let cell = cameraRollView?.cellForItem(at: selectedPhotos[i]) as! PhotoCell
-                let image = cell.imageView.image
-                let uploadData = UIImagePNGRepresentation(image!)
-                
-                storageRef.put(uploadData!, metadata: nil, completion: { (metaData, error) in
-                    
-                    if error != nil {
-                        print(error)
-                        return
-                    } else {
-                        
-                        // update database after successfully uploaded
-                        let storyRef = storiesRef.childByAutoId()
-                        if let imageURL = metaData?.downloadURL()?.absoluteString {
-                            storyRef.updateChildValues(["userID": uid, "username": username, "imageURL": imageURL, "timer": 3], withCompletionBlock: { (error, ref) in
-                                if error != nil {
-                                    print(error)
-                                    return
-                                }
-                                
-                                self.handleSelectImage()
-                                self.didClickSelectButton = true
-                            })
-                        }
-                        
-                    }
-                    
-                })
-            }
+//            var username = String()
+//            
+//            // Create story reference
+//            let storiesRef = FIRDatabase.database().reference().child("stories")
+//            FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+//                if let dictionary = snapshot.value as? [String: AnyObject] {
+//                    
+//                    username = dictionary["name"] as! String
+//                }
+//            })
+//            
+//            for i in 0..<selectedPhotos.count {
+//                let imageName = NSUUID().uuidString
+//                let storageRef = FIRStorage.storage().reference().child("stories").child(imageName)
+//                let cell = cameraRollView?.cellForItem(at: selectedPhotos[i]) as! PhotoCell
+//                let image = cell.imageView.image
+//                let uploadData = UIImagePNGRepresentation(image!)
+//                
+//                storageRef.put(uploadData!, metadata: nil, completion: { (metaData, error) in
+//                    
+//                    if error != nil {
+//                        print(error)
+//                        return
+//                    } else {
+//                        
+//                        // update database after successfully uploaded
+//                        let storyRef = storiesRef.childByAutoId()
+//                        if let imageURL = metaData?.downloadURL()?.absoluteString {
+//                            storyRef.updateChildValues(["userID": uid, "username": username, "imageURL": imageURL, "timer": 3], withCompletionBlock: { (error, ref) in
+//                                if error != nil {
+//                                    print(error)
+//                                    return
+//                                }
+//                                
+//                                self.handleSelectImage()
+//                                self.didClickSelectButton = true
+//                            })
+//                        }
+//                        
+//                    }
+//                    
+//                })
+//            }
         }
         
     }

@@ -23,6 +23,7 @@
 		0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349041D99030100D3DE54 /* VerticalScrollViewController.swift */; };
 		004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349101D9903CA00D3DE54 /* StoriesViewController.swift */; };
 		004B00CB1D9D23B500C1C6E5 /* SnapsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */; };
+		00513ED81DAA27C30097D967 /* SendToController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00513ED71DAA27C30097D967 /* SendToController.swift */; };
 		0061700B1D9E3192002354B3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0061700A1D9E3192002354B3 /* Photos.framework */; };
 		0061700D1D9EA9AA002354B3 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061700C1D9EA9AA002354B3 /* PhotoCell.swift */; };
 		0061700F1D9FCEC2002354B3 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061700E1D9FCEC2002354B3 /* Story.swift */; };
@@ -77,6 +78,7 @@
 		004349041D99030100D3DE54 /* VerticalScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalScrollViewController.swift; path = Controllers/VerticalScrollViewController.swift; sourceTree = "<group>"; };
 		004349101D9903CA00D3DE54 /* StoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoriesViewController.swift; path = Controllers/StoriesViewController.swift; sourceTree = "<group>"; };
 		004B00CA1D9D23B500C1C6E5 /* SnapsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapsController.swift; path = Controllers/SnapsController.swift; sourceTree = "<group>"; };
+		00513ED71DAA27C30097D967 /* SendToController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendToController.swift; path = Controllers/SendToController.swift; sourceTree = "<group>"; };
 		0061700A1D9E3192002354B3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		0061700C1D9EA9AA002354B3 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCell.swift; path = Controllers/PhotoCell.swift; sourceTree = "<group>"; };
 		0061700E1D9FCEC2002354B3 /* Story.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Story.swift; path = Model/Story.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		00DD9D161D98F5D3006489BE /* simple-snapchat */ = {
 			isa = PBXGroup;
 			children = (
+				00513ED71DAA27C30097D967 /* SendToController.swift */,
 				004B00C51D9D0DF100C1C6E5 /* BottomView */,
 				79E7CFFB1D9EBFF200F081E2 /* Helpers */,
 				79E7CFF61D9CE93B00F081E2 /* View */,
@@ -479,6 +482,7 @@
 				0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */,
 				798136471D9BCFD50074ED25 /* Message.swift in Sources */,
 				D4E2313E1DA4722D008B7FC4 /* photoModel.xcdatamodeld in Sources */,
+				00513ED81DAA27C30097D967 /* SendToController.swift in Sources */,
 				006170131DA22118002354B3 /* StoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
