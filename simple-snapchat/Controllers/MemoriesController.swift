@@ -97,8 +97,15 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
     }()
     
     func handleSend() {
-        if let selectedPhotos = cameraRollView?.indexPathsForSelectedItems, let uid = FIRAuth.auth()?.currentUser?.uid {
+        if let selectedPhotos = cameraRollView?.indexPathsForSelectedItems{
             let sendToController = SendToController()
+            
+            for i in 0..<selectedPhotos.count {
+                let cell = cameraRollView?.cellForItem(at: selectedPhotos[i]) as! PhotoCell
+                sendToController.images.append(cell.imageView.image!)
+            }
+            self.handleSelectImage()
+            self.didClickSelectButton = true
             let navController = UINavigationController(rootViewController: sendToController)
             present(navController, animated: true, completion: nil)
             
