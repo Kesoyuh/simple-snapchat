@@ -185,6 +185,13 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         let emoView = UIImageView()
         emoView.image = UIImage(named: "chat_emo")
         containerView.addSubview(emoView)
+        
+        //Integrate Google Map
+        let mapTap = UITapGestureRecognizer(target: self, action: #selector(openGoogleMap))
+        emoView.addGestureRecognizer(mapTap)
+        emoView.isUserInteractionEnabled = true
+        
+        
         emoView.translatesAutoresizingMaskIntoConstraints = false
         emoView.widthAnchor.constraint(equalToConstant: 30).isActive = true
         emoView.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -489,6 +496,13 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
             
             })
         }
+    }
+    
+    func openGoogleMap(){
+        print("tap emo!!!!!!!!!!!")
+        let mapController = MapViewController()
+        present(mapController, animated: true, completion: nil)
+    
     }
 }
 
