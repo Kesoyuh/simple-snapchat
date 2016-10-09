@@ -48,40 +48,44 @@ class AddUsernameTableViewController: UITableViewController {
                     let user = User()
                     user.setValuesForKeys(dictionary)
                     user.id = snapshot.key
-        
-                    let friendRef = FIRDatabase.database().reference().child("friendship").child(myID)
-                    friendRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                        print(snapshot.value)
-                        if let dictionary = snapshot.value as? [String : AnyObject]{
-                            for(key,value) in dictionary {
-                                if value as? Int == 2 {
-                                    if user.id != myID && user.id != key{
-                                        if !self.allusers.contains(user){
-                                            self.allusers.append(user)
-                                        }
-                                        }
+                    
+                    if user.id != myID {
+                         let friendRef = FIRDatabase.database().reference().child("friendship").child(myID)
+                        friendRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                            
+                            if let dictionary = snapshot.value as? [String : AnyObject]{
+                                //Check if the user has already been my friend
+                                var canAdd : Bool
+                                canAdd = true
+                                
+                                for(key,value) in dictionary {
+                                    if value as? Int == 2  && user.id == key{
+                                        canAdd = false
+                                    }
+                                }
+                                if canAdd && !self.allusers.contains(user) {
+                                    self.allusers.append(user)
+                                }
+                            }else{
+                                
+                            // Have no friend ship yet, can add all users.
+                                if !self.allusers.contains(user){
+                                    self.allusers.append(user)
                                 }
                             }
-                        }else{
-                            if user.id != myID {
-                                self.allusers.append(user)}
-                        
-                        }
-                        
-                        DispatchQueue.global().async {
                             
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
+                            DispatchQueue.global().async {
+                                
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
                             }
-                        }
-                        
-                    })
-   
-                }
-                }, withCancel: nil)
 
+                         })
+                    }
+                }
+            })
         }
-        
         
     }
 
