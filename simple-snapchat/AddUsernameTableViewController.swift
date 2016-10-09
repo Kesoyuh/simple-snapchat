@@ -45,21 +45,23 @@ class AddUsernameTableViewController: UITableViewController {
         if let myID = FIRAuth.auth()?.currentUser?.uid{
             FIRDatabase.database().reference().child("users").observe(.childAdded, with: {(snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject]{
+                   // print(dictionary)
                     let user = User()
                     user.setValuesForKeys(dictionary)
                     user.id = snapshot.key
-                    
-                    let myID = FIRAuth.auth()?.currentUser?.uid
-                    let friendRef = FIRDatabase.database().reference().child("friendship").child(myID!)
+        
+                    let friendRef = FIRDatabase.database().reference().child("friendship").child(myID)
                     friendRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                        //                    print(snapshot.value)
+                        print(snapshot.value)
                         if let dictionary = snapshot.value as? [String : AnyObject]{
                             for(key,value) in dictionary {
                                 if value as? Int == 2 {
-                                    if user.id != myID! && user.id != key{
-                                        
-                                        self.allusers.append(user)}
-                                    print(user.name)
+                                    if user.id != myID && user.id != key{
+                                        if !self.allusers.contains(user){
+                                            self.allusers.append(user)
+                                        }
+                                        }
+                                   // print(user.name)
                                     
                                     
                                     DispatchQueue.global().async {
