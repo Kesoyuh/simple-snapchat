@@ -16,11 +16,6 @@ class AddFriendsTableViewController: UITableViewController,MFMessageComposeViewC
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,6 +49,8 @@ class AddFriendsTableViewController: UITableViewController,MFMessageComposeViewC
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 1 {
         // Add by Snapcode
+            let scanner = QRReaderControllerViewController()
+            present(scanner, animated: true, completion: nil)
             
         }else if indexPath.row == 2{
         sendSMSText()
@@ -92,6 +89,7 @@ class AddFriendsTableViewController: UITableViewController,MFMessageComposeViewC
         //... handle sms screen actions
         self.dismiss(animated: true, completion: nil)
     }
+    
     
 
     /*

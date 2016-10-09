@@ -37,6 +37,7 @@
 		00DD9D2C1D98FA75006489BE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DD9D2B1D98FA75006489BE /* Bolts.framework */; };
 		00DD9D2E1D98FA9C006489BE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DD9D2D1D98FA9C006489BE /* Parse.framework */; };
 		791F308B1DAA5B1A00001D90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 791F308A1DAA5B1A00001D90 /* GoogleService-Info.plist */; };
+		791F308D1DAA722400001D90 /* QRReaderControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */; };
 		798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136311D9928670074ED25 /* ChatListTableViewController.swift */; };
 		798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136331D992DA10074ED25 /* NewChatTableViewController.swift */; };
 		798136361D9977010074ED25 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136351D9977000074ED25 /* ChatLogController.swift */; };
@@ -93,6 +94,7 @@
 		00DD9D2B1D98FA75006489BE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "simple-snapchat/Bolts.framework"; sourceTree = "<group>"; };
 		00DD9D2D1D98FA9C006489BE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "simple-snapchat/Parse.framework"; sourceTree = "<group>"; };
 		791F308A1DAA5B1A00001D90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QRReaderControllerViewController.swift; path = Controllers/QRReaderControllerViewController.swift; sourceTree = "<group>"; };
 		798136311D9928670074ED25 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListTableViewController.swift; path = Controllers/ChatListTableViewController.swift; sourceTree = "<group>"; };
 		798136331D992DA10074ED25 /* NewChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewChatTableViewController.swift; path = Controllers/NewChatTableViewController.swift; sourceTree = "<group>"; };
 		798136351D9977000074ED25 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLogController.swift; path = Controllers/ChatLogController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				E55B253D1DA3D8C9005E5626 /* AddedMeTableViewController.swift */,
 				E55B253F1DA3DF20005E5626 /* AddFriendsTableViewController.swift */,
 				E563EC221DA495EF00EA97F9 /* AddUsernameTableViewController.swift */,
+				791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */,
 			);
 			name = TopView;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				798136471D9BCFD50074ED25 /* Message.swift in Sources */,
 				D4E2313E1DA4722D008B7FC4 /* photoModel.xcdatamodeld in Sources */,
 				006170131DA22118002354B3 /* StoryCell.swift in Sources */,
+				791F308D1DAA722400001D90 /* QRReaderControllerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
