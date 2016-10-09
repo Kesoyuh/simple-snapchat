@@ -15,6 +15,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(closeMap))
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.isMyLocationEnabled = true
@@ -26,6 +27,19 @@ class MapViewController: UIViewController {
         marker.title = "Sydney"
         marker.snippet = "Australia"
         marker.map = mapView
+//        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+//        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+//        mapView.isMyLocationEnabled = true
+//        if let mylocation = mapView.myLocation {
+//            print("User's location: \(mylocation)")
+//            
+//            
+//        } else {
+//            print("User's location is unknown")
+//        }
+        
+       
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +47,9 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func closeMap(){
+    self.dismiss(animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

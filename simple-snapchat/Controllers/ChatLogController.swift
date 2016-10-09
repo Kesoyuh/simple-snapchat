@@ -501,7 +501,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
     func openGoogleMap(){
         print("tap emo!!!!!!!!!!!")
         let mapController = MapViewController()
-        present(mapController, animated: true, completion: nil)
+        let navController = UINavigationController(rootViewController: mapController)
+        present(navController, animated:true, completion:nil)
+
     
     }
 }
