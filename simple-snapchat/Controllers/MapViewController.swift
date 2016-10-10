@@ -12,10 +12,33 @@ import GoogleMaps
 
 class MapViewController: UIViewController {
 
+    let getCurrentLocationBtn : UIButton = {
+        let btn = UIButton()
+        btn.titleLabel?.text = "My Location"
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }()
+    
+    lazy var buttonsContainerView : UIView = {
+        let containerView = UIView()
+        containerView.frame = CGRect(x:0, y:0, width: self.view.frame.width, height: 80)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.backgroundColor = UIColor.black
+        
+        //Add get current location button
+        containerView.addSubview(self.getCurrentLocationBtn)
+        self.getCurrentLocationBtn.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        self.getCurrentLocationBtn.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
+ 
+        return containerView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(closeMap))
+        self.view.addSubview(buttonsContainerView)
+        buttonsContainerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.isMyLocationEnabled = true
@@ -27,17 +50,7 @@ class MapViewController: UIViewController {
         marker.title = "Sydney"
         marker.snippet = "Australia"
         marker.map = mapView
-//        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-//        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-//        mapView.isMyLocationEnabled = true
-//        if let mylocation = mapView.myLocation {
-//            print("User's location: \(mylocation)")
-//            
-//            
-//        } else {
-//            print("User's location is unknown")
-//        }
-        
+
        
         
     }

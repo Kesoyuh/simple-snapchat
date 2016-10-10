@@ -81,11 +81,8 @@ class AddedMeTableViewController: UITableViewController {
 
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
-    
-    
-    
     
     
     

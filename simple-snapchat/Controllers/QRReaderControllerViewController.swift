@@ -16,7 +16,8 @@ class QRReaderControllerViewController: UIViewController , AVCaptureMetadataOutp
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(closeScanner))
+
         view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
         
@@ -61,6 +62,10 @@ class QRReaderControllerViewController: UIViewController , AVCaptureMetadataOutp
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
         captureSession = nil
+    }
+    
+    func closeScanner(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

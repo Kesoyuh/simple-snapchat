@@ -26,7 +26,7 @@ class AddFriendsTableViewController: UITableViewController,MFMessageComposeViewC
    
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -49,8 +49,10 @@ class AddFriendsTableViewController: UITableViewController,MFMessageComposeViewC
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 1 {
         // Add by Snapcode
+            
             let scanner = QRReaderControllerViewController()
-            present(scanner, animated: true, completion: nil)
+            let navCOntroller = UINavigationController(rootViewController: scanner)
+            present(navCOntroller,animated:true,completion: nil)
             
         }else if indexPath.row == 2{
         sendSMSText()
@@ -90,7 +92,9 @@ class AddFriendsTableViewController: UITableViewController,MFMessageComposeViewC
         self.dismiss(animated: true, completion: nil)
     }
     
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
