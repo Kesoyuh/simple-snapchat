@@ -47,10 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         // Initialize Firebase
         FIRApp.configure()
-        GMSServices.provideAPIKey("AIzaSyBFEINYsquFpgkSWy6UE-2ItWpc5lAOK-I")
-        GMSPlacesClient.provideAPIKey("AIzaSyBFEINYsquFpgkSWy6UE-2ItWpc5lAOK-I")
-        //Google map
         
+//        //Google map
+//        GMSServices.provideAPIKey("AIzaSyBFEINYsquFpgkSWy6UE-2ItWpc5lAOK-I")
+//        GMSPlacesClient.provideAPIKey("AIzaSyBFEINYsquFpgkSWy6UE-2ItWpc5lAOK-I")
+
         return true
     }
     func applicationWillResignActive(_ application: UIApplication) {

@@ -7,61 +7,75 @@
 //
 
 import UIKit
-import GoogleMaps
+import CoreLocation
+import MapKit
 
 
-class MapViewController: UIViewController {
-
-    let getCurrentLocationBtn : UIButton = {
+class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapViewDelegate{
+    
+    let locationManager = CLLocationManager()
+    var mapView = MKMapView()
+    
+    lazy var getCurrentLocationBtn : UIButton = {
         let btn = UIButton()
-        btn.titleLabel?.text = "My Location"
+        btn.setTitle("My Location", for: .normal)
+        btn.backgroundColor = UIColor.white
+        btn.alpha = 0.7
+        btn.layer.cornerRadius = CGFloat(10.0)
+        btn.setTitleColor(UIColor.darkGray, for: UIControlState())
         btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return btn
     }()
     
-    lazy var buttonsContainerView : UIView = {
-        let containerView = UIView()
-        containerView.frame = CGRect(x:0, y:0, width: self.view.frame.width, height: 80)
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.backgroundColor = UIColor.black
-        
-        //Add get current location button
-        containerView.addSubview(self.getCurrentLocationBtn)
-        self.getCurrentLocationBtn.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        self.getCurrentLocationBtn.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
- 
-        return containerView
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
+       override func viewDidLoad() {
+        super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(closeMap))
-        self.view.addSubview(buttonsContainerView)
-        buttonsContainerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        mapView.isMyLocationEnabled = true
         view = mapView
         
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
-        marker.map = mapView
-
-       
+        // Add get my location button
+        mapView.addSubview(getCurrentLocationBtn)
+        self.getCurrentLocationBtn.rightAnchor.constraint(equalTo: mapView.rightAnchor,constant: -12).isActive = true
+        self.getCurrentLocationBtn.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -8).isActive = true
+        self.getCurrentLocationBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        self.getCurrentLocationBtn.widthAnchor.constraint(equalToConstant: 110).isActive = true
+        view = mapView
         
+       
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled(){
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+            mapView.showsUserLocation = true
+        }
+        
+  
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Errors: ", error.localizedDescription)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last
+        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+        
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta:1, longitudeDelta: 1))
+        self.mapView.setRegion(region, animated: true)
+        self.locationManager.stopUpdatingLocation()
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     func closeMap(){
-    self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation
@@ -72,5 +86,12 @@ class MapViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func buttonTapped(){
+    
+    
+    }
 
 }
+
+

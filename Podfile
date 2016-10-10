@@ -10,9 +10,4 @@ target 'simple-snapchat' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
 
-  #Pods for Google Map
-  pod 'GooglePlaces'
-  pod 'GooglePlacePicker'
-  pod 'GoogleMaps’
-
 end
