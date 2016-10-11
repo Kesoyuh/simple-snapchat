@@ -29,6 +29,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         self.SaveImage()
     }
     
+    @IBAction func Sendtotest(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "haha", sender: self)
+    }
     @IBAction func enable_draw(_ sender: UIButton) {
         
         if enabledrawing == true {
@@ -158,14 +161,12 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     
     func SaveImage(){
         let saveQueue = DispatchQueue(label: "saveQueue",attributes: .concurrent)
-        
         saveQueue.async {
             let image : UIImage! = self.ImageEdit.image
             let imageData = UIImageJPEGRepresentation(image, 1)
             let contextManaged = self.getContext()
-            let a = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: contextManaged)
-            a.setPrimitiveValue(NSNumber(value:self.pictureid), forKey: "photo_id")
-            a.setValue(imageData, forKey: "photo_data")
+            let a = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: contextManaged) as! Photo
+            //a.photo_data = imageData as NSData?
             do {
                 try contextManaged.save()
             } catch{
@@ -204,6 +205,13 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
             
         }
         return context!
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "haha"{
+            let testfetch = segue.destination as! Testcontroller
+            
+            //previewController.capturedPhoto = self.ImageCaptured
+        }
     }
     
 
