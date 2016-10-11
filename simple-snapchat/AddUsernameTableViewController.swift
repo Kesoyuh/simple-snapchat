@@ -34,7 +34,7 @@ class AddUsernameTableViewController: UITableViewController {
             return (allusers.name?.localizedLowercase.contains(searchText.localizedLowercase))!
         })
         filterUsers.forEach { (user) in
-            print(user.name)
+            print(user.name!)
         }
         tableView.reloadData()
     }
@@ -49,37 +49,43 @@ class AddUsernameTableViewController: UITableViewController {
                     user.setValuesForKeys(dictionary)
                     user.id = snapshot.key
                     
-                    let myID = FIRAuth.auth()?.currentUser?.uid
-                    let friendRef = FIRDatabase.database().reference().child("friendship").child(myID!)
-                    friendRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                        //                    print(snapshot.value)
-                        if let dictionary = snapshot.value as? [String : AnyObject]{
-                            for(key,value) in dictionary {
-                                if value as? Int == 2 {
-                                    if user.id != myID! && user.id != key{
-                                        
-                                        self.allusers.append(user)}
-                                    print(user.name)
-                                    
-                                    
-                                    DispatchQueue.global().async {
-                                        
-                                        DispatchQueue.main.async {
-                                            self.tableView.reloadData()
-                                        }
+                    if user.id != myID {
+                         let friendRef = FIRDatabase.database().reference().child("friendship").child(myID)
+                        friendRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                            
+                            if let dictionary = snapshot.value as? [String : AnyObject]{
+                                //Check if the user has already been my friend
+                                var canAdd : Bool
+                                canAdd = true
+                                
+                                for(key,value) in dictionary {
+                                    if value as? Int == 2  && user.id == key{
+                                        canAdd = false
                                     }
-                                    
+                                }
+                                if canAdd && !self.allusers.contains(user) {
+                                    self.allusers.append(user)
+                                }
+                            }else{
+                                
+                            // Have no friend ship yet, can add all users.
+                                if !self.allusers.contains(user){
+                                    self.allusers.append(user)
                                 }
                             }
-                        }
-                        
-                    })
-   
-                }
-                }, withCancel: nil)
+                            
+                            DispatchQueue.global().async {
+                                
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
+                            }
 
+                         })
+                    }
+                }
+            })
         }
-        
         
     }
 
@@ -90,7 +96,7 @@ class AddUsernameTableViewController: UITableViewController {
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
 

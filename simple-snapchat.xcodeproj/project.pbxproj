@@ -37,6 +37,9 @@
 		00DD9D221D98F5D3006489BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DD9D201D98F5D3006489BE /* LaunchScreen.storyboard */; };
 		00DD9D2C1D98FA75006489BE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DD9D2B1D98FA75006489BE /* Bolts.framework */; };
 		00DD9D2E1D98FA9C006489BE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DD9D2D1D98FA9C006489BE /* Parse.framework */; };
+		791F308B1DAA5B1A00001D90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 791F308A1DAA5B1A00001D90 /* GoogleService-Info.plist */; };
+		791F308D1DAA722400001D90 /* QRReaderControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */; };
+		791F30911DAA8CFB00001D90 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F30901DAA8CFB00001D90 /* MapViewController.swift */; };
 		798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136311D9928670074ED25 /* ChatListTableViewController.swift */; };
 		798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136331D992DA10074ED25 /* NewChatTableViewController.swift */; };
 		798136361D9977010074ED25 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136351D9977000074ED25 /* ChatLogController.swift */; };
@@ -53,7 +56,6 @@
 		D4E231381DA470F5008B7FC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E231371DA470F5008B7FC4 /* CoreData.framework */; };
 		D4E2313E1DA4722D008B7FC4 /* photoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D4E2313C1DA4722D008B7FC4 /* photoModel.xcdatamodeld */; };
 		D4F528341D9D64F200781F78 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F528331D9D64F200781F78 /* PreviewController.swift */; };
-		E50C4A071DA5247A009F4656 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E50C4A061DA5247A009F4656 /* GoogleService-Info.plist */; };
 		E55B253E1DA3D8C9005E5626 /* AddedMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55B253D1DA3D8C9005E5626 /* AddedMeTableViewController.swift */; };
 		E55B25401DA3DF20005E5626 /* AddFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55B253F1DA3DF20005E5626 /* AddFriendsTableViewController.swift */; };
 		E563EC231DA495EF00EA97F9 /* AddUsernameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E563EC221DA495EF00EA97F9 /* AddUsernameTableViewController.swift */; };
@@ -95,6 +97,9 @@
 		00DD9D231D98F5D3006489BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00DD9D2B1D98FA75006489BE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "simple-snapchat/Bolts.framework"; sourceTree = "<group>"; };
 		00DD9D2D1D98FA9C006489BE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "simple-snapchat/Parse.framework"; sourceTree = "<group>"; };
+		791F308A1DAA5B1A00001D90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QRReaderControllerViewController.swift; path = Controllers/QRReaderControllerViewController.swift; sourceTree = "<group>"; };
+		791F30901DAA8CFB00001D90 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Controllers/MapViewController.swift; sourceTree = "<group>"; };
 		798136311D9928670074ED25 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListTableViewController.swift; path = Controllers/ChatListTableViewController.swift; sourceTree = "<group>"; };
 		798136331D992DA10074ED25 /* NewChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewChatTableViewController.swift; path = Controllers/NewChatTableViewController.swift; sourceTree = "<group>"; };
 		798136351D9977000074ED25 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLogController.swift; path = Controllers/ChatLogController.swift; sourceTree = "<group>"; };
@@ -112,7 +117,6 @@
 		D4E231371DA470F5008B7FC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D4E2313D1DA4722D008B7FC4 /* photoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = photoModel.xcdatamodel; sourceTree = "<group>"; };
 		D4F528331D9D64F200781F78 /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
-		E50C4A061DA5247A009F4656 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E55B253D1DA3D8C9005E5626 /* AddedMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddedMeTableViewController.swift; sourceTree = "<group>"; };
 		E55B253F1DA3DF20005E5626 /* AddFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewController.swift; sourceTree = "<group>"; };
 		E563EC221DA495EF00EA97F9 /* AddUsernameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsernameTableViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 				E55B253D1DA3D8C9005E5626 /* AddedMeTableViewController.swift */,
 				E55B253F1DA3DF20005E5626 /* AddFriendsTableViewController.swift */,
 				E563EC221DA495EF00EA97F9 /* AddUsernameTableViewController.swift */,
+				791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */,
 			);
 			name = TopView;
 			sourceTree = "<group>";
@@ -250,6 +255,8 @@
 			isa = PBXGroup;
 			children = (
 				00513ED71DAA27C30097D967 /* SendToController.swift */,
+				791F308F1DAA8CE200001D90 /* GoogleMap */,
+				791F308A1DAA5B1A00001D90 /* GoogleService-Info.plist */,
 				004B00C51D9D0DF100C1C6E5 /* BottomView */,
 				79E7CFFB1D9EBFF200F081E2 /* Helpers */,
 				79E7CFF61D9CE93B00F081E2 /* View */,
@@ -266,7 +273,6 @@
 				00DD9D1E1D98F5D3006489BE /* Assets.xcassets */,
 				00DD9D201D98F5D3006489BE /* LaunchScreen.storyboard */,
 				00DD9D231D98F5D3006489BE /* Info.plist */,
-				E50C4A061DA5247A009F4656 /* GoogleService-Info.plist */,
 			);
 			path = "simple-snapchat";
 			sourceTree = "<group>";
@@ -278,6 +284,14 @@
 				FF70871258D3258057C9ED4E /* Pods-simple-snapchat.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		791F308F1DAA8CE200001D90 /* GoogleMap */ = {
+			isa = PBXGroup;
+			children = (
+				791F30901DAA8CFB00001D90 /* MapViewController.swift */,
+			);
+			name = GoogleMap;
 			sourceTree = "<group>";
 		};
 		798136301D9928560074ED25 /* Chat */ = {
@@ -393,7 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00DD9D221D98F5D3006489BE /* LaunchScreen.storyboard in Resources */,
-				E50C4A071DA5247A009F4656 /* GoogleService-Info.plist in Resources */,
+				791F308B1DAA5B1A00001D90 /* GoogleService-Info.plist in Resources */,
 				00DD9D1F1D98F5D3006489BE /* Assets.xcassets in Resources */,
 				00DD9D1D1D98F5D3006489BE /* Main.storyboard in Resources */,
 			);
@@ -488,6 +502,8 @@
 				D4E2313E1DA4722D008B7FC4 /* photoModel.xcdatamodeld in Sources */,
 				00513ED81DAA27C30097D967 /* SendToController.swift in Sources */,
 				006170131DA22118002354B3 /* StoryCell.swift in Sources */,
+				791F308D1DAA722400001D90 /* QRReaderControllerViewController.swift in Sources */,
+				791F30911DAA8CFB00001D90 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

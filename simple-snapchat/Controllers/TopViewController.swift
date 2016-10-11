@@ -11,13 +11,64 @@ import Parse
 import Firebase
 
 class TopViewController: UIViewController {
+    
 
+    
+    let QRCode: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = UIColor.black
+        return imageView
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(QRCode)
         
 
         // Do any additional setup after loading the view.
+        QRCode.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
+        QRCode.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        QRCode.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        QRCode.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        delay(2, closure: {
+        self.loadQRCode()
+        })
+        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.loadQRCode()
+    }
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+    }
+    
+    func loadQRCode(){
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        if uid != nil {
+            print("current user is ", uid)
+            if let code = generateQRCode(from: uid!){
+                DispatchQueue.global().async {
+                    DispatchQueue.main.async {
+                        self.QRCode.image = code
+                    }
+                }
+            }
+        }else {
+            
+            print("You need to login first!")
+            let loginRegisterController = LoginRegisterController()
+            present(loginRegisterController, animated: true, completion: nil)
+            
+        }
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -35,6 +86,21 @@ class TopViewController: UIViewController {
         scrollView!.contentOffset.y = view.bounds.height
         
         present(loginRegisterController, animated: true, completion: nil)
+    }
+    
+    func generateQRCode(from string: String) -> UIImage? {
+        let data = string.data(using: String.Encoding.ascii)
+        
+        if let filter = CIFilter(name: "CIQRCodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
+            
+            if let output = filter.outputImage?.applying(transform) {
+                return UIImage(ciImage: output)
+            }
+        }
+        
+        return nil
     }
     
     

@@ -7,17 +7,15 @@
 //
 
 import UIKit
+import Firebase
+import MessageUI
+import Messages
 
-class AddFriendsTableViewController: UITableViewController {
+class AddFriendsTableViewController: UITableViewController,MFMessageComposeViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,7 +26,7 @@ class AddFriendsTableViewController: UITableViewController {
    
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -46,6 +44,56 @@ class AddFriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 3
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 1 {
+        // Add by Snapcode
+            
+            let scanner = QRReaderControllerViewController()
+            let navCOntroller = UINavigationController(rootViewController: scanner)
+            present(navCOntroller,animated:true,completion: nil)
+            
+        }else if indexPath.row == 2{
+        sendSMSText()
+        }
+    }
+    
+    
+    func sendSMSText() {
+        if let uid = FIRAuth.auth()?.currentUser?.uid{
+            let userRef = FIRDatabase.database().reference().child("users").child(uid)
+            userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                    let username = dictionary["name"] as! String
+                    //print("My user name is :", username)
+                    if (MFMessageComposeViewController.canSendText()) {
+                        let controller = MFMessageComposeViewController()
+                        controller.body = " Add my username and chat with me in TCP Chat: " + username
+                        controller.recipients = []
+                        controller.messageComposeDelegate = self
+                        self.present(controller, animated: true, completion: {
+                            print("send text finished")
+                        })
+                    }else{
+                        print("SMS services are not available!")
+                    }
+                    
+                }
+                
+            })
+        }
+        
+    }
+    
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        //... handle sms screen actions
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
     }
 
     /*

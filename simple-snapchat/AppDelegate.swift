@@ -7,10 +7,11 @@
 //
 
 import UIKit
-//import Parse
 import Bolts
 import Firebase
 import CoreData
+import GooglePlaces
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -46,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         // Initialize Firebase
         FIRApp.configure()
+        
+//        //Google map
+//        GMSServices.provideAPIKey("AIzaSyBFEINYsquFpgkSWy6UE-2ItWpc5lAOK-I")
+//        GMSPlacesClient.provideAPIKey("AIzaSyBFEINYsquFpgkSWy6UE-2ItWpc5lAOK-I")
 
         return true
     }
