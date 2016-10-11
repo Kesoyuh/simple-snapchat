@@ -148,15 +148,10 @@ class SendToController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 print(error)
                                 return
                             }
-                            
-                            
                         })
                     }
-                    
                 }
-                
             })
-            
         }
     }
     

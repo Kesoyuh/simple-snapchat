@@ -1,19 +1,17 @@
 //
-//  CamerollRollCell.swift
+//  SnapsController.swift
 //  simple-snapchat
 //
-//  Created by Jeffrey on 5/10/16.
+//  Created by Jeffrey on 29/9/16.
 //  Copyright © 2016 University of Melbourne. All rights reserved.
 //
 
 import UIKit
-import Photos
+import CoreData
 
+class SnapsCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-
-class CamerollRollCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    let cellId = "cellCameraRoll"
+    let cellId = "cellSnap"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,40 +42,55 @@ class CamerollRollCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
         
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.allowsSelection = false
-        grabPhotos()
+        grabSnaps()
     }
-    
     var imgArray = [UIImage]()
     
-    
-    func grabPhotos() {
-        let imgManager = PHImageManager.default()
-        
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        requestOptions.deliveryMode = .highQualityFormat
-        
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
-        let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-        
-        if fetchResult.count > 0 {
-            
-            for i in 0..<fetchResult.count {
-                
-                imgManager.requestImage(for: fetchResult.object(at: i), targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: requestOptions, resultHandler: { (image, error) in
-                    self.imgArray.append(image!)
-                })
+    func grabSnaps() {
+        imgArray.removeAll()
+        let context = getContext()
+        let fetchRequest: NSFetchRequest = Photo.fetchRequest()
+        do {
+            let results = try context.fetch(fetchRequest)
+            for snap in results {
+                if let image: UIImage = UIImage(data: snap.photo_data as! Data , scale: 1) {
+                    self.imgArray.append(image)
+                }
             }
             
-        } else {
-            print("No photos in your library")
         }
-        
+        catch let error as NSError{
+            print("could not fetch \(error)")
+        }
     }
-    
-    
+
+    func getContext() -> NSManagedObjectContext {
+        var context: NSManagedObjectContext?
+        
+        if #available(iOS 10.0, *) {
+            context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        } else {
+            // iOS 9.0 and below - however you were previously handling it
+            guard let modelURL = Bundle.main.url(forResource: "Model", withExtension:"momd") else {
+                fatalError("Error loading model from bundle")
+            }
+            guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+                fatalError("Error initializing mom from: \(modelURL)")
+            }
+            let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
+            context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docURL = urls[urls.endIndex-1]
+            let storeURL = docURL.appendingPathComponent("Model.sqlite")
+            do {
+                try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+            } catch {
+                fatalError("Error migrating store: \(error)")
+            }
+            
+        }
+        return context!
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imgArray.count
@@ -86,7 +99,7 @@ class CamerollRollCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PhotoCell
         cell.imageView.image = imgArray[indexPath.row]
-            return cell
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -110,4 +123,7 @@ class CamerollRollCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
         let selectedCell = collectionView.cellForItem(at: indexPath) as? PhotoCell
         selectedCell?.imageView.alpha = 1
     }
+
+    
+
 }
