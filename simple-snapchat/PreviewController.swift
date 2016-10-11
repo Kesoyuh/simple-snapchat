@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewDelegate {
     
@@ -27,6 +28,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     
     @IBAction func SaveButton(_ sender: UIButton) {
         self.SaveImage()
+        saveToFirebase()
     }
     
     @IBAction func Sendtotest(_ sender: UIButton) {
@@ -72,7 +74,48 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         
 
     }
-    
+    func saveToFirebase() {
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        var username = String()
+        
+        // Create story reference
+        let snapsRef = FIRDatabase.database().reference().child("snaps")
+        FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                
+                username = dictionary["name"] as! String
+            }
+        })
+        
+        let imageName = NSUUID().uuidString
+        let storageRef = FIRStorage.storage().reference().child("snaps").child(imageName)
+        let image = ImageEdit.image!
+        let uploadData = UIImagePNGRepresentation(image)
+        
+        storageRef.put(uploadData!, metadata: nil, completion: { (metaData, error) in
+            
+            if error != nil {
+                print(error)
+                return
+            } else {
+            
+                // update database after successfully uploaded
+                let snapRef = snapsRef.childByAutoId()
+                if let imageURL = metaData?.downloadURL()?.absoluteString {
+                    snapRef.updateChildValues(["userID": uid!, "username": username, "imageURL": imageURL, "timer": self.pic_duaration], withCompletionBlock: {(error, ref) in
+                        if error != nil {
+                            print(error)
+                            return
+                        }
+                        
+                        
+                    })
+                }
+                
+            }
+            
+        })
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -173,7 +216,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
             } catch{
                 
             }
-            print(a.value(forKey: "photo_id"))
+            //print(a.value(forKey: "photo_id"))
         }
         self.pictureid += 1
         self.save.isHidden = true
