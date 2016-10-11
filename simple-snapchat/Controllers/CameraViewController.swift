@@ -40,7 +40,7 @@ class CameraViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        //loadCamera()
+        loadCamera()
         
     }
     

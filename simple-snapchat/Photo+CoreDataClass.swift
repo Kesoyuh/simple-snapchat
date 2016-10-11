@@ -2,7 +2,7 @@
 //  Photo+CoreDataClass.swift
 //  simple-snapchat
 //
-//  Created by Boqin Hu on 5/10/16.
+//  Created by Boqin Hu on 10/10/16.
 //  Copyright © 2016 University of Melbourne. All rights reserved.
 //
 

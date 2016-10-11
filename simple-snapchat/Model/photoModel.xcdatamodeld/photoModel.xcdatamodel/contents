@@ -2,24 +2,9 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Photo" representedClassName=".Photo" syncable="YES">
         <attribute name="photo_data" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="photo_duration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="photo_id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
-        <attribute name="photo_url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="included" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoLibrary" inverseName="include" inverseEntity="PhotoLibrary" syncable="YES"/>
-    </entity>
-    <entity name="PhotoLibrary" representedClassName=".PhotoLibrary" syncable="YES">
         <attribute name="photo_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="belongs" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Snap_user" inverseName="has" inverseEntity="Snap_user" syncable="YES"/>
-        <relationship name="include" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="included" inverseEntity="Photo" syncable="YES"/>
-    </entity>
-    <entity name="Snap_user" representedClassName=".User" syncable="YES">
-        <attribute name="user_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="has" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoLibrary" inverseName="belongs" inverseEntity="PhotoLibrary" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Snap_user" positionX="-81" positionY="-108" width="128" height="58"/>
-        <element name="Photo" positionX="27" positionY="243" width="128" height="118"/>
-        <element name="PhotoLibrary" positionX="216" positionY="18" width="128" height="88"/>
+        <element name="Photo" positionX="-63" positionY="-18" width="128" height="75"/>
     </elements>
 </model>
