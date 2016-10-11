@@ -30,7 +30,10 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     }
     
     @IBAction func Sendtotest(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "haha", sender: self)
+        let sendtocontroller = SendToController()
+        sendtocontroller.images.append(self.ImageEdit.image!)
+        let navController = UINavigationController(rootViewController: sendtocontroller)
+        present(navController, animated: true, completion: nil)
     }
     @IBAction func enable_draw(_ sender: UIButton) {
         
@@ -207,13 +210,13 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         }
         return context!
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "haha"{
-            let testfetch = segue.destination as! Testcontroller
-            
-            //previewController.capturedPhoto = self.ImageCaptured
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "haha"{
+//            let testfetch = segue.destination as! Testcontroller
+//            
+//            //previewController.capturedPhoto = self.ImageCaptured
+//        }
+//    }
     
 
 }

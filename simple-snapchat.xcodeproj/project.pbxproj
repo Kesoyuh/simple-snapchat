@@ -636,7 +636,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat0716";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -657,7 +657,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat0716";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
