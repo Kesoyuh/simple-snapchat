@@ -37,7 +37,7 @@
 		00DD9D221D98F5D3006489BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DD9D201D98F5D3006489BE /* LaunchScreen.storyboard */; };
 		00DD9D2C1D98FA75006489BE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DD9D2B1D98FA75006489BE /* Bolts.framework */; };
 		00DD9D2E1D98FA9C006489BE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DD9D2D1D98FA9C006489BE /* Parse.framework */; };
-		791F308B1DAA5B1A00001D90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 791F308A1DAA5B1A00001D90 /* GoogleService-Info.plist */; };
+		00E2E8D71DAC997E0080CF24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00E2E8D61DAC997E0080CF24 /* GoogleService-Info.plist */; };
 		791F308D1DAA722400001D90 /* QRReaderControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */; };
 		791F30911DAA8CFB00001D90 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F30901DAA8CFB00001D90 /* MapViewController.swift */; };
 		798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136311D9928670074ED25 /* ChatListTableViewController.swift */; };
@@ -97,7 +97,7 @@
 		00DD9D231D98F5D3006489BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00DD9D2B1D98FA75006489BE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "simple-snapchat/Bolts.framework"; sourceTree = "<group>"; };
 		00DD9D2D1D98FA9C006489BE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "simple-snapchat/Parse.framework"; sourceTree = "<group>"; };
-		791F308A1DAA5B1A00001D90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		00E2E8D61DAC997E0080CF24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QRReaderControllerViewController.swift; path = Controllers/QRReaderControllerViewController.swift; sourceTree = "<group>"; };
 		791F30901DAA8CFB00001D90 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Controllers/MapViewController.swift; sourceTree = "<group>"; };
 		798136311D9928670074ED25 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListTableViewController.swift; path = Controllers/ChatListTableViewController.swift; sourceTree = "<group>"; };
@@ -256,7 +256,6 @@
 			children = (
 				00513ED71DAA27C30097D967 /* SendToController.swift */,
 				791F308F1DAA8CE200001D90 /* GoogleMap */,
-				791F308A1DAA5B1A00001D90 /* GoogleService-Info.plist */,
 				004B00C51D9D0DF100C1C6E5 /* BottomView */,
 				79E7CFFB1D9EBFF200F081E2 /* Helpers */,
 				79E7CFF61D9CE93B00F081E2 /* View */,
@@ -273,6 +272,7 @@
 				00DD9D1E1D98F5D3006489BE /* Assets.xcassets */,
 				00DD9D201D98F5D3006489BE /* LaunchScreen.storyboard */,
 				00DD9D231D98F5D3006489BE /* Info.plist */,
+				00E2E8D61DAC997E0080CF24 /* GoogleService-Info.plist */,
 			);
 			path = "simple-snapchat";
 			sourceTree = "<group>";
@@ -407,7 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00DD9D221D98F5D3006489BE /* LaunchScreen.storyboard in Resources */,
-				791F308B1DAA5B1A00001D90 /* GoogleService-Info.plist in Resources */,
+				00E2E8D71DAC997E0080CF24 /* GoogleService-Info.plist in Resources */,
 				00DD9D1F1D98F5D3006489BE /* Assets.xcassets in Resources */,
 				00DD9D1D1D98F5D3006489BE /* Main.storyboard in Resources */,
 			);

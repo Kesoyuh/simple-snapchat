@@ -73,6 +73,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
 
     }
     
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

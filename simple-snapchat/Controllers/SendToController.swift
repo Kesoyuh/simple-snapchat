@@ -56,6 +56,7 @@ class SendToController: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableView.register(SendToCell.self, forCellReuseIdentifier: cellId)
         tableView.allowsMultipleSelectionDuringEditing = true
         tableView.setEditing(true, animated: false)
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
 
