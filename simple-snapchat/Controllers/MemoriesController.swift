@@ -18,6 +18,7 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
     
     var cameraRollView: UICollectionView?
     var snapsView: UICollectionView?
+    var snapsCell: SnapsCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +48,18 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
         setupMenuBar()
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        snapsCell?.grabSnaps()
+        snapsCell?.collectionView.reloadData()
+    }
     
     func setupMemoriesView() {
         collectionView?.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(40, 0, 0, 0)
         
         
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: snapsCellId)
+        collectionView?.register(SnapsCell.self, forCellWithReuseIdentifier: snapsCellId)
         collectionView?.register(CamerollRollCell.self, forCellWithReuseIdentifier: cameraRollCellId)
         collectionView?.isPagingEnabled = true
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -222,7 +228,9 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: snapsCellId, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: snapsCellId, for: indexPath) as! SnapsCell
+            snapsView = cell.collectionView
+            snapsCell = cell
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cameraRollCellId, for: indexPath) as! CamerollRollCell
