@@ -163,10 +163,10 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         let saveQueue = DispatchQueue(label: "saveQueue",attributes: .concurrent)
         saveQueue.async {
             let image : UIImage! = self.ImageEdit.image
-            let imageData = UIImageJPEGRepresentation(image, 1)
+            let imageData = UIImageJPEGRepresentation(image, 0.1)
             let contextManaged = self.getContext()
             let a = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: contextManaged) as! Photo
-            //a.photo_data = imageData as NSData?
+            a.photo_data = imageData as NSData?
             do {
                 try contextManaged.save()
             } catch{

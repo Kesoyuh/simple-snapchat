@@ -21,7 +21,6 @@ class CameraViewController : UIViewController {
     var captureDeviceInputBack:AVCaptureDeviceInput!
     var captureDeviceInputFront:AVCaptureDeviceInput!
     var stillImageOutput:AVCaptureStillImageOutput!
-    
     var cameraFacingback: Bool = true
     var ImageCaptured: UIImage!
     var cameraState:Bool = true
@@ -159,7 +158,11 @@ class CameraViewController : UIViewController {
         cameraFacingback = !cameraFacingback
         if cameraFacingback {
             displayBackCamera()
+            self.FlipCamera.setImage(UIImage(named:"Camera flip"), for: UIControlState.normal)
+            
         } else {
+            
+            self.FlipCamera.setImage(UIImage(named:"Camera_flip_self"), for: UIControlState.normal)
             displayFrontCamera()
         }
     }
