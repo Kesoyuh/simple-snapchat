@@ -166,7 +166,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
             let imageData = UIImageJPEGRepresentation(image, 1)
             let contextManaged = self.getContext()
             let a = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: contextManaged) as! Photo
-            //a.photo_data = imageData as NSData?
+            a.photo_data = imageData as NSData?
             do {
                 try contextManaged.save()
             } catch{
