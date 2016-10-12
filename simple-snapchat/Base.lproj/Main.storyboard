@@ -467,7 +467,7 @@
                                     <constraint firstAttribute="width" constant="30" id="7C5-yZ-hbD"/>
                                     <constraint firstAttribute="height" constant="30" id="xC7-hA-ovp"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="Flash"/>
+                                <state key="normal" image="Flash_off"/>
                                 <connections>
                                     <action selector="ChangeFlash:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nzg-2Z-Dam"/>
                                 </connections>
@@ -500,6 +500,7 @@
                     <navigationItem key="navigationItem" id="TRO-BS-djY"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="Flash" destination="1yw-Tj-3EA" id="Lo9-GG-Cjd"/>
                         <outlet property="FlipCamera" destination="Qkb-8s-mvH" id="GAs-fo-3Bg"/>
                         <outlet property="TakePicButton" destination="VUc-xl-edW" id="XLI-X9-0g7"/>
                         <outlet property="previewView" destination="EGf-Wj-b1O" id="EVq-DX-kjg"/>
@@ -742,7 +743,7 @@
         <image name="Action button" width="82" height="82"/>
         <image name="Camera flip" width="33" height="27"/>
         <image name="Delete" width="54" height="60"/>
-        <image name="Flash" width="25" height="26"/>
+        <image name="Flash_off" width="25" height="26"/>
         <image name="Image_story" width="30" height="30"/>
         <image name="Image_timer" width="30" height="30"/>
         <image name="image_draw" width="34" height="34"/>
