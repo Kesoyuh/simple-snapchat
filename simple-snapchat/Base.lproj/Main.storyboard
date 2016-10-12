@@ -589,6 +589,9 @@
                                     <action selector="SaveButton:" destination="Tb7-Al-dck" eventType="touchUpInside" id="APk-U1-Na0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBk-ke-De3" userLabel="Memery">
+                                <state key="normal" image="Image_story"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QsS-1N-6Yp" userLabel="Send">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="EmS-49-Gre"/>
@@ -618,13 +621,9 @@
                                     <action selector="enable_draw:" destination="Tb7-Al-dck" eventType="touchUpInside" id="rMa-wW-9DK"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dqr-qc-HdJ">
-                                <frame key="frameInset" minY="197" width="375" height="216"/>
+                            <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="dqr-qc-HdJ">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBk-ke-De3" userLabel="Memery">
-                                <state key="normal" image="Image_story"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
