@@ -108,7 +108,10 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
             
             for i in 0..<selectedPhotos.count {
                 let cell = cameraRollView?.cellForItem(at: selectedPhotos[i]) as! PhotoCell
-                sendToController.images.append(cell.imageView.image!)
+                let photo = SendingPhoto()
+                photo.image = cell.imageView.image!
+                photo.timer = 3
+                sendToController.photos.append(photo)
             }
             self.handleSelectImage()
             self.didClickSelectButton = true

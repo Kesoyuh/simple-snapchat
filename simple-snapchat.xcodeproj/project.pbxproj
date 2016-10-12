@@ -38,6 +38,7 @@
 		00DD9D2C1D98FA75006489BE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DD9D2B1D98FA75006489BE /* Bolts.framework */; };
 		00DD9D2E1D98FA9C006489BE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DD9D2D1D98FA9C006489BE /* Parse.framework */; };
 		00E2E8D71DAC997E0080CF24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00E2E8D61DAC997E0080CF24 /* GoogleService-Info.plist */; };
+		00E2E8D91DADCA380080CF24 /* SendingPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E2E8D81DADCA380080CF24 /* SendingPhoto.swift */; };
 		791F308D1DAA722400001D90 /* QRReaderControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */; };
 		791F30911DAA8CFB00001D90 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F30901DAA8CFB00001D90 /* MapViewController.swift */; };
 		798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136311D9928670074ED25 /* ChatListTableViewController.swift */; };
@@ -98,6 +99,7 @@
 		00DD9D2B1D98FA75006489BE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "simple-snapchat/Bolts.framework"; sourceTree = "<group>"; };
 		00DD9D2D1D98FA9C006489BE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "simple-snapchat/Parse.framework"; sourceTree = "<group>"; };
 		00E2E8D61DAC997E0080CF24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		00E2E8D81DADCA380080CF24 /* SendingPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendingPhoto.swift; path = Model/SendingPhoto.swift; sourceTree = "<group>"; };
 		791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QRReaderControllerViewController.swift; path = Controllers/QRReaderControllerViewController.swift; sourceTree = "<group>"; };
 		791F30901DAA8CFB00001D90 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Controllers/MapViewController.swift; sourceTree = "<group>"; };
 		798136311D9928670074ED25 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListTableViewController.swift; path = Controllers/ChatListTableViewController.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				798136461D9BCFD50074ED25 /* User.swift */,
 				D4E2313C1DA4722D008B7FC4 /* photoModel.xcdatamodeld */,
 				0061700E1D9FCEC2002354B3 /* Story.swift */,
+				00E2E8D81DADCA380080CF24 /* SendingPhoto.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4F528341D9D64F200781F78 /* PreviewController.swift in Sources */,
+				00E2E8D91DADCA380080CF24 /* SendingPhoto.swift in Sources */,
 				004349091D99030100D3DE54 /* TopViewController.swift in Sources */,
 				D471E51F1DABAB9800FFC29A /* Photo+CoreDataClass.swift in Sources */,
 				00C4571F1DA52381004075FD /* CamerollRollCell.swift in Sources */,

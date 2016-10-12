@@ -33,7 +33,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     
     @IBAction func Sendtotest(_ sender: UIButton) {
         let sendtocontroller = SendToController()
-        sendtocontroller.images.append(self.ImageEdit.image!)
+        //sendtocontroller.images.append(self.ImageEdit.image!)
         let navController = UINavigationController(rootViewController: sendtocontroller)
         present(navController, animated: true, completion: nil)
     }

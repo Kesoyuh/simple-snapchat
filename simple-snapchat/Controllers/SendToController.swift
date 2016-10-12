@@ -13,7 +13,7 @@ import Firebase
 class SendToController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let cellId = "cellId"
     
-    var images = [UIImage]()
+    var photos = [SendingPhoto]()
     var friendList = [User]()
     var sendList = [String]()
     let tableView = UITableView()
@@ -127,10 +127,11 @@ class SendToController: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         })
         
-        for i in 0..<images.count {
+        for i in 0..<photos.count {
             let imageName = NSUUID().uuidString
             let storageRef = FIRStorage.storage().reference().child("stories").child(imageName)
-            let image = images[i]
+            let image = photos[i].image!
+            let timer = photos[i].timer!
             let uploadData = UIImagePNGRepresentation(image)
             
             storageRef.put(uploadData!, metadata: nil, completion: { (metaData, error) in
@@ -143,7 +144,7 @@ class SendToController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     // update database after successfully uploaded
                     let storyRef = storiesRef.childByAutoId()
                     if let imageURL = metaData?.downloadURL()?.absoluteString {
-                        storyRef.updateChildValues(["userID": uid!, "username": username, "imageURL": imageURL, "timer": 3], withCompletionBlock: { (error, ref) in
+                        storyRef.updateChildValues(["userID": uid!, "username": username, "imageURL": imageURL, "timer": timer], withCompletionBlock: { (error, ref) in
                             if error != nil {
                                 print(error)
                                 return
