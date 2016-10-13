@@ -12,13 +12,17 @@ import Firebase
 class Message:NSObject{
     
     var text: String!
+
     var timestamp: NSNumber!
     var fromID: String!
     var toID: String!
     var imageUrl: String?
     var imageHeight: NSNumber?
     var imageWidth: NSNumber?
+    
     var timer: Int?
+    var latitude : String?
+    var longitude: String?
     
     var partnerName: String!
     
@@ -53,6 +57,11 @@ class Message:NSObject{
         imageUrl = dictionary["imageUrl"] as? String
         imageHeight = dictionary["imageHeight"] as? NSNumber
         imageWidth = dictionary["imageWidth"] as? NSNumber
+        
+        latitude = dictionary["latitude"] as? String
+        longitude = dictionary["longitude"] as? String
+        
+        
         
     }
     
