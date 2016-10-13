@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import CoreLocation
 
 class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -42,7 +43,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
             messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 guard let dictionary = snapshot.value as? [String: AnyObject] else{return}
                 self.messages.append(Message(dictionary: dictionary))
-   
+   print(dictionary)
                 DispatchQueue.global().async {
                     
                     DispatchQueue.main.async {
@@ -181,22 +182,22 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         videoView.topAnchor.constraint(equalTo: self.inputTextField.bottomAnchor, constant: -8).isActive = true
         videoView.leftAnchor.constraint(equalTo: cameraView.rightAnchor, constant: space).isActive = true
         
-        //-----------------------------------Add emoj icon--------------------------------
-        let emoView = UIImageView()
-        emoView.image = UIImage(named: "chat_emo")
-        containerView.addSubview(emoView)
+        //-----------------------------------Add location icon--------------------------------
+        let locationView = UIImageView()
+        locationView.image = UIImage(named: "chat_location")
+        containerView.addSubview(locationView)
         
-        //Integrate Google Map
-        let mapTap = UITapGestureRecognizer(target: self, action: #selector(openGoogleMap))
-        emoView.addGestureRecognizer(mapTap)
-        emoView.isUserInteractionEnabled = true
+        //Integrate map
+        let mapTap = UITapGestureRecognizer(target: self, action: #selector(openMap))
+        locationView.addGestureRecognizer(mapTap)
+        locationView.isUserInteractionEnabled = true
         
         
-        emoView.translatesAutoresizingMaskIntoConstraints = false
-        emoView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        emoView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        emoView.topAnchor.constraint(equalTo: self.inputTextField.bottomAnchor, constant: -8).isActive = true
-        emoView.leftAnchor.constraint(equalTo: videoView.rightAnchor, constant: space).isActive = true
+        locationView.translatesAutoresizingMaskIntoConstraints = false
+        locationView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        locationView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        locationView.topAnchor.constraint(equalTo: self.inputTextField.bottomAnchor, constant: -8).isActive = true
+        locationView.leftAnchor.constraint(equalTo: videoView.rightAnchor, constant: space).isActive = true
  
         
         return containerView
@@ -279,7 +280,16 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         if let text = message.text{
           cell.bubbleWidthAnchor?.constant = estimateFrameForText(text: text).width + 32
             cell.textView.isHidden = false
-        } else if message.imageUrl != nil {
+        }else if message.latitude != nil {
+            print("This message should show location! Here is cellForItemAt")
+            cell.imageType = 1
+            cell.lat = message.latitude
+            cell.lng = message.longitude
+            cell.bubbleWidthAnchor?.constant = 50
+            cell.textView.isHidden = true
+        }else if message.imageUrl != nil {
+            print("imageURL", message.imageUrl)
+            cell.imageType = 0
             cell.bubbleWidthAnchor?.constant = 200
             //If the text view is not hidden, tap gesture recognizer won't work
             cell.textView.isHidden = true
@@ -298,11 +308,20 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
             cell.messageImageView.isHidden = false
             cell.bubbleView.backgroundColor = UIColor.clear
             
+        }else if message.latitude != nil{
+            print("I want to show lacation here...", message.latitude, message.longitude)
+            cell.messageImageView.isHidden = false
+            cell.bubbleView.backgroundColor = UIColor.clear
+            cell.messageImageView.image = UIImage(named:"chat_location")
+            cell.messageImageView.isHidden = false
+            cell.bubbleView.backgroundColor = UIColor.clear
+        
         }else{
             
             cell.messageImageView.isHidden = true
           
         }
+        
         // Incoming and outgoing messages
         if message.fromID == FIRAuth.auth()?.currentUser?.uid {
             // outgoing blue bubble
@@ -330,6 +349,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         }else if let imageWidth = message.imageWidth?.floatValue, let imageHeight = message.imageHeight?.floatValue {
             
             height = CGFloat(200 * imageHeight / imageWidth)
+        }else if (message.latitude != nil) {
+            height = 50
         }
         return CGSize(width: view.frame.width, height: height)
     }
@@ -498,12 +519,34 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         }
     }
     
-    func openGoogleMap(){
-        print("tap emo!!!!!!!!!!!")
+    
+    /*
+        Handle Map
+     */
+    
+    func openMap(){
         let mapController = MapViewController()
+        mapController.fromID = FIRAuth.auth()!.currentUser!.uid
+        mapController.toID = partnerId!
         let navController = UINavigationController(rootViewController: mapController)
         present(navController, animated:true, completion:nil)
 
+    
+    }
+    
+    func openMapWithLocation(location : CLLocationCoordinate2D){
+        let mapController = MapViewController()
+        mapController.fromID = FIRAuth.auth()!.currentUser!.uid
+        mapController.toID = partnerId!
+        mapController.partnerLocation = location
+        let navController = UINavigationController(rootViewController: mapController)
+        present(navController, animated:true, completion:nil)
+    }
+    
+    func handleShareLocation(lat: String, lng: String) {
+        let location = CLLocationCoordinate2D(latitude: (lat as NSString).doubleValue, longitude: (lng as NSString).doubleValue )
+        openMapWithLocation(location: location)
+        
     
     }
 }

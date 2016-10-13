@@ -10,6 +10,10 @@ import UIKit
 
 class MessageCell: UICollectionViewCell {
     var chatLogController : ChatLogController?
+    var imageType : Int?
+    
+    var lat : String?
+    var lng: String?
     
     let textView: UITextView = {
         let tv = UITextView()
@@ -26,14 +30,27 @@ class MessageCell: UICollectionViewCell {
     
     lazy var messageImageView: UIImageView =  {
         let imageView = UIImageView()
+ 
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         return imageView
     }()
     
+    func handleTap(tapGesture: UITapGestureRecognizer){
+        // Type 0 : normal
+        // Type 1 : location
+        // Type 2 : with view constraint
+        
+        if imageType == 0 {
+            handleZoomTap(tapGesture: tapGesture)
+        }else if imageType == 1 {
+            handleShareLocation(tapGesture: tapGesture)
+        }
+    }
     
     func handleZoomTap(tapGesture: UITapGestureRecognizer){
         // *Do not put lots of custom logic in View
@@ -41,9 +58,16 @@ class MessageCell: UICollectionViewCell {
         if let imageView = tapGesture.view as? UIImageView {
             self.chatLogController?.performZoomInForStartingImageView(startingImageView: imageView)
         }
-       
+
+    }
+    
+    func handleShareLocation(tapGesture: UITapGestureRecognizer){
+ 
+        self.chatLogController?.handleShareLocation(lat:lat!, lng: lng!)
+        
         
     }
+    
     
     static let blueColor = UIColor(red: 0, green: 137, blue: 249)
     static let grayColor = UIColor(red: 240, green: 240, blue: 240)
