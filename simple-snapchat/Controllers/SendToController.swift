@@ -13,6 +13,8 @@ import Firebase
 class SendToController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let cellId = "cellId"
     
+    var currentUid = String()
+    var currentUsername = String()
     var photos = [SendingPhoto]()
     var friendList = [User]()
     var sendList = [String]()
@@ -103,60 +105,68 @@ class SendToController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func handleSend() {
-        for i in 0..<sendList.count {
-            if sendList[i] == "My Story" {
-                sendToMyStory()
-            } else {
-                sendToFriend(uid: sendList[i])
+        if let uid = FIRAuth.auth()?.currentUser?.uid {
+            self.currentUid = uid
+            // Fetch current user's name
+            FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    self.currentUsername = dictionary["name"] as! String
+                }
+            })
+            
+            for i in 0..<photos.count {
+                let imageName = NSUUID().uuidString
+                let sharedRef = FIRStorage.storage().reference().child("sharedImages").child(imageName)
+                let image = photos[i].image!
+                let uploadData = UIImagePNGRepresentation(image)
+                
+                sharedRef.put(uploadData!, metadata: nil, completion: { (metaData, error) in
+                    
+                    if error != nil {
+                        print(error)
+                        return
+                    } else {
+                        if let imageURL = metaData?.downloadURL()?.absoluteString {
+                            // Store image's url
+                            self.photos[i].imageURL = imageURL
+                            
+                            for j in 0..<self.sendList.count {
+                                if self.sendList[j] == "My Story" {
+                                    self.sendToMyStory(photoIndex: i)
+                                } else {
+                                    self.sendToFriend(photoIndex: i, uid: self.sendList[j])
+                                }
+                            }
+                        }
+                        
+                    }
+                })
             }
+            
+            dismiss(animated: true, completion: nil)
         }
-        dismiss(animated: true, completion: nil)
+        
+        
     }
     
-    func sendToMyStory() {
-        
-        let uid = FIRAuth.auth()?.currentUser?.uid
-        var username = String()
+    func sendToMyStory(photoIndex: Int) {
         
         // Create story reference
         let storiesRef = FIRDatabase.database().reference().child("stories")
-        FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                
-                username = dictionary["name"] as! String
+        
+        let timer = photos[photoIndex].timer!
+        let imageURL = photos[photoIndex].imageURL!
+        
+        let storyRef = storiesRef.childByAutoId()
+        storyRef.updateChildValues(["userID": self.currentUid, "username": self.currentUsername, "imageURL": imageURL, "timer": timer], withCompletionBlock: {(error, ref) in
+            if error != nil {
+                print(error)
+                return
             }
         })
-        
-        for i in 0..<photos.count {
-            let imageName = NSUUID().uuidString
-            let storageRef = FIRStorage.storage().reference().child("stories").child(imageName)
-            let image = photos[i].image!
-            let timer = photos[i].timer!
-            let uploadData = UIImagePNGRepresentation(image)
-            
-            storageRef.put(uploadData!, metadata: nil, completion: { (metaData, error) in
-                
-                if error != nil {
-                    print(error)
-                    return
-                } else {
-                    
-                    // update database after successfully uploaded
-                    let storyRef = storiesRef.childByAutoId()
-                    if let imageURL = metaData?.downloadURL()?.absoluteString {
-                        storyRef.updateChildValues(["userID": uid!, "username": username, "imageURL": imageURL, "timer": timer], withCompletionBlock: { (error, ref) in
-                            if error != nil {
-                                print(error)
-                                return
-                            }
-                        })
-                    }
-                }
-            })
-        }
     }
     
-    func sendToFriend(uid: String) {
+    func sendToFriend(photoIndex: Int, uid: String) {
         print("sended to ", uid)
         //********************To be implemented by Hailun*************************
     }

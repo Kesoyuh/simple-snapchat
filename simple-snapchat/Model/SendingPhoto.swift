@@ -11,4 +11,5 @@ import UIKit
 class SendingPhoto {
     var image: UIImage?
     var timer: Int?
+    var imageURL: String?
 }
