@@ -23,17 +23,31 @@ class TopViewController: UIViewController {
         return imageView
     }()
     
+    let nameLabel : UILabel = {
+        let name = UILabel()
+        name.textColor = UIColor.white
+        name.font = UIFont.boldSystemFont(ofSize: 22)
+        name.translatesAutoresizingMaskIntoConstraints = false
+        return name
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(QRCode)
+        self.view.addSubview(nameLabel)
         
 
-        // Do any additional setup after loading the view.
+        // Constraints for QR code
         QRCode.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
         QRCode.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         QRCode.widthAnchor.constraint(equalToConstant: 200).isActive = true
         QRCode.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        // Constraints for name label
+        nameLabel.topAnchor.constraint(equalTo: QRCode.bottomAnchor, constant: 20).isActive = true
+        nameLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        
+        
         delay(2, closure: {
         self.loadQRCode()
         })
@@ -60,6 +74,18 @@ class TopViewController: UIViewController {
                     }
                 }
             }
+            
+            let nameRef = FIRDatabase.database().reference().child("users").child(uid!)
+            nameRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                    DispatchQueue.global().async {
+                        DispatchQueue.main.async {
+                             self.nameLabel.text = dictionary["name"] as? String
+                        }
+                    }
+
+                }
+            })
         }else {
             
             print("You need to login first!")
@@ -68,7 +94,8 @@ class TopViewController: UIViewController {
             
         }
     }
-
+    
+  
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

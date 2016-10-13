@@ -99,57 +99,96 @@ class QRReaderControllerViewController: UIViewController , AVCaptureMetadataOutp
     
     func found(userID: String) {
         let myID = FIRAuth.auth()?.currentUser?.uid
-        if userID != myID{
-            
-            var name : String?
-            let userRef = FIRDatabase.database().reference().child("users").child(userID)
-            userRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                if let dictionary = snapshot.value as? [String: AnyObject]{
-                    name = dictionary["name"] as! String
-                }
-                let friendRef = FIRDatabase.database().reference().child("friendship").child(userID)
-                friendRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                    if let dictionary = snapshot.value as? [String:AnyObject] {
-                        if (dictionary[myID!] != nil && dictionary[myID!] as? Int == 2)  {
+        print("QR reader get", userID)
+        if isValidInput(inputID: userID) {
+            print("Only execute if there is no special characters.")
+            if userID != myID{
+                
+                var name : String?
+                
+                let userRef = FIRDatabase.database().reference().child("users").child(userID)
+                userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                    print(snapshot)
+                    if snapshot.value != nil {
+                        if let dictionary = snapshot.value as? [String: AnyObject]{
+                            print("Dictionary is ", dictionary)
+                            name = dictionary["name"] as! String
                             
-                            let alertView = UIAlertView();
-                            alertView.addButton(withTitle: "Done");
-                            alertView.title = "Wrong Operation";
-                            alertView.message = "You and \(name!) already are friends.";
-                            alertView.show();
+                            let friendRef = FIRDatabase.database().reference().child("friendship").child(userID)
+                            friendRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                                if let dictionary = snapshot.value as? [String:AnyObject] {
+                                    if (dictionary[myID!] != nil && dictionary[myID!] as? Int == 2)  {
+                                        
+                                        let alertView = UIAlertView();
+                                        alertView.addButton(withTitle: "Done");
+                                        alertView.title = "Wrong Operation";
+                                        alertView.message = "You and \(name!) already are friends.";
+                                        alertView.show();
+                                        
+                                    }else{
+                                        self.sendRequest(id: userID)
+                                        let alertView = UIAlertView();
+                                        alertView.addButton(withTitle: "Done");
+                                        alertView.title = "Request is sent!";
+                                        alertView.message = "You sent a request to \(name!)! Wait for the confirmation...";
+                                        alertView.show();
+                                    }
+                                }else{
+                                    
+                                    self.sendRequest(id: userID)
+                                    let alertView = UIAlertView();
+                                    alertView.addButton(withTitle: "Done");
+                                    alertView.title = "Request is sent!";
+                                    alertView.message = "You sent a request to \(name!)! Wait for the confirmation...";
+                                    alertView.show();
+                                    
+                                }
+                            })
                             
                         }else{
-                            self.sendRequest(id: userID)
+                           
                             let alertView = UIAlertView();
                             alertView.addButton(withTitle: "Done");
-                            alertView.title = "Request is sent!";
-                            alertView.message = "You sent a request to \(name!)! Wait for the confirmation...";
+                            alertView.title = "Invalid Cose";
+                            alertView.message = "This coede is not invalid!";
                             alertView.show();
                         }
-                    }else{
-                        
-                        self.sendRequest(id: userID)
-                        let alertView = UIAlertView();
-                        alertView.addButton(withTitle: "Done");
-                        alertView.title = "Request is sent!";
-                        alertView.message = "You sent a request to \(name!)! Wait for the confirmation...";
-                        alertView.show();
-                        
                     }
+                    
+                    
                 })
-                
-            })
             }else{
+                let alertView = UIAlertView();
+                alertView.addButton(withTitle: "Done");
+                alertView.title = "Wrong Operation";
+                alertView.message = "You cannot send request to yourself!";
+                alertView.show();
+                
+            }
+
+        }else{
+            print("This string contains special characters.")
             let alertView = UIAlertView();
             alertView.addButton(withTitle: "Done");
-            alertView.title = "Wrong Operation";
-            alertView.message = "You cannot send request to yourself!";
+            alertView.title = "Invalid Cose";
+            alertView.message = "This coede is not invalid!";
             alertView.show();
-            
         }
         
 
     }
+    
+    func isValidInput(inputID: String) -> Bool{
+        let characterset = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789")
+        if inputID.rangeOfCharacter(from: characterset.inverted) != nil {
+            print("String contains special charaters!")
+            return false
+        }else{
+            return true
+        }
+    
+    }
+    
     func sendRequest(id:String){
         
         let fromID = (FIRAuth.auth()?.currentUser?.uid)!
@@ -165,21 +204,22 @@ class QRReaderControllerViewController: UIViewController , AVCaptureMetadataOutp
         receiverFriendRef.updateChildValues([fromID: 1])
         
     }
-    func getUsername(id: String) -> String? {
-            var name : String?
-            let userRef = FIRDatabase.database().reference().child("users").child(id)
-                userRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                    if let dictionary = snapshot.value as? [String: AnyObject]{
-                        print(dictionary)
-                        name = dictionary["name"] as? String
-                        print(name)
-                    }
-                })
-        
-            return name
-          
-        
-        }
+    
+//    func getUsername(id: String) -> String? {
+//            var name : String?
+//            let userRef = FIRDatabase.database().reference().child("users").child(id)
+//                userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+//                    if let dictionary = snapshot.value as? [String: AnyObject]{
+//                        print(dictionary)
+//                        name = dictionary["name"] as? String
+//                        print(name)
+//                    }
+//                })
+//        
+//            return name
+//          
+//        
+//        }
     
     override var prefersStatusBarHidden: Bool {
         return true

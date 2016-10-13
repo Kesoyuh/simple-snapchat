@@ -18,6 +18,7 @@ class Message:NSObject{
     var imageUrl: String?
     var imageHeight: NSNumber?
     var imageWidth: NSNumber?
+    var timer: Int?
     
     var partnerName: String!
     
