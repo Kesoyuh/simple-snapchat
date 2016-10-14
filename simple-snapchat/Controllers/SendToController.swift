@@ -169,6 +169,26 @@ class SendToController: UIViewController, UITableViewDelegate, UITableViewDataSo
     func sendToFriend(photoIndex: Int, uid: String) {
         print("sended to ", uid)
         //********************To be implemented by Hailun*************************
+        
+        let ref = FIRDatabase.database().reference().child("messages")
+        let childRef = ref.childByAutoId()
+        let fromID = FIRAuth.auth()!.currentUser!.uid
+        let toID = uid
+        let timestamp = Int(NSDate().timeIntervalSince1970)
+        let values = [ "timer": photos[photoIndex].timer!, "toID": toID, "fromID": fromID, "timestamp": timestamp, "imageUrl": photos[photoIndex].imageURL!] as [String : Any]
+        
+        childRef.updateChildValues(values) { (error, ref) in
+            if error != nil{
+                print(error)
+                return
+            }
+            //Update user-messages for both sender and receiver
+            let senderMsgRef = FIRDatabase.database().reference().child("user-messages").child(fromID).child(toID)
+            senderMsgRef.updateChildValues([childRef.key : 1])
+            let receiverMsgRef = FIRDatabase.database().reference().child("user-messages").child(toID).child(fromID)
+            receiverMsgRef.updateChildValues([childRef.key : 1])
+        }
+
     }
     
     func handleCancle() {

@@ -42,8 +42,10 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
             
             messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 guard let dictionary = snapshot.value as? [String: AnyObject] else{return}
-                self.messages.append(Message(dictionary: dictionary))
-   print(dictionary)
+                let msg = Message(dictionary: dictionary)
+                msg.messageID = snapshot.key
+                print(snapshot.key)
+                self.messages.append(msg)
                 DispatchQueue.global().async {
                     
                     DispatchQueue.main.async {
@@ -194,8 +196,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         
         
         locationView.translatesAutoresizingMaskIntoConstraints = false
-        locationView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        locationView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        locationView.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        locationView.heightAnchor.constraint(equalToConstant: 35).isActive = true
         locationView.topAnchor.constraint(equalTo: self.inputTextField.bottomAnchor, constant: -8).isActive = true
         locationView.leftAnchor.constraint(equalTo: videoView.rightAnchor, constant: space).isActive = true
  
@@ -224,11 +226,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
     
     func setupKeyboardObservers(){
          NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: .UIKeyboardDidShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: .UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: .UIKeyboardWillHide, object: nil)
-
-        
     }
+    
     func handleKeyboardDidShow(notification: Notification){
         if messages.count > 0{
             let index = messages.count - 1
@@ -278,17 +277,28 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         // Modify the bubble size based on content size
         // Hide the text view if that is an imgae because text view is on the top of the image view
         if let text = message.text{
+            print("----------This is a text message!------------------", message)
           cell.bubbleWidthAnchor?.constant = estimateFrameForText(text: text).width + 32
             cell.textView.isHidden = false
         }else if message.latitude != nil {
-            print("This message should show location! Here is cellForItemAt")
+            print("----------This is a location message!------------------")
             cell.imageType = 1
             cell.lat = message.latitude
             cell.lng = message.longitude
             cell.bubbleWidthAnchor?.constant = 50
             cell.textView.isHidden = true
+        }else if message.timer != nil {
+            print("----------This is a timer message!------------------", message.timer)
+            cell.imageType = 2
+            cell.timer = message.timer
+            cell.messageID = message.messageID
+            cell.openTimes = 0
+            cell.imageURL = message.imageUrl
+            cell.bubbleWidthAnchor?.constant = 80
+            cell.textView.isHidden = true
+        
         }else if message.imageUrl != nil {
-            print("imageURL", message.imageUrl)
+            print("----------This is a image message!------------------")
             cell.imageType = 0
             cell.bubbleWidthAnchor?.constant = 200
             //If the text view is not hidden, tap gesture recognizer won't work
@@ -300,7 +310,16 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
     
     private func setupCell(cell: MessageCell, message: Message){
         
-        if let messageImageUrl = message.imageUrl {
+        if message.timer != nil{
+            print("I want to show a timer icon here")
+            cell.messageImageView.isHidden = false
+            cell.bubbleView.backgroundColor = UIColor.clear
+            cell.messageImageView.image = UIImage(named:"chat_receive")
+            cell.messageImageView.isHidden = false
+            cell.bubbleView.backgroundColor = UIColor.clear
+            
+            
+        } else if let messageImageUrl = message.imageUrl {
             
             cell.messageImageView.isHidden = false
             cell.bubbleView.backgroundColor = UIColor.clear
@@ -309,7 +328,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
             cell.bubbleView.backgroundColor = UIColor.clear
             
         }else if message.latitude != nil{
-            print("I want to show lacation here...", message.latitude, message.longitude)
+            
             cell.messageImageView.isHidden = false
             cell.bubbleView.backgroundColor = UIColor.clear
             cell.messageImageView.image = UIImage(named:"chat_location")
@@ -410,7 +429,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        print(info)
         var selectedImageFromPicker: UIImage?
         selectedImageFromPicker = info["UIImagePickerControllerOriginalImage"] as? UIImage
         if let selectedImage = selectedImageFromPicker {
@@ -422,7 +440,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
     }
     
     private func uploadToFirebaseStorageUsingImage(image: UIImage){
-        print("upload to firebase")
         let imageName = NSUUID().uuidString
         let ref = FIRStorage.storage().reference().child("message_images").child(imageName)
         
@@ -475,7 +492,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
     var blackBackgroundVBiew : UIView?
     func performZoomInForStartingImageView(startingImageView: UIImageView) {
         startingFrame = startingImageView.superview?.convert(startingImageView.frame, to: nil)
-        print(startingFrame)
         
         let zoomingImageView = UIImageView(frame: startingFrame!)
         zoomingImageView.backgroundColor = UIColor.red
@@ -546,9 +562,48 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
     func handleShareLocation(lat: String, lng: String) {
         let location = CLLocationCoordinate2D(latitude: (lat as NSString).doubleValue, longitude: (lng as NSString).doubleValue )
         openMapWithLocation(location: location)
-        
-    
+
     }
+    
+    
+    /*
+     
+     Handle timer and view constraints
+     
+     */
+    
+    func handleTimer(time: Int!, imageURL: String!, openTimes: Int!){
+
+        if openTimes == 0 {
+            let newImageView = ImageWithTimerViewController()
+            newImageView.timer = time
+            newImageView.imgUrl = imageURL
+            newImageView.chat = self
+            let navController = UINavigationController(rootViewController: newImageView)
+            present(navController, animated:true, completion:nil)
+            
+            
+        } else if openTimes == 1{
+            let newImageView = ImageWithTimerViewController()
+            newImageView.timer = time
+            newImageView.imgUrl = imageURL
+            newImageView.chat = self
+            let navController = UINavigationController(rootViewController: newImageView)
+            present(navController, animated:true, completion:nil)
+            
+        
+        } else {
+            // Delete it 
+            
+        
+        }
+        
+        // TODO: Open the image and add timer
+        
+        
+
+    }
+
 }
 
 

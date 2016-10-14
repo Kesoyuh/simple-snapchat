@@ -14,6 +14,10 @@ class MessageCell: UICollectionViewCell {
     
     var lat : String?
     var lng: String?
+    var timer: Int?
+    var openTimes: Int?
+    var messageID: String?
+    var imageURL : String?
     
     let textView: UITextView = {
         let tv = UITextView()
@@ -49,6 +53,9 @@ class MessageCell: UICollectionViewCell {
             handleZoomTap(tapGesture: tapGesture)
         }else if imageType == 1 {
             handleShareLocation(tapGesture: tapGesture)
+        }else if imageType == 2 {
+            handleTimer(tapGesture: tapGesture)
+            
         }
     }
     
@@ -62,10 +69,18 @@ class MessageCell: UICollectionViewCell {
     }
     
     func handleShareLocation(tapGesture: UITapGestureRecognizer){
- 
         self.chatLogController?.handleShareLocation(lat:lat!, lng: lng!)
+    }
+    
+    func handleTimer(tapGesture: UITapGestureRecognizer){
         
-        
+        self.chatLogController?.handleTimer(time: timer!, imageURL: imageURL!, openTimes: openTimes!)
+        openTimes! += 1
+        if openTimes == 1 {
+            messageImageView.image = UIImage(named:"can_see_one_more_time")
+        }else if openTimes == 2{
+            messageImageView.image = UIImage(named:"can_not_view")
+        }
     }
     
     

@@ -19,11 +19,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
     var mapView = MKMapView()
     var fromID : String?
     var toID : String?
-    var partnerLocation = CLLocationCoordinate2D()
+    var partnerLocation = kCLLocationCoordinate2DInvalid
     
-    lazy var getCurrentLocationBtn : UIButton = {
+    lazy var myBtn : UIButton = {
         let btn = UIButton()
-        btn.setTitle("Share", for: .normal)
+        btn.setTitle("Share my location", for: .normal)
         btn.backgroundColor = UIColor.white
         btn.alpha = 0.7
         btn.layer.cornerRadius = CGFloat(10.0)
@@ -40,11 +40,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
         view = mapView
         
         // Add get my location button
-        mapView.addSubview(getCurrentLocationBtn)
-        self.getCurrentLocationBtn.rightAnchor.constraint(equalTo: mapView.rightAnchor,constant: -12).isActive = true
-        self.getCurrentLocationBtn.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -8).isActive = true
-        self.getCurrentLocationBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        self.getCurrentLocationBtn.widthAnchor.constraint(equalToConstant: 110).isActive = true
+        mapView.addSubview(myBtn)
+        self.myBtn.rightAnchor.constraint(equalTo: mapView.rightAnchor,constant: -12).isActive = true
+        self.myBtn.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -8).isActive = true
+        self.myBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        self.myBtn.widthAnchor.constraint(equalToConstant: 200).isActive = true
         view = mapView
         
         
@@ -57,17 +57,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
             mapView.showsUserLocation = true
         }
         
-        if partnerLocation != nil {
+        if CLLocationCoordinate2DIsValid(partnerLocation) {
+            print("Partner location is :",partnerLocation)
+            //Add pin
+            
             let annotation = MKPointAnnotation()
             annotation.coordinate   = partnerLocation
             annotation.title        = "Chat partner"
             
             mapView.addAnnotation(annotation)
+            
+            // Change Button
+            myBtn.setTitle("Show Direction", for: .normal)
 
         }
-        
-  
     }
+
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Errors: ", error.localizedDescription)
@@ -77,9 +82,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
         location = locations.last!
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta:1, longitudeDelta: 1))
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta:0.001, longitudeDelta: 0.001))
         self.mapView.setRegion(region, animated: true)
-        //self.locationManager.stopUpdatingLocation()
+        self.locationManager.stopUpdatingLocation()
     }
 
     
@@ -102,13 +107,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
     */
     
     func buttonTapped(){
-        print("My location is", location.coordinate)
+
+        if CLLocationCoordinate2DIsValid(partnerLocation){
+            showDirection(source: location.coordinate, destination: partnerLocation)
+        }else{
+            shareLocation()
+        }
+    }
+    
+    func shareLocation(){
         let ref = FIRDatabase.database().reference().child("messages")
         let childRef = ref.childByAutoId()
         
         let lat : String = location.coordinate.latitude.description
         let lng : String = location.coordinate.longitude.description
-
+        
         
         let timestamp = Int(NSDate().timeIntervalSince1970)
         let values = ["latitude": lat , "longitude": lng,"toID": self.toID!, "fromID": self.fromID!, "timestamp": timestamp] as [String : Any]
@@ -125,10 +138,44 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
             receiverMsgRef.updateChildValues([childRef.key : 1])
         }
         closeMap()
-
     }
     
-  
+    
+    func showDirection(source: CLLocationCoordinate2D, destination: CLLocationCoordinate2D){
+        // Show direction
+        let annotation = MKPointAnnotation()
+        annotation.coordinate   = source
+        annotation.title        = "My location"
+        mapView.addAnnotation(annotation)
+       
+        
+
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: source, addressDictionary: nil))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination, addressDictionary: nil))
+        request.requestsAlternateRoutes = true
+        request.transportType = .automobile
+        
+        let directions = MKDirections(request: request)
+        
+        directions.calculate { [unowned self] response, error in
+            guard let unwrappedResponse = response else { return }
+            
+            for route in unwrappedResponse.routes {
+                print("Fine a rout :", route)
+                self.mapView.add(route.polyline, level: MKOverlayLevel.aboveRoads)
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect , animated: true)
+            }
+            
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+        renderer.strokeColor = UIColor.red
+        renderer.lineWidth = 5
+        return renderer
+    }
 }
 
 

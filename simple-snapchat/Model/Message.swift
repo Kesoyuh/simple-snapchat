@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class Message:NSObject{
-    
+    var messageID : String!
     var text: String!
 
     var timestamp: NSNumber!
@@ -21,6 +21,8 @@ class Message:NSObject{
     var imageWidth: NSNumber?
     
     var timer: Int?
+ 
+    
     var latitude : String?
     var longitude: String?
     
@@ -48,7 +50,7 @@ class Message:NSObject{
 //    
     init(dictionary : [String: AnyObject]){
         super.init()
-        
+
         fromID = dictionary["fromID"] as? String
         text = dictionary["text"] as? String
         toID = dictionary["toID"] as? String
@@ -60,6 +62,7 @@ class Message:NSObject{
         
         latitude = dictionary["latitude"] as? String
         longitude = dictionary["longitude"] as? String
+        timer = dictionary["timer"] as? Int
         
         
         
