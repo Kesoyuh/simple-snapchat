@@ -62,6 +62,13 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         
     }
     
+    
+    @IBAction func Imagetextdrag(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: self.view)
+        sender.view?.center = CGPoint(x:sender.view!.center.x, y:sender.view!.center.y+translation.y)
+        sender.setTranslation(CGPoint.init(x: 0.0, y: 0.0), in: self.view)
+    }
+    
     var capturedPhoto :UIImage!
     var pictureid : Int = 0
     var pic_duaration = 3
@@ -174,11 +181,11 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         self.isDrawing = true
         if let e = event?.touches(for: self.ImageEdit){
         if let touch = e.first{
-            print(touch.view)
             if let d = self.ImageEdit {
                 let currentCoordinate = touch.preciseLocation(in: d)
-                UIGraphicsBeginImageContext(d.frame.size)
-                d.image?.draw(in: CGRect.init(x: 0, y: 0, width: d.frame.width, height: d.frame.height))
+                //UIGraphicsBeginImageContext(d.bounds.size)
+                UIGraphicsBeginImageContextWithOptions(d.bounds.size, false, 0.0)
+                d.image?.draw(in: CGRect.init(x: 0, y: 0, width: d.bounds.width, height: d.bounds.height))
                 UIGraphicsGetCurrentContext()?.move(to: finalPoint)
                 UIGraphicsGetCurrentContext()?.addLine(to: currentCoordinate)
                 UIGraphicsGetCurrentContext()?.setLineCap(CGLineCap.round)
