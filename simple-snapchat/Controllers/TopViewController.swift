@@ -89,8 +89,8 @@ class TopViewController: UIViewController {
         }else {
             
             print("You need to login first!")
-            let loginRegisterController = LoginRegisterController()
-            present(loginRegisterController, animated: true, completion: nil)
+            //let loginRegisterController = LoginRegisterController()
+            //present(loginRegisterController, animated: true, completion: nil)
             
         }
     }

@@ -167,9 +167,6 @@ class SendToController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func sendToFriend(photoIndex: Int, uid: String) {
-        print("sended to ", uid)
-        //********************To be implemented by Hailun*************************
-        
         let ref = FIRDatabase.database().reference().child("messages")
         let childRef = ref.childByAutoId()
         let fromID = FIRAuth.auth()!.currentUser!.uid

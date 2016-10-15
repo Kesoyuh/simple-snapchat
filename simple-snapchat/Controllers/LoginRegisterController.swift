@@ -105,12 +105,32 @@ class LoginRegisterController: UIViewController {
             print("Form is not valid!")
             return
         }
+        if email.isEmpty || password.isEmpty {
+            self.spinnerView.stopAnimating()
+            self.loginRegisterButton.isUserInteractionEnabled = true
+            self.displayAlert(title: "Invalid Form", message: "Please fill in all fields!")
+            return
+        }
         
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             self.spinnerView.stopAnimating()
-            if error != nil {
+            if let error = error {
                 self.loginRegisterButton.isUserInteractionEnabled = true
-                print(error)
+                if let errCode = FIRAuthErrorCode(rawValue: error._code) {
+                    switch errCode {
+                    case .errorCodeUserNotFound:
+                        self.displayAlert(title: "Email Not Found", message: "Please check your email!")
+                    case .errorCodeInvalidEmail:
+                        self.displayAlert(title: "Invaild Email", message: "Please check your email format!")
+                    case .errorCodeWrongPassword:
+                        self.displayAlert(title: "Wrong Password", message: "Please check your password!")
+                    case .errorCodeNetworkError:
+                        self.displayAlert(title: "Netword Error", message: "No network connection!")
+                    default:
+                        print("unknown error")
+                        print(error)
+                    }
+                }
                 return
             } else {
 
@@ -122,17 +142,44 @@ class LoginRegisterController: UIViewController {
         
     }
     
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(defaultAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func handleRegister() {
         guard let email = emailTextField.text, let username = nameTextField.text, let password = passwordTextField.text else {
             print("Form is not valid!")
             return
         }
+        if email.isEmpty || password.isEmpty || username.isEmpty {
+            self.spinnerView.stopAnimating()
+            self.loginRegisterButton.isUserInteractionEnabled = true
+            self.displayAlert(title: "Invalid Form", message: "Please fill in all fields!")
+            return
+        }
         
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
             self.spinnerView.stopAnimating()
-            if error != nil {
-                print(error)
+            if let error = error {
                 self.loginRegisterButton.isUserInteractionEnabled = true
+                if let errCode = FIRAuthErrorCode(rawValue: error._code) {
+                    switch errCode {
+                    case .errorCodeInvalidEmail:
+                        self.displayAlert(title: "Invaild Email", message: "Please check your email format!")
+                    case .errorCodeEmailAlreadyInUse:
+                        self.displayAlert(title: "Email Already Registered", message: "Please use another email!")
+                    case .errorCodeWeakPassword:
+                        self.displayAlert(title: "Weak Password", message: "Your password is too weak!")
+                    case .errorCodeNetworkError:
+                        self.displayAlert(title: "Netword Error", message: "No network connection!")
+                    default:
+                        print("unknown error")
+                        print(error)
+                    }
+                }
                 return
             } else {
                 
