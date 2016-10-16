@@ -12,6 +12,8 @@ import CoreData
 class SnapsCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     let cellId = "cellSnap"
+    var snaps = [Photo]()
+    var imgArray = [UIImage]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,10 +46,11 @@ class SnapsCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionV
         collectionView.allowsSelection = false
         grabSnaps()
     }
-    var imgArray = [UIImage]()
+    
     
     func grabSnaps() {
         imgArray.removeAll()
+        snaps.removeAll()
         let context = getContext()
         let fetchRequest: NSFetchRequest = Photo.fetchRequest()
         do {

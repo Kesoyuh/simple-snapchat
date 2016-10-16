@@ -103,11 +103,18 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
     }()
     
     func handleSend() {
-        if let selectedPhotos = cameraRollView?.indexPathsForSelectedItems{
+        if let selectedCameraRollPhotos = cameraRollView?.indexPathsForSelectedItems, let selectedSnapsPhotos = snapsView?.indexPathsForSelectedItems{
             let sendToController = SendToController()
             
-            for i in 0..<selectedPhotos.count {
-                let cell = cameraRollView?.cellForItem(at: selectedPhotos[i]) as! PhotoCell
+            for i in 0..<selectedSnapsPhotos.count {
+                let cell = snapsView?.cellForItem(at: selectedSnapsPhotos[i]) as! PhotoCell
+                let photo = SendingPhoto()
+                photo.image = cell.imageView.image!
+                photo.timer = 3
+                sendToController.photos.append(photo)
+            }
+            for i in 0..<selectedCameraRollPhotos.count {
+                let cell = cameraRollView?.cellForItem(at: selectedCameraRollPhotos[i]) as! PhotoCell
                 let photo = SendingPhoto()
                 photo.image = cell.imageView.image!
                 photo.timer = 3
@@ -117,51 +124,6 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
             self.didClickSelectButton = true
             let navController = UINavigationController(rootViewController: sendToController)
             present(navController, animated: true, completion: nil)
-            
-            
-//            var username = String()
-//            
-//            // Create story reference
-//            let storiesRef = FIRDatabase.database().reference().child("stories")
-//            FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-//                if let dictionary = snapshot.value as? [String: AnyObject] {
-//                    
-//                    username = dictionary["name"] as! String
-//                }
-//            })
-//            
-//            for i in 0..<selectedPhotos.count {
-//                let imageName = NSUUID().uuidString
-//                let storageRef = FIRStorage.storage().reference().child("stories").child(imageName)
-//                let cell = cameraRollView?.cellForItem(at: selectedPhotos[i]) as! PhotoCell
-//                let image = cell.imageView.image
-//                let uploadData = UIImagePNGRepresentation(image!)
-//                
-//                storageRef.put(uploadData!, metadata: nil, completion: { (metaData, error) in
-//                    
-//                    if error != nil {
-//                        print(error)
-//                        return
-//                    } else {
-//                        
-//                        // update database after successfully uploaded
-//                        let storyRef = storiesRef.childByAutoId()
-//                        if let imageURL = metaData?.downloadURL()?.absoluteString {
-//                            storyRef.updateChildValues(["userID": uid, "username": username, "imageURL": imageURL, "timer": 3], withCompletionBlock: { (error, ref) in
-//                                if error != nil {
-//                                    print(error)
-//                                    return
-//                                }
-//                                
-//                                self.handleSelectImage()
-//                                self.didClickSelectButton = true
-//                            })
-//                        }
-//                        
-//                    }
-//                    
-//                })
-//            }
         }
         
     }
@@ -176,7 +138,15 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
             
             cameraRollView?.allowsSelection = true
             cameraRollView?.allowsMultipleSelection = true
+            snapsView?.allowsSelection = true
+            snapsView?.allowsMultipleSelection = true
             if let cells = cameraRollView?.visibleCells {
+                for i in 0..<cells.count {
+                    let photoCell = cells[i] as? PhotoCell
+                    photoCell?.imageView.isUserInteractionEnabled = false
+                }
+            }
+            if let cells = snapsView?.visibleCells {
                 for i in 0..<cells.count {
                     let photoCell = cells[i] as? PhotoCell
                     photoCell?.imageView.isUserInteractionEnabled = false
@@ -211,8 +181,18 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
                     photoCell?.imageView.alpha = 1
                 }
             }
+            if let cells = snapsView?.visibleCells {
+                for i in 0..<cells.count {
+                    let photoCell = cells[i] as? PhotoCell
+                    snapsView?.deselectItem(at: IndexPath(row: i, section: 0), animated: true)
+                    photoCell?.imageView.isUserInteractionEnabled = true
+                    photoCell?.imageView.alpha = 1
+                }
+            }
             cameraRollView?.allowsSelection = false
             cameraRollView?.allowsMultipleSelection = false
+            snapsView?.allowsSelection = false
+            snapsView?.allowsMultipleSelection = false
             sendButtonView.removeFromSuperview()
             bottomSelectView.removeFromSuperview()
         }

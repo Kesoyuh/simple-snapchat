@@ -234,7 +234,6 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     var startingFrame: CGRect?
-    var blackBackgroundView: UIView?
     var startingImageView: UIImageView?
     
     func handleDisplayStories(tapGesture: UITapGestureRecognizer) {
@@ -248,10 +247,9 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
         }
         
         
-        if let imageView = storyCell?.imageView {
+        if let imageView = storyCell?.imageView, storyCell?.imageView.image != nil {
             
             startingImageView = imageView
-            startingImageView?.isHidden = true
             startingFrame = imageView.superview?.convert(imageView.frame, to: nil)
             let zoomingImageView = UIImageView(frame: startingFrame!)
             zoomingImageView.contentMode = .scaleAspectFill
@@ -262,22 +260,22 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
             
             if let keyWindow = UIApplication.shared.keyWindow {
                 
-                blackBackgroundView = UIView(frame: keyWindow.frame)
-                blackBackgroundView?.backgroundColor = UIColor.black
-                blackBackgroundView?.alpha = 0
-                keyWindow.addSubview(blackBackgroundView!)
-                keyWindow.addSubview(zoomingImageView)
+                let blackBackgroundView = UIView(frame: keyWindow.frame)
+                blackBackgroundView.backgroundColor = UIColor.black
+                blackBackgroundView.alpha = 0
+                keyWindow.addSubview(blackBackgroundView)
+                blackBackgroundView.addSubview(zoomingImageView)
                 
                 UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     
-                    self.blackBackgroundView?.alpha = 1.0
+                    blackBackgroundView.alpha = 1.0
                     
                     let imageWidth: CGFloat? = self.startingImageView?.image?.size.width
                     let imageHeight: CGFloat? = self.startingImageView?.image?.size.height
                     
-                    let height = imageHeight! / imageWidth! * keyWindow.frame.width
+                    let height = imageHeight! / imageWidth! * blackBackgroundView.frame.width
                     
-                    zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+                    zoomingImageView.frame = CGRect(x: 0, y: 0, width: blackBackgroundView.frame.width, height: height)
                     zoomingImageView.center = keyWindow.center
                     }, completion: nil)
                 
@@ -306,11 +304,11 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
                     UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         
                         zoomingImageView.frame = self.startingFrame!
-                        self.blackBackgroundView?.alpha = 0
+                        zoomingImageView.superview?.alpha = 0
                         
                         }, completion: { (completed) in
+                            zoomingImageView.superview?.removeFromSuperview()
                             zoomingImageView.removeFromSuperview()
-                            self.startingImageView?.isHidden = false
                     })
                 }
             }
@@ -324,11 +322,11 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 
                 zoomingImageView.frame = self.startingFrame!
-                self.blackBackgroundView?.alpha = 0
+                zoomingImageView.superview?.alpha = 0
                 
                 }, completion: { (completed) in
+                    zoomingImageView.superview?.removeFromSuperview()
                     zoomingImageView.removeFromSuperview()
-                    self.startingImageView?.isHidden = false
             })
         }
         
