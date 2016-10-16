@@ -50,6 +50,8 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
         
     }
     
+    
+    
     func observeStories() {
         FIRDatabase.database().reference().child("stories").observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
@@ -176,6 +178,7 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
             if indexPath.row == 0 {
                 // public stories
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PublicAgencyCell
+                cell.storiesViewController = self
                 return cell
             } else {
                 // friends' story cell
@@ -211,6 +214,7 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
             } else if indexPath.row == 1 {
                 //public stories
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PublicAgencyCell
+                cell.storiesViewController = self
                 return cell
             } else {
                 // friends' story cell

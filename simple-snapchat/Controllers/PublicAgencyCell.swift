@@ -10,6 +10,7 @@ import UIKit
 
 class PublicAgencyCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    var storiesViewController: StoriesViewController?
     let cellId = "agencyCell"
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,7 +44,6 @@ class PublicAgencyCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
         backgroundColor = UIColor.clear
         
         addSubview(agenciesCollectionView)
-//        addSubview(separatorView)
         
         agenciesCollectionView.delegate = self
         agenciesCollectionView.dataSource = self
@@ -53,11 +53,14 @@ class PublicAgencyCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
         agenciesCollectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         agenciesCollectionView.heightAnchor.constraint(equalTo: heightAnchor, constant: 0).isActive = true
         
-//        separatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//        separatorView.topAnchor.constraint(equalTo: agenciesCollectionView.bottomAnchor).isActive = true
-//        separatorView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-//        separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
+    
+    func handleDisplayPublicStories(tapGesture: UITapGestureRecognizer) {
+        let layout = UICollectionViewFlowLayout()
+        let publicStoryController = PublicStoryController(collectionViewLayout: layout)
         
+        storiesViewController!.present(publicStoryController, animated: false, completion: nil)
+
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -65,7 +68,17 @@ class PublicAgencyCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AgencyCell
+        switch indexPath.item {
+        case 0:
+            cell.agency = "buzzfeed"
+            cell.imageView.image = UIImage(named: "buzzfeed")
+        default:
+            cell.agency = ""
+            cell.imageView.image = nil
+        }
+        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDisplayPublicStories)))
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -88,9 +101,10 @@ class AgencyCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var agency = String()
+    
     let imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "buzzfeed")
         iv.contentMode = .scaleAspectFill
         return iv
     }()
@@ -98,7 +112,7 @@ class AgencyCell: UICollectionViewCell {
     
     func setupViews() {
         addSubview(imageView)
+        isUserInteractionEnabled = true
         imageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        
     }
 }

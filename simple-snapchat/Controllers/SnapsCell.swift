@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 class SnapsCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -56,9 +57,13 @@ class SnapsCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionV
         do {
             let results = try context.fetch(fetchRequest)
             for snap in results {
-                if let image: UIImage = UIImage(data: snap.photo_data as! Data , scale: 1) {
-                    self.imgArray.append(image)
+                if snap.user_id == FIRAuth.auth()?.currentUser?.uid {
+                    if let image: UIImage = UIImage(data: snap.photo_data as! Data , scale: 1) {
+                        self.imgArray.append(image)
+                        snaps.append(snap)
+                    }
                 }
+                
             }
             
         }

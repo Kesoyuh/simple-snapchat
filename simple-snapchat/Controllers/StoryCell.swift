@@ -21,7 +21,6 @@ class StoryCell: UICollectionViewCell {
     
     let nameLable: UILabel = {
         let nl = UILabel()
-        nl.text = "Changchang Wang"
         nl.font = UIFont.systemFont(ofSize: 20)
         return nl
     }()

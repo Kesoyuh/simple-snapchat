@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000D50CB1DB36883003131DB /* PublicStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D50CA1DB36883003131DB /* PublicStoryController.swift */; };
+		000D50CD1DB37C8E003131DB /* PublicStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D50CC1DB37C8E003131DB /* PublicStory.swift */; };
+		000D50CF1DB39948003131DB /* PublicStoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D50CE1DB39948003131DB /* PublicStoryCell.swift */; };
 		004348EB1D98FCB600D3DE54 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348EA1D98FCB600D3DE54 /* AudioToolbox.framework */; };
 		004348ED1D98FCC200D3DE54 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348EC1D98FCC200D3DE54 /* CFNetwork.framework */; };
 		004348EF1D98FCCA00D3DE54 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348EE1D98FCCA00D3DE54 /* CoreGraphics.framework */; };
@@ -67,6 +70,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		000D50CA1DB36883003131DB /* PublicStoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PublicStoryController.swift; path = Controllers/PublicStoryController.swift; sourceTree = "<group>"; };
+		000D50CC1DB37C8E003131DB /* PublicStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PublicStory.swift; path = Model/PublicStory.swift; sourceTree = "<group>"; };
+		000D50CE1DB39948003131DB /* PublicStoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PublicStoryCell.swift; path = View/PublicStoryCell.swift; sourceTree = "<group>"; };
 		00198B171D99102A003AD328 /* simple-snapchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "simple-snapchat.entitlements"; sourceTree = "<group>"; };
 		004348EA1D98FCB600D3DE54 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		004348EC1D98FCC200D3DE54 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -224,6 +230,8 @@
 				004349101D9903CA00D3DE54 /* StoriesViewController.swift */,
 				004349011D99030100D3DE54 /* PublicAgencyCell.swift */,
 				006170121DA22118002354B3 /* StoryCell.swift */,
+				000D50CA1DB36883003131DB /* PublicStoryController.swift */,
+				000D50CE1DB39948003131DB /* PublicStoryCell.swift */,
 			);
 			name = Discover;
 			sourceTree = "<group>";
@@ -322,6 +330,7 @@
 				D4E2313C1DA4722D008B7FC4 /* photoModel.xcdatamodeld */,
 				0061700E1D9FCEC2002354B3 /* Story.swift */,
 				00E2E8D81DADCA380080CF24 /* SendingPhoto.swift */,
+				000D50CC1DB37C8E003131DB /* PublicStory.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -479,6 +488,7 @@
 			files = (
 				D4F528341D9D64F200781F78 /* PreviewController.swift in Sources */,
 				00E2E8D91DADCA380080CF24 /* SendingPhoto.swift in Sources */,
+				000D50CD1DB37C8E003131DB /* PublicStory.swift in Sources */,
 				D45026AC1DB340FF00463DA3 /* Photo+CoreDataProperties.swift in Sources */,
 				004349091D99030100D3DE54 /* TopViewController.swift in Sources */,
 				00C4571F1DA52381004075FD /* CamerollRollCell.swift in Sources */,
@@ -498,11 +508,13 @@
 				D471E51C1DAB682900FFC29A /* TestFetchImage.swift in Sources */,
 				00C4571D1DA5094E004075FD /* MemoriesController.swift in Sources */,
 				798136481D9BCFD50074ED25 /* User.swift in Sources */,
+				000D50CF1DB39948003131DB /* PublicStoryCell.swift in Sources */,
 				004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */,
 				798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */,
 				79DA44E91DA5DD4D00BBF518 /* AddedMeCell.swift in Sources */,
 				E55B25401DA3DF20005E5626 /* AddFriendsTableViewController.swift in Sources */,
 				79E7CFFD1D9EC01600F081E2 /* Extensions.swift in Sources */,
+				000D50CB1DB36883003131DB /* PublicStoryController.swift in Sources */,
 				79E7CFFA1D9E04AA00F081E2 /* MessageCell.swift in Sources */,
 				79E7CFF81D9CE95A00F081E2 /* ChatCell.swift in Sources */,
 				E57FF9DC1DA39E450038239B /* MyFriendsTableViewController.swift in Sources */,

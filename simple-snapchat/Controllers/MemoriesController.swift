@@ -107,10 +107,11 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
             let sendToController = SendToController()
             
             for i in 0..<selectedSnapsPhotos.count {
-                let cell = snapsView?.cellForItem(at: selectedSnapsPhotos[i]) as! PhotoCell
+                let photoCell = snapsView?.cellForItem(at: selectedSnapsPhotos[i]) as! PhotoCell
+                let snapsCell = snapsView?.superview as! SnapsCell
                 let photo = SendingPhoto()
-                photo.image = cell.imageView.image!
-                photo.timer = 3
+                photo.image = photoCell.imageView.image!
+                photo.timer = Int(snapsCell.snaps[selectedSnapsPhotos[i].item].timer)
                 sendToController.photos.append(photo)
             }
             for i in 0..<selectedCameraRollPhotos.count {
