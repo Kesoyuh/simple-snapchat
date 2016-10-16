@@ -42,7 +42,7 @@ class ImageWithTimerViewController: UIViewController {
 
         imageView.loadImageUsingCacheWithUrlString(urlString: imgUrl!)
         
-        var delayTime = Double(timer!)
+        let delayTime = Double(timer!)
         delay(delayTime){
             self.handleCancel()
         }

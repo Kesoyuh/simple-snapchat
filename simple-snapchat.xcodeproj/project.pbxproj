@@ -259,7 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				00513ED71DAA27C30097D967 /* SendToController.swift */,
-				791F308F1DAA8CE200001D90 /* GoogleMap */,
+				791F308F1DAA8CE200001D90 /* Map */,
 				004B00C51D9D0DF100C1C6E5 /* BottomView */,
 				79E7CFFB1D9EBFF200F081E2 /* Helpers */,
 				79E7CFF61D9CE93B00F081E2 /* View */,
@@ -290,12 +290,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		791F308F1DAA8CE200001D90 /* GoogleMap */ = {
+		791F308F1DAA8CE200001D90 /* Map */ = {
 			isa = PBXGroup;
 			children = (
 				791F30901DAA8CFB00001D90 /* MapViewController.swift */,
 			);
-			name = GoogleMap;
+			name = Map;
 			sourceTree = "<group>";
 		};
 		798136301D9928560074ED25 /* Chat */ = {
