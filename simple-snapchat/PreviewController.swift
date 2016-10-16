@@ -62,6 +62,13 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         
     }
     
+    @IBAction func showStickers(_ sender: UIButton) {
+        //self.performSegue(withIdentifier: "ha", sender: self)
+        
+        
+
+    }
+
     @IBOutlet weak var TextX: NSLayoutConstraint!
     
     @IBOutlet weak var TextY: NSLayoutConstraint!
@@ -79,6 +86,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     var pickoption  = [1,2,3,4,5,6,7,8]
     var image_sending :UIImage!
     var test_image : UIImage!
+    var lebel :UILabel!
     
     var isDrawing : Bool! = false
     var enabledrawing : Bool! = true
@@ -262,6 +270,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
             let contextManaged = self.getContext()
             let a = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: contextManaged) as! Photo
             a.photo_data = imageData3 as NSData?
+            a.timer = Int64(self.pic_duaration)
+            a.user_id = FIRAuth.auth()?.currentUser?.uid
+            print(a.user_id)
             do {
                 try contextManaged.save()
             } catch{
@@ -329,6 +340,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     
     func captureScreen() -> UIImage {
         self.ImageEdit.addSubview(self.text_on_image)
+        self.lebel = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 22))
+        self.lebel.text = "\u{1F603}"
+        self.ImageEdit.addSubview(self.lebel)
         UIGraphicsBeginImageContextWithOptions(self.ImageEdit.bounds.size, false,0.0);
         let context = UIGraphicsGetCurrentContext();
         self.ImageEdit.layer.render(in: context!)
@@ -336,13 +350,13 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         UIGraphicsEndImageContext()
         return image!
     }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "haha"{
-//            let testfetch = segue.destination as! Testcontroller
-//            
-//            //previewController.capturedPhoto = self.ImageCaptured
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "haha"{
+            let testfetch = segue.destination as! Testcontroller
+            
+            //previewController.capturedPhoto = self.ImageCaptured
+        }
+    }
     
 
 }
