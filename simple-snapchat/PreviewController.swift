@@ -62,11 +62,15 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         
     }
     
+    @IBOutlet weak var TextX: NSLayoutConstraint!
     
+    @IBOutlet weak var TextY: NSLayoutConstraint!
     @IBAction func Imagetextdrag(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self.view)
         sender.view?.center = CGPoint(x:sender.view!.center.x, y:sender.view!.center.y+translation.y)
         sender.setTranslation(CGPoint.init(x: 0.0, y: 0.0), in: self.view)
+        self.TextX.constant += translation.x
+        self.TextY.constant += translation.y
     }
     
     var capturedPhoto :UIImage!
@@ -93,6 +97,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         ImageEdit.image = capturedPhoto
         self.DurationPick.isHidden = true
         self.text_on_image.isHidden = true
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -248,7 +253,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         let saveQueue = DispatchQueue(label: "saveQueue",attributes: .concurrent)
         saveQueue.async {
             let image : UIImage! = self.ImageEdit.image
-            self.ImageEdit.addSubview(self.text_on_image)
+            //self.ImageEdit.addSubview(self.text_on_image)
             let image1 = self.captureScreen()
             self.image_sending = self.ResizeImage(image: image, targetSize: CGSize.init(width: 370.0, height: 647.0))
 //            let imageData = UIImageJPEGRepresentation(image, 0.1)
@@ -323,6 +328,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     }
     
     func captureScreen() -> UIImage {
+        self.ImageEdit.addSubview(self.text_on_image)
         UIGraphicsBeginImageContextWithOptions(self.ImageEdit.bounds.size, false,0.0);
         let context = UIGraphicsGetCurrentContext();
         self.ImageEdit.layer.render(in: context!)
