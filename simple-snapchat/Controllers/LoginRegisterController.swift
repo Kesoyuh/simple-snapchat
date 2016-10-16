@@ -58,6 +58,20 @@ class LoginRegisterController: UIViewController {
         return button
     }()
     
+    lazy var forgetPasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor(r: 255, g: 96, b: 136)
+        button.setTitle("", for: UIControlState())
+        button.setTitleColor(UIColor.white, for: UIControlState())
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(handleForgetPassword), for: .touchUpInside)
+        
+        return button
+    }()
+
+    
     let nameTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Name"
@@ -149,6 +163,37 @@ class LoginRegisterController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func handleForgetPassword (){
+        guard let email = emailTextField.text else{
+             self.displayAlert(title: "Invalid Form", message: "Please fill in your email!")
+             return
+        }
+        
+        FIRAuth.auth()?.sendPasswordReset(withEmail: email, completion: { (error) in
+    
+             if let error = error {
+                if let errCode = FIRAuthErrorCode(rawValue: error._code) {
+                    switch errCode {
+                    case .errorCodeInvalidEmail:
+                        self.displayAlert(title: "Invaild Email", message: "Please check your email format!")
+                    case .errorCodeNetworkError:
+                        self.displayAlert(title: "Netword Error", message: "No network connection!")
+                    case .errorCodeUserNotFound:
+                         self.displayAlert(title: "No User Found", message: "No user record found!")
+                    default:
+                        print("unknown error")
+                        print(error)
+                    }
+                }
+            }else{
+                self.emailTextField.text = ""
+                self.displayAlert(title: "Success", message: "Password reset email sent!")
+
+            }
+        })
+
+    }
+    
     func handleRegister() {
         guard let email = emailTextField.text, let username = nameTextField.text, let password = passwordTextField.text else {
             print("Form is not valid!")
@@ -235,8 +280,18 @@ class LoginRegisterController: UIViewController {
         
         // passwordTextField height
         passwordTextFieldHeightConstraint?.isActive = false
-        passwordTextFieldHeightConstraint = passwordTextField.heightAnchor.constraint(equalTo: inputContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        passwordTextFieldHeightConstraint = passwordTextField.heightAnchor.constraint(equalTo: inputContainerView.heightAnchor, multiplier:loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
         passwordTextFieldHeightConstraint?.isActive = true
+        
+        forgetPasswordHeightConstraint?.isActive = false
+        forgetPasswordHeightConstraint = forgetPasswordButton.heightAnchor.constraint(equalToConstant: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 50 : 0)
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 1 {
+            forgetPasswordButton.setTitle("", for: UIControlState())
+        }else{
+            forgetPasswordButton.setTitle("Forget Password", for: UIControlState())
+        }
+        forgetPasswordHeightConstraint?.isActive = true
+
         
     }
     
@@ -251,12 +306,15 @@ class LoginRegisterController: UIViewController {
         view.addSubview(loginRegisterSegmentedControl)
         view.addSubview(spinnerView)
         view.bringSubview(toFront: spinnerView)
+        view.addSubview(forgetPasswordButton)
         
         setupSpinnerView()
         setupInputContainerView()
         setupLoginRegisterButton()
         setupProfileImageView()
         setupLoginRegisterSegmentedControl()
+        
+        setupForgetPasswordButton()
     }
     
     func setupSpinnerView() {
@@ -280,6 +338,8 @@ class LoginRegisterController: UIViewController {
     var emailTextFieldHeightConstraint: NSLayoutConstraint?
     var passwordTextFieldHeightConstraint: NSLayoutConstraint?
     var nameSeparatorHeightConstraint: NSLayoutConstraint?
+    var forgetPasswordHeightConstraint: NSLayoutConstraint?
+    
     fileprivate func setupInputContainerView() {
         //setup constraints, x, y, width, height
         inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -338,6 +398,18 @@ class LoginRegisterController: UIViewController {
         loginRegisterButton.widthAnchor.constraint(equalTo: inputContainerView.widthAnchor).isActive = true
         loginRegisterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
+    
+    fileprivate func setupForgetPasswordButton() {
+        //setup constraints, x, y, width, height
+        forgetPasswordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        forgetPasswordButton.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 12).isActive = true
+        forgetPasswordButton.widthAnchor.constraint(equalTo: inputContainerView.widthAnchor).isActive = true
+        forgetPasswordHeightConstraint = forgetPasswordButton.heightAnchor.constraint(equalToConstant: 0)
+        forgetPasswordHeightConstraint?.isActive = true
+        forgetPasswordHeightConstraint?.isActive = true
+
+    }
+
     
     fileprivate func setupProfileImageView() {
         //setup constraints, x, y, width, height
