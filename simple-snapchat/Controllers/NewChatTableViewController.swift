@@ -16,11 +16,11 @@ class NewChatTableViewController: UITableViewController {
     let cellID = "newChatCellId"
     var chatListController: ChatListTableViewController?
     
-     //************************************************************************TODO:Currently show all users, latter show firnds
+    //************************************************************************TODO:Currently show all users, latter show firnds
     var friends = [User]()
     var filterFriends = [User]()
     let searchController = UISearchController(searchResultsController: nil)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target:self, action: #selector(handleCancel))
@@ -36,8 +36,8 @@ class NewChatTableViewController: UITableViewController {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-
-  }
+        
+    }
     
     func filterContentForSearchText(searchText: String, scope: String = "All"){
         filterFriends = friends.filter({ (friend) -> Bool in
@@ -71,16 +71,16 @@ class NewChatTableViewController: UITableViewController {
                 }  }, withCancel: nil)
         }
     }
-
+    
     func handleCancel(){
-       /* let usersController = usersTableViewController()
-        let navController = UINavigationController(rootViewController: usersController)
-        present(navController, animated:true, completion:nil)*/
+        /* let usersController = usersTableViewController()
+         let navController = UINavigationController(rootViewController: usersController)
+         present(navController, animated:true, completion:nil)*/
         
         dismiss(animated: true, completion: nil)
-
+        
     }
-
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -107,17 +107,17 @@ class NewChatTableViewController: UITableViewController {
         return cell
     }
     
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true) {
             let user: User?
-                
-           if self.searchController.searchBar.text != ""{
             
-                    user = self.filterFriends[indexPath.row]
-
-                    self.handleCancel()
-                }else{
+            if self.searchController.searchBar.text != ""{
+                
+                user = self.filterFriends[indexPath.row]
+                
+                self.handleCancel()
+            }else{
                 user = self.friends[indexPath.row]
             }
             

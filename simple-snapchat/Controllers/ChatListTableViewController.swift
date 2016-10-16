@@ -13,11 +13,10 @@ class ChatListTableViewController: UITableViewController {
     
     let cellId = "ChatCellId"
     var uid : String?
-    var messages = [Message]()
-    var messagesDictionary = [String: Message]()
-    
+    var friends = [Friend]()
+    var filterFriends = [Friend]()
     var searchController = UISearchController(searchResultsController: nil)
-    var filterMessages = [Message]()
+    
     
     
     override func viewDidLoad() {
@@ -32,7 +31,7 @@ class ChatListTableViewController: UITableViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         navigationController?.navigationBar.isHidden = false
-        tableView.register(ChatCell.self, forCellReuseIdentifier: cellId)
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -45,129 +44,114 @@ class ChatListTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if uid != FIRAuth.auth()?.currentUser?.uid{
-            messages.removeAll()
-            messagesDictionary.removeAll()
-            uid = FIRAuth.auth()?.currentUser?.uid
-            observeUserMessages()
-        }
-
+        friends.removeAll()
+        uid = FIRAuth.auth()?.currentUser?.uid
+        fetchFriends()
     }
     
     func filterContentForSearch(searchText: String, scope: String = "All"){
-        
-        filterMessages = messages.filter({ (message) -> Bool in
-            let index = messages.index(of: message)! as Int
-            let indexPath = IndexPath(row: index, section: 0)
-            if let cell = tableView.cellForRow(at: indexPath) as? ChatCell {
-                  return (cell.textLabel?.text!.localizedLowercase.contains(searchText.localizedLowercase))!
-            }else {
-                return false
-            }
-//            return (cell.textLabel?.text!.localizedLowercase.contains(searchText.localizedLowercase))!
-     })
-        print("----FILTER MESSAGES-------",filterMessages)
+        filterFriends = friends.filter({ (friend) -> Bool in
+            return (friend.name?.localizedLowercase.contains(searchText.localizedLowercase))!
+        })
+        print("This is the filter function", filterFriends)
         tableView.reloadData()
+        
     }
     
-
     
     
-    func observeUserMessages(){
+    
+    func fetchFriends(){
         guard  let uid = FIRAuth.auth()?.currentUser?.uid else {
             return
         }
         
-        let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
+        let ref = FIRDatabase.database().reference().child("friendship-level").child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
-            let userID = snapshot.key
-            FIRDatabase.database().reference().child("user-messages").child(uid).child(userID).observe(.childAdded, with: { (snapshot) in
-                let messageID = snapshot.key
-                self.fetchMessageWithID(messageID: messageID)
-                }, withCancel: nil)
-        })
-    }
-    
-    private func fetchMessageWithID(messageID: String){
-        let msgRef = FIRDatabase.database().reference().child("messages").child(messageID)
-        msgRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject]{
-                let message = Message(dictionary: dictionary)
-                // Group messages by id
-                if let chatPartnerId = message.chatPartnerId() {
-                    self.messagesDictionary[chatPartnerId] = message
+            print("Here I fetch the friends",snapshot)
+            let thisFriend = Friend()
+            let friendID = snapshot.key
+            thisFriend.id = friendID
+            thisFriend.friendLevel = snapshot.value as! Int?
+            let friendRef = FIRDatabase.database().reference().child("users").child(friendID)
+            friendRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                    thisFriend.email = dictionary["email"] as! String?
+                    thisFriend.name = dictionary["name"] as! String?
+                    self.friends.append(thisFriend)
+                    
+                    DispatchQueue.global().async {
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                            print("Here I reload the data!")
+                        }
+                    }
                 }
-                self.attemptReloadOfTable()
-            }
-            }, withCancel: nil)
-    }
-    
- 
-    
-    private func attemptReloadOfTable(){
-        
-        self.timer?.invalidate()
-        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
-    }
-    
-    var timer: Timer?
-    func handleReloadTable(){
-        self.messages = Array(self.messagesDictionary.values)
-        //Sort the messages by timestamp
-        self.messages.sort(by: {
-            (m1,m2) ->Bool in
-            return (m1.timestamp?.intValue)! > (m2.timestamp?.intValue)!
+            })
+            
         })
-        
-        DispatchQueue.global().async {
-            DispatchQueue.main.async {
-                print("We reloaded the table")
-                self.tableView.reloadData()
-                
-            }
-        }
     }
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
-            return filterMessages.count
+            return filterFriends.count
         }
         
-        return messages.count
+        return friends.count
     }
     
     
     // Display value for cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatCell
-        let message: Message
+        let friend : Friend
         
-        if searchController.isActive && searchController.searchBar.text != ""{
-            message = filterMessages[indexPath.row]
-            print("Update filter messages cell!!!")
-        }else{
-            message = messages[indexPath.row]
+        if searchController.isActive && searchController.searchBar.text != "" {
+            friend = filterFriends[indexPath.row]
+        }else {
+            friend = friends[indexPath.row]
         }
         
-        cell.message = message
+        cell.textLabel?.text = friend.name
+        cell.detailTextLabel?.text = friend.getFriendshipLevel()
+        
         return cell
         
     }
     
     //Start a chat --> ChatLogController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let message: Message
-        print("When I want to start a chat, the index is :", indexPath)
-        if searchController.isActive {
-         message = filterMessages[indexPath.row]
+        let friend : Friend
+        if searchController.isActive  && searchController.searchBar.text != "" {
+            print("This is a filter friend!There are ", filterFriends.count, " the index is ", indexPath.row)
+            friend = filterFriends[indexPath.row]
+            print(filterFriends)
         }else{
-            message = messages[indexPath.row]
+            print("This is a friend! There are ", friends.count, " the index is ", indexPath.row)
+            friend = friends[indexPath.row]
+            print(friends)
         }
-        guard let chatPartnerId = message.chatPartnerId() else {
+        
+        guard let chatPartnerId = friend.id else {
             return
         }
-        showChatLogControllerForUser(uid: chatPartnerId)
+        if searchController.isActive  && searchController.searchBar.text != "" {
+            searchController.dismiss(animated: true) {
+                self.searchController.searchBar.text = ""
+                self.searchController.isActive = false
+                print("I want to chat with filter friend",indexPath.row, "in", self.filterFriends.count)
+                print(self.filterFriends)
+                self.showChatLogControllerForUser(uid: chatPartnerId)
+            }
+        }else{
+            print("I want to chat with friend",indexPath.row, "in", friends.count)
+            print(friends)
+            self.showChatLogControllerForUser(uid: chatPartnerId)
+        }
+        
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -214,11 +198,7 @@ extension ChatListTableViewController : UISearchResultsUpdating{
     public func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearch(searchText: searchController.searchBar.text!)
     }
-
+    
     
 }
 
-/**TODO: Change status bar color Doesn't work!!!!!!
- override var preferredStatusBarStyle: UIStatusBarStyle {
- return .lightContent
- }**/

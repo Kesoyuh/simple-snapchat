@@ -46,6 +46,7 @@
 		798136361D9977010074ED25 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136351D9977000074ED25 /* ChatLogController.swift */; };
 		798136471D9BCFD50074ED25 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136451D9BCFD50074ED25 /* Message.swift */; };
 		798136481D9BCFD50074ED25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136461D9BCFD50074ED25 /* User.swift */; };
+		7993CE781DB33A93008F44D4 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7993CE771DB33A93008F44D4 /* Friend.swift */; };
 		799B6F3C1DADC5D20029F2F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 799B6F3B1DADC5D20029F2F0 /* GoogleService-Info.plist */; };
 		79DA44E91DA5DD4D00BBF518 /* AddedMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */; };
 		79E7CFF51D9C259F00F081E2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */; };
@@ -108,6 +109,7 @@
 		798136351D9977000074ED25 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLogController.swift; path = Controllers/ChatLogController.swift; sourceTree = "<group>"; };
 		798136451D9BCFD50074ED25 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
 		798136461D9BCFD50074ED25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
+		7993CE771DB33A93008F44D4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Friend.swift; path = Model/Friend.swift; sourceTree = "<group>"; };
 		799B6F3B1DADC5D20029F2F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddedMeCell.swift; path = View/AddedMeCell.swift; sourceTree = "<group>"; };
 		79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Controllers/CameraViewController.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				D4E2313C1DA4722D008B7FC4 /* photoModel.xcdatamodeld */,
 				0061700E1D9FCEC2002354B3 /* Story.swift */,
 				00E2E8D81DADCA380080CF24 /* SendingPhoto.swift */,
+				7993CE771DB33A93008F44D4 /* Friend.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */,
 				79DA44E91DA5DD4D00BBF518 /* AddedMeCell.swift in Sources */,
 				E55B25401DA3DF20005E5626 /* AddFriendsTableViewController.swift in Sources */,
+				7993CE781DB33A93008F44D4 /* Friend.swift in Sources */,
 				79E7CFFD1D9EC01600F081E2 /* Extensions.swift in Sources */,
 				79E7CFFA1D9E04AA00F081E2 /* MessageCell.swift in Sources */,
 				79E7CFF81D9CE95A00F081E2 /* ChatCell.swift in Sources */,
@@ -578,7 +582,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -621,7 +625,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -644,7 +648,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat111";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat111FH";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -665,7 +669,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat111";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat111FH";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -422,6 +422,48 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
             senderMsgRef.updateChildValues([childRef.key : 1])
             let receiverMsgRef = FIRDatabase.database().reference().child("user-messages").child(toID).child(fromID)
             receiverMsgRef.updateChildValues([childRef.key : 1])
+            
+            //Update friendship level for both sender and receiver
+            let senderFriendLevel = FIRDatabase.database().reference().child("friendship-level").child(fromID)
+            senderFriendLevel.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if var dictionary = snapshot.value as? [String: Int]{
+                    // check if there is the child for toID
+                    if let count = dictionary[toID] {
+                        dictionary[toID] = count + 1
+                    }else{
+                        dictionary[toID] = 1
+                    }
+                    senderFriendLevel.updateChildValues(dictionary)
+                    
+                }else{
+                    //There is no data, add the first one
+                    let new = [toID : 1]
+                    senderFriendLevel.updateChildValues(new)
+                }
+            })
+            
+            let receiverFriendLevel = FIRDatabase.database().reference().child("friendship-level").child(toID)
+            receiverFriendLevel.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if var dictionary = snapshot.value as? [String: Int]{
+                    // check if there is the child for toID
+                    if let count = dictionary[fromID] {
+                        dictionary[fromID] = count + 1
+                    }else{
+                        dictionary[fromID] = 1
+                    }
+                    receiverFriendLevel.updateChildValues(dictionary)
+                    
+                }else{
+                    //There is no data, add the first one
+                    let new = [fromID : 1]
+                    receiverFriendLevel.updateChildValues(new)
+                }
+            })
+
+        
+            
     }
         
         self.inputTextField.text = nil
