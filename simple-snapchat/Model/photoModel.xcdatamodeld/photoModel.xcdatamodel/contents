@@ -4,7 +4,7 @@
         <attribute name="photo_data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="photo_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timer" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="user_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Photo" positionX="-63" positionY="-18" width="128" height="105"/>

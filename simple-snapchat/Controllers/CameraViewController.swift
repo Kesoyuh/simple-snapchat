@@ -24,8 +24,8 @@ class CameraViewController : UIViewController {
     var cameraFacingback: Bool = true
     var ImageCaptured: UIImage!
     var cameraState:Bool = true
+    var flashOn:Bool = false
     
-
     
     @IBOutlet var previewView: UIView!
     
@@ -64,8 +64,7 @@ class CameraViewController : UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    
+
     
     func loadCamera() {
         captureSession = AVCaptureSession()
@@ -91,6 +90,7 @@ class CameraViewController : UIViewController {
         }
         
         currentDevice = backCamera
+        configureFlash()
         //var error:NSError?
         
         //create a capture device input object from the back and front camera
@@ -148,7 +148,14 @@ class CameraViewController : UIViewController {
     }
     
     @IBAction func ChangeFlash(_ sender: UIButton){
-        
+        flashOn = !flashOn
+        if flashOn {
+            self.Flash.setImage(UIImage(named: "Flash_on"), for: UIControlState.normal)
+        }
+        else {
+            self.Flash.setImage(UIImage(named: "Flash_off"), for: UIControlState.normal)
+        }
+            self.configureFlash()
     }
     
     
@@ -166,7 +173,7 @@ class CameraViewController : UIViewController {
             displayFrontCamera()
         }
     }
-    
+    // Load back camera
     func displayBackCamera(){
         if captureSession.canAddInput(captureDeviceInputBack) {
             captureSession.addInput(captureDeviceInputBack)
@@ -178,7 +185,7 @@ class CameraViewController : UIViewController {
         }
         
     }
-    
+    // Load front camera
     func displayFrontCamera(){
         if captureSession.canAddInput(captureDeviceInputFront) {
             captureSession.addInput(captureDeviceInputFront)
@@ -188,6 +195,75 @@ class CameraViewController : UIViewController {
                 captureSession.addInput(captureDeviceInputFront)
             }
         }
+    }
+    // Configure Flash
+    func configureFlash(){
+        do {
+            try backCamera.lockForConfiguration()
+        } catch {
+            
+        }
+        if backCamera.hasFlash {
+            if flashOn {
+                if backCamera.isFlashModeSupported(AVCaptureFlashMode.on){
+                backCamera.flashMode = AVCaptureFlashMode.on
+                }
+            }else {
+                if backCamera.isFlashModeSupported(AVCaptureFlashMode.off){
+                    backCamera.flashMode = AVCaptureFlashMode.off
+                    //flashOn = false
+                }
+                
+            }
+        }
+        backCamera.unlockForConfiguration()
+    }
+    
+    //Camera focusing
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        var touchpoint = touches.first
+        var screenSize = previewView.bounds.size
+        var location = touchpoint?.location(in: self.view)
+        var x = (touchpoint?.location(in: self.view).x)! / self.view.bounds.width
+        var y = (touchpoint?.location(in: self.view).y)! / self.view.bounds.height
+        
+        var locationX = location?.x
+        var locationY = location?.y
+        
+        focusOnPoint(x: x, y: y)
+    }
+    
+    func focusOnPoint(x: CGFloat, y:CGFloat){
+        let focusPoint = CGPoint(x: x, y: y)
+        if cameraFacingback {
+            currentDevice = backCamera
+        }
+        else {
+            currentDevice = frontCamera
+        }
+        do {
+            try currentDevice.lockForConfiguration()
+        }catch {
+            
+        }
+        
+        if currentDevice.isFocusPointOfInterestSupported{
+            
+            currentDevice.focusPointOfInterest = focusPoint
+        }
+        if currentDevice.isFocusModeSupported(AVCaptureFocusMode.autoFocus)
+        {
+            currentDevice.focusMode = AVCaptureFocusMode.autoFocus
+        }
+        if currentDevice.isExposurePointOfInterestSupported
+        {
+            currentDevice.exposurePointOfInterest = focusPoint
+        }
+        if currentDevice.isExposureModeSupported(AVCaptureExposureMode.autoExpose) {
+            currentDevice.exposureMode = AVCaptureExposureMode.autoExpose
+        }
+        currentDevice.unlockForConfiguration()
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

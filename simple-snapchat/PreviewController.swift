@@ -16,7 +16,8 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     @IBOutlet weak var ImageEdit: UIImageView!
     @IBOutlet weak var CancleButton: UIButton!
     @IBOutlet weak var save: UIButton!
-    
+    @IBOutlet weak var text_on_image: UITextView!
+    @IBOutlet weak var Image_Text: UIButton!
     @IBOutlet weak var Draw: UIButton!
     @IBAction func selectDuration(_ sender: AnyObject) {
         self.DurationPick.isHidden = false
@@ -48,15 +49,48 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         }
     }
     
+    @IBAction func Image_edit_text(_ sender: UIButton) {
+        if enabletexting == true {
+            enabletexting = false
+            self.text_on_image.becomeFirstResponder()
+            self.text_on_image.isHidden = false
+        } else {
+            enabletexting = true
+            self.text_on_image.endEditing(true)
+            self.text_on_image.isHidden = true
+        }
+        
+    }
+    
+    @IBAction func showStickers(_ sender: UIButton) {
+        //self.performSegue(withIdentifier: "ha", sender: self)
+        
+        
+
+    }
+
+    @IBOutlet weak var TextX: NSLayoutConstraint!
+    
+    @IBOutlet weak var TextY: NSLayoutConstraint!
+    @IBAction func Imagetextdrag(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: self.view)
+        sender.view?.center = CGPoint(x:sender.view!.center.x, y:sender.view!.center.y+translation.y)
+        sender.setTranslation(CGPoint.init(x: 0.0, y: 0.0), in: self.view)
+        self.TextX.constant += translation.x
+        self.TextY.constant += translation.y
+    }
+    
     var capturedPhoto :UIImage!
     var pictureid : Int = 0
     var pic_duaration = 3
     var pickoption  = [1,2,3,4,5,6,7,8]
     var image_sending :UIImage!
-    
+    var test_image : UIImage!
+    var lebel :UILabel!
     
     var isDrawing : Bool! = false
     var enabledrawing : Bool! = true
+    var enabletexting : Bool! = true
     var finalPoint: CGPoint!
     var lineWidth: CGFloat = 4.0
     
@@ -70,6 +104,8 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         DurationPick.delegate = self
         ImageEdit.image = capturedPhoto
         self.DurationPick.isHidden = true
+        self.text_on_image.isHidden = true
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,7 +129,8 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         
         let imageName = NSUUID().uuidString
         let storageRef = FIRStorage.storage().reference().child("snaps").child(imageName)
-        let image = ImageEdit.image!
+        //let image = ImageEdit.image!
+        let image = self.captureScreen()
         let uploadData = UIImagePNGRepresentation(image)
         
         storageRef.put(uploadData!, metadata: nil, completion: { (metaData, error) in
@@ -133,22 +170,35 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.isDrawing = false
         self.DurationPick.isHidden = true
+        if self.text_on_image.hasText
+        {
+            //self.ImageEdit.addSubview(self.text_on_image)
+            self.enabletexting = true
+            self.text_on_image.endEditing(false)
+            
+        } else {
+            self.text_on_image.isHidden = true
+            self.enabletexting = true
+            self.text_on_image.endEditing(false)
+
+        }
+        self.text_on_image.endEditing(true)
         if let e = event?.touches(for: self.ImageEdit){
         if let touch = e.first {
             finalPoint = touch.preciseLocation(in: self.ImageEdit)
         }
-    }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.isDrawing = true
         if let e = event?.touches(for: self.ImageEdit){
         if let touch = e.first{
-            print(touch.view)
             if let d = self.ImageEdit {
                 let currentCoordinate = touch.preciseLocation(in: d)
-                UIGraphicsBeginImageContext(d.frame.size)
-                d.image?.draw(in: CGRect.init(x: 0, y: 0, width: d.frame.width, height: d.frame.height))
+                //UIGraphicsBeginImageContext(d.bounds.size)
+                UIGraphicsBeginImageContextWithOptions(d.bounds.size, false, 0.0)
+                d.image?.draw(in: CGRect.init(x: 0, y: 0, width: d.bounds.width, height: d.bounds.height))
                 UIGraphicsGetCurrentContext()?.move(to: finalPoint)
                 UIGraphicsGetCurrentContext()?.addLine(to: currentCoordinate)
                 UIGraphicsGetCurrentContext()?.setLineCap(CGLineCap.round)
@@ -164,26 +214,26 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if(!self.isDrawing){
-        if let touch = touches.first{
-            print(touch.view)
-            if let d = ImageEdit {
-                let currentCoordinate = touch.preciseLocation(in: d)
-                UIGraphicsBeginImageContext(d.frame.size)
-                d.image?.draw(in: CGRect.init(x: 0, y: 0, width: d.frame.width, height: d.frame.height))
-                UIGraphicsGetCurrentContext()?.move(to: finalPoint)
-                UIGraphicsGetCurrentContext()?.addLine(to: currentCoordinate)
-                UIGraphicsGetCurrentContext()?.setLineCap(CGLineCap.round)
-                UIGraphicsGetCurrentContext()?.setLineWidth(lineWidth)
-                UIGraphicsGetCurrentContext()?.setStrokeColor(red: red, green: green, blue: blue, alpha: 1.0)
-                UIGraphicsGetCurrentContext()?.strokePath()
-                d.image = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-            }
-        }
-        }
-    }
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if(!self.isDrawing){
+//        if let touch = touches.first{
+//            print(touch.view)
+//            if let d = ImageEdit {
+//                let currentCoordinate = touch.preciseLocation(in: d)
+//                UIGraphicsBeginImageContext(d.frame.size)
+//                d.image?.draw(in: CGRect.init(x: 0, y: 0, width: d.frame.width, height: d.frame.height))
+//                UIGraphicsGetCurrentContext()?.move(to: finalPoint)
+//                UIGraphicsGetCurrentContext()?.addLine(to: currentCoordinate)
+//                UIGraphicsGetCurrentContext()?.setLineCap(CGLineCap.round)
+//                UIGraphicsGetCurrentContext()?.setLineWidth(lineWidth)
+//                UIGraphicsGetCurrentContext()?.setStrokeColor(red: red, green: green, blue: blue, alpha: 1.0)
+//                UIGraphicsGetCurrentContext()?.strokePath()
+//                d.image = UIGraphicsGetImageFromCurrentImageContext()
+//                UIGraphicsEndImageContext()
+//            }
+//        }
+//        }
+//    }
     
     // Duration pick view
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -211,13 +261,18 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         let saveQueue = DispatchQueue(label: "saveQueue",attributes: .concurrent)
         saveQueue.async {
             let image : UIImage! = self.ImageEdit.image
+            //self.ImageEdit.addSubview(self.text_on_image)
+            let image1 = self.captureScreen()
             self.image_sending = self.ResizeImage(image: image, targetSize: CGSize.init(width: 370.0, height: 647.0))
-
-            let imageData = UIImageJPEGRepresentation(image, 0.1)
-            let imageData2 = UIImageJPEGRepresentation(self.image_sending, 1)
+//            let imageData = UIImageJPEGRepresentation(image, 0.1)
+//            let imageData2 = UIImageJPEGRepresentation(self.image_sending, 1)
+            let imageData3 = UIImageJPEGRepresentation(image1, 0.1)
             let contextManaged = self.getContext()
             let a = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: contextManaged) as! Photo
-            a.photo_data = imageData2 as NSData?
+            a.photo_data = imageData3 as NSData?
+            a.timer = Int64(self.pic_duaration)
+            a.user_id = FIRAuth.auth()?.currentUser?.uid
+            print(a.user_id)
             do {
                 try contextManaged.save()
             } catch{
@@ -282,13 +337,26 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         }
         return context!
     }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "haha"{
-//            let testfetch = segue.destination as! Testcontroller
-//            
-//            //previewController.capturedPhoto = self.ImageCaptured
-//        }
-//    }
+    
+    func captureScreen() -> UIImage {
+        self.ImageEdit.addSubview(self.text_on_image)
+        self.lebel = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 22))
+        self.lebel.text = "\u{1F603}"
+        self.ImageEdit.addSubview(self.lebel)
+        UIGraphicsBeginImageContextWithOptions(self.ImageEdit.bounds.size, false,0.0);
+        let context = UIGraphicsGetCurrentContext();
+        self.ImageEdit.layer.render(in: context!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "haha"{
+            let testfetch = segue.destination as! Testcontroller
+            
+            //previewController.capturedPhoto = self.ImageCaptured
+        }
+    }
     
 
 }
