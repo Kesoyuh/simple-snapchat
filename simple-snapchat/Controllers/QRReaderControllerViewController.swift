@@ -93,8 +93,6 @@ class QRReaderControllerViewController: UIViewController , AVCaptureMetadataOutp
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             found(userID: readableObject.stringValue);
         }
-        
-        dismiss(animated: true)
     }
     
     func found(userID: String) {
@@ -112,70 +110,39 @@ class QRReaderControllerViewController: UIViewController , AVCaptureMetadataOutp
                     if snapshot.value != nil {
                         if let dictionary = snapshot.value as? [String: AnyObject]{
                             print("Dictionary is ", dictionary)
-                            name = dictionary["name"] as! String
+                            name = dictionary["name"] as? String
                             
                             let friendRef = FIRDatabase.database().reference().child("friendship").child(userID)
                             friendRef.observeSingleEvent(of: .value, with: { (snapshot) in
                                 if let dictionary = snapshot.value as? [String:AnyObject] {
                                     if (dictionary[myID!] != nil && dictionary[myID!] as? Int == 2)  {
-                                        
-                                        let alertView = UIAlertView();
-                                        alertView.addButton(withTitle: "Done");
-                                        alertView.title = "Wrong Operation";
-                                        alertView.message = "You and \(name!) already are friends.";
-                                        alertView.show();
+                                        self.displayAlert(title: "Wrong Operation", message: "You and \(name!) already are friends.")
                                         
                                     }else{
                                         self.sendRequest(id: userID)
-                                        let alertView = UIAlertView();
-                                        alertView.addButton(withTitle: "Done");
-                                        alertView.title = "Request is sent!";
-                                        alertView.message = "You sent a request to \(name!)! Wait for the confirmation...";
-                                        alertView.show();
+                                        self.displayAlert(title: "Request is sent!", message: "You sent a request to \(name!)! Wait for the confirmation..")
                                     }
                                 }else{
-                                    
+                                    self.displayAlert(title: "Request is sent!", message: "You sent a request to \(name!)! Wait for the confirmation..")
                                     self.sendRequest(id: userID)
-                                    let alertView = UIAlertView();
-                                    alertView.addButton(withTitle: "Done");
-                                    alertView.title = "Request is sent!";
-                                    alertView.message = "You sent a request to \(name!)! Wait for the confirmation...";
-                                    alertView.show();
                                     
                                 }
                             })
                             
                         }else{
-                           
-                            let alertView = UIAlertView();
-                            alertView.addButton(withTitle: "Done");
-                            alertView.title = "Invalid Cose";
-                            alertView.message = "This coede is not invalid!";
-                            alertView.show();
+                            self.displayAlert(title: "Invalid Cose", message: "This coede is not invalid!")
                         }
                     }
                     
                     
                 })
             }else{
-                let alertView = UIAlertView();
-                alertView.addButton(withTitle: "Done");
-                alertView.title = "Wrong Operation";
-                alertView.message = "You cannot send request to yourself!";
-                alertView.show();
-                
+                self.displayAlert(title: "Wrong Operation", message: "You cannot send request to yourself!")
+
             }
-
         }else{
-            print("This string contains special characters.")
-            let alertView = UIAlertView();
-            alertView.addButton(withTitle: "Done");
-            alertView.title = "Invalid Cose";
-            alertView.message = "This coede is not invalid!";
-            alertView.show();
+            self.displayAlert(title: "Invalid Cose", message: "This coede is not invalid!")
         }
-        
-
     }
     
     func isValidInput(inputID: String) -> Bool{
@@ -190,7 +157,6 @@ class QRReaderControllerViewController: UIViewController , AVCaptureMetadataOutp
     }
     
     func sendRequest(id:String){
-        
         let fromID = (FIRAuth.auth()?.currentUser?.uid)!
         let toID = id
         
@@ -205,22 +171,15 @@ class QRReaderControllerViewController: UIViewController , AVCaptureMetadataOutp
         
     }
     
-//    func getUsername(id: String) -> String? {
-//            var name : String?
-//            let userRef = FIRDatabase.database().reference().child("users").child(id)
-//                userRef.observeSingleEvent(of: .value, with: { (snapshot) in
-//                    if let dictionary = snapshot.value as? [String: AnyObject]{
-//                        print(dictionary)
-//                        name = dictionary["name"] as? String
-//                        print(name)
-//                    }
-//                })
-//        
-//            return name
-//          
-//        
-//        }
-    
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: {
+            (alert: UIAlertAction!) in self.closeScanner()
+        })
+        alert.addAction(defaultAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
     override var prefersStatusBarHidden: Bool {
         return true
     }

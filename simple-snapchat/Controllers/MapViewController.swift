@@ -55,6 +55,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
             mapView.showsUserLocation = true
+
         }
         
         if CLLocationCoordinate2DIsValid(partnerLocation) {
@@ -68,9 +69,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
             mapView.addAnnotation(annotation)
             
             // Change Button
-            myBtn.setTitle("Show Direction", for: .normal)
+            myBtn.setTitle("Calculate Distance", for: .normal)
 
         }
+        
+       
     }
 
     
@@ -109,7 +112,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
     func buttonTapped(){
 
         if CLLocationCoordinate2DIsValid(partnerLocation){
-            showDirection(source: location.coordinate, destination: partnerLocation)
+            calculateDistance(source: location.coordinate, destination: partnerLocation)
         }else{
             shareLocation()
         }
@@ -141,14 +144,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
     }
     
     
-    func showDirection(source: CLLocationCoordinate2D, destination: CLLocationCoordinate2D){
-        // Show direction
+    func calculateDistance(source: CLLocationCoordinate2D, destination: CLLocationCoordinate2D){
+        // Show Pin
         let annotation = MKPointAnnotation()
         annotation.coordinate   = source
         annotation.title        = "My location"
         mapView.addAnnotation(annotation)
-       
-        
+
 
         let request = MKDirectionsRequest()
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: source, addressDictionary: nil))
@@ -159,23 +161,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
         let directions = MKDirections(request: request)
         
         directions.calculate { [unowned self] response, error in
+            var shortestDistance : CLLocationDistance
             guard let unwrappedResponse = response else { return }
-            
-            for route in unwrappedResponse.routes {
-                print("Fine a rout :", route)
-                self.mapView.add(route.polyline, level: MKOverlayLevel.aboveRoads)
+            shortestDistance = (unwrappedResponse.routes.first?.distance)!
+            for route in unwrappedResponse.routes{
+                    if route.distance < shortestDistance {
+                        shortestDistance = route.distance
+                    }
+                
+                self.mapView.add(route.polyline, level: MKOverlayLevel.aboveLabels)
                 self.mapView.setVisibleMapRect(route.polyline.boundingMapRect , animated: true)
+                
             }
             
+            let txt = "The distance between you two is \(shortestDistance) meters!"
+            self.displayAlert(title: "Distance", message: txt)
+
         }
+        
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+
         renderer.strokeColor = UIColor.red
         renderer.lineWidth = 5
         return renderer
     }
+    
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(defaultAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
 }
 
 
