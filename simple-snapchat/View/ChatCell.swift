@@ -46,14 +46,6 @@ class ChatCell: UITableViewCell{
             ref.observeSingleEvent(of: .value, with: {(snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     self.textLabel?.text =  dictionary["name"] as? String
-                    //Load imgae
-                    //TODO: Add profile image OR status image?
-                    if let imageURL = dictionary["imageURL"] as? URL
-                    {
-                        self.downloadImage(imageView: self.leftImageView, url: imageURL)
-                    }else{
-                        //print("NO Image found for this cell.")
-                    }
                     
                 }
                 
@@ -112,30 +104,6 @@ class ChatCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    //---------------------Downloading Imgae from URL------------------------------------------
-    //a method with a completion handler to get the image data from your url
-    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
-        URLSession.shared.dataTask(with: url) {
-            (data, response, error) in
-            completion(data, response, error)
-            }.resume()
-    }
-    //Create a method to download the image (start the task)
-    func downloadImage(imageView: UIImageView, url: URL) {
-        print("Download Started")
-        getDataFromUrl(url: url) { (data, response, error)  in
-            DispatchQueue.main.sync() { () -> Void in
-                guard let data = data, error == nil else { return }
-                print(response?.suggestedFilename ?? url.lastPathComponent)
-                print("Download Finished")
-                imageView.image = UIImage(data: data)
-            }
-        }
-    }
-    
-    //--------------------------------------------------------------------------------------------
-    
-
+ 
     
 }

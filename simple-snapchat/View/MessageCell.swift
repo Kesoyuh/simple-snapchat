@@ -16,7 +16,9 @@ class MessageCell: UICollectionViewCell {
     var lng: String?
     var timer: Int?
     var openTimes: Int?
+    
     var messageID: String?
+    var index : Int?
     var imageURL : String?
     
     let textView: UITextView = {
@@ -73,13 +75,10 @@ class MessageCell: UICollectionViewCell {
     }
     
     func handleTimer(tapGesture: UITapGestureRecognizer){
-        
-        self.chatLogController?.handleTimer(time: timer!, imageURL: imageURL!, openTimes: openTimes!)
         openTimes! += 1
+        self.chatLogController?.handleTimer(time: timer!, imageURL: imageURL!, openTimes: openTimes!, messageID: messageID!, index: index!)
         if openTimes == 1 {
             messageImageView.image = UIImage(named:"can_see_one_more_time")
-        }else if openTimes == 2{
-            messageImageView.image = UIImage(named:"can_not_view")
         }
     }
     

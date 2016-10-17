@@ -46,22 +46,31 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
                 msg.messageID = snapshot.key
                 print(snapshot.key)
                 self.messages.append(msg)
+                
                 DispatchQueue.global().async {
                     
                     DispatchQueue.main.async {
                         self.collectionView?.reloadData()
                         //scroll to the last index
+                        self.delay(1){
                             let count = self.messages.count - 1
                             let indexPath = NSIndexPath(item: count, section: 0)
                             self.collectionView?.scrollToItem(at: indexPath as IndexPath, at: .bottom, animated: true)
+
+                        }
                     }
                 }
                 }, withCancel: nil)
             
             }, withCancel: nil)
+        
 
     }
     
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+    }
     
     
     lazy var inputTextField: UITextField = {
@@ -220,8 +229,17 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
 
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
+        guard let uid = FIRAuth.auth()?.currentUser?.uid, let pid = partnerId else {
+            return
+        }
+        let userMsgRef = FIRDatabase.database().reference().child("user-messages").child(uid).child(pid)
+        userMsgRef.removeValue { (error, FIRDatabaseReference) in
+            print("delete all messages for ", uid, "'s child ", pid)
+            let partnerMsgRef = FIRDatabase.database().reference().child("user-messages").child(pid).child(uid)
+            partnerMsgRef.removeValue(completionBlock: { (eoor, FIRDatabaseReference) in
+                print("delete all messages for ", pid, "'s child ", uid)
+            })
+        }
     }
     
     func setupKeyboardObservers(){
@@ -272,7 +290,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         let message = messages[indexPath.item]
         cell.textView.text = message.text
         cell.chatLogController = self
-        setupCell(cell: cell, message: message)
+        setupCell(cell: cell, message: message, index: indexPath.row)
         
         // Modify the bubble size based on content size
         // Hide the text view if that is an imgae because text view is on the top of the image view
@@ -292,6 +310,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
             cell.imageType = 2
             cell.timer = message.timer
             cell.messageID = message.messageID
+            cell.index = indexPath.row
             cell.openTimes = 0
             cell.imageURL = message.imageUrl
             cell.bubbleWidthAnchor?.constant = 80
@@ -308,7 +327,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         return cell
     }
     
-    private func setupCell(cell: MessageCell, message: Message){
+    private func setupCell(cell: MessageCell, message: Message, index: Int){
         
         if message.timer != nil{
             print("I want to show a timer icon here")
@@ -403,6 +422,48 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
             senderMsgRef.updateChildValues([childRef.key : 1])
             let receiverMsgRef = FIRDatabase.database().reference().child("user-messages").child(toID).child(fromID)
             receiverMsgRef.updateChildValues([childRef.key : 1])
+            
+            //Update friendship level for both sender and receiver
+            let senderFriendLevel = FIRDatabase.database().reference().child("friendship-level").child(fromID)
+            senderFriendLevel.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if var dictionary = snapshot.value as? [String: Int]{
+                    // check if there is the child for toID
+                    if let count = dictionary[toID] {
+                        dictionary[toID] = count + 1
+                    }else{
+                        dictionary[toID] = 1
+                    }
+                    senderFriendLevel.updateChildValues(dictionary)
+                    
+                }else{
+                    //There is no data, add the first one
+                    let new = [toID : 1]
+                    senderFriendLevel.updateChildValues(new)
+                }
+            })
+            
+            let receiverFriendLevel = FIRDatabase.database().reference().child("friendship-level").child(toID)
+            receiverFriendLevel.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if var dictionary = snapshot.value as? [String: Int]{
+                    // check if there is the child for toID
+                    if let count = dictionary[fromID] {
+                        dictionary[fromID] = count + 1
+                    }else{
+                        dictionary[fromID] = 1
+                    }
+                    receiverFriendLevel.updateChildValues(dictionary)
+                    
+                }else{
+                    //There is no data, add the first one
+                    let new = [fromID : 1]
+                    receiverFriendLevel.updateChildValues(new)
+                }
+            })
+
+        
+            
     }
         
         self.inputTextField.text = nil
@@ -572,9 +633,17 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
      
      */
     
-    func handleTimer(time: Int!, imageURL: String!, openTimes: Int!){
+    func handleTimer(time: Int!, imageURL: String!, openTimes: Int!, messageID: String!, index: Int!){
 
-        if openTimes == 0 {
+        if openTimes == 1 {
+            let newImageView = ImageWithTimerViewController()
+            newImageView.timer = time
+            newImageView.imgUrl = imageURL
+            newImageView.chat = self
+            let navController = UINavigationController(rootViewController: newImageView)
+            present(navController, animated:true, completion:nil)
+
+        } else if openTimes == 2 {
             let newImageView = ImageWithTimerViewController()
             newImageView.timer = time
             newImageView.imgUrl = imageURL
@@ -582,26 +651,30 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
             let navController = UINavigationController(rootViewController: newImageView)
             present(navController, animated:true, completion:nil)
             
-            
-        } else if openTimes == 1{
-            let newImageView = ImageWithTimerViewController()
-            newImageView.timer = time
-            newImageView.imgUrl = imageURL
-            newImageView.chat = self
-            let navController = UINavigationController(rootViewController: newImageView)
-            present(navController, animated:true, completion:nil)
-            
-        
-        } else {
-            // Delete it 
-            
-        
+            //Delete from database
+            guard let uid = FIRAuth.auth()?.currentUser?.uid, let pid = partnerId else {
+                return
+            }
+            print("That image should be deleted!", messageID)
+            let myMessagesRef = FIRDatabase.database().reference().child("user-messages").child(uid).child(pid).child(messageID)
+            myMessagesRef.removeValue(completionBlock: { (error, FIRDatabaseReference) in
+                print("Delete it from user-messages", uid,"'s child", pid)
+                let partnerMessageRef = FIRDatabase.database().reference().child("user-messages").child(pid).child(uid).child(messageID)
+                partnerMessageRef.removeValue(completionBlock: { (error, FIRDatabaseReference) in
+                    print("Delete it from user-messages", pid,"'s child", uid)
+                    DispatchQueue.global().async {
+                        DispatchQueue.main.async {
+                            self.messages.remove(at: index)
+                            self.collectionView?.reloadData()
+                            print("That image should be deleted!", messageID)
+                
+                        }
+                    }
+                })
+
+            })
         }
-        
         // TODO: Open the image and add timer
-        
-        
-
     }
 
 }
