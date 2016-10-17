@@ -36,11 +36,13 @@ class CameraViewController : UIViewController {
     @IBOutlet weak var FlipCamera: UIButton!
     
     @IBAction func Jump_to_chat(_ sender: UIButton) {
-        let chatController = ChatListTableViewController()
-        let scrollView = self.view.superview as? UIScrollView
-        scrollView!.contentOffset.x = 0.0
-    
-        
+        let scrollView = self.view.superview?.superview?.superview as? UIScrollView
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            scrollView!.contentOffset.x = 0.0
+            
+            }, completion: nil)
+
+        //scrollView!.contentOffset.x = 0.0
     }
     
     @IBAction func Jump_to_story(_ sender: UIButton) {
