@@ -625,9 +625,6 @@
                                     <action selector="SaveButton:" destination="Tb7-Al-dck" eventType="touchUpInside" id="APk-U1-Na0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBk-ke-De3" userLabel="Memery">
-                                <state key="normal" image="Image_story"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QsS-1N-6Yp" userLabel="Send">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="EmS-49-Gre"/>
@@ -743,7 +740,6 @@
                             <constraint firstItem="Apf-3B-AfM" firstAttribute="trailing" secondItem="85R-JD-SwN" secondAttribute="trailingMargin" id="48I-YQ-iOA"/>
                             <constraint firstItem="Xje-SK-CMo" firstAttribute="top" secondItem="aqt-Vv-gqh" secondAttribute="bottom" constant="10" id="5RA-SP-WOV"/>
                             <constraint firstItem="5yq-gm-TWD" firstAttribute="centerY" secondItem="85R-JD-SwN" secondAttribute="centerY" id="8Nd-9F-nJ7"/>
-                            <constraint firstItem="U1L-rF-p9A" firstAttribute="trailing" secondItem="kBk-ke-De3" secondAttribute="trailing" id="BD6-c6-zIp"/>
                             <constraint firstItem="eEu-qj-IP9" firstAttribute="leading" secondItem="dqr-qc-HdJ" secondAttribute="leading" id="D1j-so-UG9"/>
                             <constraint firstItem="dqr-qc-HdJ" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leading" id="DQ6-Xu-zTS"/>
                             <constraint firstItem="Xje-SK-CMo" firstAttribute="top" secondItem="QsS-1N-6Yp" secondAttribute="bottom" constant="8" symbolic="YES" id="LEY-fK-bZ2"/>
@@ -763,9 +759,7 @@
                             <constraint firstItem="Xje-SK-CMo" firstAttribute="top" secondItem="dqr-qc-HdJ" secondAttribute="bottom" id="aLr-jH-GaM"/>
                             <constraint firstAttribute="trailing" secondItem="5yq-gm-TWD" secondAttribute="trailing" id="eap-6G-Ntj"/>
                             <constraint firstItem="U1L-rF-p9A" firstAttribute="top" secondItem="FhO-Fu-Oez" secondAttribute="top" id="egJ-vt-2ei"/>
-                            <constraint firstItem="U1L-rF-p9A" firstAttribute="leading" secondItem="kBk-ke-De3" secondAttribute="leading" id="hdZ-nc-ffK"/>
                             <constraint firstItem="Apf-3B-AfM" firstAttribute="top" secondItem="6cZ-5Q-Azc" secondAttribute="top" id="hrz-yr-e0B"/>
-                            <constraint firstItem="kBk-ke-De3" firstAttribute="top" secondItem="JYd-U2-5GK" secondAttribute="top" id="iGH-iW-hdn"/>
                             <constraint firstItem="JYd-U2-5GK" firstAttribute="top" secondItem="aqt-Vv-gqh" secondAttribute="top" id="jic-Lh-Hty"/>
                             <constraint firstItem="6cZ-5Q-Azc" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leadingMargin" constant="4" id="kij-cd-E31"/>
                             <constraint firstItem="6cZ-5Q-Azc" firstAttribute="top" secondItem="fki-0f-KgM" secondAttribute="bottom" constant="15" id="kmA-XR-HXi"/>
@@ -776,7 +770,6 @@
                             <constraint firstAttribute="trailing" secondItem="EoO-n8-d3I" secondAttribute="trailing" id="tgz-VA-EHT"/>
                             <constraint firstItem="5yq-gm-TWD" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leading" id="uqE-dt-iGK"/>
                             <constraint firstItem="5yq-gm-TWD" firstAttribute="centerX" secondItem="85R-JD-SwN" secondAttribute="centerX" id="v5f-4J-QK8"/>
-                            <constraint firstItem="kBk-ke-De3" firstAttribute="leading" secondItem="JYd-U2-5GK" secondAttribute="trailing" constant="51" id="vSY-cG-6s3"/>
                             <constraint firstItem="Apf-3B-AfM" firstAttribute="leading" secondItem="QsS-1N-6Yp" secondAttribute="leading" id="z63-3C-wNK"/>
                         </constraints>
                     </view>
@@ -938,7 +931,6 @@
         <image name="Camera flip" width="33" height="27"/>
         <image name="Delete" width="54" height="60"/>
         <image name="Flash_off" width="25" height="26"/>
-        <image name="Image_story" width="30" height="30"/>
         <image name="Image_timer" width="30" height="30"/>
         <image name="Jump_to_story" width="19" height="18"/>
         <image name="image_draw" width="34" height="34"/>
