@@ -35,7 +35,16 @@ class CameraViewController : UIViewController {
     
     @IBOutlet weak var FlipCamera: UIButton!
     
+    @IBAction func Jump_to_chat(_ sender: UIButton) {
+        let chatController = ChatListTableViewController()
+        let scrollView = self.view.superview as? UIScrollView
+        scrollView!.contentOffset.x = 0.0
     
+        
+    }
+    
+    @IBAction func Jump_to_story(_ sender: UIButton) {
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true

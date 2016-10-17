@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Firebase
 
-class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewDelegate {
+class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate {
     
     
     @IBOutlet weak var ImageEdit: UIImageView!
@@ -22,6 +22,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     @IBAction func selectDuration(_ sender: AnyObject) {
         self.DurationPick.isHidden = false
     }
+    @IBOutlet weak var test: UILabel!
     @IBOutlet weak var DurationPick: UIPickerView!
     @IBAction func quit(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -62,16 +63,31 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         
     }
     
+    @IBOutlet weak var allEmoji: UICollectionView!
+    
     @IBAction func showStickers(_ sender: UIButton) {
-        //self.performSegue(withIdentifier: "ha", sender: self)
+        //self.performSegue(withIdentifier: "haha", sender: self)
+        if enableemoji == true {
+            enableemoji = false
+            self.allEmoji.isHidden = false
+        }else{
+            enableemoji = true
+            self.allEmoji.isHidden = true
+        }
         
-        
-
     }
 
     @IBOutlet weak var TextX: NSLayoutConstraint!
-    
     @IBOutlet weak var TextY: NSLayoutConstraint!
+    
+
+    @IBAction func Emoji_drag(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: self.view)
+        sender.view?.center = CGPoint(x:sender.view!.center.x+translation.x, y:sender.view!.center.y+translation.y)
+        sender.setTranslation(CGPoint.init(x: 0.0, y: 0.0), in: self.view)
+
+    }
+
     @IBAction func Imagetextdrag(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self.view)
         sender.view?.center = CGPoint(x:sender.view!.center.x, y:sender.view!.center.y+translation.y)
@@ -87,16 +103,22 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     var image_sending :UIImage!
     var test_image : UIImage!
     var lebel :UILabel!
+    var lebel_test :UILabel!
     
     var isDrawing : Bool! = false
     var enabledrawing : Bool! = true
     var enabletexting : Bool! = true
+    var enableemoji :Bool! = true
     var finalPoint: CGPoint!
     var lineWidth: CGFloat = 4.0
     
     let red: CGFloat = 255.0/255.0
     let green: CGFloat = 0.0/255.0
     let blue: CGFloat = 0.0/255.0
+    let Indentifier = "sticker"
+    var emojiList: [String] = []
+    var LabelList: [UILabel] = []
+    var lastRotation = CGFloat()
 
 
     override func viewDidLoad() {
@@ -105,8 +127,13 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         ImageEdit.image = capturedPhoto
         self.DurationPick.isHidden = true
         self.text_on_image.isHidden = true
-        
+        self.allEmoji.isHidden = true
+        self.test.isHidden = true
+        self.initEmoji()
+
     }
+    
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -170,6 +197,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.isDrawing = false
         self.DurationPick.isHidden = true
+        self.allEmoji.isHidden = true
+        self.enableemoji = true
+        
         if self.text_on_image.hasText
         {
             //self.ImageEdit.addSubview(self.text_on_image)
@@ -340,9 +370,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     
     func captureScreen() -> UIImage {
         self.ImageEdit.addSubview(self.text_on_image)
-        self.lebel = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 22))
-        self.lebel.text = "\u{1F603}"
-        self.ImageEdit.addSubview(self.lebel)
+        self.ImageEdit.addSubview(self.test)
         UIGraphicsBeginImageContextWithOptions(self.ImageEdit.bounds.size, false,0.0);
         let context = UIGraphicsGetCurrentContext();
         self.ImageEdit.layer.render(in: context!)
@@ -350,13 +378,41 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         UIGraphicsEndImageContext()
         return image!
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "haha"{
-            let testfetch = segue.destination as! Testcontroller
-            
-            //previewController.capturedPhoto = self.ImageCaptured
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.emojiList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Indentifier, for: indexPath as IndexPath) as! StickerCell
+        cell.emojilabel.text = self.emojiList[indexPath.item]
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        print("You have selected cell #\(indexPath.item)")
+    }
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        let c:StickerCell = collectionView.cellForItem(at: indexPath) as! StickerCell
+        self.test.text = c.emojilabel.text
+        self.test.isHidden = false
+        self.allEmoji.isHidden = true
+        self.enableemoji = true
+    }
+    
+    func initEmoji(){
+        for c in 0x1F601...0x1F64F{
+            self.emojiList.append(String(describing: UnicodeScalar(c)!))
         }
     }
+    
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "haha"{
+//            let test = segue.destination as! UINavigationController
+//            
+//            //previewController.capturedPhoto = self.ImageCaptured
+//        }
+//    }
     
 
 }
