@@ -175,9 +175,11 @@ class ChatListTableViewController: UITableViewController {
     
     
     func cameraView(){
-        let cameraViewController = CameraViewController()
-        present(cameraViewController, animated:true, completion:nil)
-        
+        let scrollView = self.navigationController?.view?.superview as? UIScrollView
+                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            scrollView!.contentOffset.x = self.view.frame.width
+            }, completion: nil)
+  
     }
 }
 

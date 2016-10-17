@@ -182,6 +182,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
         cameraView.topAnchor.constraint(equalTo: self.inputTextField.bottomAnchor, constant: -8).isActive = true
         cameraView.leftAnchor.constraint(equalTo: callView.rightAnchor, constant: space).isActive = true
         
+        let cameraTap = UITapGestureRecognizer(target: self, action: #selector(openCamera))
+        cameraView.addGestureRecognizer(cameraTap)
+        cameraView.isUserInteractionEnabled = true
+
+        
 
         //-----------------------------------Add video call icon--------------------------------
         let videoView = UIImageView()
@@ -667,14 +672,20 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate ,UIColl
                             self.messages.remove(at: index)
                             self.collectionView?.reloadData()
                             print("That image should be deleted!", messageID)
-                
                         }
                     }
                 })
-
             })
         }
         // TODO: Open the image and add timer
+    }
+    
+    func openCamera(){
+        let scrollView = self.navigationController?.view.superview as? UIScrollView
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            scrollView!.contentOffset.x = self.view.frame.width
+            }, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
 }
