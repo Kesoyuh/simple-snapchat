@@ -10,5 +10,8 @@ import UIKit
 
 class StickerCell: UICollectionViewCell {
     
+    /**
+     The outlet of the label shown in each cell.
+     */
     @IBOutlet weak var emojilabel: UILabel!
 }

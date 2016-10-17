@@ -26,24 +26,39 @@ class CameraViewController : UIViewController {
     var cameraState:Bool = true
     var flashOn:Bool = false
     
-    
+    /**
+     The outlet of UIView of the CameraView.
+     */
     @IBOutlet var previewView: UIView!
     
+    /**
+     The outlet of the take picture button.
+     */
     @IBOutlet weak var TakePicButton: UIButton!
     
+    /**
+     The outlet of the configure flash button.
+     */
     @IBOutlet weak var Flash: UIButton!
     
+    /**
+     The outlet of the flip camera button.
+     */
     @IBOutlet weak var FlipCamera: UIButton!
     
+    /**
+     The action button to scroll to the chat view.
+     */
     @IBAction func Jump_to_chat(_ sender: UIButton) {
         let scrollView = self.view.superview?.superview?.superview as? UIScrollView
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             scrollView!.contentOffset.x = 0.0
-            
             }, completion: nil)
-
     }
     
+    /**
+     The action button to scroll to the story view.
+     */
     @IBAction func Jump_to_story(_ sender: UIButton) {
         let scrollView = self.view.superview?.superview?.superview as? UIScrollView
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -51,6 +66,10 @@ class CameraViewController : UIViewController {
             
             }, completion: nil)
     }
+    
+    /**
+     The action button to scroll to the my information view.
+     */
     @IBAction func toAddfriend(_ sender: UIButton) {
         let scrollView = self.view.superview as? UIScrollView
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -59,6 +78,7 @@ class CameraViewController : UIViewController {
 
 
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
@@ -72,6 +92,9 @@ class CameraViewController : UIViewController {
         checkIfUserIsLoggedIn()
     }
     
+    /**
+     Method to check whether user is logged in.
+     */
     func checkIfUserIsLoggedIn() {
         
         if FIRAuth.auth()?.currentUser?.uid != nil {
@@ -88,7 +111,9 @@ class CameraViewController : UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    
+    /**
+     The method to load camera.
+     */
     func loadCamera() {
         captureSession = AVCaptureSession()
         captureSession.startRunning()
@@ -150,7 +175,9 @@ class CameraViewController : UIViewController {
         
     }
     
-    
+    /**
+     The method to realize the shutter function.
+     */
     @IBAction func Takepicture(_ sender: UIButton) {
         TakePicButton.isEnabled = true;
         cameraState = false
@@ -170,6 +197,9 @@ class CameraViewController : UIViewController {
         }
     }
     
+    /**
+     The method to realise opening and closing camera flash.
+     */
     @IBAction func ChangeFlash(_ sender: UIButton){
         flashOn = !flashOn
         if flashOn {
@@ -181,8 +211,9 @@ class CameraViewController : UIViewController {
             self.configureFlash()
     }
     
-    
-    
+    /**
+     The method to realize changing the camera direction.
+     */
     @IBAction func Flip_Camera(_ sender: UIButton){
         
         cameraFacingback = !cameraFacingback
@@ -196,7 +227,10 @@ class CameraViewController : UIViewController {
             displayFrontCamera()
         }
     }
-    // Load back camera
+    
+    /**
+     The method to load back camera.
+     */
     func displayBackCamera(){
         if captureSession.canAddInput(captureDeviceInputBack) {
             captureSession.addInput(captureDeviceInputBack)
@@ -208,7 +242,10 @@ class CameraViewController : UIViewController {
         }
         
     }
-    // Load front camera
+    
+    /**
+     The method to load front camera.
+     */
     func displayFrontCamera(){
         if captureSession.canAddInput(captureDeviceInputFront) {
             captureSession.addInput(captureDeviceInputFront)
@@ -219,7 +256,10 @@ class CameraViewController : UIViewController {
             }
         }
     }
-    // Configure Flash
+    
+    /**
+     The method to configure flash light.
+     */
     func configureFlash(){
         do {
             try backCamera.lockForConfiguration()
@@ -242,7 +282,9 @@ class CameraViewController : UIViewController {
         backCamera.unlockForConfiguration()
     }
     
-    //Camera focusing
+    /**
+     The method to realise camera focusing.
+     */
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchpoint = touches.first
 //        var screenSize = previewView.bounds.size
@@ -256,6 +298,9 @@ class CameraViewController : UIViewController {
         focusOnPoint(x: x, y: y)
     }
     
+    /**
+     The algorithm to reasise autofocus .
+     */
     func focusOnPoint(x: CGFloat, y:CGFloat){
         let focusPoint = CGPoint(x: x, y: y)
         if cameraFacingback {

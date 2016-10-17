@@ -12,27 +12,66 @@ import Firebase
 
 class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate {
     
-    
+    /**
+     The outlet of the image to be edited.
+     */
     @IBOutlet weak var ImageEdit: UIImageView!
+    
+    /**
+     The outlet of cancle editing image button.
+     */
     @IBOutlet weak var CancleButton: UIButton!
+    
+    /**
+     The outlet of save editing image button.
+     */
     @IBOutlet weak var save: UIButton!
+    
+    /**
+     The outlet of the text on image view.
+     */
     @IBOutlet weak var text_on_image: UITextView!
+    
+    /**
+     The outlet of the button to control displaying the text view.
+     */
     @IBOutlet weak var Image_Text: UIButton!
+    /**
+     The outlet of the button to control drawing function.
+     */
     @IBOutlet weak var Draw: UIButton!
+    /**
+     The outlet of the button to control displaying picker view.
+     */
     @IBAction func selectDuration(_ sender: AnyObject) {
         self.DurationPick.isHidden = false
     }
+    /**
+     The outlet of the label to display emoji.
+     */
     @IBOutlet weak var test: UILabel!
+    
+    /**
+     The outlet of the picker view for selecting timer.
+     */
     @IBOutlet weak var DurationPick: UIPickerView!
+    
+    /**
+     The action button to quit preview view.
+     */
     @IBAction func quit(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
+    /**
+     The action button save the image into snaps and server.
+     */
     @IBAction func SaveButton(_ sender: UIButton) {
         self.SaveImage()
         saveToFirebase()
     }
-    
+    /**
+     The action button to send image to friend and server.
+     */
     @IBAction func Sendtotest(_ sender: UIButton) {
         let image_original = self.captureScreen()
         let image_sending = self.ResizeImage(image: image_original, targetSize: CGSize.init(width:305.0,height:600.0))
@@ -45,6 +84,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         let navController = UINavigationController(rootViewController: sendtocontroller)
         present(navController, animated: true, completion: nil)
     }
+    /**
+     The action button to realise controlling drawing on the image.
+     */
     @IBAction func enable_draw(_ sender: UIButton) {
         
         if enabledrawing == true {
@@ -56,6 +98,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         }
     }
     
+    /**
+     The action button to attach text on image.
+     */
     @IBAction func Image_edit_text(_ sender: UIButton) {
         if enabletexting == true {
             enabletexting = false
@@ -69,10 +114,15 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         
     }
     
+    /**
+     The outlet of the collection view to show all the emojis.
+     */
     @IBOutlet weak var allEmoji: UICollectionView!
     
+    /**
+     The action button to control displaying the collection view.
+     */
     @IBAction func showStickers(_ sender: UIButton) {
-        //self.performSegue(withIdentifier: "haha", sender: self)
         if enableemoji == true {
             enableemoji = false
             self.allEmoji.isHidden = false
@@ -82,18 +132,25 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         }
         
     }
-
+    /**
+     The outlet of the constraints of the text view.
+     */
     @IBOutlet weak var TextX: NSLayoutConstraint!
     @IBOutlet weak var TextY: NSLayoutConstraint!
     
-
+    /**
+     The action gesture to realise draging the emoji on the picture.
+     */
     @IBAction func Emoji_drag(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self.view)
         sender.view?.center = CGPoint(x:sender.view!.center.x+translation.x, y:sender.view!.center.y+translation.y)
         sender.setTranslation(CGPoint.init(x: 0.0, y: 0.0), in: self.view)
 
     }
-
+    
+    /**
+     The action gesture to realise draging the text on the picture.
+     */
     @IBAction func Imagetextdrag(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self.view)
         sender.view?.center = CGPoint(x:sender.view!.center.x, y:sender.view!.center.y+translation.y)
@@ -147,6 +204,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         
 
     }
+    /**
+     The method to save image to server.
+     */
     func saveToFirebase() {
         let uid = FIRAuth.auth()?.currentUser?.uid
         var username = String()
@@ -199,7 +259,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         ImageEdit.image = capturedPhoto
     }
     
-    // Draw view
+    /**
+     The method to realise drawing on image.
+     */
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.isDrawing = false
         self.DurationPick.isHidden = true
@@ -271,7 +333,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
 //        }
 //    }
     
-    // Duration pick view
+    /**
+     The method based on picker view delegate.
+     */
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -293,6 +357,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         self.DurationPick.isHidden = true
     }
     
+    /**
+     The method to save image to core data.
+     */
     func SaveImage(){
         let saveQueue = DispatchQueue(label: "saveQueue",attributes: .concurrent)
         saveQueue.async {
@@ -315,12 +382,14 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         self.save.isHidden = true
     }
     
+    /**
+     The method to resize image.
+     */
     func ResizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         let size = image.size
         
         let widthRatio  = targetSize.width  / image.size.width
         let heightRatio = targetSize.height / image.size.height
-        
         // Figure out what our orientation is, and use that to form the rectangle
         var newSize: CGSize
         if(widthRatio > heightRatio) {
@@ -368,6 +437,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         return context!
     }
     
+    /**
+     The method to realise the final image.
+     */
     func captureScreen() -> UIImage {
         self.ImageEdit.addSubview(self.text_on_image)
         self.ImageEdit.addSubview(self.test)
@@ -378,7 +450,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         UIGraphicsEndImageContext()
         return image!
     }
-    
+    /**
+     The method based on the collectionview delegate.
+     */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.emojiList.count
     }
@@ -402,6 +476,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         self.enableemoji = true
     }
     
+    /**
+     The method translate emoji unicode into string.
+     */
     func initEmoji(){
         for c in 0x1F601...0x1F64F{
             self.emojiList.append(String(describing: UnicodeScalar(c)!))

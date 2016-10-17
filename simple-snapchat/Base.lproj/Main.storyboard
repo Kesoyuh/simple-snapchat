@@ -786,7 +786,6 @@
                         <outlet property="save" destination="JYd-U2-5GK" id="v5c-uH-EDv"/>
                         <outlet property="test" destination="FUf-80-mw3" id="VLf-aK-fNj"/>
                         <outlet property="text_on_image" destination="5yq-gm-TWD" id="6Am-AC-r75"/>
-                        <segue destination="72d-F5-j0K" kind="presentation" identifier="haha" animates="NO" id="TEE-eJ-CFc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eId-am-sdt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -802,92 +801,6 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2370.4000000000001" y="1376.7616191904049"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="XZC-CL-5w5">
-            <objects>
-                <navigationController id="72d-F5-j0K" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7hk-FX-egY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="YsB-8I-LXp" kind="relationship" relationship="rootViewController" id="WdO-mw-yn9"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MrX-fk-cUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3346" y="1731"/>
-        </scene>
-        <!--Title-->
-        <scene sceneID="r2h-Qo-Qx0">
-            <objects>
-                <viewController id="YsB-8I-LXp" customClass="Testcontroller" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="A3k-lI-NAX"/>
-                        <viewControllerLayoutGuide type="bottom" id="6Pz-RK-soQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Qox-UY-KsD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="D0v-8u-y80">
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EYU-BY-IoE">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="emoji" id="HjJ-YS-2MF" customClass="EmojiCell" customModule="simple_snapchat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uy3-gK-w50">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="uy3-gK-w50" firstAttribute="leading" secondItem="HjJ-YS-2MF" secondAttribute="leading" id="S9s-y7-TRv"/>
-                                            <constraint firstItem="uy3-gK-w50" firstAttribute="centerY" secondItem="HjJ-YS-2MF" secondAttribute="centerY" id="YDI-cn-eQo"/>
-                                        </constraints>
-                                        <size key="customSize" width="80" height="80"/>
-                                        <connections>
-                                            <outlet property="emoji" destination="uy3-gK-w50" id="kfX-lP-6fk"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="YsB-8I-LXp" id="PNa-2U-59P"/>
-                                    <outlet property="delegate" destination="YsB-8I-LXp" id="h2S-KI-S1g"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="bottomMargin" secondItem="D0v-8u-y80" secondAttribute="bottom" constant="-7" id="DgL-5b-brL"/>
-                            <constraint firstItem="D0v-8u-y80" firstAttribute="leading" secondItem="Qox-UY-KsD" secondAttribute="leading" id="V18-tm-WVM"/>
-                            <constraint firstAttribute="trailing" secondItem="D0v-8u-y80" secondAttribute="trailing" id="evQ-bN-aYA"/>
-                            <constraint firstItem="D0v-8u-y80" firstAttribute="top" secondItem="A3k-lI-NAX" secondAttribute="bottom" id="tiO-KW-92o"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Title" id="maL-hQ-2kh">
-                        <barButtonItem key="backBarButtonItem" title="back" id="sPf-CY-30P"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="emojiview" destination="D0v-8u-y80" id="lJm-1a-2hE"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lEs-SV-3ZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4566" y="1631"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kxB-C8-7gA">
