@@ -291,6 +291,14 @@ class LoginRegisterController: UIViewController {
             forgetPasswordButton.setTitle("Forget Password", for: UIControlState())
         }
         forgetPasswordHeightConstraint?.isActive = true
+        
+        // Handle centerYAnchor for input container
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0{
+            inputContainerCenterYAnchor?.constant -= 12
+        }else{
+            inputContainerCenterYAnchor?.constant += 12
+        }
+        
 
         
     }
@@ -315,6 +323,7 @@ class LoginRegisterController: UIViewController {
         setupLoginRegisterSegmentedControl()
         
         setupForgetPasswordButton()
+        setupKeyboardObservers()
     }
     
     func setupSpinnerView() {
@@ -339,12 +348,13 @@ class LoginRegisterController: UIViewController {
     var passwordTextFieldHeightConstraint: NSLayoutConstraint?
     var nameSeparatorHeightConstraint: NSLayoutConstraint?
     var forgetPasswordHeightConstraint: NSLayoutConstraint?
-    
+    var inputContainerCenterYAnchor : NSLayoutConstraint?
     fileprivate func setupInputContainerView() {
         //setup constraints, x, y, width, height
         inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        inputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        inputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        inputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        inputContainerCenterYAnchor =  inputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        inputContainerCenterYAnchor?.isActive = true
         inputContainerViewHeightConstraint = inputContainerView.heightAnchor.constraint(equalToConstant: 150)
         inputContainerViewHeightConstraint?.isActive = true
         
@@ -418,6 +428,39 @@ class LoginRegisterController: UIViewController {
         profileImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
     }
+    
+    func setupKeyboardObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+    }
+    
+    
+    func handleKeyboardWillShow(notification: Notification){
+        //get keyboard height
+        let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let height = keyboardFrame.cgRectValue.height
+        let move = height/4
+        
+        let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let duration = keyboardDuration.doubleValue
+        
+        inputContainerCenterYAnchor?.constant = -move
+        
+        UIView.animate(withDuration: duration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func handleKeyboardWillHide(notification: Notification){
+        
+        let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let duration = keyboardDuration.doubleValue
+        inputContainerCenterYAnchor?.constant = 0
+        UIView.animate(withDuration: duration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+
 
 }
 
