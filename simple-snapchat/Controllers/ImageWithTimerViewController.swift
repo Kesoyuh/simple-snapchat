@@ -18,7 +18,7 @@ class ImageWithTimerViewController: UIViewController {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         
         imageView.backgroundColor = UIColor.black
         return imageView
@@ -39,6 +39,8 @@ class ImageWithTimerViewController: UIViewController {
         imageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
         imageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
 
         imageView.loadImageUsingCacheWithUrlString(urlString: imgUrl!)
         

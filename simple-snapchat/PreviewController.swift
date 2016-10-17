@@ -34,8 +34,14 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     }
     
     @IBAction func Sendtotest(_ sender: UIButton) {
+        let image_original = self.captureScreen()
+        let image_sending = self.ResizeImage(image: image_original, targetSize: CGSize.init(width:305.0,height:600.0))
         let sendtocontroller = SendToController()
-        //sendtocontroller.images.append(self.ImageEdit.image!)
+        let sending_image = SendingPhoto()
+        sending_image.image = image_sending
+        sending_image.timer = self.pic_duaration
+        sendtocontroller.photos.append(sending_image)
+        
         let navController = UINavigationController(rootViewController: sendtocontroller)
         present(navController, animated: true, completion: nil)
     }
@@ -156,9 +162,9 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         
         let imageName = NSUUID().uuidString
         let storageRef = FIRStorage.storage().reference().child("snaps").child(imageName)
-        //let image = ImageEdit.image!
-        let image = self.captureScreen()
-        let uploadData = UIImagePNGRepresentation(image)
+        let image_original = self.captureScreen()
+        let image_upload = self.ResizeImage(image: image_original, targetSize: CGSize.init(width:304,height:604))
+        let uploadData = UIImagePNGRepresentation(image_upload)
         
         storageRef.put(uploadData!, metadata: nil, completion: { (metaData, error) in
             
@@ -290,16 +296,12 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
     func SaveImage(){
         let saveQueue = DispatchQueue(label: "saveQueue",attributes: .concurrent)
         saveQueue.async {
-            let image : UIImage! = self.ImageEdit.image
-            //self.ImageEdit.addSubview(self.text_on_image)
-            let image1 = self.captureScreen()
-            self.image_sending = self.ResizeImage(image: image, targetSize: CGSize.init(width: 370.0, height: 647.0))
-//            let imageData = UIImageJPEGRepresentation(image, 0.1)
-//            let imageData2 = UIImageJPEGRepresentation(self.image_sending, 1)
-            let imageData3 = UIImageJPEGRepresentation(image1, 0.1)
+            let image_original = self.captureScreen()
+            let image_sending = self.ResizeImage(image: image_original, targetSize: CGSize.init(width:375.0,height:604.0))
+            let imageData = UIImageJPEGRepresentation(image_sending, 1)
             let contextManaged = self.getContext()
             let a = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: contextManaged) as! Photo
-            a.photo_data = imageData3 as NSData?
+            a.photo_data = imageData as NSData?
             a.timer = Int64(self.pic_duaration)
             a.user_id = FIRAuth.auth()?.currentUser?.uid
             print(a.user_id)
@@ -308,7 +310,6 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
             } catch{
                 
             }
-            //print(a.value(forKey: "photo_id"))
         }
         self.pictureid += 1
         self.save.isHidden = true
@@ -336,7 +337,6 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         image.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         return newImage!
     }
     
@@ -378,6 +378,7 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         UIGraphicsEndImageContext()
         return image!
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.emojiList.count
     }
@@ -387,10 +388,12 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         cell.emojilabel.text = self.emojiList[indexPath.item]
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         print("You have selected cell #\(indexPath.item)")
     }
+    
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         let c:StickerCell = collectionView.cellForItem(at: indexPath) as! StickerCell
         self.test.text = c.emojilabel.text
@@ -405,14 +408,4 @@ class PreviewController: UIViewController, UIPickerViewDataSource ,UIPickerViewD
         }
     }
     
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "haha"{
-//            let test = segue.destination as! UINavigationController
-//            
-//            //previewController.capturedPhoto = self.ImageCaptured
-//        }
-//    }
-    
-
 }

@@ -42,10 +42,22 @@ class CameraViewController : UIViewController {
             
             }, completion: nil)
 
-        //scrollView!.contentOffset.x = 0.0
     }
     
     @IBAction func Jump_to_story(_ sender: UIButton) {
+        let scrollView = self.view.superview?.superview?.superview as? UIScrollView
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            scrollView!.contentOffset.x += self.view.frame.width
+            
+            }, completion: nil)
+    }
+    @IBAction func toAddfriend(_ sender: UIButton) {
+        let scrollView = self.view.superview as? UIScrollView
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            scrollView!.contentOffset.y = 0.0
+            }, completion: nil)
+
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -232,14 +244,14 @@ class CameraViewController : UIViewController {
     
     //Camera focusing
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        var touchpoint = touches.first
-        var screenSize = previewView.bounds.size
-        var location = touchpoint?.location(in: self.view)
-        var x = (touchpoint?.location(in: self.view).x)! / self.view.bounds.width
-        var y = (touchpoint?.location(in: self.view).y)! / self.view.bounds.height
+        let touchpoint = touches.first
+//        var screenSize = previewView.bounds.size
+//        let location = touchpoint?.location(in: self.view)
+        let x = (touchpoint?.location(in: self.view).x)! / self.view.bounds.width
+        let y = (touchpoint?.location(in: self.view).y)! / self.view.bounds.height
         
-        var locationX = location?.x
-        var locationY = location?.y
+//        var locationX = location?.x
+//        var locationY = location?.y
         
         focusOnPoint(x: x, y: y)
     }

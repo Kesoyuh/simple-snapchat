@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "go to story.png",
+      "filename" : "snapchat_logo.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "snaplogo.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "snaplogo-1.png",
       "scale" : "3x"
     }
   ],
