@@ -8,7 +8,8 @@
 
 import UIKit
 
-class PublicStoryCell: UICollectionViewCell, UIWebViewDelegate {
+class PublicStoryCell: UICollectionViewCell, UIWebViewDelegate, UIGestureRecognizerDelegate {
+    var publicStoryController: PublicStoryController?
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -28,21 +29,48 @@ class PublicStoryCell: UICollectionViewCell, UIWebViewDelegate {
         let sv = UIScrollView()
         sv.backgroundColor = .white
         sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.bounces = false
         return sv
     }()
     
-    let titleView: UITextView = {
+    lazy var titleView: UITextView = {
         let tl = UITextView()
         tl.font = UIFont.boldSystemFont(ofSize: 32)
         tl.translatesAutoresizingMaskIntoConstraints = false
         tl.isScrollEnabled = false
+        tl.isEditable = false
+        
+        // add gesture to dismiss the controller
+        tl.isUserInteractionEnabled = true
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleDismiss))
+        swipeDown.direction = .down
+        swipeDown.delegate = self
+        tl.addGestureRecognizer(swipeDown)
         return tl
     }()
     
-    let authorLable: UILabel = {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if storyView.contentOffset.y == 0{
+            return true
+        }
+        return false
+    }
+    
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        return true
+//    }
+    
+    lazy var authorLable: UILabel = {
         let tl = UILabel()
         tl.font = UIFont.systemFont(ofSize: 16)
         tl.translatesAutoresizingMaskIntoConstraints = false
+        
+        // add gesture to dismiss the controller
+        tl.isUserInteractionEnabled = true
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleDismiss))
+        swipeDown.direction = .down
+        swipeDown.delegate = self
+        tl.addGestureRecognizer(swipeDown)
         return tl
     }()
     
@@ -52,21 +80,28 @@ class PublicStoryCell: UICollectionViewCell, UIWebViewDelegate {
         cv.scrollView.isScrollEnabled = false
         cv.scalesPageToFit = true
         cv.delegate = self
+        
+        // add gesture to dismiss the controller
+        cv.isUserInteractionEnabled = true
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleDismiss))
+        swipeDown.direction = .down
+        swipeDown.delegate = self
+        cv.addGestureRecognizer(swipeDown)
         return cv
     }()
     
-    var storyViewHeightConstraint: NSLayoutConstraint?
+    func handleDismiss(swipeGesture: UIGestureRecognizer) {
+        publicStoryController?.dismiss(animated: true, completion: nil)
+    }
+    
     var titleHeightConstraint: NSLayoutConstraint?
     var contentHeightConstraint: NSLayoutConstraint?
     func setupView() {
         addSubview(storyView)
-//        storyView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 3000)
-//        storyView.contentSize.height = 2000
         storyView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         storyView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         storyView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        storyViewHeightConstraint = storyView.heightAnchor.constraint(equalToConstant: 1000)
-        storyViewHeightConstraint?.isActive = true
+        storyView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         
         storyView.addSubview(titleView)
         titleView.leftAnchor.constraint(equalTo: storyView.leftAnchor, constant: 20).isActive = true
@@ -76,7 +111,6 @@ class PublicStoryCell: UICollectionViewCell, UIWebViewDelegate {
         titleHeightConstraint?.isActive = true
         
         storyView.addSubview(authorLable)
-        authorLable.text = "Changchang Wang"
         authorLable.leftAnchor.constraint(equalTo: storyView.leftAnchor, constant: 25).isActive = true
         authorLable.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 5).isActive = true
         authorLable.widthAnchor.constraint(equalTo: storyView.widthAnchor, constant: -40).isActive = true
@@ -99,57 +133,30 @@ class PublicStoryCell: UICollectionViewCell, UIWebViewDelegate {
         titleHeightConstraint?.isActive = false
         titleHeightConstraint = titleView.heightAnchor.constraint(equalToConstant: newTitleSize.height)
         
+        authorLable.text = publicStory.author
+        
         // modify contentWebView
 
         let html = "<html><head><meta name=\"viewport\" content=\"width=320\"/></head>" + publicStory.content
         contentWebView.loadHTMLString(html, baseURL: nil)
         isLoaded = true
-        print("reloading")
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if contentWebView.isLoading {
             return
         }
-        let fixedWidth = frame.width - 40
+        var fixedWidth = frame.width - 40
+        let newTitleSize = titleView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat(MAXFLOAT)))
+        
+        fixedWidth = frame.width - 40
         let newContentSize = contentWebView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat(MAXFLOAT)))
         contentHeightConstraint?.isActive = false
         contentHeightConstraint = contentWebView.heightAnchor.constraint(equalToConstant: newContentSize.height)
         contentHeightConstraint?.isActive = true
-        print("finish loading")
+
         // modify the height of the whole view
-//        storyViewHeightConstraint?.isActive = false
-//        storyViewHeightConstraint = storyView.bottomAnchor.constraint(equalTo: contentWebView.bottomAnchor)
-//        storyViewHeightConstraint?.isActive = true
+        storyView.contentSize = CGSize(width: frame.width - 40, height: newTitleSize.height + newContentSize.height + CGFloat(90))
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-//        if indexPath.item == 0 {
-//            cell.addSubview(titleView)
-//            titleView.text = publicStory.title
-//            titleView.frame = CGRect(x: 20, y: 50, width: cell.frame.width - 60, height: cell.frame.height)
-//        } else if indexPath.item == 1 {
-//            cell.addSubview(authorLable)
-//            authorLable.text = publicStory.author
-//            authorLable.frame = CGRect(x: 20, y: 0, width: cell.frame.width, height: cell.frame.height)
-//        }
-//        cell.backgroundColor = .yellow
-//        return cell
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if indexPath.item == 0 {
-//            let cell = collectionView.cellForItem(at: indexPath)
-//            if !titleView.text.isEmpty {
-//                let fixedWidth = (cell?.frame.width)! - 60
-//                let newSize = titleView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat(MAXFLOAT)))
-//                return CGSize(width: frame.width, height: newSize.height)
-//            }
-//        } else if indexPath.item == 1 {
-//            return CGSize(width: frame.width, height: 200)
-//        }
-//        return CGSize(width: frame.width, height: 100)
-//    }
     
 }

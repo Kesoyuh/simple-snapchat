@@ -11,6 +11,7 @@ import UIKit
 class PublicStoryController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let storyCellId = "StoryCellId"
     
+    var agency = String()
     var publicStories = [PublicStory]()
     
     override func viewDidLoad() {
@@ -21,7 +22,19 @@ class PublicStoryController: UICollectionViewController, UICollectionViewDelegat
     }
     
     func fetchFeeds() {
-        let urlString = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q=https://www.buzzfeed.com/andyneuenschwander.xml"
+        var urlString = String()
+        if agency == "buzzfeed" {
+            urlString = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q=https://www.buzzfeed.com/andyneuenschwander.xml"
+        } else if agency == "comedycentral" {
+            urlString = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://comedycentral.tumblr.com/rss"
+        } else if agency == "espn" {
+            urlString = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=8&q=http://www.espnfc.us/rss"
+        } else if agency == "dailymail" {
+            urlString = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=8&q=http://www.dailymail.co.uk/sport/football/index.rss"
+        } else {
+            urlString = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=8&q=http://rss.cnn.com/rss/money_topstories.rss"
+        }
+        
         let url = URL(string: urlString)
         URLSession.shared.dataTask(with: url!) { (data, reponse, error) in
             if error != nil {
@@ -61,6 +74,10 @@ class PublicStoryController: UICollectionViewController, UICollectionViewDelegat
         
     }
     
+    func handleDismiss() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return publicStories.count
     }
@@ -68,6 +85,8 @@ class PublicStoryController: UICollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: storyCellId, for: indexPath) as! PublicStoryCell
         cell.publicStory = publicStories[indexPath.item]
+        cell.publicStoryController = self
+        
         return cell
     }
     

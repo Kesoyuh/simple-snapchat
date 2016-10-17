@@ -58,7 +58,8 @@ class PublicAgencyCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
     func handleDisplayPublicStories(tapGesture: UITapGestureRecognizer) {
         let layout = UICollectionViewFlowLayout()
         let publicStoryController = PublicStoryController(collectionViewLayout: layout)
-        
+        let agencyCell = tapGesture.view as! AgencyCell
+        publicStoryController.agency = agencyCell.agency
         storiesViewController!.present(publicStoryController, animated: false, completion: nil)
 
     }
@@ -73,6 +74,18 @@ class PublicAgencyCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
         case 0:
             cell.agency = "buzzfeed"
             cell.imageView.image = UIImage(named: "buzzfeed")
+        case 1:
+            cell.agency = "dailymail"
+            cell.imageView.image = UIImage(named: "dailymail")
+        case 2:
+            cell.agency = "comedycentral"
+            cell.imageView.image = UIImage(named: "comedycentral")
+        case 3:
+            cell.agency = "espn"
+            cell.imageView.image = UIImage(named: "espn")
+        case 4:
+            cell.agency = "cnn"
+            cell.imageView.image = UIImage(named: "cnn")
         default:
             cell.agency = ""
             cell.imageView.image = nil
@@ -106,6 +119,7 @@ class AgencyCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
+        iv.layer.masksToBounds = true
         return iv
     }()
     

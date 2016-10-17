@@ -63,13 +63,13 @@ class SnapsCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionV
                         snaps.append(snap)
                     }
                 }
-                
             }
             
         }
         catch let error as NSError{
             print("could not fetch \(error)")
         }
+        collectionView.reloadData()
     }
 
     func getContext() -> NSManagedObjectContext {

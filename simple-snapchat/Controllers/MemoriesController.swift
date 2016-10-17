@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import Firebase
+import CoreData
 
 private let cameraRollCellId = "cameraRollCellId"
 private let snapsCellId = "snapsCellId"
@@ -102,8 +103,70 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
         return sb
     }()
     
+    lazy var deleteButtonView: UIImageView = {
+        let db = UIImageView()
+        db.image = UIImage(named: "delete-icon")?.withRenderingMode(.alwaysTemplate)
+        db.tintColor = UIColor.white
+        db.isUserInteractionEnabled = true
+        db.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDelete)))
+        return db
+    }()
+    
+    func handleDelete() {
+        if let selectedSnapsPhotos = snapsView?.indexPathsForSelectedItems {
+            for i in 0..<selectedSnapsPhotos.count {
+                let snapsCell = snapsView?.superview as! SnapsCell
+                let context = getContext()
+                let fetchRequest: NSFetchRequest = Photo.fetchRequest()
+                do {
+                    let results = try context.fetch(fetchRequest)
+                    for snap in results {
+                        if snap.isEqual(snapsCell.snaps[selectedSnapsPhotos[i].row]) {
+                            context.delete(snap)
+                            try context.save()
+                            snapsCell.grabSnaps()
+                        }
+                    }
+                    
+                }
+                catch let error as NSError{
+                    print("could not fetch \(error)")
+                }
+            }
+        }
+    }
+    
+    func getContext() -> NSManagedObjectContext {
+        var context: NSManagedObjectContext?
+        
+        if #available(iOS 10.0, *) {
+            context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        } else {
+            // iOS 9.0 and below - however you were previously handling it
+            guard let modelURL = Bundle.main.url(forResource: "Model", withExtension:"momd") else {
+                fatalError("Error loading model from bundle")
+            }
+            guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+                fatalError("Error initializing mom from: \(modelURL)")
+            }
+            let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
+            context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let docURL = urls[urls.endIndex-1]
+            let storeURL = docURL.appendingPathComponent("Model.sqlite")
+            do {
+                try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+            } catch {
+                fatalError("Error migrating store: \(error)")
+            }
+            
+        }
+        return context!
+    }
+
+    
     func handleSend() {
-        if let selectedCameraRollPhotos = cameraRollView?.indexPathsForSelectedItems, let selectedSnapsPhotos = snapsView?.indexPathsForSelectedItems{
+        if let selectedCameraRollPhotos = cameraRollView?.indexPathsForSelectedItems, let selectedSnapsPhotos = snapsView?.indexPathsForSelectedItems {
             let sendToController = SendToController()
             
             for i in 0..<selectedSnapsPhotos.count {
@@ -168,6 +231,14 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
             sendButtonView.centerXAnchor.constraint(equalTo: bottomSelectView.rightAnchor, constant: -30).isActive = true
             sendButtonView.heightAnchor.constraint(equalToConstant: 35).isActive = true
             sendButtonView.widthAnchor.constraint(equalToConstant: 35).isActive = true
+            
+            // Set delete button
+            bottomSelectView.addSubview(deleteButtonView)
+            deleteButtonView.translatesAutoresizingMaskIntoConstraints = false
+            deleteButtonView.centerYAnchor.constraint(equalTo: bottomSelectView.centerYAnchor).isActive = true
+            deleteButtonView.leftAnchor.constraint(equalTo: bottomSelectView.leftAnchor, constant: 20).isActive = true
+            deleteButtonView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+            deleteButtonView.widthAnchor.constraint(equalToConstant: 35).isActive = true
         } else {
             
             didClickSelectButton = false
