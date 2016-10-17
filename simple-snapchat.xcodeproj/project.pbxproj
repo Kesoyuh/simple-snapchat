@@ -56,11 +56,9 @@
 		79E7CFF81D9CE95A00F081E2 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */; };
 		79E7CFFA1D9E04AA00F081E2 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */; };
 		79E7CFFD1D9EC01600F081E2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFFC1D9EC01600F081E2 /* Extensions.swift */; };
-		D45026A81DB3313D00463DA3 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026A71DB3313D00463DA3 /* EmojiCell.swift */; };
 		D45026AB1DB340FF00463DA3 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026A91DB340FF00463DA3 /* Photo+CoreDataClass.swift */; };
 		D45026AC1DB340FF00463DA3 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026AA1DB340FF00463DA3 /* Photo+CoreDataProperties.swift */; };
 		D45026AE1DB3787800463DA3 /* StickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026AD1DB3787800463DA3 /* StickerCell.swift */; };
-		D471E51C1DAB682900FFC29A /* TestFetchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D471E51B1DAB682900FFC29A /* TestFetchImage.swift */; };
 		D4E231381DA470F5008B7FC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E231371DA470F5008B7FC4 /* CoreData.framework */; };
 		D4E2313E1DA4722D008B7FC4 /* photoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D4E2313C1DA4722D008B7FC4 /* photoModel.xcdatamodeld */; };
 		D4F528341D9D64F200781F78 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F528331D9D64F200781F78 /* PreviewController.swift */; };
@@ -125,11 +123,9 @@
 		79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = View/MessageCell.swift; sourceTree = "<group>"; };
 		79E7CFFC1D9EC01600F081E2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_simple_snapchat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D45026A71DB3313D00463DA3 /* EmojiCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
 		D45026A91DB340FF00463DA3 /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D45026AA1DB340FF00463DA3 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D45026AD1DB3787800463DA3 /* StickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCell.swift; sourceTree = "<group>"; };
-		D471E51B1DAB682900FFC29A /* TestFetchImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestFetchImage.swift; path = Controllers/TestFetchImage.swift; sourceTree = "<group>"; };
 		D4E231371DA470F5008B7FC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D4E2313D1DA4722D008B7FC4 /* photoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = photoModel.xcdatamodel; sourceTree = "<group>"; };
 		D4F528331D9D64F200781F78 /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
@@ -193,8 +189,6 @@
 				D45026AD1DB3787800463DA3 /* StickerCell.swift */,
 				D4F528331D9D64F200781F78 /* PreviewController.swift */,
 				79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */,
-				D471E51B1DAB682900FFC29A /* TestFetchImage.swift */,
-				D45026A71DB3313D00463DA3 /* EmojiCell.swift */,
 			);
 			name = Carema;
 			sourceTree = "<group>";
@@ -511,7 +505,6 @@
 				006170151DA28CB4002354B3 /* MenuBar.swift in Sources */,
 				004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */,
 				004B00CB1D9D23B500C1C6E5 /* SnapsCell.swift in Sources */,
-				D471E51C1DAB682900FFC29A /* TestFetchImage.swift in Sources */,
 				00C4571D1DA5094E004075FD /* MemoriesController.swift in Sources */,
 				798136481D9BCFD50074ED25 /* User.swift in Sources */,
 				000D50CF1DB39948003131DB /* PublicStoryCell.swift in Sources */,
@@ -529,7 +522,6 @@
 				0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */,
 				798136471D9BCFD50074ED25 /* Message.swift in Sources */,
 				D4E2313E1DA4722D008B7FC4 /* photoModel.xcdatamodeld in Sources */,
-				D45026A81DB3313D00463DA3 /* EmojiCell.swift in Sources */,
 				00513ED81DAA27C30097D967 /* SendToController.swift in Sources */,
 				79484F901DB0E5AD00505B0F /* ImageWithTimerViewController.swift in Sources */,
 				006170131DA22118002354B3 /* StoryCell.swift in Sources */,
