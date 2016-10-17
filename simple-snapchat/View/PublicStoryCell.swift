@@ -27,7 +27,7 @@ class PublicStoryCell: UICollectionViewCell, UIWebViewDelegate {
     let storyView: UIScrollView = {
         let sv = UIScrollView()
         sv.backgroundColor = .white
-//        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
     }()
     
@@ -60,13 +60,13 @@ class PublicStoryCell: UICollectionViewCell, UIWebViewDelegate {
     var contentHeightConstraint: NSLayoutConstraint?
     func setupView() {
         addSubview(storyView)
-        storyView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 3000)
-        storyView.contentSize.height = 2000
-//        storyView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//        storyView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-//        storyView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-//        storyViewHeightConstraint = storyView.heightAnchor.constraint(equalToConstant: 1000)
-//        storyViewHeightConstraint?.isActive = true
+//        storyView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 3000)
+//        storyView.contentSize.height = 2000
+        storyView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        storyView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        storyView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        storyViewHeightConstraint = storyView.heightAnchor.constraint(equalToConstant: 1000)
+        storyViewHeightConstraint?.isActive = true
         
         storyView.addSubview(titleView)
         titleView.leftAnchor.constraint(equalTo: storyView.leftAnchor, constant: 20).isActive = true
@@ -119,7 +119,7 @@ class PublicStoryCell: UICollectionViewCell, UIWebViewDelegate {
         print("finish loading")
         // modify the height of the whole view
 //        storyViewHeightConstraint?.isActive = false
-//        storyViewHeightConstraint = storyView.bottomAnchor.constraint(equalTo: bottomAnchor)
+//        storyViewHeightConstraint = storyView.bottomAnchor.constraint(equalTo: contentWebView.bottomAnchor)
 //        storyViewHeightConstraint?.isActive = true
     }
     
