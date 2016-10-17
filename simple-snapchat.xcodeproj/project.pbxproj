@@ -58,6 +58,7 @@
 		D45026A81DB3313D00463DA3 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026A71DB3313D00463DA3 /* EmojiCell.swift */; };
 		D45026AB1DB340FF00463DA3 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026A91DB340FF00463DA3 /* Photo+CoreDataClass.swift */; };
 		D45026AC1DB340FF00463DA3 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026AA1DB340FF00463DA3 /* Photo+CoreDataProperties.swift */; };
+		D45026AE1DB3787800463DA3 /* StickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026AD1DB3787800463DA3 /* StickerCell.swift */; };
 		D471E51C1DAB682900FFC29A /* TestFetchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D471E51B1DAB682900FFC29A /* TestFetchImage.swift */; };
 		D4E231381DA470F5008B7FC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E231371DA470F5008B7FC4 /* CoreData.framework */; };
 		D4E2313E1DA4722D008B7FC4 /* photoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D4E2313C1DA4722D008B7FC4 /* photoModel.xcdatamodeld */; };
@@ -125,6 +126,7 @@
 		D45026A71DB3313D00463DA3 /* EmojiCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
 		D45026A91DB340FF00463DA3 /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D45026AA1DB340FF00463DA3 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D45026AD1DB3787800463DA3 /* StickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCell.swift; sourceTree = "<group>"; };
 		D471E51B1DAB682900FFC29A /* TestFetchImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestFetchImage.swift; path = Controllers/TestFetchImage.swift; sourceTree = "<group>"; };
 		D4E231371DA470F5008B7FC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D4E2313D1DA4722D008B7FC4 /* photoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = photoModel.xcdatamodel; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		0043490B1D99031000D3DE54 /* Carema */ = {
 			isa = PBXGroup;
 			children = (
+				D45026AD1DB3787800463DA3 /* StickerCell.swift */,
 				D4F528331D9D64F200781F78 /* PreviewController.swift */,
 				79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */,
 				D471E51B1DAB682900FFC29A /* TestFetchImage.swift */,
@@ -528,6 +531,7 @@
 				006170131DA22118002354B3 /* StoryCell.swift in Sources */,
 				791F308D1DAA722400001D90 /* QRReaderControllerViewController.swift in Sources */,
 				791F30911DAA8CFB00001D90 /* MapViewController.swift in Sources */,
+				D45026AE1DB3787800463DA3 /* StickerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,7 +664,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat12";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -681,7 +685,7 @@
 				INFOPLIST_FILE = "simple-snapchat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat12";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.unimelb.simple-snapchat2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

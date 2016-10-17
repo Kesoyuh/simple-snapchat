@@ -142,11 +142,11 @@
                                         <rect key="frame" x="0.0" y="99" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pTx-mY-UPL" id="LGk-67-zaE">
-                                            <frame key="frameInset" width="342" height="43.5"/>
+                                            <frame key="frameInset" width="342" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Add by Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Irw-4P-qgH">
-                                                    <frame key="frameInset" minX="15" width="325" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="325" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -162,11 +162,11 @@
                                         <rect key="frame" x="0.0" y="143" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pg3-QF-PIz" id="NwP-Ev-lKL">
-                                            <frame key="frameInset" width="342" height="43.5"/>
+                                            <frame key="frameInset" width="342" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Add by Snapcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ygC-DJ-jnK">
-                                                    <frame key="frameInset" minX="15" width="325" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="325" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -179,11 +179,11 @@
                                         <rect key="frame" x="0.0" y="187" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lIC-13-q3O" id="WGd-pJ-EpV">
-                                            <frame key="frameInset" width="342" height="43.5"/>
+                                            <frame key="frameInset" width="342" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Share my username with SMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2NM-yx-bYj">
-                                                    <frame key="frameInset" minX="15" width="325" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="325" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -235,7 +235,7 @@
                                 <rect key="frame" x="0.0" y="136" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XRu-yI-XI7" id="Q07-bH-BVZ">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -314,18 +314,18 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tcv-VK-0rz" id="9BQ-BS-BsB">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9QF-xs-gsa">
-                                            <frame key="frameInset" minX="15" minY="5" width="33.5" height="20.5"/>
+                                            <frame key="frameInset" minX="15" minY="4" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="elR-zU-cqg">
-                                            <frame key="frameInset" minX="15" minY="25.5" width="44" height="14.5"/>
+                                            <frame key="frameInset" minX="15" minY="25" width="44" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
@@ -381,7 +381,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e5X-Cb-eJL" id="4ZZ-Sy-twB">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -426,7 +426,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oA4-gm-OFh" id="16q-oC-Cnh">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -486,11 +486,19 @@
                                     <action selector="Flip_Camera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8vK-WL-jrP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqx-tf-LTA">
+                                <state key="normal" image="jump_to_chat"/>
+                                <connections>
+                                    <action selector="Jump_to_chat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eYF-Ks-cYS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="VUc-xl-edW" secondAttribute="bottom" constant="54" id="0Kc-Ku-tIU"/>
                             <constraint firstItem="Qkb-8s-mvH" firstAttribute="bottom" secondItem="1yw-Tj-3EA" secondAttribute="bottom" id="2gW-gd-9D2"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hqx-tf-LTA" secondAttribute="bottom" constant="33" id="8ml-jI-Fya"/>
+                            <constraint firstItem="hqx-tf-LTA" firstAttribute="leading" secondItem="1yw-Tj-3EA" secondAttribute="leading" id="Nmm-Ux-0Qa"/>
                             <constraint firstItem="1yw-Tj-3EA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="Puw-jM-VjA"/>
                             <constraint firstItem="VUc-xl-edW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QKP-pc-Cm6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Qkb-8s-mvH" secondAttribute="trailing" constant="-10" id="TtY-Qg-Cqr"/>
@@ -499,6 +507,7 @@
                             <constraint firstItem="EGf-Wj-b1O" firstAttribute="centerX" secondItem="VUc-xl-edW" secondAttribute="centerX" id="aq4-ut-Lv9"/>
                             <constraint firstItem="Qkb-8s-mvH" firstAttribute="top" secondItem="1yw-Tj-3EA" secondAttribute="top" id="ccz-kC-Erx"/>
                             <constraint firstItem="EGf-Wj-b1O" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dxJ-1U-xAr"/>
+                            <constraint firstItem="hqx-tf-LTA" firstAttribute="trailing" secondItem="1yw-Tj-3EA" secondAttribute="trailing" id="f9W-V9-Qnd"/>
                             <constraint firstItem="EGf-Wj-b1O" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="m4k-TI-29x"/>
                         </constraints>
                     </view>
@@ -648,13 +657,64 @@
                                     <outletCollection property="gestureRecognizers" destination="bj9-Xm-rX6" appends="YES" id="UT0-ly-Bvb"/>
                                 </connections>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1L-rF-p9A">
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1L-rF-p9A">
+                                <state key="normal" image="image_emoji"/>
                                 <connections>
                                     <action selector="showStickers:" destination="Tb7-Al-dck" eventType="touchUpInside" id="gke-RK-7Gd"/>
-                                    <segue destination="Gga-Lj-yIG" kind="presentation" identifier="all_emoji" id="2XG-6J-TFk"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eEu-qj-IP9">
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wYU-0O-LXb">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="sticker" id="rbz-Q2-DcJ" customClass="StickerCell" customModule="simple_snapchat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWQ-xC-sDg">
+                                                    <gestureRecognizers/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="dWQ-xC-sDg" secondAttribute="trailing" id="5NZ-6Q-LRa"/>
+                                            <constraint firstItem="dWQ-xC-sDg" firstAttribute="top" secondItem="rbz-Q2-DcJ" secondAttribute="top" id="aT0-Tv-fRS"/>
+                                            <constraint firstItem="dWQ-xC-sDg" firstAttribute="leading" secondItem="rbz-Q2-DcJ" secondAttribute="leading" id="pMl-B3-6vw"/>
+                                            <constraint firstAttribute="bottom" secondItem="dWQ-xC-sDg" secondAttribute="bottom" id="yLA-Vf-JDP"/>
+                                        </constraints>
+                                        <size key="customSize" width="80" height="80"/>
+                                        <connections>
+                                            <outlet property="emojilabel" destination="dWQ-xC-sDg" id="Y4r-Ra-M64"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Tb7-Al-dck" id="b3T-iX-hzt"/>
+                                    <outlet property="delegate" destination="Tb7-Al-dck" id="nib-rl-ZUj"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUf-80-mw3">
+                                <frame key="frameInset" minX="172" minY="176" width="50" height="50"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ROx-ht-Yeo" appends="YES" id="cNx-C7-PXm"/>
+                                </connections>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -662,19 +722,24 @@
                             <constraint firstItem="Xje-SK-CMo" firstAttribute="top" secondItem="aqt-Vv-gqh" secondAttribute="bottom" constant="10" id="5RA-SP-WOV"/>
                             <constraint firstItem="5yq-gm-TWD" firstAttribute="centerY" secondItem="85R-JD-SwN" secondAttribute="centerY" id="8Nd-9F-nJ7"/>
                             <constraint firstItem="U1L-rF-p9A" firstAttribute="trailing" secondItem="kBk-ke-De3" secondAttribute="trailing" id="BD6-c6-zIp"/>
+                            <constraint firstItem="eEu-qj-IP9" firstAttribute="leading" secondItem="dqr-qc-HdJ" secondAttribute="leading" id="D1j-so-UG9"/>
                             <constraint firstItem="dqr-qc-HdJ" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leading" id="DQ6-Xu-zTS"/>
                             <constraint firstItem="Xje-SK-CMo" firstAttribute="top" secondItem="QsS-1N-6Yp" secondAttribute="bottom" constant="8" symbolic="YES" id="LEY-fK-bZ2"/>
                             <constraint firstItem="dqr-qc-HdJ" firstAttribute="top" secondItem="fki-0f-KgM" secondAttribute="bottom" constant="431" id="LMb-4V-Dsd"/>
+                            <constraint firstItem="eEu-qj-IP9" firstAttribute="trailing" secondItem="dqr-qc-HdJ" secondAttribute="trailing" id="LQ7-Qx-9ve"/>
                             <constraint firstItem="EoO-n8-d3I" firstAttribute="trailing" secondItem="dqr-qc-HdJ" secondAttribute="trailing" id="NDz-Vs-uFe"/>
                             <constraint firstItem="Apf-3B-AfM" firstAttribute="leading" secondItem="FhO-Fu-Oez" secondAttribute="trailing" constant="38" id="S71-1E-Ndz"/>
                             <constraint firstItem="EoO-n8-d3I" firstAttribute="bottom" secondItem="Xje-SK-CMo" secondAttribute="top" id="STZ-Yq-st4"/>
+                            <constraint firstItem="eEu-qj-IP9" firstAttribute="bottom" secondItem="Xje-SK-CMo" secondAttribute="top" id="UJ4-gH-xah"/>
                             <constraint firstAttribute="trailing" secondItem="dqr-qc-HdJ" secondAttribute="trailing" id="URd-g8-Itd"/>
                             <constraint firstItem="EoO-n8-d3I" firstAttribute="top" secondItem="fki-0f-KgM" secondAttribute="bottom" id="Uc1-5W-eIe"/>
                             <constraint firstItem="EoO-n8-d3I" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leading" id="VB2-v6-1ra"/>
                             <constraint firstItem="Apf-3B-AfM" firstAttribute="trailing" secondItem="QsS-1N-6Yp" secondAttribute="trailing" id="Xds-EJ-Cbo"/>
                             <constraint firstItem="aqt-Vv-gqh" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leadingMargin" id="ZVV-Dm-tNQ"/>
+                            <constraint firstItem="eEu-qj-IP9" firstAttribute="top" secondItem="5yq-gm-TWD" secondAttribute="bottom" constant="1" id="a2b-nC-KiI"/>
                             <constraint firstItem="FhO-Fu-Oez" firstAttribute="leading" secondItem="U1L-rF-p9A" secondAttribute="trailing" constant="53" id="a4y-82-dW1"/>
                             <constraint firstItem="Xje-SK-CMo" firstAttribute="top" secondItem="dqr-qc-HdJ" secondAttribute="bottom" id="aLr-jH-GaM"/>
+                            <constraint firstItem="FUf-80-mw3" firstAttribute="top" secondItem="85R-JD-SwN" secondAttribute="top" constant="176" id="afR-bA-fyH"/>
                             <constraint firstAttribute="trailing" secondItem="5yq-gm-TWD" secondAttribute="trailing" id="eap-6G-Ntj"/>
                             <constraint firstItem="U1L-rF-p9A" firstAttribute="top" secondItem="FhO-Fu-Oez" secondAttribute="top" id="egJ-vt-2ei"/>
                             <constraint firstItem="U1L-rF-p9A" firstAttribute="leading" secondItem="kBk-ke-De3" secondAttribute="leading" id="hdZ-nc-ffK"/>
@@ -686,6 +751,7 @@
                             <constraint firstItem="Apf-3B-AfM" firstAttribute="top" secondItem="FhO-Fu-Oez" secondAttribute="top" id="kqY-zM-Xzl"/>
                             <constraint firstItem="EoO-n8-d3I" firstAttribute="leading" secondItem="dqr-qc-HdJ" secondAttribute="leading" id="loW-Zy-8Ba"/>
                             <constraint firstItem="Apf-3B-AfM" firstAttribute="bottom" secondItem="6cZ-5Q-Azc" secondAttribute="bottom" id="p6P-86-d4C"/>
+                            <constraint firstItem="FUf-80-mw3" firstAttribute="centerX" secondItem="U1L-rF-p9A" secondAttribute="centerX" id="qTG-pX-WiP"/>
                             <constraint firstItem="JYd-U2-5GK" firstAttribute="leading" secondItem="aqt-Vv-gqh" secondAttribute="trailing" constant="51" id="t6e-Yq-tDx"/>
                             <constraint firstAttribute="trailing" secondItem="EoO-n8-d3I" secondAttribute="trailing" id="tgz-VA-EHT"/>
                             <constraint firstItem="5yq-gm-TWD" firstAttribute="leading" secondItem="85R-JD-SwN" secondAttribute="leading" id="uqE-dt-iGK"/>
@@ -703,8 +769,11 @@
                         <outlet property="Image_Text" destination="FhO-Fu-Oez" id="X7T-DB-neb"/>
                         <outlet property="TextX" destination="v5f-4J-QK8" id="Yl5-Oy-EvS"/>
                         <outlet property="TextY" destination="8Nd-9F-nJ7" id="eKy-pm-7oI"/>
+                        <outlet property="allEmoji" destination="eEu-qj-IP9" id="xFc-OB-WgK"/>
                         <outlet property="save" destination="JYd-U2-5GK" id="v5c-uH-EDv"/>
+                        <outlet property="test" destination="FUf-80-mw3" id="VLf-aK-fNj"/>
                         <outlet property="text_on_image" destination="5yq-gm-TWD" id="6Am-AC-r75"/>
+                        <segue destination="72d-F5-j0K" kind="presentation" identifier="haha" animates="NO" id="TEE-eJ-CFc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eId-am-sdt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -713,10 +782,31 @@
                         <action selector="Imagetextdrag:" destination="Tb7-Al-dck" id="nYn-hL-oft"/>
                     </connections>
                 </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="ROx-ht-Yeo">
+                    <connections>
+                        <action selector="Emoji_drag:" destination="Tb7-Al-dck" id="5oS-w3-9es"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2370.4000000000001" y="1376.7616191904049"/>
         </scene>
-        <!--Testcontroller-->
+        <!--Navigation Controller-->
+        <scene sceneID="XZC-CL-5w5">
+            <objects>
+                <navigationController id="72d-F5-j0K" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7hk-FX-egY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="YsB-8I-LXp" kind="relationship" relationship="rootViewController" id="WdO-mw-yn9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MrX-fk-cUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3346" y="1731"/>
+        </scene>
+        <!--Title-->
         <scene sceneID="r2h-Qo-Qx0">
             <objects>
                 <viewController id="YsB-8I-LXp" customClass="Testcontroller" customModule="simple_snapchat" customModuleProvider="target" sceneMemberID="viewController">
@@ -728,10 +818,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="D0v-8u-y80">
-                                <frame key="frameInset" minX="67" minY="246" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="D0v-8u-y80">
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EYU-BY-IoE">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -739,22 +827,25 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="HjJ-YS-2MF" customClass="EmojiCell" customModule="simple_snapchat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="emoji" id="HjJ-YS-2MF" customClass="EmojiCell" customModule="simple_snapchat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uy3-gK-w50">
-                                                    <frame key="frameInset" minY="15" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uy3-gK-w50">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="uy3-gK-w50" firstAttribute="leading" secondItem="HjJ-YS-2MF" secondAttribute="leading" id="S9s-y7-TRv"/>
+                                            <constraint firstItem="uy3-gK-w50" firstAttribute="centerY" secondItem="HjJ-YS-2MF" secondAttribute="centerY" id="YDI-cn-eQo"/>
+                                        </constraints>
+                                        <size key="customSize" width="80" height="80"/>
                                         <connections>
                                             <outlet property="emoji" destination="uy3-gK-w50" id="kfX-lP-6fk"/>
                                         </connections>
@@ -767,27 +858,23 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="D0v-8u-y80" secondAttribute="bottom" constant="-7" id="DgL-5b-brL"/>
+                            <constraint firstItem="D0v-8u-y80" firstAttribute="leading" secondItem="Qox-UY-KsD" secondAttribute="leading" id="V18-tm-WVM"/>
+                            <constraint firstAttribute="trailing" secondItem="D0v-8u-y80" secondAttribute="trailing" id="evQ-bN-aYA"/>
+                            <constraint firstItem="D0v-8u-y80" firstAttribute="top" secondItem="A3k-lI-NAX" secondAttribute="bottom" id="tiO-KW-92o"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="maL-hQ-2kh">
+                        <barButtonItem key="backBarButtonItem" title="back" id="sPf-CY-30P"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="haha" destination="D0v-8u-y80" id="YyN-sZ-Bwe"/>
+                        <outlet property="emojiview" destination="D0v-8u-y80" id="lJm-1a-2hE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lEs-SV-3ZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4178" y="1851"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="y5H-ES-QpW">
-            <objects>
-                <navigationController id="Gga-Lj-yIG" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pKa-wy-TOA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zr8-3E-cMg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3226" y="1685"/>
+            <point key="canvasLocation" x="4566" y="1631"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kxB-C8-7gA">
@@ -834,8 +921,10 @@
         <image name="Image_story" width="30" height="30"/>
         <image name="Image_timer" width="30" height="30"/>
         <image name="image_draw" width="34" height="34"/>
+        <image name="image_emoji" width="30" height="30"/>
         <image name="image_save" width="30" height="30"/>
         <image name="image_text" width="30" height="30"/>
+        <image name="jump_to_chat" width="18" height="22"/>
         <image name="send-button" width="132" height="130"/>
     </resources>
 </document>
