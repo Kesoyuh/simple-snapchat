@@ -56,6 +56,7 @@ class MemoriesController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func setupMemoriesView() {
+        
         collectionView?.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(40, 0, 0, 0)
         

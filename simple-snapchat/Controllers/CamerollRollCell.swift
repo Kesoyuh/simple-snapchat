@@ -44,13 +44,35 @@ class CamerollRollCell: UICollectionViewCell, UICollectionViewDataSource, UIColl
         
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.allowsSelection = false
-        grabPhotos()
+        loadCameraRoll()
+        //grabPhotos()
     }
     
     var imgArray = [UIImage]()
     
+    func loadCameraRoll() {
+        // check for permission
+        let status = PHPhotoLibrary.authorizationStatus()
+        if status == .authorized {
+            grabPhotos()
+            collectionView.reloadData()
+        } else if status == .denied {
+            // do nothing
+        } else if status == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({ (newStatus) in
+                DispatchQueue.main.async {
+                    if newStatus == .authorized {
+                        self.grabPhotos()
+                        self.collectionView.reloadData()
+                    }
+                }
+                
+            })
+        }
+    }
     
     func grabPhotos() {
+        
         let imgManager = PHImageManager.default()
         
         let requestOptions = PHImageRequestOptions()

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Photos
 
 @IBDesignable
 class LoginRegisterController: UIViewController {
