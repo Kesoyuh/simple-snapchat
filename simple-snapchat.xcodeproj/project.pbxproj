@@ -10,6 +10,20 @@
 		000D50CB1DB36883003131DB /* PublicStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D50CA1DB36883003131DB /* PublicStoryController.swift */; };
 		000D50CD1DB37C8E003131DB /* PublicStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D50CC1DB37C8E003131DB /* PublicStory.swift */; };
 		000D50CF1DB39948003131DB /* PublicStoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D50CE1DB39948003131DB /* PublicStoryCell.swift */; };
+		002A34F51DCDEC9000BC0A29 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A34F31DCDEC9000BC0A29 /* Photo+CoreDataClass.swift */; };
+		002A34F61DCDEC9000BC0A29 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A34F41DCDEC9000BC0A29 /* Photo+CoreDataProperties.swift */; };
+		002A34FA1DCDECFC00BC0A29 /* AddedMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A34F71DCDECFC00BC0A29 /* AddedMeTableViewController.swift */; };
+		002A34FB1DCDECFC00BC0A29 /* AddFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A34F81DCDECFC00BC0A29 /* AddFriendsTableViewController.swift */; };
+		002A34FC1DCDECFC00BC0A29 /* AddUsernameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A34F91DCDECFC00BC0A29 /* AddUsernameTableViewController.swift */; };
+		002A34FE1DCDED4400BC0A29 /* MyFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A34FD1DCDED4400BC0A29 /* MyFriendsTableViewController.swift */; };
+		002A35001DCDED7500BC0A29 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A34FF1DCDED7500BC0A29 /* PreviewController.swift */; };
+		002A35021DCDED9300BC0A29 /* StickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A35011DCDED9300BC0A29 /* StickerCell.swift */; };
+		002A35041DCDEE6700BC0A29 /* CamerollRollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A35031DCDEE6700BC0A29 /* CamerollRollCell.swift */; };
+		002A35061DCDEE9500BC0A29 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A35051DCDEE9500BC0A29 /* MenuBar.swift */; };
+		002A35081DCDEEAE00BC0A29 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A35071DCDEEAE00BC0A29 /* PhotoCell.swift */; };
+		002A350A1DCDEECD00BC0A29 /* PublicAgencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A35091DCDEECD00BC0A29 /* PublicAgencyCell.swift */; };
+		002A350C1DCDEEFC00BC0A29 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A350B1DCDEEFC00BC0A29 /* StoryCell.swift */; };
+		002A350E1DCDEF0600BC0A29 /* SnapsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A350D1DCDEF0600BC0A29 /* SnapsCell.swift */; };
 		004348EB1D98FCB600D3DE54 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348EA1D98FCB600D3DE54 /* AudioToolbox.framework */; };
 		004348ED1D98FCC200D3DE54 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348EC1D98FCC200D3DE54 /* CFNetwork.framework */; };
 		004348EF1D98FCCA00D3DE54 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348EE1D98FCCA00D3DE54 /* CoreGraphics.framework */; };
@@ -20,20 +34,14 @@
 		004348FB1D98FD0200D3DE54 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348FA1D98FD0200D3DE54 /* libz.tbd */; };
 		004348FD1D98FD0B00D3DE54 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 004348FC1D98FD0B00D3DE54 /* libsqlite3.tbd */; };
 		004349061D99030100D3DE54 /* LoginRegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349001D99030100D3DE54 /* LoginRegisterController.swift */; };
-		004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349011D99030100D3DE54 /* PublicAgencyCell.swift */; };
 		004349081D99030100D3DE54 /* SnapContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349021D99030100D3DE54 /* SnapContainerViewController.swift */; };
 		004349091D99030100D3DE54 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349031D99030100D3DE54 /* TopViewController.swift */; };
 		0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349041D99030100D3DE54 /* VerticalScrollViewController.swift */; };
 		004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004349101D9903CA00D3DE54 /* StoriesViewController.swift */; };
-		004B00CB1D9D23B500C1C6E5 /* SnapsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B00CA1D9D23B500C1C6E5 /* SnapsCell.swift */; };
 		00513ED81DAA27C30097D967 /* SendToController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00513ED71DAA27C30097D967 /* SendToController.swift */; };
 		0061700B1D9E3192002354B3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0061700A1D9E3192002354B3 /* Photos.framework */; };
-		0061700D1D9EA9AA002354B3 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061700C1D9EA9AA002354B3 /* PhotoCell.swift */; };
 		0061700F1D9FCEC2002354B3 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061700E1D9FCEC2002354B3 /* Story.swift */; };
-		006170131DA22118002354B3 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006170121DA22118002354B3 /* StoryCell.swift */; };
-		006170151DA28CB4002354B3 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006170141DA28CB4002354B3 /* MenuBar.swift */; };
 		00C4571D1DA5094E004075FD /* MemoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4571C1DA5094E004075FD /* MemoriesController.swift */; };
-		00C4571F1DA52381004075FD /* CamerollRollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4571E1DA52381004075FD /* CamerollRollCell.swift */; };
 		00DD9D181D98F5D3006489BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DD9D171D98F5D3006489BE /* AppDelegate.swift */; };
 		00DD9D1D1D98F5D3006489BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DD9D1B1D98F5D3006489BE /* Main.storyboard */; };
 		00DD9D1F1D98F5D3006489BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00DD9D1E1D98F5D3006489BE /* Assets.xcassets */; };
@@ -56,16 +64,8 @@
 		79E7CFF81D9CE95A00F081E2 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */; };
 		79E7CFFA1D9E04AA00F081E2 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */; };
 		79E7CFFD1D9EC01600F081E2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFFC1D9EC01600F081E2 /* Extensions.swift */; };
-		D45026AB1DB340FF00463DA3 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026A91DB340FF00463DA3 /* Photo+CoreDataClass.swift */; };
-		D45026AC1DB340FF00463DA3 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026AA1DB340FF00463DA3 /* Photo+CoreDataProperties.swift */; };
-		D45026AE1DB3787800463DA3 /* StickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45026AD1DB3787800463DA3 /* StickerCell.swift */; };
 		D4E231381DA470F5008B7FC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E231371DA470F5008B7FC4 /* CoreData.framework */; };
 		D4E2313E1DA4722D008B7FC4 /* photoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D4E2313C1DA4722D008B7FC4 /* photoModel.xcdatamodeld */; };
-		D4F528341D9D64F200781F78 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F528331D9D64F200781F78 /* PreviewController.swift */; };
-		E55B253E1DA3D8C9005E5626 /* AddedMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55B253D1DA3D8C9005E5626 /* AddedMeTableViewController.swift */; };
-		E55B25401DA3DF20005E5626 /* AddFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55B253F1DA3DF20005E5626 /* AddFriendsTableViewController.swift */; };
-		E563EC231DA495EF00EA97F9 /* AddUsernameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E563EC221DA495EF00EA97F9 /* AddUsernameTableViewController.swift */; };
-		E57FF9DC1DA39E450038239B /* MyFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57FF9DB1DA39E450038239B /* MyFriendsTableViewController.swift */; };
 		F595B0AB8367814EF8C25504 /* Pods_simple_snapchat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +74,20 @@
 		000D50CC1DB37C8E003131DB /* PublicStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PublicStory.swift; path = Model/PublicStory.swift; sourceTree = "<group>"; };
 		000D50CE1DB39948003131DB /* PublicStoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PublicStoryCell.swift; path = View/PublicStoryCell.swift; sourceTree = "<group>"; };
 		00198B171D99102A003AD328 /* simple-snapchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "simple-snapchat.entitlements"; sourceTree = "<group>"; };
+		002A34F31DCDEC9000BC0A29 /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Photo+CoreDataClass.swift"; path = "Model/Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		002A34F41DCDEC9000BC0A29 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Photo+CoreDataProperties.swift"; path = "Model/Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		002A34F71DCDECFC00BC0A29 /* AddedMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddedMeTableViewController.swift; path = Controllers/AddedMeTableViewController.swift; sourceTree = "<group>"; };
+		002A34F81DCDECFC00BC0A29 /* AddFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddFriendsTableViewController.swift; path = Controllers/AddFriendsTableViewController.swift; sourceTree = "<group>"; };
+		002A34F91DCDECFC00BC0A29 /* AddUsernameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUsernameTableViewController.swift; path = Controllers/AddUsernameTableViewController.swift; sourceTree = "<group>"; };
+		002A34FD1DCDED4400BC0A29 /* MyFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyFriendsTableViewController.swift; path = Controllers/MyFriendsTableViewController.swift; sourceTree = "<group>"; };
+		002A34FF1DCDED7500BC0A29 /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreviewController.swift; path = Controllers/PreviewController.swift; sourceTree = "<group>"; };
+		002A35011DCDED9300BC0A29 /* StickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StickerCell.swift; path = View/StickerCell.swift; sourceTree = "<group>"; };
+		002A35031DCDEE6700BC0A29 /* CamerollRollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CamerollRollCell.swift; path = View/CamerollRollCell.swift; sourceTree = "<group>"; };
+		002A35051DCDEE9500BC0A29 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuBar.swift; path = View/MenuBar.swift; sourceTree = "<group>"; };
+		002A35071DCDEEAE00BC0A29 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCell.swift; path = View/PhotoCell.swift; sourceTree = "<group>"; };
+		002A35091DCDEECD00BC0A29 /* PublicAgencyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PublicAgencyCell.swift; path = View/PublicAgencyCell.swift; sourceTree = "<group>"; };
+		002A350B1DCDEEFC00BC0A29 /* StoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryCell.swift; path = View/StoryCell.swift; sourceTree = "<group>"; };
+		002A350D1DCDEF0600BC0A29 /* SnapsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapsCell.swift; path = View/SnapsCell.swift; sourceTree = "<group>"; };
 		004348EA1D98FCB600D3DE54 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		004348EC1D98FCC200D3DE54 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		004348EE1D98FCCA00D3DE54 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -84,20 +98,14 @@
 		004348FA1D98FD0200D3DE54 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		004348FC1D98FD0B00D3DE54 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		004349001D99030100D3DE54 /* LoginRegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginRegisterController.swift; path = Controllers/LoginRegisterController.swift; sourceTree = "<group>"; };
-		004349011D99030100D3DE54 /* PublicAgencyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PublicAgencyCell.swift; path = Controllers/PublicAgencyCell.swift; sourceTree = "<group>"; };
 		004349021D99030100D3DE54 /* SnapContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapContainerViewController.swift; path = Controllers/SnapContainerViewController.swift; sourceTree = "<group>"; };
 		004349031D99030100D3DE54 /* TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopViewController.swift; path = Controllers/TopViewController.swift; sourceTree = "<group>"; };
 		004349041D99030100D3DE54 /* VerticalScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalScrollViewController.swift; path = Controllers/VerticalScrollViewController.swift; sourceTree = "<group>"; };
 		004349101D9903CA00D3DE54 /* StoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoriesViewController.swift; path = Controllers/StoriesViewController.swift; sourceTree = "<group>"; };
-		004B00CA1D9D23B500C1C6E5 /* SnapsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapsCell.swift; path = Controllers/SnapsCell.swift; sourceTree = "<group>"; };
 		00513ED71DAA27C30097D967 /* SendToController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendToController.swift; path = Controllers/SendToController.swift; sourceTree = "<group>"; };
 		0061700A1D9E3192002354B3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		0061700C1D9EA9AA002354B3 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCell.swift; path = Controllers/PhotoCell.swift; sourceTree = "<group>"; };
 		0061700E1D9FCEC2002354B3 /* Story.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Story.swift; path = Model/Story.swift; sourceTree = "<group>"; };
-		006170121DA22118002354B3 /* StoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryCell.swift; path = Controllers/StoryCell.swift; sourceTree = "<group>"; };
-		006170141DA28CB4002354B3 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuBar.swift; path = Controllers/MenuBar.swift; sourceTree = "<group>"; };
 		00C4571C1DA5094E004075FD /* MemoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoriesController.swift; path = Controllers/MemoriesController.swift; sourceTree = "<group>"; };
-		00C4571E1DA52381004075FD /* CamerollRollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CamerollRollCell.swift; path = Controllers/CamerollRollCell.swift; sourceTree = "<group>"; };
 		00DD9D141D98F5D3006489BE /* simple-snapchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "simple-snapchat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DD9D171D98F5D3006489BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00DD9D1C1D98F5D3006489BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -123,16 +131,8 @@
 		79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = View/MessageCell.swift; sourceTree = "<group>"; };
 		79E7CFFC1D9EC01600F081E2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_simple_snapchat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D45026A91DB340FF00463DA3 /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D45026AA1DB340FF00463DA3 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D45026AD1DB3787800463DA3 /* StickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerCell.swift; sourceTree = "<group>"; };
 		D4E231371DA470F5008B7FC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D4E2313D1DA4722D008B7FC4 /* photoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = photoModel.xcdatamodel; sourceTree = "<group>"; };
-		D4F528331D9D64F200781F78 /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
-		E55B253D1DA3D8C9005E5626 /* AddedMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddedMeTableViewController.swift; sourceTree = "<group>"; };
-		E55B253F1DA3DF20005E5626 /* AddFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewController.swift; sourceTree = "<group>"; };
-		E563EC221DA495EF00EA97F9 /* AddUsernameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsernameTableViewController.swift; sourceTree = "<group>"; };
-		E57FF9DB1DA39E450038239B /* MyFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFriendsTableViewController.swift; sourceTree = "<group>"; };
 		FEFFBC8570546B75E246890B /* Pods-simple-snapchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.debug.xcconfig"; sourceTree = "<group>"; };
 		FF70871258D3258057C9ED4E /* Pods-simple-snapchat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.release.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,8 +186,8 @@
 		0043490B1D99031000D3DE54 /* Carema */ = {
 			isa = PBXGroup;
 			children = (
-				D45026AD1DB3787800463DA3 /* StickerCell.swift */,
-				D4F528331D9D64F200781F78 /* PreviewController.swift */,
+				002A34FF1DCDED7500BC0A29 /* PreviewController.swift */,
+				002A35011DCDED9300BC0A29 /* StickerCell.swift */,
 				79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */,
 			);
 			name = Carema;
@@ -204,11 +204,12 @@
 		0043490E1D99032E00D3DE54 /* TopView */ = {
 			isa = PBXGroup;
 			children = (
+				79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */,
+				002A34F71DCDECFC00BC0A29 /* AddedMeTableViewController.swift */,
+				002A34F81DCDECFC00BC0A29 /* AddFriendsTableViewController.swift */,
+				002A34F91DCDECFC00BC0A29 /* AddUsernameTableViewController.swift */,
 				004349031D99030100D3DE54 /* TopViewController.swift */,
-				E57FF9DB1DA39E450038239B /* MyFriendsTableViewController.swift */,
-				E55B253D1DA3D8C9005E5626 /* AddedMeTableViewController.swift */,
-				E55B253F1DA3DF20005E5626 /* AddFriendsTableViewController.swift */,
-				E563EC221DA495EF00EA97F9 /* AddUsernameTableViewController.swift */,
+				002A34FD1DCDED4400BC0A29 /* MyFriendsTableViewController.swift */,
 				791F308C1DAA722400001D90 /* QRReaderControllerViewController.swift */,
 			);
 			name = TopView;
@@ -227,8 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				004349101D9903CA00D3DE54 /* StoriesViewController.swift */,
-				004349011D99030100D3DE54 /* PublicAgencyCell.swift */,
-				006170121DA22118002354B3 /* StoryCell.swift */,
+				002A350B1DCDEEFC00BC0A29 /* StoryCell.swift */,
+				002A35091DCDEECD00BC0A29 /* PublicAgencyCell.swift */,
 				000D50CA1DB36883003131DB /* PublicStoryController.swift */,
 				000D50CE1DB39948003131DB /* PublicStoryCell.swift */,
 			);
@@ -239,10 +240,10 @@
 			isa = PBXGroup;
 			children = (
 				00C4571C1DA5094E004075FD /* MemoriesController.swift */,
-				00C4571E1DA52381004075FD /* CamerollRollCell.swift */,
-				004B00CA1D9D23B500C1C6E5 /* SnapsCell.swift */,
-				0061700C1D9EA9AA002354B3 /* PhotoCell.swift */,
-				006170141DA28CB4002354B3 /* MenuBar.swift */,
+				002A35031DCDEE6700BC0A29 /* CamerollRollCell.swift */,
+				002A350D1DCDEF0600BC0A29 /* SnapsCell.swift */,
+				002A35071DCDEEAE00BC0A29 /* PhotoCell.swift */,
+				002A35051DCDEE9500BC0A29 /* MenuBar.swift */,
 			);
 			name = BottomView;
 			sourceTree = "<group>";
@@ -272,7 +273,6 @@
 				791F308F1DAA8CE200001D90 /* Map */,
 				004B00C51D9D0DF100C1C6E5 /* BottomView */,
 				79E7CFFB1D9EBFF200F081E2 /* Helpers */,
-				79E7CFF61D9CE93B00F081E2 /* View */,
 				798136421D9BCF9D0074ED25 /* Model */,
 				798136301D9928560074ED25 /* Chat */,
 				00198B171D99102A003AD328 /* simple-snapchat.entitlements */,
@@ -311,6 +311,8 @@
 		798136301D9928560074ED25 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */,
+				79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */,
 				798136311D9928670074ED25 /* ChatListTableViewController.swift */,
 				798136331D992DA10074ED25 /* NewChatTableViewController.swift */,
 				798136351D9977000074ED25 /* ChatLogController.swift */,
@@ -322,8 +324,8 @@
 		798136421D9BCF9D0074ED25 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D45026A91DB340FF00463DA3 /* Photo+CoreDataClass.swift */,
-				D45026AA1DB340FF00463DA3 /* Photo+CoreDataProperties.swift */,
+				002A34F31DCDEC9000BC0A29 /* Photo+CoreDataClass.swift */,
+				002A34F41DCDEC9000BC0A29 /* Photo+CoreDataProperties.swift */,
 				798136451D9BCFD50074ED25 /* Message.swift */,
 				798136461D9BCFD50074ED25 /* User.swift */,
 				D4E2313C1DA4722D008B7FC4 /* photoModel.xcdatamodeld */,
@@ -333,16 +335,6 @@
 				7993CE771DB33A93008F44D4 /* Friend.swift */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		79E7CFF61D9CE93B00F081E2 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */,
-				79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */,
-				79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */,
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 		79E7CFFB1D9EBFF200F081E2 /* Helpers */ = {
@@ -486,48 +478,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4F528341D9D64F200781F78 /* PreviewController.swift in Sources */,
+				002A35001DCDED7500BC0A29 /* PreviewController.swift in Sources */,
+				002A350C1DCDEEFC00BC0A29 /* StoryCell.swift in Sources */,
+				002A34F61DCDEC9000BC0A29 /* Photo+CoreDataProperties.swift in Sources */,
 				00E2E8D91DADCA380080CF24 /* SendingPhoto.swift in Sources */,
 				000D50CD1DB37C8E003131DB /* PublicStory.swift in Sources */,
-				D45026AC1DB340FF00463DA3 /* Photo+CoreDataProperties.swift in Sources */,
 				004349091D99030100D3DE54 /* TopViewController.swift in Sources */,
-				00C4571F1DA52381004075FD /* CamerollRollCell.swift in Sources */,
+				002A350A1DCDEECD00BC0A29 /* PublicAgencyCell.swift in Sources */,
 				798136321D9928670074ED25 /* ChatListTableViewController.swift in Sources */,
 				0061700F1D9FCEC2002354B3 /* Story.swift in Sources */,
 				004349061D99030100D3DE54 /* LoginRegisterController.swift in Sources */,
-				D45026AB1DB340FF00463DA3 /* Photo+CoreDataClass.swift in Sources */,
 				00DD9D181D98F5D3006489BE /* AppDelegate.swift in Sources */,
-				0061700D1D9EA9AA002354B3 /* PhotoCell.swift in Sources */,
 				79E7CFF51D9C259F00F081E2 /* CameraViewController.swift in Sources */,
 				004349081D99030100D3DE54 /* SnapContainerViewController.swift in Sources */,
+				002A34FB1DCDECFC00BC0A29 /* AddFriendsTableViewController.swift in Sources */,
 				798136361D9977010074ED25 /* ChatLogController.swift in Sources */,
-				E563EC231DA495EF00EA97F9 /* AddUsernameTableViewController.swift in Sources */,
-				006170151DA28CB4002354B3 /* MenuBar.swift in Sources */,
-				004349071D99030100D3DE54 /* PublicAgencyCell.swift in Sources */,
-				004B00CB1D9D23B500C1C6E5 /* SnapsCell.swift in Sources */,
+				002A350E1DCDEF0600BC0A29 /* SnapsCell.swift in Sources */,
+				002A35081DCDEEAE00BC0A29 /* PhotoCell.swift in Sources */,
 				00C4571D1DA5094E004075FD /* MemoriesController.swift in Sources */,
 				798136481D9BCFD50074ED25 /* User.swift in Sources */,
 				000D50CF1DB39948003131DB /* PublicStoryCell.swift in Sources */,
+				002A35061DCDEE9500BC0A29 /* MenuBar.swift in Sources */,
+				002A34FA1DCDECFC00BC0A29 /* AddedMeTableViewController.swift in Sources */,
 				004349111D9903CA00D3DE54 /* StoriesViewController.swift in Sources */,
 				798136341D992DA10074ED25 /* NewChatTableViewController.swift in Sources */,
 				79DA44E91DA5DD4D00BBF518 /* AddedMeCell.swift in Sources */,
-				E55B25401DA3DF20005E5626 /* AddFriendsTableViewController.swift in Sources */,
 				7993CE781DB33A93008F44D4 /* Friend.swift in Sources */,
 				79E7CFFD1D9EC01600F081E2 /* Extensions.swift in Sources */,
+				002A34F51DCDEC9000BC0A29 /* Photo+CoreDataClass.swift in Sources */,
 				000D50CB1DB36883003131DB /* PublicStoryController.swift in Sources */,
 				79E7CFFA1D9E04AA00F081E2 /* MessageCell.swift in Sources */,
 				79E7CFF81D9CE95A00F081E2 /* ChatCell.swift in Sources */,
-				E57FF9DC1DA39E450038239B /* MyFriendsTableViewController.swift in Sources */,
-				E55B253E1DA3D8C9005E5626 /* AddedMeTableViewController.swift in Sources */,
 				0043490A1D99030100D3DE54 /* VerticalScrollViewController.swift in Sources */,
+				002A35041DCDEE6700BC0A29 /* CamerollRollCell.swift in Sources */,
+				002A34FE1DCDED4400BC0A29 /* MyFriendsTableViewController.swift in Sources */,
+				002A35021DCDED9300BC0A29 /* StickerCell.swift in Sources */,
 				798136471D9BCFD50074ED25 /* Message.swift in Sources */,
+				002A34FC1DCDECFC00BC0A29 /* AddUsernameTableViewController.swift in Sources */,
 				D4E2313E1DA4722D008B7FC4 /* photoModel.xcdatamodeld in Sources */,
 				00513ED81DAA27C30097D967 /* SendToController.swift in Sources */,
 				79484F901DB0E5AD00505B0F /* ImageWithTimerViewController.swift in Sources */,
-				006170131DA22118002354B3 /* StoryCell.swift in Sources */,
 				791F308D1DAA722400001D90 /* QRReaderControllerViewController.swift in Sources */,
 				791F30911DAA8CFB00001D90 /* MapViewController.swift in Sources */,
-				D45026AE1DB3787800463DA3 /* StickerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
