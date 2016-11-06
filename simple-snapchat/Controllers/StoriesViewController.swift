@@ -191,7 +191,7 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
                 cell.nameLable.text = user.name
                 
                 if let imageURL = user.stories.first?.imageURL{
-                    fetchImageAndDisplay(withURL: imageURL, inCell: cell)
+                    fetchImageAndDisplay(withURL: imageURL, indexPath: indexPath)
                 }
                 return cell
             }
@@ -208,7 +208,7 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
                 cell.nameLable.text = "My Story"
                 cell.userID = myself!.id
                 if let imageURL = myself?.stories.first?.imageURL{
-                    fetchImageAndDisplay(withURL: imageURL, inCell: cell)
+                    fetchImageAndDisplay(withURL: imageURL, indexPath: indexPath)
                 }
                 return cell
             } else if indexPath.row == 1 {
@@ -229,7 +229,7 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
                 cell.nameLable.text = user.name
                 
                 if let imageURL = user.stories.first?.imageURL{
-                    fetchImageAndDisplay(withURL: imageURL, inCell: cell)
+                    fetchImageAndDisplay(withURL: imageURL, indexPath: indexPath)
                 }
                 return cell
             }
@@ -341,16 +341,17 @@ class StoriesViewController: UICollectionViewController, UICollectionViewDelegat
             deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
     
-    func fetchImageAndDisplay(withURL imageURL: String, inCell cell: StoryCell) {
+    func fetchImageAndDisplay(withURL imageURL: String, indexPath: IndexPath) {
         let url = URL(string: imageURL)
         URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             if error != nil {
                 print(error)
                 return
             }
+            let cell = self.collectionView?.cellForItem(at: indexPath) as? StoryCell
             DispatchQueue.global().async {
                 DispatchQueue.main.async {
-                    cell.imageView.image = UIImage(data: data!)
+                    cell?.imageView.image = UIImage(data: data!)
                 }
             }
         }).resume()
