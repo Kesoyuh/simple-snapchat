@@ -1,6 +1,6 @@
 TBC Chat - A Snapchat Clone
 ===========================
-This is a Snapchat clone running on iOS, powered by Firebase. A Uni project developed by [@Changchang](https://github.com/Jeff1943), [@HelenTian](https://github.com/HelenTian), and [@Maybe](https://github.com/Dirtymac). Just for learning and pratice.
+This is a Snapchat clone running on iOS, powered by Firebase. A Uni project developed by [@Changchang](https://github.com/Jeff1943), [@Hailun Tian](https://github.com/HelenTian), and [@Boqin Hu](https://github.com/Dirtymac). Just for learning and pratice.
 
 Screenshots
 -----------
