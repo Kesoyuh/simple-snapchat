@@ -45,3 +45,7 @@ Installation
 4. Run the project on your device. Sometimes you need to press cmd + shift + k to clean the project (not sure why).
 *Don't run it on your simulator. It will crash since camera cannot be loaded. This problem only exit on iOS 10
 
+License
+------------
+MIT
+
