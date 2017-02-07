@@ -41,7 +41,7 @@ Installation
 1. Make an account at [Firebase](https://firebase.google.com/) and perform some very basic [setup](https://firebase.google.com/docs/ios/setup). (the CocoaPods Frameworks and Libraries are already included in the repo)
 2. Download *GoogleService-Info.plist* and drag it into the project<br>
 <img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Google%20plist.png" width="200">
-3. Go to you firebase console, authentication page, and enable email/password sign-in method.
+3. Go to your firebase console, authentication page, and enable email/password sign-in method.
 4. Run the project on your device. Sometimes you need to press cmd + shift + k to clean the project (not sure why).
 *Don't run it on your simulator. It will crash since camera cannot be loaded. This problem only exit on iOS 10
 
