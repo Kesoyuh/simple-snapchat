@@ -27,7 +27,7 @@ Features
 * Memories - Share with my friends
 * Memories - Send to my stories
 * Stories - My stories and friends' stories
-* ~~Discover - Display suggested public stories (mainly using RSS feed)~~ * Update: The google RSS API that I was using is no longer available
+* ~~Discover - Display suggested public stories (mainly using RSS feed)~~ * Update: Not working now. The google RSS API that I was using is no longer available
 
 Developing Environment
 ----------------------
