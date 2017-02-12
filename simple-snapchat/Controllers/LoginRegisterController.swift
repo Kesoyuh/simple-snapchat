@@ -136,7 +136,7 @@ class LoginRegisterController: UIViewController {
                     case .errorCodeUserNotFound:
                         self.displayAlert(title: "Email Not Found", message: "Please check your email!")
                     case .errorCodeInvalidEmail:
-                        self.displayAlert(title: "Invaild Email", message: "Please check your email format!")
+                        self.displayAlert(title: "Invalid Email", message: "Please check your email format!")
                     case .errorCodeWrongPassword:
                         self.displayAlert(title: "Wrong Password", message: "Please check your password!")
                     case .errorCodeNetworkError:
@@ -176,7 +176,7 @@ class LoginRegisterController: UIViewController {
                 if let errCode = FIRAuthErrorCode(rawValue: error._code) {
                     switch errCode {
                     case .errorCodeInvalidEmail:
-                        self.displayAlert(title: "Invaild Email", message: "Please check your email format!")
+                        self.displayAlert(title: "Invalid Email", message: "Please check your email format!")
                     case .errorCodeNetworkError:
                         self.displayAlert(title: "Netword Error", message: "No network connection!")
                     case .errorCodeUserNotFound:
@@ -214,7 +214,7 @@ class LoginRegisterController: UIViewController {
                 if let errCode = FIRAuthErrorCode(rawValue: error._code) {
                     switch errCode {
                     case .errorCodeInvalidEmail:
-                        self.displayAlert(title: "Invaild Email", message: "Please check your email format!")
+                        self.displayAlert(title: "Invalid Email", message: "Please check your email format!")
                     case .errorCodeEmailAlreadyInUse:
                         self.displayAlert(title: "Email Already Registered", message: "Please use another email!")
                     case .errorCodeWeakPassword:
