@@ -59,12 +59,12 @@
 		798136471D9BCFD50074ED25 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136451D9BCFD50074ED25 /* Message.swift */; };
 		798136481D9BCFD50074ED25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798136461D9BCFD50074ED25 /* User.swift */; };
 		7993CE781DB33A93008F44D4 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7993CE771DB33A93008F44D4 /* Friend.swift */; };
-		799B6F3C1DADC5D20029F2F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 799B6F3B1DADC5D20029F2F0 /* GoogleService-Info.plist */; };
 		79DA44E91DA5DD4D00BBF518 /* AddedMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */; };
 		79E7CFF51D9C259F00F081E2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */; };
 		79E7CFF81D9CE95A00F081E2 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */; };
 		79E7CFFA1D9E04AA00F081E2 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */; };
 		79E7CFFD1D9EC01600F081E2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E7CFFC1D9EC01600F081E2 /* Extensions.swift */; };
+		BF9E77E51E51204E00B3A147 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF9E77E41E51204E00B3A147 /* GoogleService-Info.plist */; };
 		D4E231381DA470F5008B7FC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E231371DA470F5008B7FC4 /* CoreData.framework */; };
 		D4E2313E1DA4722D008B7FC4 /* photoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D4E2313C1DA4722D008B7FC4 /* photoModel.xcdatamodeld */; };
 		F595B0AB8367814EF8C25504 /* Pods_simple_snapchat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */; };
@@ -147,13 +147,13 @@
 		798136451D9BCFD50074ED25 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
 		798136461D9BCFD50074ED25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
 		7993CE771DB33A93008F44D4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Friend.swift; path = Model/Friend.swift; sourceTree = "<group>"; };
-		799B6F3B1DADC5D20029F2F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		79DA44E81DA5DD4D00BBF518 /* AddedMeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddedMeCell.swift; path = View/AddedMeCell.swift; sourceTree = "<group>"; };
 		79E7CFF41D9C259F00F081E2 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Controllers/CameraViewController.swift; sourceTree = "<group>"; };
 		79E7CFF71D9CE95A00F081E2 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCell.swift; path = View/ChatCell.swift; sourceTree = "<group>"; };
 		79E7CFF91D9E04AA00F081E2 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = View/MessageCell.swift; sourceTree = "<group>"; };
 		79E7CFFC1D9EC01600F081E2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AEAE246D0AA3AD2FEEC45FB0 /* Pods_simple_snapchat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_simple_snapchat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF9E77E41E51204E00B3A147 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D4E231371DA470F5008B7FC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D4E2313D1DA4722D008B7FC4 /* photoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = photoModel.xcdatamodel; sourceTree = "<group>"; };
 		FEFFBC8570546B75E246890B /* Pods-simple-snapchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simple-snapchat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-simple-snapchat/Pods-simple-snapchat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -326,8 +326,8 @@
 				00DD9D1B1D98F5D3006489BE /* Main.storyboard */,
 				00DD9D1E1D98F5D3006489BE /* Assets.xcassets */,
 				00DD9D201D98F5D3006489BE /* LaunchScreen.storyboard */,
+				BF9E77E41E51204E00B3A147 /* GoogleService-Info.plist */,
 				00DD9D231D98F5D3006489BE /* Info.plist */,
-				799B6F3B1DADC5D20029F2F0 /* GoogleService-Info.plist */,
 			);
 			path = "simple-snapchat";
 			sourceTree = "<group>";
@@ -525,7 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00DD9D221D98F5D3006489BE /* LaunchScreen.storyboard in Resources */,
-				799B6F3C1DADC5D20029F2F0 /* GoogleService-Info.plist in Resources */,
+				BF9E77E51E51204E00B3A147 /* GoogleService-Info.plist in Resources */,
 				00DD9D1F1D98F5D3006489BE /* Assets.xcassets in Resources */,
 				00DD9D1D1D98F5D3006489BE /* Main.storyboard in Resources */,
 			);
@@ -919,6 +919,7 @@
 				0C2A94D71E506FED0099A8F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C2A94E41E50700A0099A8F5 /* Build configuration list for PBXNativeTarget "simple-snapchat-UITests" */ = {
 			isa = XCConfigurationList;
@@ -927,6 +928,7 @@
 				0C2A94E61E50700A0099A8F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

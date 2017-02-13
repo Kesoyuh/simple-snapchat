@@ -31,14 +31,15 @@ class simple_snapchat_UITests: XCTestCase {
     
     func testLogin() {
         
-        
         let app = XCUIApplication()
+        
+        checkWhetherLogin()
         
         app.buttons["Login"].tap()
         
         let emailAddressTextField = app.textFields["Email address"]
         emailAddressTextField.tap()
-        emailAddressTextField.typeText("test1@gmail.com")
+        emailAddressTextField.typeText("simulator@anz.com")
         
         
         let passwordSecureTextField = app.secureTextFields["Password"]
@@ -55,37 +56,89 @@ class simple_snapchat_UITests: XCTestCase {
     
     func testRegister() {
         
-        //Test with blank form
+        
         let app = XCUIApplication()
         
-        let scrollViewsQuery = app.scrollViews.otherElements.scrollViews
-        scrollViewsQuery.otherElements.containing(.button, identifier:"Flash off").children(matching: .other).element.swipeDown()
-        scrollViewsQuery.otherElements.buttons["logout"].tap()
+        checkWhetherLogin()
         
+        //Test with blank form
         app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button)["Register"].tap()
         
         XCTAssert(XCUIApplication().alerts["Invalid Form"].exists)
         
         app.alerts["Invalid Form"].buttons["OK"].tap()
         
-        //Test with the wrong email format
-        let nameTextField = XCUIApplication().textFields["Name"]
+        //Test with the email which already exist
+        var nameTextField = XCUIApplication().textFields["Name"]
         nameTextField.tap()
-        nameTextField.typeText("John")
+        nameTextField.typeText("iphone")
         
-        let emailAddressTextField = XCUIApplication().textFields["Email address"]
+        var emailAddressTextField = XCUIApplication().textFields["Email address"]
         emailAddressTextField.tap()
-        emailAddressTextField.typeText("John")
+        emailAddressTextField.typeText("iphone@anz.com")
         
         
-        let passwordSecureTextField = XCUIApplication().secureTextFields["Password"]
+        var passwordSecureTextField = XCUIApplication().secureTextFields["Password"]
         passwordSecureTextField.tap()
-        passwordSecureTextField.typeText("1234")
+        passwordSecureTextField.typeText("12341234")
         
         XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button)["Register"].tap()
         
-        XCTAssert(XCUIApplication().alerts["Invalid Email"].exists)
-        XCUIApplication().alerts["Invalid Email"].buttons["OK"].tap()
+        sleep(2)
+        XCTAssert(XCUIApplication().alerts["Email Already Registered"].exists)
+        XCUIApplication().alerts["Email Already Registered"].buttons["OK"].tap()
+        
+        //Test with the a successful registration
+        nameTextField = XCUIApplication().textFields["Name"]
+        nameTextField.tap()
+        nameTextField.clearAndEnterText(text: "Test1")
+        
+        emailAddressTextField = XCUIApplication().textFields["Email address"]
+        emailAddressTextField.tap()
+        emailAddressTextField.clearAndEnterText(text: "test1@anz.com")
+        
+        
+        passwordSecureTextField = XCUIApplication().secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.clearAndEnterText(text: "12341234")
+        
+        let registerButton = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button) ["Register"]
+        registerButton.tap()
+        
+        sleep(6)
+        
+        XCTAssertEqual(registerButton.exists, false)
         
     }
+    
+    func checkWhetherLogin() {
+        if (!XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button) ["Register"].exists) {
+            let scrollViewsQuery = XCUIApplication().scrollViews.otherElements.scrollViews
+            scrollViewsQuery.otherElements.containing(.button, identifier:"Flash off").children(matching: .other).element.swipeDown()
+            scrollViewsQuery.otherElements.buttons["logout"].tap()
+        }
+    }
+    
 }
+
+extension XCUIElement {
+    /**
+     Removes any current text in the field before typing in the new value
+     - Parameter text: the text to enter into the field
+     */
+    func clearAndEnterText(text: String) -> Void {
+        guard let stringValue = self.value as? String else {
+            XCTFail("Tried to clear and enter text into a non string value")
+            return
+        }
+        
+        self.tap()
+        
+        let deleteString = stringValue.characters.map { _ in XCUIKeyboardKeyDelete }.joined(separator: "")
+        
+        self.typeText(deleteString)
+        self.typeText(text)
+    }
+}
+
+
