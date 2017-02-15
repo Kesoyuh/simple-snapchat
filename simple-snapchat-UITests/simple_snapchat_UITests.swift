@@ -29,56 +29,67 @@ class simple_snapchat_UITests: XCTestCase {
     }
     
     
-    func testLogin() {
+    func testLoginAndRegister() {
         
         let app = XCUIApplication()
+        
+        //Test Login
         
         checkWhetherLogin()
         
         app.buttons["Login"].tap()
         
-        let emailAddressTextField = app.textFields["Email address"]
+        //Test with blank form
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button)["Login"].tap()
+        
+        XCTAssert(XCUIApplication().alerts["Invalid Form"].exists)
+        app.alerts["Invalid Form"].buttons["OK"].tap()
+        
+        //Test with a wrong combination of email and password
+        var emailAddressTextField = app.textFields["Email address"]
         emailAddressTextField.tap()
         emailAddressTextField.typeText("simulator@anz.com")
         
         
-        let passwordSecureTextField = app.secureTextFields["Password"]
+        var passwordSecureTextField = app.secureTextFields["Password"]
         passwordSecureTextField.tap()
-        passwordSecureTextField.typeText("12341234")
-        let loginButton = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button)["Login"]
+        passwordSecureTextField.typeText("55555555")
+        var loginButton = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button)["Login"]
+        loginButton.tap()
+        
+        sleep(3)
+        
+        XCTAssert(XCUIApplication().alerts["Wrong Password"].exists)
+        XCUIApplication().alerts["Wrong Password"].buttons["OK"].tap()
+
+        
+        //Test with the a successful login
+        passwordSecureTextField = app.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.clearAndEnterText(text: "12341234")
+        
+        loginButton = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button)["Login"]
         loginButton.tap()
         
         sleep(3)
         
         XCTAssertEqual(loginButton.exists, false)
         
-    }
-    
-    func testRegister() {
-        
-        
-        let app = XCUIApplication()
-        
         checkWhetherLogin()
         
-        //Test with blank form
-        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button)["Register"].tap()
-        
-        XCTAssert(XCUIApplication().alerts["Invalid Form"].exists)
-        
-        app.alerts["Invalid Form"].buttons["OK"].tap()
+        //Test register
         
         //Test with the email which already exist
         var nameTextField = XCUIApplication().textFields["Name"]
         nameTextField.tap()
         nameTextField.typeText("iphone")
         
-        var emailAddressTextField = XCUIApplication().textFields["Email address"]
+        emailAddressTextField = XCUIApplication().textFields["Email address"]
         emailAddressTextField.tap()
         emailAddressTextField.typeText("iphone@anz.com")
         
         
-        var passwordSecureTextField = XCUIApplication().secureTextFields["Password"]
+        passwordSecureTextField = XCUIApplication().secureTextFields["Password"]
         passwordSecureTextField.tap()
         passwordSecureTextField.typeText("12341234")
         
@@ -88,19 +99,39 @@ class simple_snapchat_UITests: XCTestCase {
         XCTAssert(XCUIApplication().alerts["Email Already Registered"].exists)
         XCUIApplication().alerts["Email Already Registered"].buttons["OK"].tap()
         
-        //Test with the a successful registration
+        //Test with the email with wrong format
         nameTextField = XCUIApplication().textFields["Name"]
         nameTextField.tap()
         nameTextField.clearAndEnterText(text: "Test1")
         
         emailAddressTextField = XCUIApplication().textFields["Email address"]
         emailAddressTextField.tap()
-        emailAddressTextField.clearAndEnterText(text: "test1@anz.com")
+        emailAddressTextField.clearAndEnterText(text: "test1@anz")
         
         
         passwordSecureTextField = XCUIApplication().secureTextFields["Password"]
         passwordSecureTextField.tap()
         passwordSecureTextField.clearAndEnterText(text: "12341234")
+        
+        XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button) ["Register"].tap()
+        
+        sleep(2)
+        XCTAssert(XCUIApplication().alerts["Invalid Email"].exists)
+        XCUIApplication().alerts["Invalid Email"].buttons["OK"].tap()
+        
+        //Test with the a successful registration
+//        nameTextField = XCUIApplication().textFields["Name"]
+//        nameTextField.tap()
+//        nameTextField.clearAndEnterText(text: "Test1")
+        
+        emailAddressTextField = XCUIApplication().textFields["Email address"]
+        emailAddressTextField.tap()
+        emailAddressTextField.typeText(".com")
+        
+        
+//        passwordSecureTextField = XCUIApplication().secureTextFields["Password"]
+//        passwordSecureTextField.tap()
+//        passwordSecureTextField.clearAndEnterText(text: "12341234")
         
         let registerButton = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button) ["Register"]
         registerButton.tap()
