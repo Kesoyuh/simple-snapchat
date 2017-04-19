@@ -1,6 +1,6 @@
 TBC Chat - A Snapchat Clone
 ===========================
-This is a Snapchat clone running on iOS, powered by Firebase. A uni project developed by [@Changchang Wang](https://github.com/Kesoyuh), [@Hailun Tian](https://github.com/HelenTian), and [@Boqin Hu](https://github.com/Dirtymac). Just for learning and practicing.
+This is a Snapchat clone running on iOS, powered by Firebase. A uni project developed by [@Changchang Wang](https://github.com/Kesoyuh), [@Hailun Tian](https://github.com/HelenTian), and [@Boqin Hu](https://github.com/Dirtymac). Just for learning and practice.
 
 Screenshots
 -----------
@@ -38,7 +38,7 @@ Developing Environment
 
 Installation
 ------------
-1. Make an account at [Firebase](https://firebase.google.com/) and perform some very basic [setup](https://firebase.google.com/docs/ios/setup). (the CocoaPods Frameworks and Libraries are already included in the repo)
+1. Make an account at [Firebase](https://firebase.google.com/) and perform some very basic [setup](https://firebase.google.com/docs/ios/setup). (the CocoaPods Frameworks and Libraries have already been included in the repo)
 2. Download *GoogleService-Info.plist* and drag it into the project<br>
 <img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Google%20plist.png" width="200">
 3. Go to your firebase console, authentication page, and enable email/password sign-in method.
