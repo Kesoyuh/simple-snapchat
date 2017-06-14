@@ -4,13 +4,8 @@ This is a Snapchat clone running on iOS, powered by Firebase. A uni project deve
 
 Screenshots
 -----------
-<img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/swipe.gif" width="200">
-<img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Login.png" width="200"> <img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Camera.png" width="200">
-<img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Chat.png" width="200">
-<img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Send.png" width="200">
-<img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Memories.png" width="200">
-<img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Stories.png" width="200">
-<img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Discover.png" width="200">
+<img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/swipe.gif" width="200"> <img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Login.png" width="200"> <img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Camera.png" width="200"> <img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Chat.png" width="200">
+<img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Send.png" width="200"> <img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Memories.png" width="200"> <img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Stories.png" width="200"> <img src="https://raw.githubusercontent.com/Jeff1943/simple-snapchat/master/images/Discover.png" width="200">
 
 Features
 -------------
@@ -29,7 +24,7 @@ Features
 * Stories - My stories and friends' stories
 * ~~Discover - Display suggested public stories (mainly using RSS feed)~~ * Update: Not working now. The google RSS API that I was using is no longer available
 
-Developing Environment
+Development Environment
 ----------------------
 * Xcode 8
 * Swift 3
